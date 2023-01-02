@@ -1,0 +1,257 @@
+<template>
+  <div :class="[`textbox-11-1`, className || ``]">
+    <div class="e-cart"><text1 :text1="text1Props.text1" :className="text1Props.className" /></div>
+  </div>
+</template>
+
+<script>
+import Text1 from "./Text1";
+export default {
+  name: "Textbox2",
+  components: {
+    Text1,
+  },
+  props: ["className", "text1Props"],
+};
+</script>
+
+<style lang="sass">
+@import '../../variables'
+
+.textbox-11-1
+  background-color: $solitude
+  border: 3px solid
+  border-color: $white
+  display: flex
+  width: 150px
+
+.e-cart
+  align-items: flex-start
+  border-radius: 5px
+  display: flex
+  flex: 1
+  height: 40px
+  position: relative
+  width: 150px
+
+.textbox-11-1.textbox-12,
+.textbox-11-1.textbox-12-1,
+.textbox-11-1.textbox-12-10,
+.textbox-11-1.textbox-12-11,
+.textbox-11-1.textbox-12-12,
+.textbox-11-1.textbox-12-13,
+.textbox-11-1.textbox-12-2,
+.textbox-11-1.textbox-12-3,
+.textbox-11-1.textbox-12-4,
+.textbox-11-1.textbox-12-5,
+.textbox-11-1.textbox-12-6,
+.textbox-11-1.textbox-12-7,
+.textbox-11-1.textbox-12-8,
+.textbox-11-1.textbox-12-9,
+.textbox-11-1.textbox-12-1 .e-cart,
+.textbox-11-1.textbox-12-2 .e-cart,
+.textbox-11-1.textbox-12-3 .e-cart,
+.textbox-11-1.textbox-12-4 .e-cart,
+.textbox-11-1.textbox-12-5 .e-cart,
+.textbox-11-1.textbox-12-6 .e-cart,
+.textbox-11-1.textbox-12-7 .e-cart,
+.textbox-11-1.textbox-12-8 .e-cart,
+.textbox-11-1.textbox-12-9 .e-cart,
+.textbox-11-1.textbox-12-10 .e-cart,
+.textbox-11-1.textbox-12-11 .e-cart,
+.textbox-11-1.textbox-12-12 .e-cart,
+.textbox-11-1.textbox-12-13 .e-cart,
+.textbox-11-1.textbox-12 .e-cart,
+.textbox-11-1.textbox-15-1 .e-cart,
+.textbox-11-1.textbox-15-2 .e-cart,
+.textbox-11-1.textbox-15-3 .e-cart,
+.textbox-11-1.textbox-15-4 .e-cart,
+.textbox-11-1.textbox-15-5 .e-cart,
+.textbox-11-1.textbox-15-6 .e-cart,
+.textbox-11-1.textbox-15-7 .e-cart,
+.textbox-11-1.textbox-15-8 .e-cart,
+.textbox-11-1.textbox-15-9 .e-cart,
+.textbox-11-1.textbox-15-10 .e-cart,
+.textbox-11-1.textbox-15-11 .e-cart,
+.textbox-11-1.textbox-15-12 .e-cart,
+.textbox-11-1.textbox-15-13 .e-cart,
+.textbox-11-1.textbox-15-14 .e-cart,
+.textbox-11-1.textbox-15-15 .e-cart,
+.textbox-11-1.textbox-15-16 .e-cart,
+.textbox-11-1.textbox-15-17 .e-cart,
+.textbox-11-1.textbox-15-18 .e-cart,
+.textbox-11-1.textbox-15-19 .e-cart,
+.textbox-11-1.textbox-15-20 .e-cart,
+.textbox-11-1.textbox-15-21 .e-cart,
+.textbox-11-1.textbox-15-22 .e-cart,
+.textbox-11-1.textbox-15-23 .e-cart,
+.textbox-11-1.textbox-15-24 .e-cart,
+.textbox-11-1.textbox-15-25 .e-cart,
+.textbox-11-1.textbox-15-26 .e-cart,
+.textbox-11-1.textbox-15-27 .e-cart,
+.textbox-11-1.textbox-15-28 .e-cart,
+.textbox-11-1.textbox-15-29 .e-cart,
+.textbox-11-1.textbox-15-30 .e-cart,
+.textbox-11-1.textbox-15-31 .e-cart,
+.textbox-11-1.textbox-15-32 .e-cart,
+.textbox-11-1.textbox-15-33 .e-cart,
+.textbox-11-1.textbox-15-34 .e-cart,
+.textbox-11-1.textbox-15-35 .e-cart,
+.textbox-11-1.textbox-15-36 .e-cart,
+.textbox-11-1.textbox-15-37 .e-cart,
+.textbox-11-1.textbox-15-38 .e-cart,
+.textbox-11-1.textbox-15-39 .e-cart,
+.textbox-11-1.textbox-15-40 .e-cart,
+.textbox-11-1.textbox-15-41 .e-cart,
+.textbox-11-1.textbox-15-42 .e-cart,
+.textbox-11-1.textbox-15-43 .e-cart,
+.textbox-11-1.textbox-15-44 .e-cart,
+.textbox-11-1.textbox-15-45 .e-cart,
+.textbox-11-1.textbox-15-46 .e-cart,
+.textbox-11-1.textbox-15-47 .e-cart,
+.textbox-11-1.textbox-15-48 .e-cart,
+.textbox-11-1.textbox-15-49 .e-cart,
+.textbox-11-1.textbox-15-50 .e-cart,
+.textbox-11-1.textbox-15-51 .e-cart,
+.textbox-11-1.textbox-15-52 .e-cart,
+.textbox-11-1.textbox-15-53 .e-cart,
+.textbox-11-1.textbox-15-54 .e-cart,
+.textbox-11-1.textbox-15-55 .e-cart,
+.textbox-11-1.textbox-15-56 .e-cart,
+.textbox-11-1.textbox-15-57 .e-cart,
+.textbox-11-1.textbox-15-58 .e-cart,
+.textbox-11-1.textbox-15-59 .e-cart,
+.textbox-11-1.textbox-15-60 .e-cart,
+.textbox-11-1.textbox-15-61 .e-cart,
+.textbox-11-1.textbox-15-62 .e-cart,
+.textbox-11-1.textbox-15-63 .e-cart,
+.textbox-11-1.textbox-15-64 .e-cart,
+.textbox-11-1.textbox-15-65 .e-cart,
+.textbox-11-1.textbox-15-66 .e-cart,
+.textbox-11-1.textbox-15-67 .e-cart,
+.textbox-11-1.textbox-15-68 .e-cart,
+.textbox-11-1.textbox-15-69 .e-cart,
+.textbox-11-1.textbox-15-70 .e-cart,
+.textbox-11-1.textbox-15-71 .e-cart,
+.textbox-11-1.textbox-15-72 .e-cart,
+.textbox-11-1.textbox-15-73 .e-cart,
+.textbox-11-1.textbox-15-74 .e-cart,
+.textbox-11-1.textbox-15 .e-cart
+  width: 50px
+
+.textbox-11-1.textbox-13,
+.textbox-11-1.textbox-13-1,
+.textbox-11-1.textbox-13-10,
+.textbox-11-1.textbox-13-11,
+.textbox-11-1.textbox-13-12,
+.textbox-11-1.textbox-13-13,
+.textbox-11-1.textbox-13-2,
+.textbox-11-1.textbox-13-3,
+.textbox-11-1.textbox-13-4,
+.textbox-11-1.textbox-13-5,
+.textbox-11-1.textbox-13-6,
+.textbox-11-1.textbox-13-7,
+.textbox-11-1.textbox-13-8,
+.textbox-11-1.textbox-13-9,
+.textbox-11-1.textbox-13-1 .e-cart,
+.textbox-11-1.textbox-13-2 .e-cart,
+.textbox-11-1.textbox-13-3 .e-cart,
+.textbox-11-1.textbox-13-4 .e-cart,
+.textbox-11-1.textbox-13-5 .e-cart,
+.textbox-11-1.textbox-13-6 .e-cart,
+.textbox-11-1.textbox-13-7 .e-cart,
+.textbox-11-1.textbox-13-8 .e-cart,
+.textbox-11-1.textbox-13-9 .e-cart,
+.textbox-11-1.textbox-13-10 .e-cart,
+.textbox-11-1.textbox-13-11 .e-cart,
+.textbox-11-1.textbox-13-12 .e-cart,
+.textbox-11-1.textbox-13-13 .e-cart,
+.textbox-11-1.textbox-13 .e-cart
+  width: 100px
+
+.textbox-11-1.textbox-14
+  background-color: $tutu
+  height: 40px
+  min-width: 150px
+  width: unset
+
+.textbox-11-1.textbox-15,
+.textbox-11-1.textbox-15-1,
+.textbox-11-1.textbox-15-10,
+.textbox-11-1.textbox-15-11,
+.textbox-11-1.textbox-15-12,
+.textbox-11-1.textbox-15-13,
+.textbox-11-1.textbox-15-14,
+.textbox-11-1.textbox-15-15,
+.textbox-11-1.textbox-15-16,
+.textbox-11-1.textbox-15-17,
+.textbox-11-1.textbox-15-18,
+.textbox-11-1.textbox-15-19,
+.textbox-11-1.textbox-15-2,
+.textbox-11-1.textbox-15-20,
+.textbox-11-1.textbox-15-21,
+.textbox-11-1.textbox-15-22,
+.textbox-11-1.textbox-15-23,
+.textbox-11-1.textbox-15-24,
+.textbox-11-1.textbox-15-25,
+.textbox-11-1.textbox-15-26,
+.textbox-11-1.textbox-15-27,
+.textbox-11-1.textbox-15-28,
+.textbox-11-1.textbox-15-29,
+.textbox-11-1.textbox-15-3,
+.textbox-11-1.textbox-15-30,
+.textbox-11-1.textbox-15-31,
+.textbox-11-1.textbox-15-32,
+.textbox-11-1.textbox-15-33,
+.textbox-11-1.textbox-15-34,
+.textbox-11-1.textbox-15-35,
+.textbox-11-1.textbox-15-36,
+.textbox-11-1.textbox-15-37,
+.textbox-11-1.textbox-15-38,
+.textbox-11-1.textbox-15-39,
+.textbox-11-1.textbox-15-4,
+.textbox-11-1.textbox-15-40,
+.textbox-11-1.textbox-15-41,
+.textbox-11-1.textbox-15-42,
+.textbox-11-1.textbox-15-43,
+.textbox-11-1.textbox-15-44,
+.textbox-11-1.textbox-15-45,
+.textbox-11-1.textbox-15-46,
+.textbox-11-1.textbox-15-47,
+.textbox-11-1.textbox-15-48,
+.textbox-11-1.textbox-15-49,
+.textbox-11-1.textbox-15-5,
+.textbox-11-1.textbox-15-50,
+.textbox-11-1.textbox-15-51,
+.textbox-11-1.textbox-15-52,
+.textbox-11-1.textbox-15-53,
+.textbox-11-1.textbox-15-54,
+.textbox-11-1.textbox-15-55,
+.textbox-11-1.textbox-15-56,
+.textbox-11-1.textbox-15-57,
+.textbox-11-1.textbox-15-58,
+.textbox-11-1.textbox-15-59,
+.textbox-11-1.textbox-15-6,
+.textbox-11-1.textbox-15-60,
+.textbox-11-1.textbox-15-61,
+.textbox-11-1.textbox-15-62,
+.textbox-11-1.textbox-15-63,
+.textbox-11-1.textbox-15-64,
+.textbox-11-1.textbox-15-65,
+.textbox-11-1.textbox-15-66,
+.textbox-11-1.textbox-15-67,
+.textbox-11-1.textbox-15-68,
+.textbox-11-1.textbox-15-69,
+.textbox-11-1.textbox-15-7,
+.textbox-11-1.textbox-15-70,
+.textbox-11-1.textbox-15-71,
+.textbox-11-1.textbox-15-72,
+.textbox-11-1.textbox-15-73,
+.textbox-11-1.textbox-15-74,
+.textbox-11-1.textbox-15-8,
+.textbox-11-1.textbox-15-9
+  background-color: $tutu
+  height: 40px
+  min-width: 50px
+  width: unset
+</style>

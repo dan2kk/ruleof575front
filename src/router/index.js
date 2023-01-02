@@ -1,55 +1,59 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Screen from "../components/new/Screen"
-import Screen3 from "../components/new/Screen3"
-import Start from "../components/new/Start"
-import { screenData, screen3Data, startData } from "../components/data"
+import Start from "../components/Start";
+import TextboxMenuTab3 from "../components/TextboxMenuTab3";
+import XMenu22 from "../components/XMenu22";
+import Timetable22 from "../components/Timetable22";
+import Cart3 from "../components/Cart3";
+import { startData, textboxMenuTab3Data, xMenu22Data, timetable22Data, cart3Data } from "../data";
+import Frame1 from "../components/Frame1";
+
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/siganpyo',
-    component: Screen,
-    props: {
-      yJh3RB1Props: screenData.yJh3RB1Props,
-      yJh3RB2Props: screenData.yJh3RB2Props,
-      yJh3RB3Props: screenData.yJh3RB3Props,
-      yJh3RB4Props: screenData.yJh3RB4Props,
-      yJh3RB5Props: screenData.yJh3RB5Props,
-      yJh3RB6Props: screenData.yJh3RB6Props,
-    },
-  },
-  {
-    path: '/menu',
-    component: Screen3,
-    props: {
-      x3eHZw8Props: screen3Data.x3eHZw8Props,
-      qlPzu1Props: screen3Data.qlPzu1Props,
-      fEdZ7vProps: screen3Data.fEdZ7vProps,
-      nso1ChProps: screen3Data.nso1ChProps,
-      x1dhSRZProps: screen3Data.x1dhSRZProps,
-    },
-  },
-  {
-    path: '/start',
+    path: "/",
     component: Start,
+    props: { timetableProps: startData.timetableProps, xMenuProps: startData.xMenuProps },
+  },
+  {
+    path: "/frame-1",
+    component: Frame1,
+  },
+  {
+    path: "/textbox-menu-tab",
+    component: TextboxMenuTab3,
     props: {
-      text_Label: "이름",
-      mEH9rYProps: startData.mEH9rYProps,
-      x0rpScvProps: startData.x0rpScvProps,
-      dP9QAzProps: startData.dP9QAzProps,
+      textbox1Props: textboxMenuTab3Data.textbox1Props,
+      textbox2Props: textboxMenuTab3Data.textbox2Props,
+      textbox3Props: textboxMenuTab3Data.textbox3Props,
+      textbox4Props: textboxMenuTab3Data.textbox4Props,
+    },
+  },
+  {
+    path: "/menu",
+    component: XMenu22,
+    props: {
+      xMenu2Props: xMenu22Data.xMenu2Props,
+      xMenu3Props: xMenu22Data.xMenu3Props,
+      xMenu4Props: xMenu22Data.xMenu4Props,
+      xMenu5Props: xMenu22Data.xMenu5Props,
+      xMenu6Props: xMenu22Data.xMenu6Props,
+    },
+  },
+  {
+    path: "/cart",
+    component: Cart3,
+    props: { timetableProps: cart3Data.timetableProps, timetableProps2: cart3Data.timetableProps2 },
+  },
+  {
+    path: "/*",
+    component: Timetable22,
+    props: {
+      timeline1Props: timetable22Data.timeline1Props,
+      timeline2Props: timetable22Data.timeline2Props,
+      timeline3Props: timetable22Data.timeline3Props,
+      timeline4Props: timetable22Data.timeline4Props,
+      timeline5Props: timetable22Data.timeline5Props,
+      timeline6Props: timetable22Data.timeline6Props,
     },
   },
 ]
