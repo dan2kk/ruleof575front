@@ -1,4 +1,4 @@
-# new-cli-project
+# new-p
 
 ## Project setup
 ```
