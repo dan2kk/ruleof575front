@@ -38,6 +38,7 @@ export default {
   gap: 5px
   position: relative
   width: 400px
+  height: 600px
 
 .timetable.timetable-1
   align-items: flex-start

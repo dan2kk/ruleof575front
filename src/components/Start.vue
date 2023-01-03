@@ -1,5 +1,5 @@
 <template>
-  <div class="start screen">
+  <div class="start">
     <div class="cart">
       <user-info-box />
       <timetable
@@ -11,7 +11,9 @@
         :timeline6Props="timetableProps.timeline6Props"
       />
     </div>
-    <x-menu :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" />
+    <div class="cart1">
+      <x-menu :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" />
+    </div>
   </div>
 </template>
 
@@ -38,11 +40,9 @@ export default {
   background-color: $white
   border: 1px none
   display: flex
-  height: 100vh
-  min-height: 600px
-  min-width: 800px
+  max-height: 600px
+  max-width: 800px
   position: relative
-  width: 100%
 
 .cart
   align-items: center
@@ -50,6 +50,16 @@ export default {
   display: flex
   flex-direction: column
   height: 600px
-  position: relative
+  position: absolute
+  top: 50px
   width: 400px
+.cart1
+  align-items: center
+  background-color: $bon-jour
+  display: flex
+  flex-direction: column
+  position: relative
+  max-width: 400px
+  max-height: 600px
+  left: 30px
 </style>

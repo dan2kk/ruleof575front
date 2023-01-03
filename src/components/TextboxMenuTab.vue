@@ -22,12 +22,12 @@ export default {
 @import '../../variables'
 
 .textbox-menu-tab
-  align-items: center
+  align-items: flex-start
   background-color: $white
   border-left-style: solid
   border-left-width: 3px
   display: flex
   height: 50px
-  position: relative
-  width: 400px
+  width: 350px
+  position: absolute
 </style>

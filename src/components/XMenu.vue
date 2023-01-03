@@ -29,28 +29,30 @@ export default {
 @import '../../variables'
 
 .menu
-  align-items: flex-start
+  align-items: stretch
   display: flex
+  position: absolute
   flex-direction: column
   height: 600px
-  width: 400px
+  max-width: 400px
 
 .cart-1
   align-items: flex-start
   align-self: stretch
   background-color: $bon-jour
-  display: flex
+  display: fix
   flex: 1
   flex-direction: column
-  position: relative
+  position: absolute
+  max-width: 400px
 
 .view-6
   align-items: center
   background-color: $bon-jour-2
   display: flex
   flex-direction: column
-  height: 550px
+  height: 500px
   justify-content: center
-  position: relative
+  position: reltaive
   width: 400px
 </style>

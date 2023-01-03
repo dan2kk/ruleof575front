@@ -35,7 +35,8 @@ export default {
   background-color: $pigeon-post
   cursor: pointer
   transition: all 0.2s ease
-
+.textbox-2.textbox-1:hover,
+.textbox-2.textbox-2:hover,
 .textbox-2.textbox-3:hover,
 .textbox-2.textbox-4:hover,
 .textbox-2.textbox-5:hover

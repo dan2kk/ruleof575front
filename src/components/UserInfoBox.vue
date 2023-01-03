@@ -26,7 +26,8 @@ export default {
   align-self: stretch
   background-color: $silver
   display: flex
-  height: 60px
+  min-height: 60px
+  width: 400px
   position: relative
 
 .user-info-box.user-info-box-1
