@@ -11,7 +11,7 @@
         :timeline6Props="timetableProps.timeline6Props"
       />
     </div>
-    <div class="cart1">
+    <div class="cart-1">
       <x-menu :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" />
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
 @import '../../variables'
 
 .start
-  align-items: center
+  align-items: flex-start
   background-color: $white
   border: 1px none
   display: flex
@@ -51,15 +51,14 @@ export default {
   flex-direction: column
   height: 600px
   position: absolute
-  top: 50px
   width: 400px
-.cart1
-  align-items: center
+.cart-1
+  align-items: flex-start
   background-color: $bon-jour
   display: flex
   flex-direction: column
   position: relative
   max-width: 400px
-  max-height: 600px
-  left: 30px
+  max-height: 550px
+  height: 600px
 </style>

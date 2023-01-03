@@ -27,7 +27,7 @@ export default {
   border-left-style: solid
   border-left-width: 3px
   display: flex
-  height: 50px
+  max-height: 50px
   width: 350px
   position: absolute
 </style>

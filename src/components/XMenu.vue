@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <div class="cart-1">
+    <div class="cart">
       <textbox-menu-tab
         :textbox1Props="textboxMenuTabProps.textbox1Props"
         :textbox2Props="textboxMenuTabProps.textbox2Props"
@@ -29,14 +29,14 @@ export default {
 @import '../../variables'
 
 .menu
-  align-items: stretch
+  align-items: flex-start
   display: flex
   position: absolute
   flex-direction: column
   height: 600px
   max-width: 400px
 
-.cart-1
+.cart
   align-items: flex-start
   align-self: stretch
   background-color: $bon-jour
@@ -45,14 +45,15 @@ export default {
   flex-direction: column
   position: absolute
   max-width: 400px
-
 .view-6
   align-items: center
   background-color: $bon-jour-2
   display: flex
   flex-direction: column
-  height: 500px
+  height: 450px
   justify-content: center
   position: reltaive
   width: 400px
+.login-button:hover 
+  transform: scale(1.2)
 </style>

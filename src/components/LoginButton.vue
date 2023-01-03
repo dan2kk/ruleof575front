@@ -1,5 +1,7 @@
 <template>
-  <div class="login-button"><cart /></div>
+  <div class="login-button">
+    <cart />
+  </div>
 </template>
 
 <script>

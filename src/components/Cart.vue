@@ -1,10 +1,15 @@
 <template>
-  <div class="cart-2"><div class="text_label-2 valign-text-middle notosanskr-normal-white-12px">로그인</div></div>
+  <div class="cart-2"><div class="text_label-2 valign-text-middle notosanskr-normal-white-12px" @click="say('로그인')">로그인</div></div>
 </template>
 
 <script>
 export default {
   name: "Cart",
+  methods: {
+  say(message) {
+    alert(message)
+  }
+}
 };
 </script>
 
