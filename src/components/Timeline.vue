@@ -47,7 +47,6 @@ export default {
 
 .timeline-3
   align-items: flex-start
-  border: 1px solid
   border-color: $white
   display: flex
   flex-direction: column
