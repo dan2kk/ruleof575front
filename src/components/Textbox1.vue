@@ -42,7 +42,11 @@ export default {
   background-color: $lily
   
 .textbox1.textbox1-1
+<<<<<<< HEAD
   background-color: $pippin
+=======
+  background-color: $geraldine
+>>>>>>> c961dc78cf699bbb2d6091bb34ba5df54d6a64b2
   cursor: pointer
   transition: all 0.2s ease
 .textbox1.textbox2-1
