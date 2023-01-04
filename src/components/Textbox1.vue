@@ -42,7 +42,7 @@ export default {
   background-color: $lily
   
 .textbox1.textbox1-1
-  background-color: $pippin
+  background-color: $geraldine
   cursor: pointer
   transition: all 0.2s ease
 .textbox1.textbox2-1
