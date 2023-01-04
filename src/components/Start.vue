@@ -5,7 +5,12 @@
       :userInfoBoxProps="userInfoTimeTableProps.userInfoBoxProps"
       :timetableProps="userInfoTimeTableProps.timetableProps"
     />
-    <x-menu :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" :initialMenuProps="xMenuProps.initialMenuProps" />
+    <x-menu 
+      :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" 
+      :initialMenuProps="xMenuProps.initialMenuProps"
+      :graduationInfoTableProps="xMenuProps.graduationInfoTableProps" 
+      :gyoyangTableProps="xMenuProps.gyoyangTableProps" 
+      :courseListTableProps="xMenuProps.courseListTableProps"  />
   </div>
 </template>
 

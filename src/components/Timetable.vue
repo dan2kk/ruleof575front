@@ -25,6 +25,7 @@ export default {
     "timeline5Props",
     "timeline6Props",
   ],
+
 };
 </script>
 

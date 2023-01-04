@@ -38,6 +38,9 @@ export default {
     "timeblock12Props",
     "timeblock13Props",
   ],
+  method:{
+    
+  }
 };
 </script>
 

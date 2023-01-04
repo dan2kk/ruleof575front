@@ -1,5 +1,5 @@
 <template>
-  <div class="gyoyang-table-flex-col-1">
+  <div class="gyoyang-table">
     <textbox32 />
     <gyoyang-record
       :iconbuttons1="gyoyangRecord1Props.iconbuttons1"
@@ -148,22 +148,22 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.gyoyang-table-flex-col-1::-webkit-scrollbar
+.gyoyang-table-::-webkit-scrollbar
   display: none
   width: 0
 
-.gyoyang-table-flex-col-1
+.gyoyang-table
   align-items: center
   background-color: $solitude
   border-left-style: solid
   border-left-width: 3px
   display: flex
   flex-direction: column
-  height: 500px
-  margin-left: 3.0px
-  margin-top: 77px
+  height: 550px
   overflow: hidden
   overflow-y: scroll
   position: relative
   width: 400px
+.textbox32
+  height: 40px
 </style>

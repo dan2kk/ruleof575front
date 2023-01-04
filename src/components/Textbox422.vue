@@ -15,12 +15,13 @@ export default {
 @import '../../variables'
 
 .textbox4-2-1
+  align-items: center
   background-color: $pippin
   border: 3px solid
   border-color: $white
   display: flex
   height: 40px
-  min-width: 50px
+  width: 50px
 
 .cart-2
   align-items: center
@@ -33,8 +34,8 @@ export default {
 
 .icon-buttons-1-1
   cursor: pointer
-  height: 35px
-  min-width: 35px
+  height: 30px
+  width: 30px
   transition: all 0.2s ease
 
 .icon-buttons-1-1:hover
@@ -53,13 +54,12 @@ export default {
 .textbox4-2-1.textbox5-7,
 .textbox4-2-1.textbox5-8,
 .textbox4-2-1.textbox5-9
-  align-items: flex-start
+  align-items: center
   flex-direction: column
-  gap: 10px
-  height: unset
+  height: 40px
   justify-content: center
   min-width: unset
-  width: fit-content
+  width: 50px
 
 .textbox4-2-1.textbox5-1 .cart-2,
 .textbox4-2-1.textbox5-2 .cart-2,

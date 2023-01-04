@@ -31,5 +31,5 @@ export default {
   border-color: $white
   display: flex
   position: relative
-  width: fit-content
+  width: 400px
 </style>

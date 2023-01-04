@@ -13,12 +13,10 @@
         v-on:forthblockclick="this.menu = 4"
       />
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
-      <course-list-table v-if="logined && menu == 1"></course-list-table>
-      <div class="flex-col-1" v-if="logined && menu == 2">
-        <gyoyang-table v-bind="gyoyangTableProps"/>
-      </div>
+      <course-list-table v-if="logined && menu == 1" v-bind="courseListTableProps"></course-list-table>
+      <gyoyang-table v-if="logined && menu == 2" v-bind="gyoyangTableProps"/>
       <course-info-table v-if="logined && menu == 3"></course-info-table>
-      <graduation-info-table v-if="logined && menu == 4"></graduation-info-table>
+      <graduation-info-table v-if="logined && menu == 4"  v-bind="graduationInfoTableProps"></graduation-info-table>
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
     GyoyangTable,
     CourseListTable
   },
-  props: ["textboxMenuTabProps", "initialMenuProps","GraduationInfoTableProps", "gyoyangTableProps", "CourseListTableProps"],
+  props: ["textboxMenuTabProps", "initialMenuProps","graduationInfoTableProps", "gyoyangTableProps", "courseListTableProps"],
   data(){
     return{
       logined: false,
@@ -49,13 +47,9 @@ export default {
   },
   methods: {
     loginevent(){
-      alert("event received")
-      this.logined = !this.logined
-      this.menu = 3
-    },
-    event(){
-      alert("event1 received")
-      this.menu = 2
+        alert("event received")
+        this.logined = !this.logined
+        this.menu = 3
     }
   }
 };

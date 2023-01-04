@@ -158,8 +158,7 @@ export default {
   background-color: $tutu
   display: flex
   flex-direction: column
-  height: 500px
-  margin-top: 305px
+  height: 550px
   overflow: hidden
   position: relative
   width: 400px
