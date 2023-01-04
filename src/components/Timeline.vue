@@ -1,18 +1,18 @@
 <template>
   <div class="timeline-1">
     <timeblock4 :children="timeblock1Props.children" />
-    <timeblock4 :children="timeblock2Props.children" />
-    <timeblock4 :children="timeblock3Props.children" />
-    <timeblock4 :children="timeblock4Props.children" />
-    <timeblock4 :children="timeblock5Props.children" />
-    <timeblock4 :children="timeblock6Props.children" />
-    <timeblock4 :children="timeblock7Props.children" />
-    <timeblock4 :children="timeblock8Props.children" />
-    <timeblock4 :children="timeblock9Props.children" />
-    <timeblock4 :children="timeblock10Props.children" />
-    <timeblock4 :children="timeblock11Props.children" />
-    <timeblock4 :children="timeblock12Props.children" />
-    <timeblock4 :children="timeblock13Props.children" :className="timeblock13Props.className" />
+    <timeblock4 :children="timeblock2Props.children" @click="timeboxclick(9)"/>
+    <timeblock4 :children="timeblock3Props.children" @click="timeboxclick(10)"/>
+    <timeblock4 :children="timeblock4Props.children" @click="timeboxclick(11)"/>
+    <timeblock4 :children="timeblock5Props.children" @click="timeboxclick(12)"/>
+    <timeblock4 :children="timeblock6Props.children" @click="timeboxclick(13)"/>
+    <timeblock4 :children="timeblock7Props.children" @click="timeboxclick(14)"/>
+    <timeblock4 :children="timeblock8Props.children" @click="timeboxclick(15)"/>
+    <timeblock4 :children="timeblock9Props.children" @click="timeboxclick(16)"/>
+    <timeblock4 :children="timeblock10Props.children" @click="timeboxclick(17)"/>
+    <timeblock4 :children="timeblock11Props.children" @click="timeboxclick(18)"/>
+    <timeblock4 :children="timeblock12Props.children" @click="timeboxclick(19)"/>
+    <timeblock4 :children="timeblock13Props.children" :className="timeblock13Props.className" @click="timeboxclick(20)" />
   </div>
 </template>
 
@@ -38,8 +38,11 @@ export default {
     "timeblock12Props",
     "timeblock13Props",
   ],
-  method:{
-    
+  methods:{
+    timeboxclick(time){
+      alert('clicked time is '+ time);
+      this.$emit("timeboxclicked", time);
+    }
   }
 };
 </script>
