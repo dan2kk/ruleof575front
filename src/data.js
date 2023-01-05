@@ -1,3 +1,4 @@
+//로그인 전 초기화면 영역
 export const textbox11Data = {
     children: "수업목록",
     className: "textbox1",
@@ -32,7 +33,7 @@ export const loginButton41Data = {
 export const initialMenu1Data = {
     loginButtonProps: loginButton41Data,
 };
-
+//추천교양 테이블 영역
 export const textbox21Data = {
     text: "수업이름",
 };
@@ -49,12 +50,12 @@ export const textbox23Data = {
 
 export const imagebox_Search4Data = {
     src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-1@2x.png",
-    className: "",
+    className: "blue",
 };
 
 export const imagebox_Search5Data = {
     src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-2@2x.png",
-    className: "textbox5-1",
+    className: "blue",
 };
 export const gyoyangRecord1Data = {
     textbox21Props: textbox21Data,
@@ -63,11 +64,18 @@ export const gyoyangRecord1Data = {
     imagebox_Add1Props: imagebox_Search4Data,
     imagebox_SearchProps: imagebox_Search5Data,
 };
-
+export const titleBoxData = {
+    className: "blue",
+}
 export const gyoyangTableData = {
+    titleboxProps: titleBoxData,
     gyoyangRecord1Props: gyoyangRecord1Data,
 };
+//수업상세 테이블 영역
+export const courseInfoTableData = {
 
+}
+//졸업사정 테이블 영역
 export const textbox243Data = {
     text: "이수명",
     className: "textbox1-3",
@@ -111,7 +119,7 @@ export const graduationInfoRecord1Data = {
 export const graduationInfoTableData = {
     graduationInfoRecord1Props: graduationInfoRecord1Data,
 };
-
+//수업목록 테이블 영역
 export const textbox2133Data = {
     text: "과목명",
     className: "textbox1-4",
@@ -129,12 +137,12 @@ export const textbox2135Data = {
 
 export const imagebox_Search2Data = {
     src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-1@2x.png",
-    className: "",
+    className: "red",
 };
 
 export const imagebox_Search3Data = {
     src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-2@2x.png",
-    className: "textbox5-1",
+    className: "red",
 };
 
 export const courseListRecord1Data = {
@@ -151,6 +159,7 @@ export const courseListTableData = {
 
 };
 
+//시간표 영역
 export const timeblock41Data = {
     children: ".",
 };
