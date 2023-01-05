@@ -14,6 +14,7 @@
       :timeline4Props="timetableProps.timeline4Props"
       :timeline5Props="timetableProps.timeline5Props"
       :timeline6Props="timetableProps.timeline6Props"
+      v-on:selectTable="sendServer"
     />
   </div>
 </template>
@@ -28,6 +29,13 @@ export default {
     Timetable,
   },
   props: ["className", "userInfoBoxProps", "timetableProps"],
+  methods: {
+    sendServer(dateTime){
+      alert("send server date and Time")
+      alert(dateTime.date)
+      alert(dateTime.time)
+    }
+  }
 };
 </script>
 

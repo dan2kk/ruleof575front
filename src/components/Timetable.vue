@@ -25,21 +25,41 @@ export default {
     "timeline5Props",
     "timeline6Props",
   ],
+  data() {
+    return {
+      dateTime: [{time : 0},{date : 0}]
+    }
+  },
   methods: {
     timelineevent1(time){
       alert("picked time and date is monday and time " + time)
+      this.dateTime.time = time
+      this.dateTime.date = 1
+      this.$emit("selectTable", this.dateTime)
     },
     timelineevent2(time){
       alert("picked time and date is tuesday and time " + time)
+      this.dateTime.time = time
+      this.dateTime.date = 2
+      this.$emit("selectTable", this.dateTime)
     },
     timelineevent3(time){
       alert("picked time and date is wedensday and time " + time)
+      this.dateTime.time = time
+      this.dateTime.date = 3
+      this.$emit("selectTable", this.dateTime)
     },
     timelineevent4(time){
       alert("picked time and date is thursday and time " + time)
+      this.dateTime.time = time
+      this.dateTime.date = 4
+      this.$emit("selectTable", this.dateTime)
     },
     timelineevent5(time){
       alert("picked time and date is friday and time " + time)
+      this.dateTime.time = time
+      this.dateTime.date = 5
+      this.$emit("selectTable", this.dateTime)
     }
   }
 };
