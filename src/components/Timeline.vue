@@ -37,12 +37,20 @@ export default {
     "timeblock11Props",
     "timeblock12Props",
     "timeblock13Props",
+    "clickedProps",
   ],
+  data(){
+    return{
+      clickprops: false
+    }
+  },
   methods:{
     timeboxclick(time){
-      alert('clicked time is '+ time);
-      this.$emit("timeboxclicked", time);
-    }
+        if(this.clickedProps){
+          alert('clicked time is '+ time);
+          this.$emit("timeboxclicked", time);
+        }
+    },
   }
 };
 </script>
