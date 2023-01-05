@@ -43,7 +43,7 @@ export default {
   align-items: center
   background-color: $white
   border-left-style: solid
-  border-left-width: 3px
+  border-left-width: 1px
   display: flex
   height: 50px
   margin-right: 18.0px
