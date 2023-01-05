@@ -1,32 +1,31 @@
 <template>
-  <div class="course-list-record-1">
+  <div class="graduation-info-record-1">
     <textbox2 :text="textbox21Props.text" :className="textbox21Props.className" />
     <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
     <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-    <textbox422 :src="textbox421Props.src" :className="textbox421Props.className" />
-    <textbox422 :src="textbox422Props.src" :className="textbox422Props.className" />
+    <textbox2 :text="textbox24Props.text" :className="textbox24Props.className" />
+    <textbox2 :text="textbox25Props.text" :className="textbox25Props.className" />
+    <textbox2 :text="textbox26Props.text" :className="textbox26Props.className" />
   </div>
 </template>
 
 <script>
 import Textbox2 from "./Textbox2";
-import Textbox422 from "./Textbox422";
 export default {
-  name: "CourseListRecord2",
+  name: "GraduationInfoRecord",
   components: {
     Textbox2,
-    Textbox422,
   },
-  props: ["textbox21Props", "textbox22Props", "textbox23Props", "textbox421Props", "textbox422Props"],
+  props: ["textbox21Props", "textbox22Props", "textbox23Props", "textbox24Props", "textbox25Props", "textbox26Props"],
 };
 </script>
 
 <style lang="sass">
 @import '../../variables'
 
-.course-list-record-1
+.graduation-info-record-1
   align-items: flex-start
-  background-color: $pippin
+  background-color: $tutu
   border: 3px solid
   border-color: $white
   display: flex

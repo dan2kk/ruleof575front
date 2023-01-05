@@ -1,16 +1,16 @@
 <template>
   <div class="course-info-table">
-    <textbox42 />
-    <textbox42 />
+    <imagebox_Add />
+    <imagebox_Add />
   </div>
 </template>
 
 <script>
-import Textbox42 from "./Textbox42";
+import Imagebox_Add from "./Imagebox_Add";
 export default {
   name: "CourseInfoTable",
   components: {
-    Textbox42,
+    Imagebox_Add,
   },
 };
 </script>
