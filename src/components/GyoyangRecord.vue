@@ -46,7 +46,8 @@ export default {
   transition: all 0.2s ease
   width: 35px
   
-.icon-buttons1-1:hover
+.icon-buttons1-1:hover,
+.icon-buttons2-1:hover
   transform: scale(1.1)
 
 .icon-buttons2-1
