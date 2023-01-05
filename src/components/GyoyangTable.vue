@@ -1,13 +1,7 @@
 <template>
   <div class="gyoyang-table">
     <titlebox />
-    <gyoyang-record
-      :iconbuttons1="gyoyangRecord1Props.iconbuttons1"
-      :iconbuttons2="gyoyangRecord1Props.iconbuttons2"
-      :textbox21Props="gyoyangRecord1Props.textbox21Props"
-      :textbox22Props="gyoyangRecord1Props.textbox22Props"
-      :textbox23Props="gyoyangRecord1Props.textbox23Props"
-    />
+    <gyoyang-record v-bind="gyoyangRecord1Props"/>
   </div>
 </template>
 

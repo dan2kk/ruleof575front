@@ -20,14 +20,12 @@ export default {
   height: 40px
   width: 400px
   position: relative
-  align-items: center
+  align-items: stretch
 .text-2
   height: 26px
-  left: 130px
   letter-spacing: 0
   line-height: normal
-  position: absolute
   text-align: center
-  top: 4px
   width: 150px
+  align-items: center
 </style>
