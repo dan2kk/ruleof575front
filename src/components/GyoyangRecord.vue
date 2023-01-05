@@ -4,11 +4,8 @@
       <textbox2 :text="textbox21Props.text" />
       <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
       <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-      <img class="icon-buttons1-1" :src="iconbuttons1" alt="IconButtons1" /><img
-        class="icon-buttons2-1 animate-enter13"
-        :src="iconbuttons2"
-        alt="IconButtons2"
-      />
+      <img class="icon-buttons1-1" src="../assets/iconbuttons-3.png"/>
+      <img class="icon-buttons2-1" src="../assets/iconbuttons-2.png"/>
     </div>
   </div>
 </template>
@@ -48,17 +45,16 @@ export default {
   margin-left: 9px
   transition: all 0.2s ease
   width: 35px
-
+  
 .icon-buttons1-1:hover
   transform: scale(1.1)
 
 .icon-buttons2-1
-  display: block
+  cursor: pointer
   height: 35px
   margin-bottom: 1.0px
-  margin-left: 15px
-  opacity: 0
-  transform: scale(1.1)
+  margin-left: 9px
+  transition: all 0.2s ease
   width: 35px
 
 .icon-buttons2-1.animate-enter13

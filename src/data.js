@@ -48,8 +48,8 @@ export const textbox23Data = {
 };
 
 export const gyoyangRecord1Data = {
-    iconbuttons1: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons1@2x.png",
-    iconbuttons2: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons2@2x.png",
+    iconbuttons1: "/../assets/iconbuttons1@2x.png",
+    iconbuttons2: "@/img/iconbuttons2@2x.png",
     textbox21Props: textbox21Data,
     textbox22Props: textbox22Data,
     textbox23Props: textbox23Data,
