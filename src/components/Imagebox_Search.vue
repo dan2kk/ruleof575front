@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`textbox4-2-1`, className || ``]">
+  <div :class="[`imagebox`, className || ``]">
     <div class="cart-2"><img class="icon-buttons-1-1" :src="src" alt="IconButtons" /></div>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.textbox4-2-1
+.imagebox
   align-items: center
   background-color: $pippin
   border: 1px solid
@@ -22,7 +22,7 @@ export default {
   display: flex
   height: 40px
   width: 50px
-.textbox4-2-1.blue
+.imagebox.blue
   background-color: $solitude
 
 .cart-2

@@ -1035,26 +1035,6 @@ export const userInfoTimeTable1Data = {
     timetableProps: timetable2Data,
 };
 
-export const frame1Data = {
-    textbox: "/img/textbox@1x.png",
-    userinfobox: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/userinfobox@2x.png",
-    loginbutton: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/loginbutton@2x.png",
-    iconbuttons: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons@2x.png",
-    menu: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/menu@1x.png",
-    gyoyangrecord: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/gyoyangrecord@2x.png",
-    graduationinforecord: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/graduationinforecord@2x.png",
-    courselistrecord: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/courselistrecord@2x.png",
-    courseinforecord: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/courseinforecord@2x.png",
-    timeblock: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/timeblock@2x.png",
-    timeline: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/timeline@1x.png",
-    textboxMenuTabProps: textboxMenuTab1Data,
-    initialMenuProps: initialMenu1Data,
-    gyoyangTableProps: gyoyangTableData,
-    graduationInfoTableProps: graduationInfoTableData,
-    courseListTableProps: courseListTableData,
-    timetableProps: timetable1Data,
-    userInfoTimeTableProps: userInfoTimeTable1Data,
-};
 
 export const textbox6Data = {
     text: "이름",
