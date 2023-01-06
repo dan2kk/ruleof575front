@@ -49,7 +49,7 @@ export const textbox23Data = {
 
 export const gyoyangRecord1Data = {
     iconbuttons1: "/../assets/iconbuttons1@2x.png",
-    iconbuttons2: "@/img/iconbuttons2@2x.png",
+    iconbuttons2: "/../assets/iconbuttons2@2x.png",
     textbox21Props: textbox21Data,
     textbox22Props: textbox22Data,
     textbox23Props: textbox23Data,
