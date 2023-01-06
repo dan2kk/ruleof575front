@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Textbox422",
+  name: "Imagebox_Search",
   props: ["src", "className"],
 };
 </script>

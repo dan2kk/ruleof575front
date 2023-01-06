@@ -4,20 +4,22 @@
       <textbox2 :text="textbox21Props.text" />
       <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
       <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-      <img class="icon-buttons1-1" src="../assets/iconbuttons-3.png"/>
-      <img class="icon-buttons2-1" src="../assets/iconbuttons-2.png"/>
+      <imagebox_Search :src="imagebox_Add1Props.src" :className="imagebox_Add1Props.className" />
+      <imagebox_Search :src="imagebox_SearchProps.src" :className="imagebox_SearchProps.className" />
     </div>
   </div>
 </template>
 
 <script>
 import Textbox2 from "./Textbox2";
+import Imagebox_Search from "./Imagebox_Search";
 export default {
   name: "GyoyangRecord",
   components: {
     Textbox2,
+    Imagebox_Search
   },
-  props: ["iconbuttons1", "iconbuttons2", "className", "textbox21Props", "textbox22Props", "textbox23Props"],
+  props: ["className", "textbox21Props", "textbox22Props", "textbox23Props", "imagebox_Add1Props", "imagebox_SearchProps"],
 };
 </script>
 
