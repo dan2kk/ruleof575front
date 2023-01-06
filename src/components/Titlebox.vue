@@ -1,7 +1,7 @@
 <template>
   <div :class="[`textbox-1`, className || ``]">
-    <div class="text-2 valign-text-middle notosanskr-bold-white-18px">
-      <slot></slot>
+    <div class="text-2 valign-text-middle notosanskr-bold-black-18px">
+      {{ this.text }}
     </div>
 
   </div>
@@ -11,6 +11,11 @@
 export default {
   name: "Titlebox",
   props: ["className"],
+  data(){
+    return{
+        text: "야스다! 야스"
+      }
+  }
 };
 </script>
 

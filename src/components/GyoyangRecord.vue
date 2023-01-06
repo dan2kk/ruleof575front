@@ -28,7 +28,7 @@ export default {
 
 .gyoyang-record-1-1
   background-color: $solitude
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   height: 40px
   min-width: 400px

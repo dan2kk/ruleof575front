@@ -18,10 +18,11 @@ export default {
 
 .textbox1-2-1
   background-color: $solitude
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   display: flex
   width: 150px
+  height: 40px
 
 .cart-1
   align-items: flex-start
@@ -36,7 +37,6 @@ export default {
   height: 40px
   letter-spacing: 0
   line-height: normal
-  margin-top: -2.00px
   text-align: center
 
 .textbox1-2-1.textbox2-2,

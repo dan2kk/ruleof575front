@@ -49,12 +49,12 @@ export const textbox23Data = {
 };
 
 export const imagebox_Search4Data = {
-    src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-1@2x.png",
+    src: './iconbuttons-3.png',
     className: "blue",
 };
 
 export const imagebox_Search5Data = {
-    src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-2@2x.png",
+    src: './iconbuttons-2.png',
     className: "blue",
 };
 export const gyoyangRecord1Data = {
@@ -136,12 +136,12 @@ export const textbox2135Data = {
 };
 
 export const imagebox_Search2Data = {
-    src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-1@2x.png",
+    src: './iconbuttons-3.png',
     className: "red",
 };
 
 export const imagebox_Search3Data = {
-    src: "https://anima-uploads.s3.amazonaws.com/projects/63b444ace639af7c8f3efd2b/releases/63b4455d27b2f99951b98b72/img/iconbuttons-2@2x.png",
+    src: './iconbuttons-2.png',
     className: "red",
 };
 

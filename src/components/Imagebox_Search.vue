@@ -17,11 +17,13 @@ export default {
 .textbox4-2-1
   align-items: center
   background-color: $pippin
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   display: flex
   height: 40px
   width: 50px
+.textbox4-2-1.blue
+  background-color: $solitude
 
 .cart-2
   align-items: center
