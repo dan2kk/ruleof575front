@@ -27,8 +27,6 @@ export default {
 .course-list-record-1
   align-items: flex-start
   background-color: $pippin
-  border: 1px solid
-  border-color: $white
   display: flex
   position: relative
   width: 400px

@@ -34,6 +34,10 @@ export default {
   flex-direction: column
   height: 550px
   overflow: hidden
+  overflow-y: scroll
   position: relative
   width: 400px
+  border-width : 1px
+  border-color : white
+  border-style: solid
 </style>

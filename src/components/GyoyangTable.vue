@@ -30,8 +30,9 @@ export default {
 .gyoyang-table
   align-items: center
   background-color: $solitude
-  border-left-style: solid
-  border-left-width: 3px
+  border-style: solid
+  border-width: 1px
+  border-color: $white
   display: flex
   flex-direction: column
   height: 550px
