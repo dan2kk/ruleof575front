@@ -27,7 +27,6 @@ export default {
 
 .cart-2
   align-items: center
-  border-radius: 5px
   display: flex
   flex: 1
   height: 40px
