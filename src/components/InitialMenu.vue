@@ -31,9 +31,11 @@ export default {
   flex-direction: column
   height: 550px
   justify-content: center
-  margin-left: 10px
   position: relative
   width: 400px
+  border-style: solid
+  border-width: 1px
+  border-color: $white
 
 .login-button4:hover
   transform: scale(1.2)
