@@ -1,11 +1,11 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline v-bind="timeline1Props"/>
-    <timeline v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
-    <timeline v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
-    <timeline v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
-    <timeline v-bind="timeline5Props" v-on:timeboxclicked="timelineevent4"/>
-    <timeline v-bind="timeline6Props" v-on:timeboxclicked="timelineevent5"/>
+    <timeline :clickedProps=false v-bind="timeline1Props"/>
+    <timeline :clickedProps=true v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
+    <timeline :clickedProps=true v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
+    <timeline :clickedProps=true v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
+    <timeline :clickedProps=true v-bind="timeline5Props" v-on:timeboxclicked="timelineevent4"/>
+    <timeline :clickedProps=true v-bind="timeline6Props" v-on:timeboxclicked="timelineevent5"/>
   </div>
 </template>
 
