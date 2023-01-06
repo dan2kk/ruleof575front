@@ -32,12 +32,10 @@ export default {
 
 .start
   align-items: flex-start
-  background-color: $white
+  background-color: $black
   border: 1px none
   display: flex
-  height: 100vh
-  min-height: 600px
-  min-width: 800px
-  position: relative
-  width: 100%
+  height: 600px
+  position: absolute
+  width: 800px
 </style>

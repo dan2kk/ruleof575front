@@ -1,6 +1,7 @@
 <template>
   <div class="gyoyang-table">
-    <titlebox />
+    <titlebox className="blueBold">야스다야스</titlebox>
+
     <gyoyang-record v-bind="gyoyangRecord1Props"/>
   </div>
 </template>

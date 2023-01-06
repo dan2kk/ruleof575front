@@ -1,9 +1,8 @@
 <template>
   <div :class="[`textbox-1`, className || ``]">
-    <div class="text-2 valign-text-middle notosanskr-bold-black-18px">
-      {{ this.text }}
+    <div class="text-2 valign-text-middle notosanskr-bold-white-18px" >
+      <slot></slot>
     </div>
-
   </div>
 </template>
 
@@ -29,10 +28,12 @@ export default {
   width: 400px
   position: relative
   align-items: stretch
-.textbox-1.red
+.textbox-1.redBold
   background-color: #ED8B85
-.textbox-1.blue
-  background-color: #B2C3E1
+.textbox-1.blueBold
+  background-color: $pigeon-post
+.textbox-1.yellowBold
+  background-color: $orange-yellow
 .text-2
   height: 40px
   letter-spacing: 0
