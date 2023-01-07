@@ -13,10 +13,10 @@
         v-on:forthblockclick="this.menu = 4"
       />
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
-      <course-list-table v-if="logined && menu == 1" v-bind="courseListTableProps"></course-list-table>
-      <gyoyang-table v-if="logined && menu == 2" v-bind="gyoyangTableProps"/>
+      <course-list-table v-if="logined && menu == 1"></course-list-table>
+      <gyoyang-table v-if="logined && menu == 2"></gyoyang-table>
       <course-info-table v-if="logined && menu == 3"></course-info-table>
-      <graduation-info-table v-if="logined && menu == 4"  v-bind="graduationInfoTableProps"></graduation-info-table>
+      <graduation-info-table v-if="logined && menu == 4"></graduation-info-table>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     GyoyangTable,
     CourseListTable
   },
-  props: ["textboxMenuTabProps", "initialMenuProps","graduationInfoTableProps", "gyoyangTableProps", "courseListTableProps"],
+  props: ["textboxMenuTabProps", "initialMenuProps",],
   data(){
     return{
       logined: false,

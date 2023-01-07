@@ -1,14 +1,7 @@
 <template>
   <div class="graduation-info-table">
     <titlebox className="purpleBold">졸업사정 변동사항</titlebox>
-    <graduation-info-record
-      :textbox21Props="graduationInfoRecord1Props.textbox21Props"
-      :textbox22Props="graduationInfoRecord1Props.textbox22Props"
-      :textbox23Props="graduationInfoRecord1Props.textbox23Props"
-      :textbox24Props="graduationInfoRecord1Props.textbox24Props"
-      :textbox25Props="graduationInfoRecord1Props.textbox25Props"
-      :textbox26Props="graduationInfoRecord1Props.textbox26Props"
-    />
+    <graduation-info-record/>
   </div>
 </template>
 
@@ -19,10 +12,8 @@ export default {
   name: "GraduationInfoTable",
   components: {
     Titlebox,
-    GraduationInfoRecord,
   },
   props: [
-    "graduationInfoRecord1Props",
   ],
 };
 </script>
@@ -36,7 +27,8 @@ export default {
   display: flex
   flex-direction: column
   height: 550px
-  overflow: hidden
+  overflow-y: scroll
+  overflow-x: hidden
   position: relative
   width: 400px
 </style>

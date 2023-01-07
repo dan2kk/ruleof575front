@@ -8,9 +8,7 @@
     <x-menu 
       :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" 
       :initialMenuProps="xMenuProps.initialMenuProps"
-      :graduationInfoTableProps="xMenuProps.graduationInfoTableProps" 
-      :gyoyangTableProps="xMenuProps.gyoyangTableProps" 
-      :courseListTableProps="xMenuProps.courseListTableProps"  />
+    />
   </div>
 </template>
 

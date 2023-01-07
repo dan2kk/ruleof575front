@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`imagebox`, className || ``]">
+  <div :class="[`imagebox`, color || ``]">
     <div class="cart-2"><img class="icon-buttons-1-1" :src="src" alt="IconButtons" /></div>
   </div>
 </template>
@@ -7,21 +7,23 @@
 <script>
 export default {
   name: "Imagebox_Search",
-  props: ["src", "className"],
+  props: ["src", "color"],
 };
 </script>
 
 <style lang="sass">
 @import '../../variables'
-
 .imagebox
   align-items: center
-  background-color: $pippin
   border: 1px solid
   border-color: $white
   display: flex
   height: 40px
   width: 50px
+
+.imagebox.red
+  background-color: $pippin
+
 .imagebox.blue
   background-color: $solitude
 

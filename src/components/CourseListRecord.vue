@@ -1,10 +1,12 @@
 <template>
   <div class="course-list-record-1">
-    <textbox2 :text="textbox21Props.text" :className="textbox21Props.className" />
-    <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
-    <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-    <imagebox_Search :src="imagebox_Add1Props.src" :className="imagebox_Add1Props.className" />
-    <imagebox_Search :src="imagebox_SearchProps.src" :className="imagebox_SearchProps.className" />
+    <div class="flex-row-1">
+      <textbox2 :text= this.mockup.coursename className= "red" size= "big"/>
+      <textbox2 :text= this.mockup.profname className= "red" size= "small"/>
+      <textbox2 :text= this.mockup.coursetime className= "red" size= "medium"/>
+      <imagebox_Search :src= this.mockup.image1 className="red" />
+      <imagebox_Search :src= this.mockup.image2 className="red" />
+    </div>
   </div>
 </template>
 
@@ -17,7 +19,13 @@ export default {
     Textbox2,
     Imagebox_Search,
   },
-  props: ["textbox21Props", "textbox22Props", "textbox23Props", "imagebox_Add1Props", "imagebox_SearchProps"],
+  props: [],
+  data()
+  {
+    return{
+      mockup: {coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00", image1: './iconbuttons-3.png', image2: './iconbuttons-2.png'},
+    }
+  }
 };
 </script>
 
@@ -27,7 +35,16 @@ export default {
 .course-list-record-1
   align-items: flex-start
   background-color: $pippin
+  border: 1px solid
+  border-color: $white
   display: flex
   position: relative
   width: 400px
+
+.flex-row-1
+  align-items: center
+  display: flex
+  height: 40px
+  min-width: 394px
+  position: relative
 </style>

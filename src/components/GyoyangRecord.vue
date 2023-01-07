@@ -1,11 +1,11 @@
 <template>
   <div :class="[`gyoyang-record-1-1`, className || ``]">
     <div class="flex-row-1">
-      <textbox2 :text= this.classname />
-      <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
-      <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-      <imagebox_Search :src="imagebox_Add1Props.src" :className="imagebox_Add1Props.className" />
-      <imagebox_Search :src="imagebox_SearchProps.src" :className="imagebox_SearchProps.className" />
+      <textbox2 :text= this.mockup.coursename className= "blue" size= "big"/>
+      <textbox2 :text= this.mockup.profname className= "blue" size= "small"/>
+      <textbox2 :text= this.mockup.coursetime className= "blue" size= "medium"/>
+      <imagebox_Search :src= this.mockup.image1 className="blue" />
+      <imagebox_Search :src= this.mockup.image2 className="blue" />
     </div>
   </div>
 </template>
@@ -19,14 +19,12 @@ export default {
     Textbox2,
     Imagebox_Search
   },
-  props: [
-    "className", "textbox21Props", "textbox22Props", "textbox23Props", "imagebox_Add1Props", "imagebox_SearchProps"],
+  props: ["className"],
   data()
   {
     return{
-      classname: "수업이름",
-      profname: "교수이름",
-      classtime: "월화수"
+      mockup: {coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00", image1: './iconbuttons-1.png', image2: './iconbuttons-2.png'},
+
     }
   }
 };

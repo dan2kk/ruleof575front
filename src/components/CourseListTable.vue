@@ -1,13 +1,7 @@
 <template>
   <div class="course-list-table">
     <titlebox className="redBold">내 수업목록</titlebox>
-    <course-list-record
-      :textbox21Props="courseListRecord1Props.textbox21Props"
-      :textbox22Props="courseListRecord1Props.textbox22Props"
-      :textbox23Props="courseListRecord1Props.textbox23Props"
-      :imagebox_Add1Props="courseListRecord1Props.imagebox_Add1Props"
-      :imagebox_SearchProps="courseListRecord1Props.imagebox_SearchProps"
-    />
+    <course-list-record/>
   </div>
 </template>
 
@@ -22,8 +16,6 @@ export default {
     Titlebox,
   },
   props: [
-    "courseListRecord1Props",
-
   ],
 };
 </script>

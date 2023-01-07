@@ -1,11 +1,13 @@
 <template>
   <div class="graduation-info-record-1">
-    <textbox2 :text="textbox21Props.text" :className="textbox21Props.className" />
-    <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
-    <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-    <textbox2 :text="textbox24Props.text" :className="textbox24Props.className" />
-    <textbox2 :text="textbox25Props.text" :className="textbox25Props.className" />
-    <textbox2 :text="textbox26Props.text" :className="textbox26Props.className" />
+      <div class="flex-row-1">
+        <textbox2 :text= this.mockup.a className= "purple" size= "big"/>
+        <textbox2 :text= this.mockup.b className= "purple" size= "small"/>
+        <textbox2 :text= this.mockup.c className= "purple" size= "small"/>
+        <textbox2 :text= this.mockup.d className= "purple" size= "small"/>
+        <textbox2 :text= this.mockup.e className= "purple" size= "small"/>
+        <textbox2 :text= this.mockup.f className= "purple" size= "small"/>
+      </div>
   </div>
 </template>
 
@@ -16,19 +18,37 @@ export default {
   components: {
     Textbox2,
   },
-  props: ["textbox21Props", "textbox22Props", "textbox23Props", "textbox24Props", "textbox25Props", "textbox26Props"],
+  props: [],
+  data()
+  {
+    return{
+      mockup: {a: "이수명", b: "배당", c: "취득",d: "변동", e: "합계", f: "잔여"},
+    }
+  }
 };
+
+
+
 </script>
 
 <style lang="sass">
 @import '../../variables'
-
 .graduation-info-record-1
   align-items: flex-start
   background-color: $tutu
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   display: flex
   position: relative
-  width: 400px
+  width: 400
+  
+.flex-row-1
+  align-items: center
+  display: flex
+  height: 40px
+  min-width: 394px
+  position: relative
+
+
+
 </style>

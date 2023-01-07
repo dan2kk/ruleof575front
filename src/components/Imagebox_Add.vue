@@ -15,7 +15,7 @@ export default {
 
 .textbox-3
   background-color: $orange-yellow
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   height: 40px
   min-width: 400px
