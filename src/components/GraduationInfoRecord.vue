@@ -1,12 +1,12 @@
 <template>
   <div class="graduation-info-record">
       <div class="flex-row-1">
-        <textbox2 :text="this.mockup.a" className= "purple" size= "big"/>
-        <textbox2 :text= "this.mockup.b" className= "purple" size= "small"/>
-        <textbox2 :text= "this.mockup.c" className= "purple" size= "small"/>
-        <textbox2 :text= "this.mockup.d" className= "purple" size= "small"/>
-        <textbox2 :text= "this.mockup.e" className= "purple" size= "small"/>
-        <textbox2 :text= "this.mockup.f" className= "purple" size= "small"/>
+        <textbox2 :text="this.textData.a" className= "purple" size= "big"/>
+        <textbox2 :text= "this.textData.b" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.c" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.d" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.e" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.f" className= "purple" size= "small"/>
       </div>
   </div>
 </template>
@@ -18,13 +18,7 @@ export default {
   components: {
     Textbox2,
   },
-  props: [],
-  data()
-  {
-    return{
-      mockup: {a: "이수명", b: "배당", c: "취득",d: "변동", e: "합계", f: "잔여"},
-    }
-  }
+  props: ["textData"],
 };
 
 

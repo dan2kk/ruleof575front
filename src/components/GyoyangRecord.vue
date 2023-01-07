@@ -1,11 +1,11 @@
 <template>
   <div :class="[`gyoyang-record-1-1`, className || ``]">
     <div class="flex-row-1">
-      <textbox2 :text= this.mockup.coursename className= "blue" size= "big"/>
-      <textbox2 :text= this.mockup.profname className= "blue" size= "small"/>
-      <textbox2 :text= this.mockup.coursetime className= "blue" size= "medium"/>
-      <imagebox_Search :src= this.mockup.image1 className="blue" />
-      <imagebox_Search :src= this.mockup.image2 className="blue" />
+      <textbox2 :text= "this.textData.coursename" className= "blue" size= "big"/>
+      <textbox2 :text= "this.textData.profname" className= "blue" size= "small"/>
+      <textbox2 :text= "this.textData.coursetime" className= "blue" size= "medium"/>
+      <imagebox_Search src= "./iconbuttons-1.png" className="blue" />
+      <imagebox_Search src= "./iconbuttons-2.png" className="blue" />
     </div>
   </div>
 </template>
@@ -19,14 +19,7 @@ export default {
     Textbox2,
     Imagebox_Search
   },
-  props: ["className"],
-  data()
-  {
-    return{
-      mockup: {coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00", image1: './iconbuttons-1.png', image2: './iconbuttons-2.png'},
-
-    }
-  }
+  props: ["textData"],
 };
 </script>
 
