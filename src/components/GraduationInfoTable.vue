@@ -11,7 +11,7 @@ import GraduationInfoRecord from "./GraduationInfoRecord";
 export default {
   name: "GraduationInfoTable",
   components: {
-    Titlebox,
+    Titlebox, GraduationInfoRecord
   },
   props: [
   ],

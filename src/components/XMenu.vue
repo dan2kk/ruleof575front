@@ -65,7 +65,7 @@ export default {
 
 .cart-5
   align-items: flex-start
-  background-color: #e1e1e1
+  background-color: #error-color
   display: flex
   flex-direction: column
   height: 600px

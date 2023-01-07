@@ -14,9 +14,7 @@ export default {
     Titlebox,
     GyoyangRecord,
   },
-  props: [
-    "gyoyangRecord1Props",
-  ],
+  props: [],
   methods:{
     setdata(index){
       this.its.at(index).textbox21Props.text = "스크린영어"

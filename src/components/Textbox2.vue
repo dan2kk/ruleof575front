@@ -77,7 +77,7 @@ export default {
 .textbox-normal.yellow.medium
   width: 100px
 
-/*노랑 영역*/
+/*보라 영역*/
 .textbox-normal.purple
   background-color: $tutu
 

@@ -1,7 +1,7 @@
 <template>
   <div class="course-info-table">
-    <titlebox className="yellowBold">suck</titlebox>
-    <titlebox className="yellowBold">sex</titlebox>
+    <titlebox className="yellowBold">해줘</titlebox>
+    <titlebox className="yellowBold">해줘</titlebox>
   </div>
 </template>
 

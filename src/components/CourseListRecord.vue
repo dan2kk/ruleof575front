@@ -1,6 +1,6 @@
 <template>
   <div class="course-list-record-1">
-    <div class="flex-row-1">
+    <div class="cart-courselistrecord">
       <textbox2 :text= this.mockup.coursename className= "red" size= "big"/>
       <textbox2 :text= this.mockup.profname className= "red" size= "small"/>
       <textbox2 :text= this.mockup.coursetime className= "red" size= "medium"/>
@@ -41,7 +41,7 @@ export default {
   position: relative
   width: 400px
 
-.flex-row-1
+.cart-courselistrecord
   align-items: center
   display: flex
   height: 40px
