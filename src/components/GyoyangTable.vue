@@ -48,9 +48,6 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.gyoyang-table-::-webkit-scrollbar
-  display: none
-  width: 0
 
 .gyoyang-table
   align-items: center

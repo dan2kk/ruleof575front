@@ -44,7 +44,7 @@ export default {
 
 .user-info-time-table
   align-items: center
-  background-color: $purple-pizzazz
+  background-color: $error-color
   display: flex
   flex-direction: column
   height: 600px
