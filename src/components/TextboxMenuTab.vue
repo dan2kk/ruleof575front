@@ -1,18 +1,20 @@
 <template>
   <div :class="[`textbox-menu-tab`, className || ``]">
-    <textbox1 :children="textbox11Props.children" :className="textbox11Props.className" @click="firstblockclick()"/>
-    <textbox1 :children="textbox12Props.children" :className="textbox12Props.className" @click="secondblockclick()"/>
-    <textbox1 :children="textbox13Props.children" :className="textbox13Props.className" @click="thirdblockclick()"/>
-    <textbox1 :children="textbox14Props.children" :className="textbox14Props.className" @click="forthblockclick()"/>
+    <menubox className="red" @click="firstblockclick()">수업목록</menubox>
+    <menubox className="blue" @click="secondblockclick()">추천교양</menubox>
+    <menubox className="yellow" @click="thirdblockclick()">수업상세</menubox>
+    <menubox className="purple" @click="fourthblockclick()">졸업사정</menubox>
+
   </div>
 </template>
 
 <script>
 import Textbox1 from "./Textbox1";
+import Menubox from "./Menubox";
 export default {
   name: "TextboxMenuTab",
   components: {
-    Textbox1,
+    Textbox1, Menubox
   },
   props: ["className", "textbox11Props", "textbox12Props", "textbox13Props", "textbox14Props"],
   methods: {
@@ -28,7 +30,7 @@ export default {
       alert("3");
       this.$emit("thirdblockclick");
     },
-    forthblockclick(){
+    fourthblockclick(){
       alert("4");
       this.$emit("forthblockclick");
     }
@@ -41,7 +43,7 @@ export default {
 
 .textbox-menu-tab
   align-items: center
-  background-color: $white
+  background-color: $error-color
   border-left-style: solid
   border-left-width: 1px
   display: flex

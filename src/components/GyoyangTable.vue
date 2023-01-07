@@ -14,9 +14,7 @@ export default {
     Titlebox,
     GyoyangRecord,
   },
-  props: [
-    "gyoyangRecord1Props",
-  ],
+  props: [],
   methods:{
    
   },

@@ -48,12 +48,9 @@ export default {
   display: flex
   flex-direction: column
   height: 600px
-  margin-left: 65px
-  margin-top: 270px
   position: relative
   width: 400px
 
 .user-info-time-table.user-info-time-table-1
-  margin-left: unset
-  margin-top: unset
+
 </style>

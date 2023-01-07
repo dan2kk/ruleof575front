@@ -1,6 +1,6 @@
 <template>
-  <div :class="[`textbox-1`, className || ``]">
-    <div class="text-2 valign-text-middle notosanskr-bold-white-18px" >
+  <div :class="[`menubox-1`, className || ``]">
+    <div class="text-menubox valign-text-middle notosanskr-bold-white-18px" >
       <slot></slot>
     </div>
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "Titlebox",
+  name: "Menubox",
   props: ["className"],
 };
 </script>
@@ -16,30 +16,31 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.textbox-1
+.menubox-1
   border: 1px solid
   border-color: $white
-  height: 40px
-  width: 400px
+  height: 50px
+  width: 100px
   position: relative
   align-items: stretch
 
-.textbox-1.redBold
-  background-color: #ED8B85
+.menubox-1.red
+  background-color: $geraldine
 
-.textbox-1.blueBold
+.menubox-1.blue
   background-color: $pigeon-post
 
-.textbox-1.yellowBold
+.menubox-1.yellow
   background-color: $orange-yellow
   
-.textbox-1.purpleBold
+.menubox-1.purple
   background-color: $lily
-.text-2
-  height: 40px
+
+.text-menubox
+  height: 50px
   letter-spacing: 0
   line-height: normal
   text-align: center
-  width: 400px
+  width: 100px
   top: -5px
 </style>

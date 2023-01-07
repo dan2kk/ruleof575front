@@ -1,6 +1,8 @@
 <template>
   <div :class="[`imagebox`, color || ``]">
-    <div class="cart-2"><img class="icon-buttons-1-1" :src="src" alt="IconButtons" /></div>
+    <div class="cart-imagebox">
+      <img class="icon-buttons-1-1" :src="src" alt="IconButtons" />
+    </div>
   </div>
 </template>
 
@@ -13,10 +15,10 @@ export default {
 
 <style lang="sass">
 @import '../../variables'
+
+
 .imagebox
   align-items: center
-  border: 1px solid
-  border-color: $white
   display: flex
   height: 40px
   width: 50px
@@ -27,13 +29,15 @@ export default {
 .imagebox.blue
   background-color: $solitude
 
-.cart-2
+.cart-imagebox
   align-items: center
   display: flex
   flex: 1
   height: 40px
   justify-content: center
   width: 50px
+  border: 1px solid
+  border-color: $white
 
 .icon-buttons-1-1
   cursor: pointer

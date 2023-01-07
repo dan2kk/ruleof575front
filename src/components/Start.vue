@@ -30,7 +30,7 @@ export default {
 
 .start
   align-items: flex-start
-  background-color: $black
+  background-color: $error-color
   border: 1px none
   display: flex
   height: 600px

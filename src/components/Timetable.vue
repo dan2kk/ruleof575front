@@ -74,13 +74,8 @@ export default {
   display: flex
   gap: 8px
   height: 540px
-  margin-left: 79px
-  margin-top: 330px
   position: relative
   width: 400px
 
-.timetable.timetable-1,
-.timetable.timetable-2
-  margin-left: unset
-  margin-top: unset
+
 </style>
