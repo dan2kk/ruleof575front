@@ -1,5 +1,6 @@
 <template>
   <div class="graduation-info-table">
+    <titlebox className="purpleBold">졸업사정 변동사항</titlebox>
     <graduation-info-record
       :textbox21Props="graduationInfoRecord1Props.textbox21Props"
       :textbox22Props="graduationInfoRecord1Props.textbox22Props"
@@ -12,10 +13,12 @@
 </template>
 
 <script>
+import Titlebox from "./Titlebox";
 import GraduationInfoRecord from "./GraduationInfoRecord";
 export default {
   name: "GraduationInfoTable",
   components: {
+    Titlebox,
     GraduationInfoRecord,
   },
   props: [

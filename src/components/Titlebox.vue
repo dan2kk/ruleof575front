@@ -34,6 +34,8 @@ export default {
   background-color: $pigeon-post
 .textbox-1.yellowBold
   background-color: $orange-yellow
+.textbox-1.purpleBold
+  background-color: $lily
 .text-2
   height: 40px
   letter-spacing: 0

@@ -1,5 +1,6 @@
 <template>
   <div class="course-list-table">
+    <titlebox className="redBold">내 수업목록</titlebox>
     <course-list-record
       :textbox21Props="courseListRecord1Props.textbox21Props"
       :textbox22Props="courseListRecord1Props.textbox22Props"
@@ -12,10 +13,13 @@
 
 <script>
 import CourseListRecord from "./CourseListRecord";
+import Titlebox from "./Titlebox";
+
 export default {
   name: "CourseListTable",
   components: {
     CourseListRecord,
+    Titlebox,
   },
   props: [
     "courseListRecord1Props",
