@@ -10,11 +10,6 @@
 export default {
   name: "Titlebox",
   props: ["className"],
-  data(){
-    return{
-        text: "야스다! 야스"
-      }
-  }
 };
 </script>
 

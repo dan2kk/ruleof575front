@@ -1,12 +1,12 @@
 <template>
-  <div class="graduation-info-record-1">
+  <div class="graduation-info-record">
       <div class="flex-row-1">
-        <textbox2 :text= this.mockup.a className= "purple" size= "big"/>
-        <textbox2 :text= this.mockup.b className= "purple" size= "small"/>
-        <textbox2 :text= this.mockup.c className= "purple" size= "small"/>
-        <textbox2 :text= this.mockup.d className= "purple" size= "small"/>
-        <textbox2 :text= this.mockup.e className= "purple" size= "small"/>
-        <textbox2 :text= this.mockup.f className= "purple" size= "small"/>
+        <textbox2 :text="this.mockup.a" className= "purple" size= "big"/>
+        <textbox2 :text= "this.mockup.b" className= "purple" size= "small"/>
+        <textbox2 :text= "this.mockup.c" className= "purple" size= "small"/>
+        <textbox2 :text= "this.mockup.d" className= "purple" size= "small"/>
+        <textbox2 :text= "this.mockup.e" className= "purple" size= "small"/>
+        <textbox2 :text= "this.mockup.f" className= "purple" size= "small"/>
       </div>
   </div>
 </template>
