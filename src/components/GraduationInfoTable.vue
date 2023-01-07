@@ -13,8 +13,7 @@ export default {
   components: {
     Titlebox, GraduationInfoRecord
   },
-  props: [
-  ],
+  props: [],
 };
 </script>
 
