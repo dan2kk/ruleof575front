@@ -20,6 +20,11 @@ export default {
     Imagebox_Search
   },
   props: ["className", "textbox21Props", "textbox22Props", "textbox23Props", "imagebox_Add1Props", "imagebox_SearchProps"],
+  data(){
+    return{
+      text: "병신"
+    }
+  }
 };
 </script>
 
