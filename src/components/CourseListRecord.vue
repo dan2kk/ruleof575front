@@ -1,11 +1,11 @@
 <template>
   <div class="course-list-record-1">
     <div class="cart-courselistrecord">
-      <textbox2 :text= this.mockup.coursename className= "red" size= "big"/>
-      <textbox2 :text= this.mockup.profname className= "red" size= "small"/>
-      <textbox2 :text= this.mockup.coursetime className= "red" size= "medium"/>
-      <imagebox_Search :src= this.mockup.image1 className="red" />
-      <imagebox_Search :src= this.mockup.image2 className="red" />
+      <textbox2 :text= this.textData.coursename className= "red" size= "big"/>
+      <textbox2 :text= this.textData.profname className= "red" size= "small"/>
+      <textbox2 :text= this.textData.coursetime className= "red" size= "medium"/>
+      <imagebox_Search src= './iconbuttons-3.png' className="red" />
+      <imagebox_Search src= './iconbuttons-2.png' className="red" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
     Textbox2,
     Imagebox_Search,
   },
-  props: [],
+  props: ["textData"],
   data()
   {
     return{

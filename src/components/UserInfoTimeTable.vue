@@ -51,6 +51,4 @@ export default {
   position: relative
   width: 400px
 
-.user-info-time-table.user-info-time-table-1
-
 </style>
