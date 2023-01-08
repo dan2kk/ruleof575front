@@ -21,12 +21,11 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.user-info-box-1,
-.user-info-box-8puNkL
+.user-info-box-1
   align-items: flex-start
   background-color: $silver
   display: flex
-  height: 60px
+  height: 80px
   position: relative
   width: 400px
 </style>
