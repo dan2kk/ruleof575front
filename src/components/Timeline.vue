@@ -55,8 +55,11 @@ export default {
             this.$emit("timeboxclicked", time);
             this.clicked[time-9] = "true";
           }
-          else
+          else{
+            alert('clicked time is '+ time);
+            this.$emit("timeboxclicked", time);
             this.clicked[time-9] = "false";
+          }
         }
     },
     sendboxclick(){

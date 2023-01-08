@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -27,7 +28,8 @@ export default {
   ],
   data() {
     return {
-      dateTime: [{time : 0},{date : 0}]
+      selectedDateTime: [{time : 0},{date : 0}],
+      timeArray: [[],[],[],[],[]]
     }
   },
   methods: {
@@ -38,12 +40,14 @@ export default {
       if(index != -1){
         alert("delete select Time and Date : Monday(1), "+ time)
         this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
       }
       else{
         alert("add select Time and Date : 월요일(1), "+ time)
         this.selectedDateTime.push(temp)
+        this.updateevent(1)
       }
-      updateevent()
+      this.updateevent()
     },
     timelineevent2(time){
       alert("picked time and date is 화요일 and time " + time)
@@ -52,12 +56,13 @@ export default {
       if(index != -1){
         alert("delete select Time and Date : 화요일(2), "+ time)
         this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
       }
       else{
         alert("add select Time and Date : 화요일(2), "+ time)
         this.selectedDateTime.push(temp)
+        this.updateevent(1)
       }
-      updateevent()
     },
     timelineevent3(time){
       alert("picked time and date is 수요일 and time " + time)
@@ -66,12 +71,14 @@ export default {
       if(index != -1){
         alert("delete select Time and Date : 수요일(3), "+ time)
         this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
       }
       else{
         alert("add select Time and Date : 수요일(3), "+ time)
         this.selectedDateTime.push(temp)
+        this.updateevent(1)
       }
-      updateevent()
+      this.updateevent()
     },
     timelineevent4(time){
       alert("picked time and date is 목요일 and time " + time)
@@ -80,12 +87,14 @@ export default {
       if(index != -1){
         alert("delete select Time and Date : 목요일(4), "+ time)
         this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
       }
       else{
         alert("add select Time and Date : 목요일(4), "+ time)
         this.selectedDateTime.push(temp)
+        this.updateevent(1)
       }
-      updateevent()
+      this.updateevent()
     },
     timelineevent5(time){
       alert("picked time and date is 금요일 and time " + time)
@@ -94,22 +103,29 @@ export default {
       if(index != -1){
         alert("delete select Time and Date : 금요일(5), "+ time)
         this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
       }
       else{
         alert("add select Time and Date : 금요일(5), "+ time)
         this.selectedDateTime.push(temp)
+        this.updateevent(1)
       }
-      updateevent()
     },
     sendtimeevent(){
       alert("send selected time to UserInfoTimeTable")
       this.$emit("selectTable", this.selectedDateTime)
     },
-    updateevent(){
-      for(let h=0; h<this.selectedDateTime.length; h++){
-        this.array[this.selectedDateTime[h].selectDate].push(selectTime)
+    updateevent(number){
+      var test = 0
+    }
+  },
+  onMounted(){
+    for(let i=0; i<5;i++){
+      for(let j=0; j< 12; j++){
+        this.timeArray[i].push(1)
       }
     }
+    
   }
 };
 </script>
