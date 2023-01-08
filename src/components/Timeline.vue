@@ -49,17 +49,15 @@ export default {
   methods:{
     timeboxclick(time){
         if(this.clickedProps){
+          alert('clicked time is '+ time);
           if(this.clicked[time-9] == "false")
           {
-            alert('clicked time is '+ time);
-            this.$emit("timeboxclicked", time);
             this.clicked[time-9] = "true";
           }
           else{
-            alert('clicked time is '+ time);
-            this.$emit("timeboxclicked", time);
             this.clicked[time-9] = "false";
           }
+          this.$emit("timeboxclicked", time);
         }
     },
     sendboxclick(){
