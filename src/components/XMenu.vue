@@ -42,7 +42,8 @@ export default {
   data(){
     return{
       logined: false,
-      menu: 0
+      menu: 0,
+      userData: {number: 2018009098, username: "정재호", major: "컴퓨터소프트웨어학부", grade: "3학년"}
     }
   },
   methods: {
@@ -50,6 +51,7 @@ export default {
         alert("event received")
         this.logined = !this.logined
         this.menu = 3
+        this.$emit("logined", userData)
     }
   }
 };
