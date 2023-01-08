@@ -44,6 +44,7 @@ export default {
         alert("add select Time and Date : 월요일(1), "+ time)
         this.selectedDateTime.push(temp)
       }
+      updateevent()
     },
     timelineevent2(time){
       alert("picked time and date is 화요일 and time " + time)
@@ -57,6 +58,7 @@ export default {
         alert("add select Time and Date : 화요일(2), "+ time)
         this.selectedDateTime.push(temp)
       }
+      updateevent()
     },
     timelineevent3(time){
       alert("picked time and date is 수요일 and time " + time)
@@ -70,6 +72,7 @@ export default {
         alert("add select Time and Date : 수요일(3), "+ time)
         this.selectedDateTime.push(temp)
       }
+      updateevent()
     },
     timelineevent4(time){
       alert("picked time and date is 목요일 and time " + time)
@@ -83,6 +86,7 @@ export default {
         alert("add select Time and Date : 목요일(4), "+ time)
         this.selectedDateTime.push(temp)
       }
+      updateevent()
     },
     timelineevent5(time){
       alert("picked time and date is 금요일 and time " + time)
@@ -96,6 +100,7 @@ export default {
         alert("add select Time and Date : 금요일(5), "+ time)
         this.selectedDateTime.push(temp)
       }
+      updateevent()
     },
     sendtimeevent(){
       alert("send selected time to UserInfoTimeTable")
