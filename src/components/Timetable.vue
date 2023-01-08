@@ -1,11 +1,11 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline :clickedProps=false v-bind="timeline1Props" v-on:sendboxclicked="sendtimeevent"/>
-    <timeline :clickedProps=true :selectedTime="this.array[0]" v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
-    <timeline :clickedProps=true :selectedTime="this.array[1]" v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
-    <timeline :clickedProps=true :selectedTime="this.array[2]" v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
-    <timeline :clickedProps=true :selectedTime="this.array[3]" v-bind="timeline5Props" v-on:timeboxclicked="timelineevent4"/>
-    <timeline :clickedProps=true :selectedTime="this.array[4]" v-bind="timeline6Props" v-on:timeboxclicked="timelineevent5"/>
+    <timeline :clickedProps=false v-bind="timeline1Props"/>
+    <timeline :clickedProps=true v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
+    <timeline :clickedProps=true v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
+    <timeline :clickedProps=true v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
+    <timeline :clickedProps=true v-bind="timeline5Props" v-on:timeboxclicked="timelineevent4"/>
+    <timeline :clickedProps=true v-bind="timeline6Props" v-on:timeboxclicked="timelineevent5"/>
   </div>
 </template>
 
@@ -27,8 +27,7 @@ export default {
   ],
   data() {
     return {
-      selectedDateTime: [{selectTime : 0, selectDate : 0}],
-      array: [[],[],[],[],[]]
+      dateTime: [{time : 0},{date : 0}]
     }
   },
   methods: {
@@ -123,7 +122,7 @@ export default {
   background-color: $white
   display: flex
   gap: 8px
-  height: 540px
+  height: 520px
   position: relative
   width: 400px
 
