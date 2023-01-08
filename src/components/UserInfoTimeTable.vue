@@ -30,10 +30,11 @@ export default {
   },
   props: ["className", "userInfoBoxProps", "timetableProps"],
   methods: {
-    sendServer(dateTime){
+    sendServer(selectedDateTime){
       alert("send server date and Time")
-      alert(dateTime.date)
-      alert(dateTime.time)
+      for(let i=0; i<selectedDateTime.length ; i++){
+        alert("selected time :" + selectedDateTime[i].selectTime + "\n selected date : "+ selectedDateTime[i].selectDate)
+      }
     }
   }
 };

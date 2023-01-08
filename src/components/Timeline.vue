@@ -1,6 +1,6 @@
 <template>
   <div class="timeline-1">
-    <timeblock4 :children="timeblock1Props.children" />
+    <timeblock4 class="timeblock1" :children="timeblock1Props.children" @click ="sendboxclick"/>
     <timeblock4 class="timeblock1" :children="timeblock2Props.children" @click="timeboxclick(9)"/>
     <timeblock4 class="timeblock2" :children="timeblock3Props.children" @click="timeboxclick(10)"/>
     <timeblock4 class="timeblock3" :children="timeblock4Props.children" @click="timeboxclick(11)"/>
@@ -51,6 +51,12 @@ export default {
           this.$emit("timeboxclicked", time);
         }
     },
+    sendboxclick(){
+      if(!this.clickedProps){
+        alert('send box clicked')
+        this.$emit("sendboxclicked")
+      }
+    }
   }
 };
 </script>
