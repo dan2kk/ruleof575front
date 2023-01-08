@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { onUpdated } from "vue";
 import Timeblock4 from "./Timeblock4";
 export default {
   name: "Timeline",
@@ -38,6 +39,7 @@ export default {
     "timeblock12Props",
     "timeblock13Props",
     "clickedProps",
+    "selectedTime",
   ],
   data(){
     return{
@@ -57,7 +59,13 @@ export default {
         this.$emit("sendboxclicked")
       }
     }
+  },
+  onUpdated(){
+    for(let i=0; i<this.selectedTime.length; i++){
+      
+    }
   }
+  
 };
 </script>
 
