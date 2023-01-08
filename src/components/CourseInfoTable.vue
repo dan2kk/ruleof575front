@@ -1,7 +1,6 @@
 <template>
   <div class="course-info-table">
-    <titlebox className="yellowBold">해줘</titlebox>
-    <titlebox className="yellowBold">해줘</titlebox>
+    <titlebox className="yellowBold" v-for="text in texts">{{text}}</titlebox>
   </div>
 </template>
 
@@ -12,6 +11,11 @@ export default {
   components: {
     Titlebox,
   },
+  data(){
+    return{
+      texts: ["해줘", "응애", "노예야", "일해라"]
+    }
+  }
 };
 </script>
 
