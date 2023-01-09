@@ -15,7 +15,7 @@ export default {
 @import '../../variables'
 
 .timeblock-1
-  align-items: flex-start
+  align-items: center
   background-color: $bon-jour
   display: flex
   flex-direction: column
@@ -32,8 +32,7 @@ export default {
   height: 40px
   letter-spacing: 0
   line-height: normal
-  margin-top: -1.00px
+  margin-top: 0px
   text-align: center
   width: 60px
-
 </style>

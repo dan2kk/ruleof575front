@@ -49,9 +49,9 @@ export default {
   methods: {
     loginevent(){
         alert("event received")
+        this.$emit("logined", this.userData)
         this.logined = !this.logined
         this.menu = 3
-        this.$emit("logined", userData)
     }
   }
 };

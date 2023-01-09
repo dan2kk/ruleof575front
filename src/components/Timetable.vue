@@ -1,6 +1,6 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline :clickedProps=false v-bind="timeline1Props"/>
+    <timeline :clickedProps=false v-bind="timeline1Props" v-on:sendboxclicked="sendtimeevent"/>
     <timeline :clickedProps=true v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
     <timeline :clickedProps=true v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
     <timeline :clickedProps=true v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
@@ -28,7 +28,7 @@ export default {
   ],
   data() {
     return {
-      selectedDateTime: [{time : 0},{date : 0}],
+      selectedDateTime: [],
       timeArray: [[],[],[],[],[]]
     }
   },

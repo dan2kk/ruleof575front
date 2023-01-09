@@ -4,10 +4,12 @@
       :className="userInfoTimeTableProps.className"
       :userInfoBoxProps="userInfoTimeTableProps.userInfoBoxProps"
       :timetableProps="userInfoTimeTableProps.timetableProps"
+      v-on:sendDateandTime="sendTimeTable"
     />
     <x-menu 
       :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" 
       :initialMenuProps="xMenuProps.initialMenuProps"
+      v-on:logined="sendLoginInfo"
     />
   </div>
 </template>
@@ -22,6 +24,17 @@ export default {
     XMenu,
   },
   props: ["userInfoTimeTableProps", "xMenuProps"],
+  methods: {
+    sendTimeTable(array){
+      for(let i=0; i< array.length; i++){
+        alert("array"+i+ "th elements = "+array[i].selectDate + " "+ array[i].selectTime)
+      }
+    },
+    sendLoginInfo(user){
+      alert("receive login event to Start.vue")
+      alert(user.number+ " "+user.username+ " "+user.major+" "+user.grade)
+    }
+  }
 };
 </script>
 

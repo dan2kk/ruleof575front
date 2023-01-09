@@ -31,10 +31,8 @@ export default {
   props: ["className", "userInfoBoxProps", "timetableProps"],
   methods: {
     sendServer(selectedDateTime){
-      alert("send server date and Time")
-      for(let i=0; i<selectedDateTime.length ; i++){
-        alert("selected time :" + selectedDateTime[i].selectTime + "\n selected date : "+ selectedDateTime[i].selectDate)
-      }
+      alert("send server date and Time to Start.vue")
+      this.$emit("sendDateandTime",selectedDateTime)
     }
   }
 };
