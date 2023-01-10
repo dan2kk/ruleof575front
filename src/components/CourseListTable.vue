@@ -15,15 +15,18 @@ export default {
     CourseListRecord,
     Titlebox,
   },
-  props: [
-  ],
+  props: [],
   data(){
     return{
-      records: [{coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00",}]
+      records: []
     }
   },
-  mounted(){
-    this.records.push({coursename: "시스템프로그래밍", profname: "까를로스", coursetime: "화 13:00~17:00", })
+  methods:{
+    update(usertimetable){
+      for(let i=0; i<usertimetable.length;i++){
+        this.records.push(usertimetable[i])
+      }
+    }
   }
 };
 </script>

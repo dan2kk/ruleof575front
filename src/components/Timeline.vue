@@ -1,6 +1,6 @@
 <template>
   <div class="timeline-1">
-    <button class='button' @click="sendboxclick" v-if="!clickedProps">
+    <button class='button' @click="sendboxclick" v-if="clickedProps[0] == '6'">
       <div class="svg-wrapper-1">
         <div class="svg-wrapper">
           <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
@@ -11,6 +11,7 @@
       </div>
       <span class="span">Send</span>
     </button>
+<<<<<<< HEAD
     <timeblock4 :children="timeblock1Props.children" v-if="clickedProps"/>
     <timeblock4 class="timeblock1" :clickedState=this.clicked[0] :children="timeblock2Props.children" @click="timeboxclick(9)" ref="TB" v-on: />
     <timeblock4 class="timeblock2" :clickedState=this.clicked[1] :children="timeblock3Props.children" @click="timeboxclick(10)"/>
@@ -24,6 +25,21 @@
     <timeblock4 class="timeblock10" :clickedState=this.clicked[9] :children="timeblock11Props.children" @click="timeboxclick(18)"/>
     <timeblock4 class="timeblock11" :clickedState=this.clicked[10] :children="timeblock12Props.children" @click="timeboxclick(19)"/>
     <timeblock4 class="timeblock12" :clickedState=this.clicked[11] :children="timeblock13Props.children" @click="timeboxclick(20)"/>
+=======
+    <timeblock4 :children="timeblock1Props.children" v-if="clickedProps[0] != '6'"/>
+    <timeblock4 class="timeblock1" :clickedState="clickedProps[1]" :children="timeblock2Props.children" @click="timeboxclick(9)"/>
+    <timeblock4 class="timeblock2" :clickedState="clickedProps[2]" :children="timeblock3Props.children" @click="timeboxclick(10)"/>
+    <timeblock4 class="timeblock3" :clickedState="clickedProps[3]" :children="timeblock4Props.children" @click="timeboxclick(11)"/>
+    <timeblock4 class="timeblock4" :clickedState="clickedProps[4]" :children="timeblock5Props.children" @click="timeboxclick(12)"/>
+    <timeblock4 class="timeblock5" :clickedState="clickedProps[5]" :children="timeblock6Props.children" @click="timeboxclick(13)"/>
+    <timeblock4 class="timeblock6" :clickedState="clickedProps[6]" :children="timeblock7Props.children" @click="timeboxclick(14)"/>
+    <timeblock4 class="timeblock7" :clickedState="clickedProps[7]" :children="timeblock8Props.children" @click="timeboxclick(15)"/>
+    <timeblock4 class="timeblock8" :clickedState="clickedProps[8]" :children="timeblock9Props.children" @click="timeboxclick(16)"/>
+    <timeblock4 class="timeblock9" :clickedState="clickedProps[9]" :children="timeblock10Props.children" @click="timeboxclick(17)"/>
+    <timeblock4 class="timeblock10" :clickedState="clickedProps[10]" :children="timeblock11Props.children" @click="timeboxclick(18)"/>
+    <timeblock4 class="timeblock11" :clickedState="clickedProps[11]" :children="timeblock12Props.children" @click="timeboxclick(19)"/>
+    <timeblock4 class="timeblock12" :clickedState="clickedProps[12]" :children="timeblock13Props.children" @click="timeboxclick(20)"/>
+>>>>>>> 9499039073d422df02b727cc84c107d994ed20e0
   </div>
 </template>
 
@@ -53,21 +69,19 @@ export default {
   ],
   data(){
     return{
-      clickprops: false,
       clicked: []
     }
   },
   methods:{
     timeboxclick(time){
-        if(this.clickedProps){
+        if(this.clickedProps[time-8]=='1'){
           alert('clicked time is '+ time);
-          if(this.clicked[time-9] == "false")
-          {
-            this.clicked[time-9] = "true";
-          }
-          else{
-            this.clicked[time-9] = "false";
-          }
+          this.clickedProps[time-8] = '1';
+          this.$emit("timeboxclicked", time);
+        }
+        else if(this.clickedProps[time-8]=='6'){
+          alert('clicked time is '+ time);
+          this.clickedProps[time-8] = '1';
           this.$emit("timeboxclicked", time);
           if(this.$refs.TB.returnState()==true) 
           {
@@ -79,18 +93,12 @@ export default {
         }
     },
     sendboxclick(){
-      if(!this.clickedProps){
+      if(this.clickedProps[0]=='6'){
         alert('send box clicked')
         this.$emit("sendboxclicked")
       }
     }
   },
-  mounted(){
-    for(let i=0;i<12;i++){
-      this.clicked.push("false")
-    }
-  },
-  
 };
 </script>
 
