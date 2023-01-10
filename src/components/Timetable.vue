@@ -10,10 +10,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
-
->>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -43,14 +39,8 @@ export default {
   methods: {
     receiveInfoAndUpdate(blockno, blocktext, posx, posy)
     {
-<<<<<<< HEAD
-      console.log(posy + " " + typeof(posy));
-      this.blocknumTable[Number(posy)][Number(posx)] = blocknum;
-      this.textTable[Number(posy)][Number(posx)] = text;
-=======
       this.blocknumTable[posx][posy] = blockno;
       this.textTable[posx][posy] = blocktext;
->>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
     },
   },
 };

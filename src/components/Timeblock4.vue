@@ -48,17 +48,10 @@ export default {
   props: ["blocknum", "timetext", "posx", "posy"],
   data(){
     return{
-<<<<<<< HEAD
-      blocknum: this.blocknum,
-      text: this.text,
-      posx: this.posx,
-      posy: this.posy,
-=======
       blockno: this.blocknum,
       blocktext: this.timetext,
       posX: this.posx,
       posY: this.posy,
->>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
     }
   },
   methods:{
@@ -67,16 +60,9 @@ export default {
       {
         if (this.blocknum < 7)
         {
-<<<<<<< HEAD
-          alert('sex');
-          this.blocknum = 7 - this.blocknum;
-          alert("y: " + this.posy + " x: " + this.posx);s
-          this.$emit("sendInfo", this.blocknum, this.text, this.posx, this.posy)
-=======
           alert('posx:' + this.posX +'posy: '+this.posY);
           this.blockno = 7 - this.blockno;
           this.$emit("sendInfo", this.blockno, this.blocktext, this.posx, this.posy)
->>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
         }
         else
         {
