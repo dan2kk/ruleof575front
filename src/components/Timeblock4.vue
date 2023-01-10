@@ -148,7 +148,7 @@ export default {
   height: 40px
   width: 60px
   border-style: solid
-  border-width: 0px
+  border-width: 0px 
   border-color: $white
   position: relative
 
@@ -164,15 +164,15 @@ export default {
   border-color: $white
   position: relative
   
-.timeblock1:hover,
-.timeblock2:hover,
-.timeblock3:hover,
-.timeblock4:hover,
-.timeblock5:hover,
-.timeblock6:hover
+.timeblock-1:hover,
+.timeblock-2:hover,
+.timeblock-3:hover,
+.timeblock-4:hover,
+.timeblock-5:hover,
+.timeblock-6:hover
   transform: scale(1.1)
-  border: 0px solid
-  border-color: $white
+  border: 1px solid
+  border-color: $black
 
 @keyframes fly-1
   0%
