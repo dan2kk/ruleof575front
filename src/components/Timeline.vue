@@ -11,21 +11,6 @@
       </div>
       <span class="span">Send</span>
     </button>
-<<<<<<< HEAD
-    <timeblock4 :children="timeblock1Props.children" v-if="clickedProps"/>
-    <timeblock4 class="timeblock1" :clickedState=this.clicked[0] :children="timeblock2Props.children" @click="timeboxclick(9)" ref="TB" v-on: />
-    <timeblock4 class="timeblock2" :clickedState=this.clicked[1] :children="timeblock3Props.children" @click="timeboxclick(10)"/>
-    <timeblock4 class="timeblock3" :clickedState=this.clicked[2] :children="timeblock4Props.children" @click="timeboxclick(11)"/>
-    <timeblock4 class="timeblock4" :clickedState=this.clicked[3] :children="timeblock5Props.children" @click="timeboxclick(12)"/>
-    <timeblock4 class="timeblock5" :clickedState=this.clicked[4] :children="timeblock6Props.children" @click="timeboxclick(13)"/>
-    <timeblock4 class="timeblock6" :clickedState=this.clicked[5] :children="timeblock7Props.children" @click="timeboxclick(14)"/>
-    <timeblock4 class="timeblock7" :clickedState=this.clicked[6] :children="timeblock8Props.children" @click="timeboxclick(15)"/>
-    <timeblock4 class="timeblock8" :clickedState=this.clicked[7] :children="timeblock9Props.children" @click="timeboxclick(16)"/>
-    <timeblock4 class="timeblock9" :clickedState=this.clicked[8] :children="timeblock10Props.children" @click="timeboxclick(17)"/>
-    <timeblock4 class="timeblock10" :clickedState=this.clicked[9] :children="timeblock11Props.children" @click="timeboxclick(18)"/>
-    <timeblock4 class="timeblock11" :clickedState=this.clicked[10] :children="timeblock12Props.children" @click="timeboxclick(19)"/>
-    <timeblock4 class="timeblock12" :clickedState=this.clicked[11] :children="timeblock13Props.children" @click="timeboxclick(20)"/>
-=======
     <timeblock4 :children="timeblock1Props.children" v-if="clickedProps[0] != '6'"/>
     <timeblock4 class="timeblock1" :clickedState="clickedProps[1]" :children="timeblock2Props.children" @click="timeboxclick(9)"/>
     <timeblock4 class="timeblock2" :clickedState="clickedProps[2]" :children="timeblock3Props.children" @click="timeboxclick(10)"/>
@@ -39,7 +24,6 @@
     <timeblock4 class="timeblock10" :clickedState="clickedProps[10]" :children="timeblock11Props.children" @click="timeboxclick(18)"/>
     <timeblock4 class="timeblock11" :clickedState="clickedProps[11]" :children="timeblock12Props.children" @click="timeboxclick(19)"/>
     <timeblock4 class="timeblock12" :clickedState="clickedProps[12]" :children="timeblock13Props.children" @click="timeboxclick(20)"/>
->>>>>>> 9499039073d422df02b727cc84c107d994ed20e0
   </div>
 </template>
 
