@@ -51,7 +51,7 @@ export default {
       blocknum: this.blocknum,
       text: this.text,
       posx: this.posx,
-      posy: this.poxy,
+      posy: this.posy,
     }
   },
   methods:{
@@ -62,6 +62,7 @@ export default {
         {
           alert('sex');
           this.blocknum = 7 - this.blocknum;
+          alert("y: " + this.posy + " x: " + this.posx);s
           this.$emit("sendInfo", this.blocknum, this.text, this.posx, this.posy)
         }
         else

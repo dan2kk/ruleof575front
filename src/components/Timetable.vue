@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import { VueElement } from "vue";
-import vueConfig from "vue.config";
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -42,8 +40,9 @@ export default {
   methods: {
     receiveInfoAndUpdate(blocknum, text, posx, posy)
     {
-      this.blocknumTable[posy][posx] = blocknum;
-      this.textTable[posy][posx] = text;
+      console.log(posy + " " + typeof(posy));
+      this.blocknumTable[Number(posy)][Number(posx)] = blocknum;
+      this.textTable[Number(posy)][Number(posx)] = text;
     },
     timelineevent1(time){
       alert("picked time and date is 월요일 and time " + time)
