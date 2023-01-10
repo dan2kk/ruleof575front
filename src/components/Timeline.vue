@@ -67,6 +67,13 @@ export default {
           alert('clicked time is '+ time);
           this.clickedProps[time-8] = '1';
           this.$emit("timeboxclicked", time);
+          if(this.$refs.TB.returnState()==true) 
+          {
+            alert("c'ex");
+          }
+          else{
+            alert("fuck");
+          }
         }
     },
     sendboxclick(){
@@ -80,6 +87,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../variables'
 .timeline-1,
 .timeline-2
   align-items: flex-start
@@ -122,7 +130,7 @@ export default {
 
 .button
   font-size: 13px 
-  background: #4169e1 
+  background: $orange-yellow
   color: white 
   display: flex 
   align-items: center 
