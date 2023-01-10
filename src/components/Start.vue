@@ -53,7 +53,7 @@ export default {
           console.log(timetabledata[i])
           console.log(this.userTimetable[i])
         }
-        this.$refs.xmenu.update(this.userTimetable)
+        this.$refs.xmenu.update1()
       }
       catch(err){
         console.log(err)

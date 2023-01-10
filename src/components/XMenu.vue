@@ -13,10 +13,10 @@
         v-on:forthblockclick="this.menu = 4"
       />
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
-      <course-list-table v-if="logined && menu == 1" ref="courselist"></course-list-table>
-      <gyoyang-table v-if="logined && menu == 2"></gyoyang-table>
-      <course-info-table v-if="logined && menu == 3"></course-info-table>
-      <graduation-info-table v-if="logined && menu == 4"></graduation-info-table>
+      <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
+      <gyoyang-table v-show="logined && menu == 2"></gyoyang-table>
+      <course-info-table v-show="logined && menu == 3"></course-info-table>
+      <graduation-info-table v-show="logined && menu == 4"></graduation-info-table>
     </div>
   </div>
 </template>
@@ -54,9 +54,10 @@ export default {
         this.logined = !this.logined
         this.menu = 1
     },
-    update(data){
-      console.log('btn run : ', this.$refs.courselist)
-      this.$refs.courselist.update(data)
+    update1(){
+      this.menu = 1
+      console.log(this.userTimetable)
+      this.$refs.courselist.update(this.$parent.userTimetable)
     }
   }
 };

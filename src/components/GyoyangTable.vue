@@ -19,14 +19,14 @@ export default {
    
   },
   mounted(){
-      this.records.push({coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00"});
-      this.records.push({coursename: "컴퓨터네트워크", profname: "Jinsik Choi", coursetime: "화 17:00~15:00<br />수 13:00 ~15:00"});
-      this.records.push({coursename: "데베시", profname: "김병주", coursetime: "목 13:00~15:00<br />수 13:00 ~15:00"});
+      this.records.push({수업번호: 77777, 과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00"});
+      this.records.push({수업번호: 88888, 과목명: "컴퓨터네트워크", 대표교강사명: "Jinsik Choi", 수업시간: "화 17:00~15:00<br />수 13:00 ~15:00"});
+      this.records.push({수업번호: 99999, 과목명: "데베시", 대표교강사명: "김병주", 수업시간: "목 13:00~15:00<br />수 13:00 ~15:00"});
   },
   data(){
     return{
       records: [],
-      mockup: {coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00"}
+      mockup: {과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00"}
     }
   }
 };
