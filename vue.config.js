@@ -6,7 +6,8 @@ module.exports = {
       "target":' http://3.37.249.210:1324',
       "pathRewrite":{'^/':''},
       "changeOrigin":true,
-      "secure":false
+      "secure":false,
+      "ws": false
       }
     }
   }

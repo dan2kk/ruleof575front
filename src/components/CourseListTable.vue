@@ -18,7 +18,7 @@ export default {
   props: [],
   data(){
     return{
-      records: [{과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00", value: false}]
+      records: []
     }
   },
   methods:{

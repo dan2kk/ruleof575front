@@ -6,7 +6,7 @@
       :timetableProps="userInfoTimeTableProps.timetableProps"
       v-on:sendDateandTime="sendTimeTable"
     />
-    <x-menu 
+    <x-menu ref="xmenu"
       :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" 
       :initialMenuProps="xMenuProps.initialMenuProps"
       :userTimetable="this.userTimetable"
@@ -46,15 +46,17 @@ export default {
       alert("receive login event to Start.vue")
       alert(user.number+ " "+user.username+ " "+user.major+" "+user.grade)
       try{
-        let timetabledata = await axios.get('/list/login', {params: {stu_id: user.number}})
-        this.userTimetable.pop()
+        let timetabledata = (await axios.get('/list/login', {params: {stu_id: user.number}})).data
+        this.userTimetable.pop() //초기데이터 삭제
         for(let i=0; i< timetabledata.length;i++){
-          this.userTimetable.push(timetabledata)
+          this.userTimetable.push(timetabledata[i])
+          console.log(timetabledata[i])
+          console.log(this.userTimetable[i])
         }
-        console.log(timetabledata.data)
+        this.$refs.xmenu.update(this.userTimetable)
       }
       catch(err){
-        alert(err)
+        console.log(err)
       }
     }
   }

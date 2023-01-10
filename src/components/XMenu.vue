@@ -38,22 +38,25 @@ export default {
     GyoyangTable,
     CourseListTable
   },
-  props: ["textboxMenuTabProps", "initialMenuProps","userTimetable"],
+  props: ["textboxMenuTabProps", "initialMenuProps"],
   data(){
     return{
       logined: false,
       menu: 0,
-      userData: {number: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"}
+      userData: {number: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+      userTimetable: []
     }
   },
   methods: {
-    loginevent(){
+    async loginevent(){
         alert("event received")
         this.$emit("logined", this.userData)
-        console.log('btn run : ', this.$refs.courselist);
-        this.$refs.courselist.update(this.userTimetable);
         this.logined = !this.logined
         this.menu = 1
+    },
+    update(data){
+      console.log('btn run : ', this.$refs.courselist)
+      this.$refs.courselist.update(data)
     }
   }
 };
