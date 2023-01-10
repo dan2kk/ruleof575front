@@ -44,8 +44,7 @@ export default {
 .textbox-menu-tab
   align-items: center
   background-color: $error-color
-  border-left-style: solid
-  border-left-width: 1px
+
   display: flex
   height: 50px
   margin-right: 18.0px

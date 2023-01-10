@@ -12,7 +12,7 @@
       <span class="span">Send</span>
     </button>
     <timeblock4 :children="timeblock1Props.children" v-if="clickedProps"/>
-    <timeblock4 class="timeblock1" :clickedState=this.clicked[0] :children="timeblock2Props.children" @click="timeboxclick(9)"/>
+    <timeblock4 class="timeblock1" :clickedState=this.clicked[0] :children="timeblock2Props.children" @click="timeboxclick(9)" ref="TB" v-on: />
     <timeblock4 class="timeblock2" :clickedState=this.clicked[1] :children="timeblock3Props.children" @click="timeboxclick(10)"/>
     <timeblock4 class="timeblock3" :clickedState=this.clicked[2] :children="timeblock4Props.children" @click="timeboxclick(11)"/>
     <timeblock4 class="timeblock4" :clickedState=this.clicked[3] :children="timeblock5Props.children" @click="timeboxclick(12)"/>
@@ -69,6 +69,13 @@ export default {
             this.clicked[time-9] = "false";
           }
           this.$emit("timeboxclicked", time);
+          if(this.$refs.TB.returnState()==true) 
+          {
+            alert("c'ex");
+          }
+          else{
+            alert("fuck");
+          }
         }
     },
     sendboxclick(){
@@ -88,6 +95,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../variables'
 .timeline-1,
 .timeline-2
   align-items: flex-start
@@ -130,7 +138,7 @@ export default {
 
 .button
   font-size: 13px 
-  background: #4169e1 
+  background: $orange-yellow
   color: white 
   display: flex 
   align-items: center 

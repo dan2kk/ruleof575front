@@ -141,6 +141,8 @@ export default {
   height: 520px
   position: relative
   width: 400px
-
+  border-style: solid
+  border-color: white
+  border-width: 1px
 
 </style>
