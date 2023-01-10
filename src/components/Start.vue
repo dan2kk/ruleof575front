@@ -20,6 +20,7 @@
 import UserInfoTimeTable from "./UserInfoTimeTable";
 import XMenu from "./XMenu";
 import axios from 'axios';
+
 export default {
   name: "Start",
   components: {
@@ -34,7 +35,6 @@ export default {
   },
   methods: {
     async sendTimeTable(array){
-      let data1 = {selectDate: 1, selectTime: 9}
       try {
         let date = await axios.post('/test', {data: array})
         alert(date.data.test)
@@ -53,12 +53,19 @@ export default {
           console.log(timetabledata[i])
           console.log(this.userTimetable[i])
         }
-        this.$refs.xmenu.update(this.userTimetable)
+        this.$refs.xmenu.update1()
       }
       catch(err){
         console.log(err)
       }
     }
+  },
+  onCreated(){
+    EventBus.$on('addCourse', (res)=> {
+      if(this.userTimetable.findIndex((x)=> x.수업번호 == res.수업번호) == -1){
+        this.userTimetable.push(res)
+      }
+    })
   }
 };
 </script>

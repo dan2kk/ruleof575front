@@ -1,10 +1,10 @@
 <template>
   <div :class="[`gyoyang-record-1-1`, className || ``]">
     <div class="flex-row-1">
-      <textbox2 :text= "this.textData.coursename" className= "blue" size= "big"/>
-      <textbox2 :text= "this.textData.profname" className= "blue" size= "small"/>
-      <textbox2 :text= "this.textData.coursetime" className= "blue" size= "medium"/>
-      <imagebox_Search src= "./iconbuttons-1.png" className="blue" />
+      <textbox2 :text= "this.textData.과목명" className= "blue" size= "big"/>
+      <textbox2 :text= "this.textData.대표교강사명" className= "blue" size= "small"/>
+      <textbox2 :text= "this.textData.수업시간" className= "blue" size= "medium"/>
+      <imagebox_Search src= "./iconbuttons-1.png" className="blue" @click="addcart"/>
       <imagebox_Search src= "./iconbuttons-2.png" className="blue" />
     </div>
   </div>
@@ -20,6 +20,13 @@ export default {
     Imagebox_Search
   },
   props: ["textData"],
+  methods:{
+    addcart(){
+      alert(this.textData.수업번호)
+      this.$parent.$parent.$parent.userTimetable.push(this.textData)
+      this.$parent.$parent.$parent.$refs.xmenu.update1()
+    }
+  }
 };
 </script>
 
