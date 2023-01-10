@@ -1,25 +1,25 @@
 <template>
-  <div :class="[`timeblock-1`, blocknum, text, posx, posy ]" v-if=" blocknum == 1" @click="click()">
-    <div class="text-1 notosanskr-normal-black-12px"> {{ this.text }}</div>
+  <div :class="[`timeblock-1`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 1" @click="click()">
+    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
   </div>
-  <div :class="[`timeblock-2`, blocknum, text, posx, posy ]" v-if=" blocknum == 2" @click="click()">
-    <div :class="cart"></div>
-    <div class="text-2 notosanskr-normal-black-12px"> {{ this.text }}</div>
+  <div :class="[`timeblock-2`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 2" @click="click()">
+    <div class="blocker"></div>
+    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
   </div>
-  <div :class="[`timeblock-3`, blocknum, text, posx, posy ]" v-if=" blocknum == 3" @click="click()">
-    <div class="text-2 notosanskr-normal-black-12px"> {{ this.text }}</div>
-    <div :class="cart"></div>
+  <div :class="[`timeblock-3`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 3" @click="click()">
+    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
+    <div class="blocker"></div>
   </div>
-  <div :class="[`timeblock-4`, blocknum, text, posx, posy ]" v-if=" blocknum == 4" @click="click()">
-    <div class="text-2 notosanskr-normal-black-12px"> {{ this.text }}</div>
-    <div :class="cart"></div>
+  <div :class="[`timeblock-4`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 4" @click="click()">
+    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
+    <div class="blocker"></div>
   </div>
-  <div :class="[`timeblock-5`, blocknum, text, posx, posy ]" v-if=" blocknum == 5" @click="click()">
-    <div :class="cart"></div>
-    <div class="text-2 notosanskr-normal-black-12px"> {{ this.text }}</div>
+  <div :class="[`timeblock-5`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 5" @click="click()">
+    <div class="blocker"></div>
+    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
   </div>
-  <div :class="[`timeblock-6`, blocknum, text, posx, posy ]" v-if=" blocknum == 6" @click="click()">
-    <div class="text-1 notosanskr-normal-black-12px"> {{ this.text }}</div>
+  <div :class="[`timeblock-6`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 6" @click="click()">
+    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
   </div>
   <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7" >
     <div class="svg-wrapper-1" @click="click()">
@@ -32,12 +32,12 @@
     </div>
     <span class="span">Send</span>
   </button>
-  <div :class="[`timeblock-8`, blocknum, text, posx, posy ]" v-if=" blocknum == 8" @click="click()">
-    <div class="text-1 notosanskr-normal-black-12px"> {{ this.text }}</div>
+  <div :class="[`timeblock-8`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 8" @click="click()">
+    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
   </div>
-  <div :class="[`timeblock-9`, blocknum, text, posx, posy ]" v-if=" blocknum == 9" @click="click()">
-    <div :class="cart"></div>
-    <div :class="cart"></div>
+  <div :class="[`timeblock-9`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 9" @click="click()">
+    <div class="blocker"></div>
+    <div class="blocker"></div>
   </div>
 
 </template>
@@ -45,13 +45,13 @@
 <script>
 export default {
   name: "Timeblock4",
-  props: ["blocknum", "text", "posx", "posy"],
+  props: ["blocknum", "timetext", "posx", "posy"],
   data(){
     return{
       blockno: this.blocknum,
-      text: this.text,
-      posx: this.posx,
-      posy: this.posy,
+      blocktext: this.timetext,
+      posX: this.posx,
+      posY: this.posy,
     }
   },
   methods:{
@@ -60,9 +60,9 @@ export default {
       {
         if (this.blocknum < 7)
         {
-          alert('sex');
+          alert('posx:' + this.posX +'posy: '+this.posY);
           this.blockno = 7 - this.blockno;
-          this.$emit("sendInfo", this.blockno, this.text, this.posx, this.posy)
+          this.$emit("sendInfo", this.blockno, this.blocktext, this.posx, this.posy)
         }
         else
         {
@@ -82,11 +82,6 @@ export default {
 
 <style lang="sass">
 @import '../../variables'
-.cart
-  width: 60px
-  height: 20px
-  background-color: $black
-
 .timeblock-7
   font-size: 13px 
   background: $orange-yellow
@@ -117,7 +112,9 @@ export default {
 .timeblock-7:active
   transform: scale(0.95)
 
-.timeblock-1
+.timeblock-1,
+.timeblock-2,
+.timeblock-3
   align-items: center
   background-color: $timeblock-background
   display: flex
@@ -125,9 +122,12 @@ export default {
   height: 40px
   width: 60px
   border-style: solid
-  border-width: 1px
-  border-color: white
+  border-width: 0px
+  border-color: $pippin
+  position: relative
 
+.timeblock-4,
+.timeblock-5,
 .timeblock-6
   align-items: center
   background-color: $silver
@@ -136,10 +136,23 @@ export default {
   height: 40px
   width: 60px
   border-style: solid
-  border-width: 1px
-  border-color: white
+  border-width: 0px
+  border-color: $white
+  position: relative
 
 .timeblock-8
+  align-items: center
+  background-color: $bon-jour
+  display: flex
+  flex-direction: row
+  height: 40px
+  width: 60px
+  border-style: solid
+  border-width: 0px
+  border-color: $white
+  position: relative
+
+.timeblock-9
   align-items: center
   background-color: $bon-jour
   display: flex
@@ -147,11 +160,10 @@ export default {
   height: 40px
   width: 60px
   border-style: solid
-  border-width: 1px
-  border-color: white
-
-.timeblock-9
-
+  border-width: 0px
+  border-color: $white
+  position: relative
+  
 .timeblock1:hover,
 .timeblock2:hover,
 .timeblock3:hover,
@@ -159,8 +171,8 @@ export default {
 .timeblock5:hover,
 .timeblock6:hover
   transform: scale(1.1)
-  border: 1px solid
-  border-color: #white
+  border: 0px solid
+  border-color: $white
 
 @keyframes fly-1
   0%
@@ -168,18 +180,27 @@ export default {
   100%
     transform: translateY(-0.1em)
 
-.text-1
-  height: 40px
-  letter-spacing: 0
-  line-height: normal
-  margin-top: 0px
-  text-align: center
-  width: 60px
-.text-2
+.timetext-1
   height: 20px
-  letter-spacing: 0
   line-height: normal
-  margin-top: 0px
   text-align: center
   width: 60px
+  position: relative
+
+.timetext-2
+  height: 20px
+  line-height: normal
+  text-align: center
+  width: 60px
+  position: relative
+
+.blocker
+  height: 20px
+  width: 60px
+  background-color: $black
+  position: relative
+  border-width: 0px
+  border-style: solid
+  border-color: $white
+  
 </style>
