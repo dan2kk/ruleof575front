@@ -1,7 +1,7 @@
 <template>
   <div class="course-list-table">
     <titlebox className="redBold">내 수업목록</titlebox>
-    <course-list-record :textData="record" v-for="record in records"/>
+    <course-list-record :textData="record" v-for="record in this.$store.getters.getTimetable"/>
   </div>
 </template>
 
@@ -22,14 +22,7 @@ export default {
     }
   },
   methods:{
-    update(usertimetable){
-      for(let i=0; i<usertimetable.length;i++){
-        if(this.records.findIndex((x)=> x.수업번호 == usertimetable[i].수업번호) != -1)
-          continue;
-        else
-          this.records.push(usertimetable[i])
-      }
-    }
+    
   }
 };
 </script>

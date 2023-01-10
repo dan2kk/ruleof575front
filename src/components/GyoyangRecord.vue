@@ -23,8 +23,11 @@ export default {
   methods:{
     addcart(){
       alert(this.textData.수업번호)
-      this.$parent.$parent.$parent.userTimetable.push(this.textData)
-      this.$parent.$parent.$parent.$refs.xmenu.update1()
+      //this.$parent.$parent.$parent.userTimetable.push(this.textData)
+      //this.$parent.$parent.$parent.$refs.xmenu.update1()
+      this.$store.commit("addTimetable", this.textData)
+      this.$store.commit("toggleSwitch", true)
+      alert(this.$store.getters.getIsChange)
     }
   }
 };

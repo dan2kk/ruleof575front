@@ -7,10 +7,10 @@
         :textbox12Props="textboxMenuTabProps.textbox12Props"
         :textbox13Props="textboxMenuTabProps.textbox13Props"
         :textbox14Props="textboxMenuTabProps.textbox14Props"
-        v-on:firstblockclick="this.menu = 1"
-        v-on:secondblockclick="this.menu = 2"
-        v-on:thirdblockclick="this.menu = 3"
-        v-on:forthblockclick="this.menu = 4"
+        v-on:firstblockclick="updateevent(1)"
+        v-on:secondblockclick="updateevent(2)"
+        v-on:thirdblockclick="updateevent(3)"
+        v-on:forthblockclick="updateevent(4)"
       />
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
       <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
@@ -28,6 +28,7 @@ import CourseInfoTable from "./CourseInfoTable.vue";
 import GraduationInfoTable from "./GraduationInfoTable.vue";
 import GyoyangTable from "./GyoyangTable.vue";
 import CourseListTable from "./CourseListTable.vue";
+import axios from "axios";
 export default {
   name: "XMenu",
   components: {
@@ -43,21 +44,36 @@ export default {
     return{
       logined: false,
       menu: 0,
-      userData: {number: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+      userData: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
       userTimetable: []
     }
   },
   methods: {
-    async loginevent(){
+    loginevent(){
         alert("event received")
         this.$emit("logined", this.userData)
         this.logined = !this.logined
         this.menu = 1
     },
-    update1(){
-      this.menu = 1
-      console.log(this.userTimetable)
-      this.$refs.courselist.update(this.$parent.userTimetable)
+    async updateevent(number){
+      alert(this.$store.getters.getIsChange)
+      if(this.$store.getters.getIsChange){
+        let data = []
+        let temp = this.$store.getters.getTimetable
+
+        for(let i = 0 ; i< temp.length; i++){
+          data.push({수업번호: temp[i].수업번호, value: temp[i].value})
+        }
+
+        try {
+          await axios.post('/list/update', {list: data})
+          this.$store.commit("toggleSwitch", false)
+        }
+        catch(err){
+            console.log(err)
+        }
+      }
+      this.menu = number
     }
   }
 };

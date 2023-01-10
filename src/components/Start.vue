@@ -36,37 +36,26 @@ export default {
   methods: {
     async sendTimeTable(array){
       try {
-        let date = await axios.post('/test', {data: array})
-        alert(date.data.test)
+        let date = await axios.post('/list/update', {data: array})
       } catch (error) {
         console.log(error)
       }
     },
     async sendLoginInfo(user){
       alert("receive login event to Start.vue")
-      alert(user.number+ " "+user.username+ " "+user.major+" "+user.grade)
+      alert(user.stu_id+ " "+user.username+ " "+user.major+" "+user.grade)
       try{
-        let timetabledata = (await axios.get('/list/login', {params: {stu_id: user.number}})).data
-        this.userTimetable.pop() //초기데이터 삭제
+        let timetabledata = (await axios.get('/list/init', {params: {stu_id: user.stu_id}})).data
         for(let i=0; i< timetabledata.length;i++){
-          this.userTimetable.push(timetabledata[i])
+          this.$store.commit("addTimetable", timetabledata[i])
           console.log(timetabledata[i])
-          console.log(this.userTimetable[i])
         }
-        this.$refs.xmenu.update1()
       }
       catch(err){
         console.log(err)
       }
     }
   },
-  onCreated(){
-    EventBus.$on('addCourse', (res)=> {
-      if(this.userTimetable.findIndex((x)=> x.수업번호 == res.수업번호) == -1){
-        this.userTimetable.push(res)
-      }
-    })
-  }
 };
 </script>
 
