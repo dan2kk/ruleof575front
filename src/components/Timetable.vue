@@ -1,17 +1,16 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posy = 0 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posy = 1 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posy = 2 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[3] :textArray = this.textTable[3] :posy = 3 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[4] :textArray = this.textTable[4] :posy = 4 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[5] :textArray = this.textTable[5] :posy = 5 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posx = 0 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posx = 1 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posx = 2 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[3] :textArray = this.textTable[3] :posx = 3 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[4] :textArray = this.textTable[4] :posx = 4 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[5] :textArray = this.textTable[5] :posx = 5 v-on:passInfo="receiveInfoAndUpdate"/>
   </div>
 </template>
 
 <script>
-import { VueElement } from "vue";
-import vueConfig from "vue.config";
+
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -22,7 +21,6 @@ export default {
   data() {
     return {
       selectedDateTime: [],
-      a: 1,
       blocknumTable: [
       [7,8,8,8,8,8,8,8,8,8,8,8,8],
       [8,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -42,8 +40,8 @@ export default {
   methods: {
     receiveInfoAndUpdate(blocknum, text, posx, posy)
     {
-      this.blocknumTable[posy][posx] = blocknum;
-      this.textTable[posy][posx] = text;
+      this.blocknumTable[posx][posy] = blocknum;
+      this.textTable[posx][posy] = text;
     },
     timelineevent1(time){
       alert("picked time and date is 월요일 and time " + time)

@@ -21,8 +21,8 @@
   <div :class="[`timeblock-6`, blocknum, text, posx, posy ]" v-if=" blocknum == 6" @click="click()">
     <div class="text-1 notosanskr-normal-black-12px"> {{ this.text }}</div>
   </div>
-  <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7">
-    <div class="svg-wrapper-1">
+  <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7" >
+    <div class="svg-wrapper-1" @click="click()">
       <div class="svg-wrapper">
         <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
           <path fill="none" d="M0 0h24v24H0z"></path>
@@ -32,10 +32,10 @@
     </div>
     <span class="span">Send</span>
   </button>
-  <div :class="[`timeblock-8`, blocknum, text, posx, posy ]" v-if=" blocknum == 8">
+  <div :class="[`timeblock-8`, blocknum, text, posx, posy ]" v-if=" blocknum == 8" @click="click()">
     <div class="text-1 notosanskr-normal-black-12px"> {{ this.text }}</div>
   </div>
-  <div :class="[`timeblock-9`, blocknum, text, posx, posy ]" v-if=" blocknum == 9">
+  <div :class="[`timeblock-9`, blocknum, text, posx, posy ]" v-if=" blocknum == 9" @click="click()">
     <div :class="cart"></div>
     <div :class="cart"></div>
   </div>
@@ -48,10 +48,10 @@ export default {
   props: ["blocknum", "text", "posx", "posy"],
   data(){
     return{
-      blocknum: this.blocknum,
+      blockno: this.blocknum,
       text: this.text,
       posx: this.posx,
-      posy: this.poxy,
+      posy: this.posy,
     }
   },
   methods:{
@@ -61,8 +61,8 @@ export default {
         if (this.blocknum < 7)
         {
           alert('sex');
-          this.blocknum = 7 - this.blocknum;
-          this.$emit("sendInfo", this.blocknum, this.text, this.posx, this.posy)
+          this.blockno = 7 - this.blockno;
+          this.$emit("sendInfo", this.blockno, this.text, this.posx, this.posy)
         }
         else
         {
