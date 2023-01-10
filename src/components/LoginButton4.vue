@@ -21,10 +21,8 @@ export default {
 .login-button-4xfPZA
   align-items: center
   background-color: $nobel
-  border: 4px solid
   border-color: $white
   display: flex
-  height: 34px
   justify-content: center
   width: 140px
 
@@ -37,10 +35,10 @@ export default {
   border-color: $white
   display: flex
   flex: 1
-  margin-bottom: -2.00px
-  margin-left: -2.00px
-  margin-right: -2.00px
-  margin-top: -2.00px
+  height: 40px
+  width: 140px
+
+
 
 .input-id,
 .input-id-LLMuUq

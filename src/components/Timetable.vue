@@ -1,15 +1,19 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posy = 0 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posy = 1 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posy = 2 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[3] :textArray = this.textTable[3] :posy = 3 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[4] :textArray = this.textTable[4] :posy = 4 v-on:passInfo="receiveInfoAndUpdate"/>
-    <timeline :blocknumArray= this.blocknumTable[5] :textArray = this.textTable[5] :posy = 5 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posx = 0 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posx = 1 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posx = 2 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[3] :textArray = this.textTable[3] :posx = 3 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[4] :textArray = this.textTable[4] :posx = 4 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[5] :textArray = this.textTable[5] :posx = 5 v-on:passInfo="receiveInfoAndUpdate"/>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -20,10 +24,9 @@ export default {
   data() {
     return {
       selectedDateTime: [],
-      a: 1,
       blocknumTable: [
       [7,8,8,8,8,8,8,8,8,8,8,8,8],
-      [8,1,1,1,1,1,1,1,1,1,1,1,1],
+      [8,9,9,2,1,1,1,1,1,1,1,1,1],
       [8,1,1,1,1,1,1,1,1,1,1,1,1],
       [8,1,1,1,1,1,1,1,1,1,1,1,1],
       [8,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -38,93 +41,17 @@ export default {
     }
   },
   methods: {
-    receiveInfoAndUpdate(blocknum, text, posx, posy)
+    receiveInfoAndUpdate(blockno, blocktext, posx, posy)
     {
+<<<<<<< HEAD
       console.log(posy + " " + typeof(posy));
       this.blocknumTable[Number(posy)][Number(posx)] = blocknum;
       this.textTable[Number(posy)][Number(posx)] = text;
+=======
+      this.blocknumTable[posx][posy] = blockno;
+      this.textTable[posx][posy] = blocktext;
+>>>>>>> e46d5bc267604ef5af95bc3086b669dfda0cdb13
     },
-    timelineevent1(time){
-      alert("picked time and date is 월요일 and time " + time)
-      var temp = {selectTime: time, selectDate: "월"}
-      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
-      if(index != -1){
-        alert("delete select Time and Date : Monday(1), "+ time)
-        this.selectedDateTime.splice(index, 1)
-        this.updateevent(2)
-      }
-      else{
-        alert("add select Time and Date : 월요일(1), "+ time)
-        this.selectedDateTime.push(temp)
-        this.updateevent(1)
-      }
-      this.updateevent()
-    },
-    timelineevent2(time){
-      alert("picked time and date is 화요일 and time " + time)
-      var temp = {selectTime: time, selectDate: "화"}
-      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
-      if(index != -1){
-        alert("delete select Time and Date : 화요일(2), "+ time)
-        this.selectedDateTime.splice(index, 1)
-        this.updateevent(2)
-      }
-      else{
-        alert("add select Time and Date : 화요일(2), "+ time)
-        this.selectedDateTime.push(temp)
-        this.updateevent(1)
-      }
-    },
-    timelineevent3(time){
-      alert("picked time and date is 수요일 and time " + time)
-      var temp = {selectTime: time, selectDate: "수"}
-      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
-      if(index != -1){
-        alert("delete select Time and Date : 수요일(3), "+ time)
-        this.selectedDateTime.splice(index, 1)
-        this.updateevent(2)
-      }
-      else{
-        alert("add select Time and Date : 수요일(3), "+ time)
-        this.selectedDateTime.push(temp)
-        this.updateevent(1)
-      }
-      this.updateevent()
-    },
-    timelineevent4(time){
-      alert("picked time and date is 목요일 and time " + time)
-      var temp = {selectTime: time, selectDate: "목"}
-      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
-      if(index != -1){
-        alert("delete select Time and Date : 목요일(4), "+ time)
-        this.selectedDateTime.splice(index, 1)
-        this.updateevent(2)
-      }
-      else{
-        alert("add select Time and Date : 목요일(4), "+ time)
-        this.selectedDateTime.push(temp)
-        this.updateevent(1)
-      }
-      this.updateevent()
-    },
-    timelineevent5(time){
-      alert("picked time and date is 금요일 and time " + time)
-      var temp = {selectTime: time, selectDate: "금"}
-      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
-      if(index != -1){
-        alert("delete select Time and Date : 금요일(5), "+ time)
-        this.selectedDateTime.splice(index, 1)
-        this.updateevent(2)
-      }
-      else{
-        alert("add select Time and Date : 금요일(5), "+ time)
-        this.selectedDateTime.push(temp)
-        this.updateevent(1)
-      }
-    },
-    updateevent(number){
-      var test = 0
-    }
   },
 };
 </script>
