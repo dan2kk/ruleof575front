@@ -1,11 +1,11 @@
 <template>
   <div :class="[`gyoyang-record-1-1`, className || ``]">
     <div class="flex-row-1">
-      <textbox2 :text="textbox21Props.text" />
-      <textbox2 :text="textbox22Props.text" :className="textbox22Props.className" />
-      <textbox2 :text="textbox23Props.text" :className="textbox23Props.className" />
-      <imagebox_Search :src="imagebox_Add1Props.src" :className="imagebox_Add1Props.className" />
-      <imagebox_Search :src="imagebox_SearchProps.src" :className="imagebox_SearchProps.className" />
+      <textbox2 :text= "this.textData.과목명" className= "blue" size= "big"/>
+      <textbox2 :text= "this.textData.대표교강사명" className= "blue" size= "small"/>
+      <textbox2 :text= "this.textData.수업시간" className= "blue" size= "medium"/>
+      <imagebox_Search src= "./iconbuttons-1.png" className="blue" @click="addcart"/>
+      <imagebox_Search src= "./iconbuttons-2.png" className="blue" />
     </div>
   </div>
 </template>
@@ -19,7 +19,14 @@ export default {
     Textbox2,
     Imagebox_Search
   },
-  props: ["className", "textbox21Props", "textbox22Props", "textbox23Props", "imagebox_Add1Props", "imagebox_SearchProps"],
+  props: ["textData"],
+  methods:{
+    addcart(){
+      alert(this.textData.수업번호)
+      this.$parent.$parent.$parent.userTimetable.push(this.textData)
+      this.$parent.$parent.$parent.$refs.xmenu.update1()
+    }
+  }
 };
 </script>
 
@@ -28,7 +35,6 @@ export default {
 
 .gyoyang-record-1-1
   background-color: $solitude
-  border: 3px solid
   border-color: $white
   height: 40px
   min-width: 400px

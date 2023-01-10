@@ -1,26 +1,36 @@
 <template>
   <div class="course-list-table">
-    <course-list-record
-      :textbox21Props="courseListRecord1Props.textbox21Props"
-      :textbox22Props="courseListRecord1Props.textbox22Props"
-      :textbox23Props="courseListRecord1Props.textbox23Props"
-      :imagebox_Add1Props="courseListRecord1Props.imagebox_Add1Props"
-      :imagebox_SearchProps="courseListRecord1Props.imagebox_SearchProps"
-    />
+    <titlebox className="redBold">내 수업목록</titlebox>
+    <course-list-record :textData="record" v-for="record in records"/>
   </div>
 </template>
 
 <script>
 import CourseListRecord from "./CourseListRecord";
+import Titlebox from "./Titlebox";
+
 export default {
   name: "CourseListTable",
   components: {
     CourseListRecord,
+    Titlebox,
   },
-  props: [
-    "courseListRecord1Props",
-
-  ],
+  props: [],
+  data(){
+    return{
+      records: []
+    }
+  },
+  methods:{
+    update(usertimetable){
+      for(let i=0; i<usertimetable.length;i++){
+        if(this.records.findIndex((x)=> x.수업번호 == usertimetable[i].수업번호) != -1)
+          continue;
+        else
+          this.records.push(usertimetable[i])
+      }
+    }
+  }
 };
 </script>
 
@@ -34,6 +44,10 @@ export default {
   flex-direction: column
   height: 550px
   overflow: hidden
+  overflow-y: scroll
   position: relative
   width: 400px
+  border-width : 1px
+  border-color : white
+  border-style: solid
 </style>

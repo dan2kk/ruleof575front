@@ -1,17 +1,21 @@
 <template>
   <div class="course-info-table">
-    <imagebox_Add />
-    <imagebox_Add />
+    <titlebox className="yellowBold" v-for="text in texts">{{text}}</titlebox>
   </div>
 </template>
 
 <script>
-import Imagebox_Add from "./Imagebox_Add";
+import Titlebox from "./Titlebox";
 export default {
   name: "CourseInfoTable",
   components: {
-    Imagebox_Add,
+    Titlebox,
   },
+  data(){
+    return{
+      texts: ["해줘", "응애", "노예야", "일해라"]
+    }
+  }
 };
 </script>
 

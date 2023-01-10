@@ -1,7 +1,7 @@
 <template>
   <div class="gyoyang-table">
-    <titlebox />
-    <gyoyang-record v-bind="gyoyangRecord1Props"/>
+    <titlebox className="blueBold">야스다야스</titlebox>
+    <gyoyang-record :textData="record" v-for="record in records"/>
   </div>
 </template>
 
@@ -14,24 +14,34 @@ export default {
     Titlebox,
     GyoyangRecord,
   },
-  props: [
-    "gyoyangRecord1Props",
-  ],
+  props: [],
+  methods:{
+   
+  },
+  mounted(){
+      this.records.push({수업번호: 77777, 과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00"});
+      this.records.push({수업번호: 88888, 과목명: "컴퓨터네트워크", 대표교강사명: "Jinsik Choi", 수업시간: "화 17:00~15:00<br />수 13:00 ~15:00"});
+      this.records.push({수업번호: 99999, 과목명: "데베시", 대표교강사명: "김병주", 수업시간: "목 13:00~15:00<br />수 13:00 ~15:00"});
+  },
+  data(){
+    return{
+      records: [],
+      mockup: {과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00"}
+    }
+  }
 };
 </script>
 
 <style lang="sass">
 @import '../../variables'
 
-.gyoyang-table-::-webkit-scrollbar
-  display: none
-  width: 0
 
 .gyoyang-table
   align-items: center
   background-color: $solitude
-  border-left-style: solid
-  border-left-width: 3px
+  border-style: solid
+  border-width: 1px
+  border-color: $white
   display: flex
   flex-direction: column
   height: 550px

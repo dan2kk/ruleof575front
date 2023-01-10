@@ -1,67 +1,132 @@
 <template>
   <div :class="[`timetable`, className || ``]">
-    <timeline :clickedProps=false v-bind="timeline1Props"/>
-    <timeline :clickedProps=true v-bind="timeline2Props" v-on:timeboxclicked="timelineevent1"/>
-    <timeline :clickedProps=true v-bind="timeline3Props" v-on:timeboxclicked="timelineevent2"/>
-    <timeline :clickedProps=true v-bind="timeline4Props" v-on:timeboxclicked="timelineevent3"/>
-    <timeline :clickedProps=true v-bind="timeline5Props" v-on:timeboxclicked="timelineevent4"/>
-    <timeline :clickedProps=true v-bind="timeline6Props" v-on:timeboxclicked="timelineevent5"/>
+    <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posy = 0 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posy = 1 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posy = 2 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[3] :textArray = this.textTable[3] :posy = 3 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[4] :textArray = this.textTable[4] :posy = 4 v-on:passInfo="receiveInfoAndUpdate"/>
+    <timeline :blocknumArray= this.blocknumTable[5] :textArray = this.textTable[5] :posy = 5 v-on:passInfo="receiveInfoAndUpdate"/>
   </div>
 </template>
 
 <script>
+import { VueElement } from "vue";
+import vueConfig from "vue.config";
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
   components: {
     Timeline,
   },
-  props: [
-    "className",
-    "timeline1Props",
-    "timeline2Props",
-    "timeline3Props",
-    "timeline4Props",
-    "timeline5Props",
-    "timeline6Props",
-  ],
+  props: [ ],
   data() {
     return {
-      dateTime: [{time : 0},{date : 0}]
+      selectedDateTime: [],
+      a: 1,
+      blocknumTable: [
+      [7,8,8,8,8,8,8,8,8,8,8,8,8],
+      [8,1,1,1,1,1,1,1,1,1,1,1,1],
+      [8,1,1,1,1,1,1,1,1,1,1,1,1],
+      [8,1,1,1,1,1,1,1,1,1,1,1,1],
+      [8,1,1,1,1,1,1,1,1,1,1,1,1],
+      [8,1,1,1,1,1,1,1,1,1,1,1,1]],
+      textTable: [
+      ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
+      ["월요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
+      ["화요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
+      ["수요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
+      ["목요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
+      ["금요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",]]
     }
   },
   methods: {
+    receiveInfoAndUpdate(blocknum, text, posx, posy)
+    {
+      this.blocknumTable[posy][posx] = blocknum;
+      this.textTable[posy][posx] = text;
+    },
     timelineevent1(time){
-      alert("picked time and date is monday and time " + time)
-      this.dateTime.time = time
-      this.dateTime.date = 1
-      this.$emit("selectTable", this.dateTime)
+      alert("picked time and date is 월요일 and time " + time)
+      var temp = {selectTime: time, selectDate: "월"}
+      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
+      if(index != -1){
+        alert("delete select Time and Date : Monday(1), "+ time)
+        this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
+      }
+      else{
+        alert("add select Time and Date : 월요일(1), "+ time)
+        this.selectedDateTime.push(temp)
+        this.updateevent(1)
+      }
+      this.updateevent()
     },
     timelineevent2(time){
-      alert("picked time and date is tuesday and time " + time)
-      this.dateTime.time = time
-      this.dateTime.date = 2
-      this.$emit("selectTable", this.dateTime)
+      alert("picked time and date is 화요일 and time " + time)
+      var temp = {selectTime: time, selectDate: "화"}
+      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
+      if(index != -1){
+        alert("delete select Time and Date : 화요일(2), "+ time)
+        this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
+      }
+      else{
+        alert("add select Time and Date : 화요일(2), "+ time)
+        this.selectedDateTime.push(temp)
+        this.updateevent(1)
+      }
     },
     timelineevent3(time){
-      alert("picked time and date is wedensday and time " + time)
-      this.dateTime.time = time
-      this.dateTime.date = 3
-      this.$emit("selectTable", this.dateTime)
+      alert("picked time and date is 수요일 and time " + time)
+      var temp = {selectTime: time, selectDate: "수"}
+      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
+      if(index != -1){
+        alert("delete select Time and Date : 수요일(3), "+ time)
+        this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
+      }
+      else{
+        alert("add select Time and Date : 수요일(3), "+ time)
+        this.selectedDateTime.push(temp)
+        this.updateevent(1)
+      }
+      this.updateevent()
     },
     timelineevent4(time){
-      alert("picked time and date is thursday and time " + time)
-      this.dateTime.time = time
-      this.dateTime.date = 4
-      this.$emit("selectTable", this.dateTime)
+      alert("picked time and date is 목요일 and time " + time)
+      var temp = {selectTime: time, selectDate: "목"}
+      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
+      if(index != -1){
+        alert("delete select Time and Date : 목요일(4), "+ time)
+        this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
+      }
+      else{
+        alert("add select Time and Date : 목요일(4), "+ time)
+        this.selectedDateTime.push(temp)
+        this.updateevent(1)
+      }
+      this.updateevent()
     },
     timelineevent5(time){
-      alert("picked time and date is friday and time " + time)
-      this.dateTime.time = time
-      this.dateTime.date = 5
-      this.$emit("selectTable", this.dateTime)
+      alert("picked time and date is 금요일 and time " + time)
+      var temp = {selectTime: time, selectDate: "금"}
+      var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
+      if(index != -1){
+        alert("delete select Time and Date : 금요일(5), "+ time)
+        this.selectedDateTime.splice(index, 1)
+        this.updateevent(2)
+      }
+      else{
+        alert("add select Time and Date : 금요일(5), "+ time)
+        this.selectedDateTime.push(temp)
+        this.updateevent(1)
+      }
+    },
+    updateevent(number){
+      var test = 0
     }
-  }
+  },
 };
 </script>
 
@@ -73,14 +138,11 @@ export default {
   background-color: $white
   display: flex
   gap: 8px
-  height: 540px
-  margin-left: 79px
-  margin-top: 330px
+  height: 520px
   position: relative
   width: 400px
+  border-style: solid
+  border-color: white
+  border-width: 1px
 
-.timetable.timetable-1,
-.timetable.timetable-2
-  margin-left: unset
-  margin-top: unset
 </style>

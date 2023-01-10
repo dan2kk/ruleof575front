@@ -13,10 +13,10 @@
         v-on:forthblockclick="this.menu = 4"
       />
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
-      <course-list-table v-if="logined && menu == 1" v-bind="courseListTableProps"></course-list-table>
-      <gyoyang-table v-if="logined && menu == 2" v-bind="gyoyangTableProps"/>
-      <course-info-table v-if="logined && menu == 3"></course-info-table>
-      <graduation-info-table v-if="logined && menu == 4"  v-bind="graduationInfoTableProps"></graduation-info-table>
+      <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
+      <gyoyang-table v-show="logined && menu == 2"></gyoyang-table>
+      <course-info-table v-show="logined && menu == 3"></course-info-table>
+      <graduation-info-table v-show="logined && menu == 4"></graduation-info-table>
     </div>
   </div>
 </template>
@@ -38,18 +38,26 @@ export default {
     GyoyangTable,
     CourseListTable
   },
-  props: ["textboxMenuTabProps", "initialMenuProps","graduationInfoTableProps", "gyoyangTableProps", "courseListTableProps"],
+  props: ["textboxMenuTabProps", "initialMenuProps"],
   data(){
     return{
       logined: false,
-      menu: 0
+      menu: 0,
+      userData: {number: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+      userTimetable: []
     }
   },
   methods: {
-    loginevent(){
+    async loginevent(){
         alert("event received")
+        this.$emit("logined", this.userData)
         this.logined = !this.logined
-        this.menu = 3
+        this.menu = 1
+    },
+    update1(){
+      this.menu = 1
+      console.log(this.userTimetable)
+      this.$refs.courselist.update(this.$parent.userTimetable)
     }
   }
 };
@@ -65,7 +73,7 @@ export default {
 
 .cart-5
   align-items: flex-start
-  background-color: #e1e1e1
+  background-color: #error-color
   display: flex
   flex-direction: column
   height: 600px

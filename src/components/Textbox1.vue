@@ -16,7 +16,7 @@ export default {
 
 .textbox1
   background-color: $geraldine
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   height: 50px
   min-width: 100px

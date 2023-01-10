@@ -1,18 +1,18 @@
 <template>
   <div class="timeline-1">
-    <timeblock4 :children="timeblock1Props.children" />
-    <timeblock4 class="timeblock1" :children="timeblock2Props.children" @click="timeboxclick(9)"/>
-    <timeblock4 class="timeblock2" :children="timeblock3Props.children" @click="timeboxclick(10)"/>
-    <timeblock4 class="timeblock3" :children="timeblock4Props.children" @click="timeboxclick(11)"/>
-    <timeblock4 class="timeblock4" :children="timeblock5Props.children" @click="timeboxclick(12)"/>
-    <timeblock4 class="timeblock5" :children="timeblock6Props.children" @click="timeboxclick(13)"/>
-    <timeblock4 class="timeblock6" :children="timeblock7Props.children" @click="timeboxclick(14)"/>
-    <timeblock4 class="timeblock7" :children="timeblock8Props.children" @click="timeboxclick(15)"/>
-    <timeblock4 class="timeblock8" :children="timeblock9Props.children" @click="timeboxclick(16)"/>
-    <timeblock4 class="timeblock9" :children="timeblock10Props.children" @click="timeboxclick(17)"/>
-    <timeblock4 class="timeblock10" :children="timeblock11Props.children" @click="timeboxclick(18)"/>
-    <timeblock4 class="timeblock11" :children="timeblock12Props.children" @click="timeboxclick(19)"/>
-    <timeblock4 class="timeblock12" :children="timeblock13Props.children" :className="timeblock13Props.className" @click="timeboxclick(20)" />
+    <timeblock4 :blocknum = this.blocknumArray[0] :text = this.textArray[0] :posy = this.posy :posx = 0 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[1] :text = this.textArray[1] :posy = this.posy :posx = 1 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[2] :text = this.textArray[2] :posy = this.posy :posx = 2 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[3] :text = this.textArray[3] :posy = this.posy :posx = 3 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[4] :text = this.textArray[4] :posy = this.posy :posx = 4 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[5] :text = this.textArray[5] :posy = this.posy :posx = 5 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[6] :text = this.textArray[6] :posy = this.posy :posx = 6 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[7] :text = this.textArray[7] :posy = this.posy :posx = 7 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[8] :text = this.textArray[8] :posy = this.posy :posx = 8 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[9] :text = this.textArray[9] :posy = this.posy :posx = 9 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[10] :text = this.textArray[10] :posy = this.posy :posx = 10 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[11] :text = this.textArray[11] :posy = this.posy :posx = 11 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[12] :text = this.textArray[12] :posy = this.posy :posx = 12 v-on:sendInfo = "passInfo"/>
   </div>
 </template>
 
@@ -24,44 +24,51 @@ export default {
     Timeblock4,
   },
   props: [
-    "timeblock1Props",
-    "timeblock2Props",
-    "timeblock3Props",
-    "timeblock4Props",
-    "timeblock5Props",
-    "timeblock6Props",
-    "timeblock7Props",
-    "timeblock8Props",
-    "timeblock9Props",
-    "timeblock10Props",
-    "timeblock11Props",
-    "timeblock12Props",
-    "timeblock13Props",
-    "clickedProps",
+    "blocknumArray",
+    "textArray",
+    "posx"
   ],
   data(){
     return{
-      clickprops: false
+      clicked: [],
+      column: []
     }
   },
   methods:{
     timeboxclick(time){
-        if(this.clickedProps){
+        if(this.clickedProps[time-8]=='1'){
           alert('clicked time is '+ time);
+          this.clickedProps[time-8] = '1';
+          this.$emit("timeboxclicked", time);
+        }
+        else if(this.clickedProps[time-8]=='6'){
+          alert('clicked time is '+ time);
+          this.clickedProps[time-8] = '1';
           this.$emit("timeboxclicked", time);
         }
     },
-  }
+    sendboxclick(){
+      if(this.clickedProps[0]=='6'){
+        alert('send box clicked')
+        this.$emit("sendboxclicked")
+      }
+    },
+    passInfo(blocknum, text, posx, posy)
+    {
+      this.$emit("passInfo", blocknum, text, posx, posy);
+    }
+  },
 };
 </script>
 
 <style lang="sass">
+@import '../../variables'
 .timeline-1,
 .timeline-2
   align-items: flex-start
   display: flex
   flex-direction: column
-  height: 540px
+  height: 520px
   position: relative
   width: 60px
 .timeblock1,
@@ -75,7 +82,8 @@ export default {
 .timeblock9,
 .timeblock10,
 .timeblock11,
-.timeblock12
+.timeblock12,
+.button
   cursor: pointer
 
 .timeblock1:hover,
@@ -89,8 +97,18 @@ export default {
 .timeblock9:hover,
 .timeblock10:hover,
 .timeblock11:hover,
-.timeblock12:hover
+.timeblock12:hover,
+.button:hover
   transform: scale(1.1)
   border: 1px solid
   border-color: #000000
+
+
+
+@keyframes fly-1
+  0%
+    transform: translateY(0.1em)
+  100%
+    transform: translateY(-0.1em)
+
 </style>

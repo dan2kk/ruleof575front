@@ -19,7 +19,7 @@ export default {
 .textbox-4,
 .textbox-5
   background-color: $silver
-  border: 3px solid
+  border: 1px solid
   border-color: $white
   height: 30px
   min-width: 100px
