@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`timetable`, className || ``]">
+  <div :class="[`timetable`]">
     <timeline :blocknumArray= this.blocknumTable[0] :textArray = this.textTable[0] :posx = 0 v-on:passInfo="receiveInfoAndUpdate"/>
     <timeline :blocknumArray= this.blocknumTable[1] :textArray = this.textTable[1] :posx = 1 v-on:passInfo="receiveInfoAndUpdate"/>
     <timeline :blocknumArray= this.blocknumTable[2] :textArray = this.textTable[2] :posx = 2 v-on:passInfo="receiveInfoAndUpdate"/>
@@ -30,11 +30,11 @@ export default {
       [8,1,1,1,1,1,1,1,1,1,1,1,1]],
       textTable: [
       ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
-      ["월요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
-      ["화요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
-      ["수요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
-      ["목요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",],
-      ["금요일", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".",]]
+      ["월요일", "소프트웨어공학", "", "", "", "", "", "", "", "", "", "", "",],
+      ["화요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["수요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["목요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["금요일", "", "", "", "", "", "", "", "", "", "", "", "",]]
     }
   },
   methods: {

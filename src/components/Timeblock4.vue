@@ -1,45 +1,45 @@
 <template>
-  <div :class="[`timeblock-1`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 1" @click="click()">
-    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-  </div>
-  <div :class="[`timeblock-2`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 2" @click="click()">
-    <div class="blocker"></div>
-    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-  </div>
-  <div :class="[`timeblock-3`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 3" @click="click()">
-    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-    <div class="blocker"></div>
-  </div>
-  <div :class="[`timeblock-4`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 4" @click="click()">
-    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-    <div class="blocker"></div>
-  </div>
-  <div :class="[`timeblock-5`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 5" @click="click()">
-    <div class="blocker"></div>
-    <div class="timetext-2 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-  </div>
-  <div :class="[`timeblock-6`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 6" @click="click()">
-    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
-  </div>
-  <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7" >
-    <div class="svg-wrapper-1" @click="click()">
-      <div class="svg-wrapper">
-        <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-          <path fill="none" d="M0 0h24v24H0z"></path>
-          <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-        </svg>
-      </div>
+  <div>
+    <div :class="[`timeblock-1`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 1" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
     </div>
-    <span class="span">Send</span>
-  </button>
-  <div :class="[`timeblock-8`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 8" @click="click()">
-    <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-2`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 2" @click="click()">
+      <div class="blocker"></div>
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    </div>
+    <div :class="[`timeblock-3`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 3" @click="click()">
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+      <div class="blocker"></div>
+    </div>
+    <div :class="[`timeblock-4`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 4" @click="click()">
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+      <div class="blocker"></div>
+    </div>
+    <div :class="[`timeblock-5`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 5" @click="click()">
+      <div class="blocker"></div>
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    </div>
+    <div :class="[`timeblock-6`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 6" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    </div>
+    <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7" >
+      <div class="svg-wrapper-1" @click="click()">
+        <div class="svg-wrapper">
+          <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+          </svg>
+        </div>
+      </div>
+      <span class="span">Send</span>
+    </button>
+    <div :class="[`timeblock-8`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 8" @click="click()">
+      <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
+    </div>
+    <div :class="[`timeblock-9`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 9" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.timetext }}</div>
+    </div>
   </div>
-  <div :class="[`timeblock-9`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 9" @click="click()">
-    <div class="blocker"></div>
-    <div class="blocker"></div>
-  </div>
-
 </template>
 
 <script>
@@ -154,7 +154,7 @@ export default {
 
 .timeblock-9
   align-items: center
-  background-color: $bon-jour
+  background-color: $black
   display: flex
   flex-direction: column
   height: 40px
