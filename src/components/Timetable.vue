@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -41,7 +40,7 @@ export default {
   methods: {
     timelineevent1(time){
       alert("picked time and date is 월요일 and time " + time)
-      var temp = {selectTime: time, selectDate: 1}
+      var temp = {selectTime: time, selectDate: "월"}
       var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
       if(index != -1){
         alert("delete select Time and Date : Monday(1), "+ time)
@@ -57,7 +56,7 @@ export default {
     },
     timelineevent2(time){
       alert("picked time and date is 화요일 and time " + time)
-      var temp = {selectTime: time, selectDate: 2}
+      var temp = {selectTime: time, selectDate: "화"}
       var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
       if(index != -1){
         alert("delete select Time and Date : 화요일(2), "+ time)
@@ -72,7 +71,7 @@ export default {
     },
     timelineevent3(time){
       alert("picked time and date is 수요일 and time " + time)
-      var temp = {selectTime: time, selectDate: 3}
+      var temp = {selectTime: time, selectDate: "수"}
       var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
       if(index != -1){
         alert("delete select Time and Date : 수요일(3), "+ time)
@@ -88,7 +87,7 @@ export default {
     },
     timelineevent4(time){
       alert("picked time and date is 목요일 and time " + time)
-      var temp = {selectTime: time, selectDate: 4}
+      var temp = {selectTime: time, selectDate: "목"}
       var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
       if(index != -1){
         alert("delete select Time and Date : 목요일(4), "+ time)
@@ -104,7 +103,7 @@ export default {
     },
     timelineevent5(time){
       alert("picked time and date is 금요일 and time " + time)
-      var temp = {selectTime: time, selectDate: 5}
+      var temp = {selectTime: time, selectDate: "금"}
       var index = this.selectedDateTime.findIndex(function(item){return (item.selectDate == temp.selectDate)&&(item.selectTime==temp.selectTime)})
       if(index != -1){
         alert("delete select Time and Date : 금요일(5), "+ time)

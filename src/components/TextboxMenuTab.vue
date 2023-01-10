@@ -56,4 +56,5 @@ export default {
   align-items: flex-start
   justify-content: center
   margin-right: unset
+
 </style>

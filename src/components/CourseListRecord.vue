@@ -1,9 +1,9 @@
 <template>
   <div class="course-list-record-1">
     <div class="cart-courselistrecord">
-      <textbox2 :text= this.textData.coursename className= "red" size= "big"/>
-      <textbox2 :text= this.textData.profname className= "red" size= "small"/>
-      <textbox2 :text= this.textData.coursetime className= "red" size= "medium"/>
+      <textbox2 :text= this.textData.과목명 className= "red" size= "big"/>
+      <textbox2 :text= this.textData.대표교강사명 className= "red" size= "small"/>
+      <textbox2 :text= this.textData.수업시간 className= "red" size= "medium"/>
       <imagebox_Search src= './iconbuttons-3.png' className="red" />
       <imagebox_Search src= './iconbuttons-2.png' className="red" />
     </div>
@@ -23,7 +23,7 @@ export default {
   data()
   {
     return{
-      mockup: {coursename: "소프트웨어공학", profname: "김윤호", coursetime: "월 13:00~15:00<br />수 13:00 ~15:00", image1: './iconbuttons-3.png', image2: './iconbuttons-2.png'},
+      mockup: {과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00", image1: './iconbuttons-3.png', image2: './iconbuttons-2.png'},
     }
   }
 };

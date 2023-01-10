@@ -58,14 +58,14 @@ export default {
   },
   methods:{
     timeboxclick(time){
-        if(this.clickedProps[time-9]=='1'){
+        if(this.clickedProps[time-8]=='1'){
           alert('clicked time is '+ time);
-          this.clickedProps[time-9] = '1';
+          this.clickedProps[time-8] = '1';
           this.$emit("timeboxclicked", time);
         }
-        else if(this.clickedProps[time-9]=='6'){
+        else if(this.clickedProps[time-8]=='6'){
           alert('clicked time is '+ time);
-          this.clickedProps[time-9] = '1';
+          this.clickedProps[time-8] = '1';
           this.$emit("timeboxclicked", time);
         }
     },
