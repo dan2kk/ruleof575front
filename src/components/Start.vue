@@ -20,6 +20,7 @@
 import UserInfoTimeTable from "./UserInfoTimeTable";
 import XMenu from "./XMenu";
 import axios from 'axios';
+import { assertTSAnyKeyword } from "@babel/types";
 
 export default {
   name: "Start",
@@ -36,16 +37,26 @@ export default {
   methods: {
     async sendTimeTable(array){
       try {
-        let date = await axios.post('/list/update', {data: array})
+        let result=   {
+                            '월' : [],
+                            '화' : [],
+                            '수' : [],
+                            '목' : [],
+                            '금' : []
+                      }
+      array.forEach((item)=> {result[item.selectDate].push(item.selectTime);})
+      for(let key in result) {
+          result[key].sort((a, b) => { return a - b; });
+      }
+        let date = await axios.post('/test', {times: result, stu_id: this.$store.getters.getUserID})
       } catch (error) {
         console.log(error)
       }
     },
-    async sendLoginInfo(user){
+    async sendLoginInfo(){
       alert("receive login event to Start.vue")
-      alert(user.stu_id+ " "+user.username+ " "+user.major+" "+user.grade)
       try{
-        let timetabledata = (await axios.get('/list/init', {params: {stu_id: user.stu_id}})).data
+        let timetabledata = (await axios.get('/list/init', {params: {stu_id: this.$store.getters.getUserID}})).data
         for(let i=0; i< timetabledata.length;i++){
           this.$store.commit("addTimetable", timetabledata[i])
           console.log(timetabledata[i])

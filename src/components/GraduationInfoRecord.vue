@@ -1,12 +1,12 @@
 <template>
   <div class="graduation-info-record">
       <div class="flex-row-1">
-        <textbox2 :text="this.textData.a" className= "purple" size= "big"/>
-        <textbox2 :text= "this.textData.b" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.c" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.d" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.e" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.f" className= "purple" size= "small"/>
+        <textbox2 :text="this.textData.이수명" className= "purple" size= "big"/>
+        <textbox2 :text= "this.textData.기준" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.이수" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.변동" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.합계" className= "purple" size= "small"/>
+        <textbox2 :text= "this.textData.잔여" className= "purple" size= "small"/>
       </div>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     Textbox2,
   },
   props: ["textData"],
+  watch: {
+    message: function (newVal, oldVal) {
+      this.reversedMessage = newVal.split('').reverse().join('')
+    }
+  }
 };
 
 
