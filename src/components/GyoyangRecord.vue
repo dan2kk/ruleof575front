@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`gyoyang-record-1-1`, className || ``]">
+  <div :class="[`gyoyang-record-1-1`]">
     <div class="flex-row-1">
       <textbox2 :text= "this.textData.과목명" className= "blue" size= "big"/>
       <textbox2 :text= "this.textData.대표교강사명" className= "blue" size= "small"/>

@@ -7,13 +7,6 @@
       :textbox4Props="userInfoBoxProps.textbox4Props"
     />
     <timetable
-      :className="timetableProps.className"
-      :timeline1Props="timetableProps.timeline1Props"
-      :timeline2Props="timetableProps.timeline2Props"
-      :timeline3Props="timetableProps.timeline3Props"
-      :timeline4Props="timetableProps.timeline4Props"
-      :timeline5Props="timetableProps.timeline5Props"
-      :timeline6Props="timetableProps.timeline6Props"
       v-on:selectTable="sendServer"
     />
   </div>

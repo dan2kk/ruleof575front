@@ -1,9 +1,9 @@
 <template>
   <div class="user-info-box-1">
-    <textbox :text="textbox1Props.text" />
-    <textbox :text="textbox2Props.text" />
-    <textbox :text="textbox3Props.text" />
-    <textbox :text="textbox4Props.text" />
+    <textbox :text=this.studentInfo[0] />
+    <textbox :text=this.studentInfo[1] />
+    <textbox :text=this.studentInfo[2] />
+    <textbox :text=this.studentInfo[3] />
   </div>
 </template>
 
@@ -14,7 +14,12 @@ export default {
   components: {
     Textbox,
   },
-  props: ["textbox1Props", "textbox2Props", "textbox3Props", "textbox4Props"],
+  props: [],
+  data(){
+    return {
+      studentInfo: ["이름", "학과", "학번", "학년"]
+    }
+  },
 };
 </script>
 

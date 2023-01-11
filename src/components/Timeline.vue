@@ -1,29 +1,18 @@
 <template>
   <div class="timeline-1">
-    <button class='button' @click="sendboxclick" v-if="clickedProps[0] == '6'">
-      <div class="svg-wrapper-1">
-        <div class="svg-wrapper">
-          <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-            <path fill="none" d="M0 0h24v24H0z"></path>
-            <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-          </svg>
-        </div>
-      </div>
-      <span class="span">Send</span>
-    </button>
-    <timeblock4 :children="timeblock1Props.children" v-if="clickedProps[0] != '6'"/>
-    <timeblock4 class="timeblock1" :clickedState="clickedProps[1]" :children="timeblock2Props.children" @click="timeboxclick(9)"/>
-    <timeblock4 class="timeblock2" :clickedState="clickedProps[2]" :children="timeblock3Props.children" @click="timeboxclick(10)"/>
-    <timeblock4 class="timeblock3" :clickedState="clickedProps[3]" :children="timeblock4Props.children" @click="timeboxclick(11)"/>
-    <timeblock4 class="timeblock4" :clickedState="clickedProps[4]" :children="timeblock5Props.children" @click="timeboxclick(12)"/>
-    <timeblock4 class="timeblock5" :clickedState="clickedProps[5]" :children="timeblock6Props.children" @click="timeboxclick(13)"/>
-    <timeblock4 class="timeblock6" :clickedState="clickedProps[6]" :children="timeblock7Props.children" @click="timeboxclick(14)"/>
-    <timeblock4 class="timeblock7" :clickedState="clickedProps[7]" :children="timeblock8Props.children" @click="timeboxclick(15)"/>
-    <timeblock4 class="timeblock8" :clickedState="clickedProps[8]" :children="timeblock9Props.children" @click="timeboxclick(16)"/>
-    <timeblock4 class="timeblock9" :clickedState="clickedProps[9]" :children="timeblock10Props.children" @click="timeboxclick(17)"/>
-    <timeblock4 class="timeblock10" :clickedState="clickedProps[10]" :children="timeblock11Props.children" @click="timeboxclick(18)"/>
-    <timeblock4 class="timeblock11" :clickedState="clickedProps[11]" :children="timeblock12Props.children" @click="timeboxclick(19)"/>
-    <timeblock4 class="timeblock12" :clickedState="clickedProps[12]" :children="timeblock13Props.children" @click="timeboxclick(20)"/>
+    <timeblock4 :blocknum = this.blocknumArray[0] :timetext = this.textArray[0] :posx = this.posx :posy = 0 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[1] :timetext = this.textArray[1] :posx = this.posx :posy = 1 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[2] :timetext = this.textArray[2] :posx = this.posx :posy = 2 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[3] :timetext = this.textArray[3] :posx = this.posx :posy = 3 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[4] :timetext = this.textArray[4] :posx = this.posx :posy = 4 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[5] :timetext = this.textArray[5] :posx = this.posx :posy = 5 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[6] :timetext = this.textArray[6] :posx = this.posx :posy = 6 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[7] :timetext = this.textArray[7] :posx = this.posx :posy = 7 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[8] :timetext = this.textArray[8] :posx = this.posx :posy = 8 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[9] :timetext = this.textArray[9] :posx = this.posx :posy = 9 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[10] :timetext = this.textArray[10] :posx = this.posx :posy = 10 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[11] :timetext = this.textArray[11] :posx = this.posx :posy = 11 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[12] :timetext = this.textArray[12] :posx = this.posx :posy = 12 v-on:sendInfo = "passInfo"/>
   </div>
 </template>
 
@@ -35,52 +24,18 @@ export default {
     Timeblock4,
   },
   props: [
-    "timeblock1Props",
-    "timeblock2Props",
-    "timeblock3Props",
-    "timeblock4Props",
-    "timeblock5Props",
-    "timeblock6Props",
-    "timeblock7Props",
-    "timeblock8Props",
-    "timeblock9Props",
-    "timeblock10Props",
-    "timeblock11Props",
-    "timeblock12Props",
-    "timeblock13Props",
-    "clickedProps",
-    "selectedTime",
+    "blocknumArray",
+    "textArray",
+    "posx"
   ],
   data(){
     return{
-      clicked: []
     }
   },
   methods:{
-    timeboxclick(time){
-        if(this.clickedProps[time-8]=='1'){
-          alert('clicked time is '+ time);
-          this.clickedProps[time-8] = '1';
-          this.$emit("timeboxclicked", time);
-        }
-        else if(this.clickedProps[time-8]=='6'){
-          alert('clicked time is '+ time);
-          this.clickedProps[time-8] = '1';
-          this.$emit("timeboxclicked", time);
-          if(this.$refs.TB.returnState()==true) 
-          {
-            alert("c'ex");
-          }
-          else{
-            alert("fuck");
-          }
-        }
-    },
-    sendboxclick(){
-      if(this.clickedProps[0]=='6'){
-        alert('send box clicked')
-        this.$emit("sendboxclicked")
-      }
+    passInfo(blockno, blocktext, posx, posy)
+    {
+      this.$emit("passInfo", blockno, blocktext, posx, posy);
     }
   },
 };
@@ -128,35 +83,7 @@ export default {
   border: 1px solid
   border-color: #000000
 
-.button
-  font-size: 13px 
-  background: $orange-yellow
-  color: white 
-  display: flex 
-  align-items: center 
-  border: none 
-  border-radius: 4px 
-  overflow: hidden
-  height: 40px
-  width: 60px
-  transition: all 0.2s
-  .span
-    display: block 
-    margin-left: 0.3em 
-    transition: all 0.3s ease-in-out 
-  .svg
-    display: block 
-    transform-origin: center center 
-    transition: transform 0.3s ease-in-out 
-.button:hover
-  .svg-wrapper
-    animation: fly-1 0.6s ease-in-out infinite alternate 
-  .svg
-    transform: translateX(1.2em) rotate(45deg) scale(1.1) 
-  .span
-    transform: translateX(5em)
-.button:active
-  transform: scale(0.95)
+
 
 @keyframes fly-1
   0%
