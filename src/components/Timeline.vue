@@ -1,6 +1,6 @@
 <template>
   <div class="timeline-1">
-    <timeblock4 :blocknum = this.blocknumArray[0] :timetext = this.textArray[0] :posx = this.posx :posy = 0 v-on:sendInfo = "passInfo"/>
+    <timeblock4 :blocknum = this.blocknumArray[0] :timetext = this.textArray[0] :posx = this.posx :posy = 0 v-on:sendboxclicked="sendTable(posx, posy)" v-on:sendInfo = "passInfo"/>
     <timeblock4 :blocknum = this.blocknumArray[1] :timetext = this.textArray[1] :posx = this.posx :posy = 1 v-on:sendInfo = "passInfo"/>
     <timeblock4 :blocknum = this.blocknumArray[2] :timetext = this.textArray[2] :posx = this.posx :posy = 2 v-on:sendInfo = "passInfo"/>
     <timeblock4 :blocknum = this.blocknumArray[3] :timetext = this.textArray[3] :posx = this.posx :posy = 3 v-on:sendInfo = "passInfo"/>

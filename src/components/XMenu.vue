@@ -16,7 +16,7 @@
       <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
       <gyoyang-table v-show="logined && menu == 2"></gyoyang-table>
       <course-info-table v-show="logined && menu == 3"></course-info-table>
-      <graduation-info-table :data="this.gradData" v-show="logined && menu == 4"></graduation-info-table>
+      <graduation-info-table :data="this.gradData" ref="grad" v-show="logined && menu == 4"></graduation-info-table>
     </div>
   </div>
 </template>
@@ -102,10 +102,13 @@ export default {
                 res[i].이수 = "N"
               }
             }
-            this.gradData[res[i].이수] = 0
+            this.gradData[res[i].이수명] = 0 //내부 데이터
           }
+          res[i].변동 = '0'
+          res[i].합계 = '0'
+          res[i].잔여 = '0'
           this.$store.commit("addGrad", res[i])
-          console.log(res[i].이수명 + res[i].기준 + res[i].이수)
+          console.log(res[i])
         }
       }
       catch(err){
@@ -116,9 +119,9 @@ export default {
       try{
         let res = (await axios.get('/grad/view', {params: {stu_id: this.$store.getters.getUserID}})).data.list
         for(let j=0 ; j< res.length; j++){
+          console.log(res[j])
+          this.gradData.졸업학점 += res[j].학점
           switch(res[j].이수구분코드명){
-            case "전공심화": case "전공핵심": case "핵심교양": case "교양필수":
-              this.gradData.졸업학점 += res[j].학점
             case "전공심화": case "전공핵심":
               this.gradData.전공학점 += res[j].학점
               break;
@@ -143,10 +146,12 @@ export default {
                     case "고전읽기영역":
                       this.gradData.고전읽기영역 += res[j].학점
                       break
-                  }
-            default:
-              alert("이수구분코드명 없는것!")
+                }
               break;
+            default:
+              console.log("이수구분코드명 없는것!")
+              break;
+            
           }
           if(res[j].영어전용){
             this.gradData.영어전용강좌수+=1
@@ -159,7 +164,7 @@ export default {
               this.gradData["400단위"] += res[j].학점
               break;
             default:
-              alert('단위부분 에러')
+              console.log('단위부분 에러')
               break;
           }
         }
@@ -167,6 +172,8 @@ export default {
       catch(err){
         alert(err)
       }
+      console.log(this.gradData)
+      this.$refs.grad.update()
     }
   }
 };

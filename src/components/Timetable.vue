@@ -19,7 +19,6 @@ export default {
   props: [ ],
   data() {
     return {
-      selectedDateTime: [],
       blocknumTable: [
       [7,8,8,8,8,8,8,8,8,8,8,8,8],
       [8,9,9,2,1,1,1,1,1,1,1,1,1],

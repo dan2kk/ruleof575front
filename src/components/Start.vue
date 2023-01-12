@@ -35,21 +35,15 @@ export default {
     }
   },
   methods: {
-    async sendTimeTable(array){
+    async sendTimeTable(){
       try {
-        let result=   {
-                            '월' : [],
-                            '화' : [],
-                            '수' : [],
-                            '목' : [],
-                            '금' : []
-                      }
-      array.forEach((item)=> {result[item.selectDate].push(item.selectTime);})
-      for(let key in result) {
-          result[key].sort((a, b) => { return a - b; });
-      }
+        let result= this.$store.getters.getDateTime
+        for(let key in result) {
+            result[key].sort((a, b) => { return a - b; });
+        }
         let date = await axios.post('/test', {times: result, stu_id: this.$store.getters.getUserID})
-      } catch (error) {
+      } 
+      catch (error) {
         console.log(error)
       }
     },

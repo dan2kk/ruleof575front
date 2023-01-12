@@ -19,11 +19,6 @@ export default {
     Textbox2,
   },
   props: ["textData"],
-  watch: {
-    message: function (newVal, oldVal) {
-      this.reversedMessage = newVal.split('').reverse().join('')
-    }
-  }
 };
 
 

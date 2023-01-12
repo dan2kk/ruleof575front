@@ -56,21 +56,62 @@ export default {
   },
   methods:{
     click(){
-      if (this.blocknum <= 7)
+      if (this.blocknum <= 7) //시간표가 안찬곳 클릭
       {
         if (this.blocknum < 7)
         {
           alert('posx:' + this.posX +'posy: '+this.posY);
           this.blockno = 7 - this.blockno;
           this.$emit("sendInfo", this.blockno, this.blocktext, this.posx, this.posy)
+          let data = {start: 0, end: 0}
+          switch(this.blockno){
+            case 6: case 1: // 풀칸 클릭 가능
+              data.start = this.posY + 8
+              data.end = this.posY + 1 + 8
+              break;
+            case 5: case 2: // 아랫칸 클릭 가능
+              data.start = this.posY + 0.5 + 8
+              data.end = this. posY + 1 + 8
+              break;
+            case 4: case 3: // 윗칸 클릭 가능
+              data.start = this.posY + 8
+              data.end = this. posY + 0.5 + 8
+              break;
+            default:
+              alert("error!")
+          }
+          let day = null
+          switch(this.posX){
+            case 1:
+              day = '월'
+              break;
+            case 2:
+              day = '화'
+              break;
+            case 3:
+              day = '수'
+              break;
+            case 4:
+              day = '목'
+              break;
+            case 5:
+              day = '금'
+              break;
+            default:
+              alert("err!")
+              break;
+          }
+          console.log(data, day)
+          this.$store.commit("clickDateTime",{data, day})
         }
         else
         {
           alert('sendbox clicked');
-          this.$emit('sendboxclicked');
+          this.$parent.$parent.$parent.$parent.sendTimeTable()
+          //this.$emit('sendboxclicked');
         }
       }
-      else
+      else // 시간표가 이미 찬곳 클릭
       {
         
       }
