@@ -39,7 +39,7 @@ export default {
       try {
         let result= this.$store.getters.getDateTime
         for(let key in result) {
-            result[key].sort((a, b) => { return a - b; });
+            result[key].sort((a, b) => { return a.start - b.start; });
         }
         let date = await axios.post('/test', {times: result, stu_id: this.$store.getters.getUserID})
       } 

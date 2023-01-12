@@ -3,10 +3,24 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     userTimetable:[],
-    selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
     isChanged: false,
     user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
-    grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}]
+    grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
+    selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
+    textTable: [
+      ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
+      ["월요일", "소프트웨어공학", "", "", "", "", "", "", "", "", "", "", "",],
+      ["화요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["수요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["목요일", "", "", "", "", "", "", "", "", "", "", "", "",],
+      ["금요일", "", "", "", "", "", "", "", "", "", "", "", "",]],
+    blocknumTable: [
+        [7,8,8,8,8,8,8,8,8,8,8,8,8],
+        [8,9,9,2,1,1,1,1,1,1,1,1,1],
+        [8,1,1,1,1,1,1,1,1,1,1,1,1],
+        [8,1,1,1,1,1,1,1,1,1,1,1,1],
+        [8,1,1,1,1,1,1,1,1,1,1,1,1],
+        [8,1,1,1,1,1,1,1,1,1,1,1,1]],
   },
   getters: {
     getTimetable(state){
@@ -23,6 +37,12 @@ export default createStore({
     },
     getDateTime(state){
       return state.selectedDateTime
+    },
+    getTextTable(state){
+      return state.textTable
+    },
+    getBlocknumTable(state){
+      return state.blocknumTable
     }
   },
   mutations: {
@@ -49,8 +69,12 @@ export default createStore({
         state.selectedDateTime[res.day].push(res.data)
         console.log("add "+res.day+" " + res.data)
       }
-      console.log(state.selectedDateTime) //test code
-      console.log(state.selectedDateTime[res.day]) //test code
+    },
+    changeBnum(state, data){
+      state.blocknumTable[data.x][data.y] = data.dat
+    },
+    changeText(state, data){
+      state.textTable[data.x][data.y] = data.dat
     }
   },
   actions: {

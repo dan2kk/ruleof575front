@@ -1,28 +1,28 @@
 <template>
   <div>
-    <div :class="[`timeblock-1`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 1" @click="click()">
-      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-1`, posx, posy ]" v-show=" this.blockno == 1" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-2`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 2" @click="click()">
+    <div :class="[`timeblock-2`, posx, posy ]" v-show=" this.blockno == 2" @click="click()">
       <div class="blocker"></div>
-      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-3`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 3" @click="click()">
-      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
-      <div class="blocker"></div>
-    </div>
-    <div :class="[`timeblock-4`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 4" @click="click()">
-      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-3`, posx, posy ]" v-show=" this.blockno == 3" @click="click()">
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
       <div class="blocker"></div>
     </div>
-    <div :class="[`timeblock-5`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 5" @click="click()">
+    <div :class="[`timeblock-4`, posx, posy ]" v-show=" this.blockno == 4" @click="click()">
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
       <div class="blocker"></div>
-      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
     </div>
-    <div :class="[`timeblock-6`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 6" @click="click()">
-      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-5`, posx, posy ]" v-show=" this.blockno == 5" @click="click()">
+      <div class="blocker"></div>
+      <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <button class='timeblock-7' @click="sendboxclick" v-if="blocknum == 7" >
+    <div :class="[`timeblock-6`, posx, posy ]" v-show=" this.blockno == 6" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
+    </div>
+    <button class='timeblock-7' @click="sendboxclick" v-show="this.blockno == 7" >
       <div class="svg-wrapper-1" @click="click()">
         <div class="svg-wrapper">
           <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
@@ -33,11 +33,11 @@
       </div>
       <span class="span">Send</span>
     </button>
-    <div :class="[`timeblock-8`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 8" @click="click()">
-      <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-8`, posx, posy ]" v-show=" this.blockno == 8" @click="click()">
+      <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-9`, blocknum, timetext, posx, posy ]" v-if=" blocknum == 9" @click="click()">
-      <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.timetext }}</div>
+    <div :class="[`timeblock-9`, posx, posy ]" v-show=" this.blockno == 9" @click="click()">
+      <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.blocktext }}</div>
     </div>
   </div>
 </template>
@@ -45,24 +45,24 @@
 <script>
 export default {
   name: "Timeblock4",
-  props: ["blocknum", "timetext", "posx", "posy"],
+  props: ["posx", "posy"],
   data(){
     return{
-      blockno: this.blocknum,
-      blocktext: this.timetext,
+      blockno: this.$store.getters.getBlocknumTable[this.posx][this.posy],
+      blocktext: this.$store.getters.getTextTable[this.posx][this.posy],
       posX: this.posx,
       posY: this.posy,
     }
   },
   methods:{
     click(){
-      if (this.blocknum <= 7) //시간표가 안찬곳 클릭
+      if (this.blockno <= 7) //시간표가 안찬곳 클릭
       {
-        if (this.blocknum < 7)
+        if (this.blockno < 7)
         {
           alert('posx:' + this.posX +'posy: '+this.posY);
           this.blockno = 7 - this.blockno;
-          this.$emit("sendInfo", this.blockno, this.blocktext, this.posx, this.posy)
+          this.$store.changBnum({x: this.posX, y: this.posY, dat: this.blockno})
           let data = {start: 0, end: 0}
           switch(this.blockno){
             case 6: case 1: // 풀칸 클릭 가능

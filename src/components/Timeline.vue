@@ -1,18 +1,18 @@
 <template>
   <div class="timeline-1">
-    <timeblock4 :blocknum = this.blocknumArray[0] :timetext = this.textArray[0] :posx = this.posx :posy = 0 v-on:sendboxclicked="sendTable(posx, posy)" v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[1] :timetext = this.textArray[1] :posx = this.posx :posy = 1 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[2] :timetext = this.textArray[2] :posx = this.posx :posy = 2 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[3] :timetext = this.textArray[3] :posx = this.posx :posy = 3 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[4] :timetext = this.textArray[4] :posx = this.posx :posy = 4 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[5] :timetext = this.textArray[5] :posx = this.posx :posy = 5 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[6] :timetext = this.textArray[6] :posx = this.posx :posy = 6 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[7] :timetext = this.textArray[7] :posx = this.posx :posy = 7 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[8] :timetext = this.textArray[8] :posx = this.posx :posy = 8 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[9] :timetext = this.textArray[9] :posx = this.posx :posy = 9 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[10] :timetext = this.textArray[10] :posx = this.posx :posy = 10 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[11] :timetext = this.textArray[11] :posx = this.posx :posy = 11 v-on:sendInfo = "passInfo"/>
-    <timeblock4 :blocknum = this.blocknumArray[12] :timetext = this.textArray[12] :posx = this.posx :posy = 12 v-on:sendInfo = "passInfo"/>
+    <timeblock4  :posx = this.posx :posy = 0 v-on:sendboxclicked="sendTable(posx, posy)" />
+    <timeblock4  :posx = this.posx :posy = 1 />
+    <timeblock4  :posx = this.posx :posy = 2 />
+    <timeblock4  :posx = this.posx :posy = 3 />
+    <timeblock4  :posx = this.posx :posy = 4 />
+    <timeblock4  :posx = this.posx :posy = 5 />
+    <timeblock4  :posx = this.posx :posy = 6 />
+    <timeblock4  :posx = this.posx :posy = 7 />
+    <timeblock4  :posx = this.posx :posy = 8 />
+    <timeblock4  :posx = this.posx :posy = 9 />
+    <timeblock4  :posx = this.posx :posy = 10 />
+    <timeblock4  :posx = this.posx :posy = 11 />
+    <timeblock4  :posx = this.posx :posy = 12 />
   </div>
 </template>
 
@@ -33,10 +33,6 @@ export default {
     }
   },
   methods:{
-    passInfo(blockno, blocktext, posx, posy)
-    {
-      this.$emit("passInfo", blockno, blocktext, posx, posy);
-    }
   },
 };
 </script>
