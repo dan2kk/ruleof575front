@@ -36,7 +36,7 @@
     <div :class="[`timeblock-8`, posx, posy ]" v-show=" this.blockno == 8" @click="click()">
       <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-9`, posx, posy ]" v-show=" this.blockno == 9" @click="click()">
+    <div :class="[`timeblock-9`, posx, posy ]" v-show=" this.blockno >= 9" @click="click()">
       <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.blocktext }}</div>
     </div>
   </div>
@@ -48,10 +48,16 @@ export default {
   props: ["posx", "posy"],
   data(){
     return{
-      blockno: this.$store.getters.getBlocknumTable[this.posx][this.posy],
-      blocktext: this.$store.getters.getTextTable[this.posx][this.posy],
       posX: this.posx,
       posY: this.posy,
+    }
+  },
+  computed: {
+    blockno() {
+        return this.$store.getters.getBlocknumTable[this.posx][this.posy]
+    },
+    blocktext(){
+      return this.$store.getters.getTextTable[this.posx][this.posy]
     }
   },
   methods:{
@@ -60,9 +66,9 @@ export default {
       {
         if (this.blockno < 7)
         {
-          alert('posx:' + this.posX +'posy: '+this.posY);
+          alert('posx:' + this.posX +'posy: '+this.posY + '');
           this.blockno = 7 - this.blockno;
-          this.$store.changBnum({x: this.posX, y: this.posY, dat: this.blockno})
+          this.$store.commit("changeBnum", {x: this.posX, y: this.posY, dat: this.blockno})
           let data = {start: 0, end: 0}
           switch(this.blockno){
             case 6: case 1: // 풀칸 클릭 가능
@@ -71,11 +77,11 @@ export default {
               break;
             case 5: case 2: // 아랫칸 클릭 가능
               data.start = this.posY + 0.5 + 8
-              data.end = this. posY + 1 + 8
+              data.end = this.posY + 1 + 8
               break;
             case 4: case 3: // 윗칸 클릭 가능
               data.start = this.posY + 8
-              data.end = this. posY + 0.5 + 8
+              data.end = this.posY + 0.5 + 8
               break;
             default:
               alert("error!")
@@ -111,9 +117,10 @@ export default {
           //this.$emit('sendboxclicked');
         }
       }
-      else // 시간표가 이미 찬곳 클릭
+      else // 시간표가 이미 찬곳 클릭 blocknum >= 9 이면 해당 수업번호 저장
       {
-        
+        console.log("clicked " + this.blockno)
+        this.$parent.$parent.$parent.$parent.sendCourseInfo(this.blockno)
       }
     }
   }

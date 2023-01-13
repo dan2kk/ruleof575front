@@ -54,7 +54,51 @@ export default {
         for(let i=0; i< timetabledata.length;i++){
           this.$store.commit("addTimetable", timetabledata[i])
           console.log(timetabledata[i])
+          if(timetabledata[i].state == 1){ //시간표에 추가해야 할 것들
+            for(let j=0 ; j< timetabledata[i].요일; j++){
+              let day = 0
+              switch(timetabledata[i].요일[j]){
+                case '월': 
+                  day=1 
+                  break
+                case '화': 
+                  day=2
+                  break
+                case '수': 
+                  day=3
+                  break
+                case '목': 
+                  day=4
+                  break
+                case '금': 
+                  day=5
+                  break
+                default:
+                  alert("error1")
+              }
+              let startTime = Number(timetabledata[i].시작시간[j].slice(1, -6))
+              let endTime = Number(timetabledata[i].끝시간[j].slice(1, -6))
+              let startHalf = (timetabledata[i].시작시간[j].slice(-5, -3) != '00')
+              let endHalf = (timetabledata[i].끝시간[j].slice(-5, -3) != '00')
+              for(let k=startTime - 8; k < endTime -8; k++){
+                this.$store.getters.getBlocknumTable[day][k] = timetabledata[i].수업번호
+              }
+              if(startHalf) this.$store.getters.getBlocknumTable[day][startTime] = 2
+              if(endHalf) this.$store.getters.getBlocknumTable[day][endTime] = 3
+            }
+          }
         }
+        this.$store.commit("initBnum")
+      }
+      catch(err){
+        console.log(err)
+      }
+    },
+    async sendCourseInfo(number){ //미완
+      alert("receive course event to Start.vue")
+      try{
+        let coursedata = (await(axios.get('/details', {params: {lec_num: number}}))).data
+        this,$refs.xmenu.getCourseInfo(coursedata)
       }
       catch(err){
         console.log(err)

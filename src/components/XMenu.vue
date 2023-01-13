@@ -15,7 +15,7 @@
       <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
       <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
       <gyoyang-table v-show="logined && menu == 2"></gyoyang-table>
-      <course-info-table v-show="logined && menu == 3"></course-info-table>
+      <course-info-table v-show="logined && menu == 3" ref="course" ></course-info-table>
       <graduation-info-table :data="this.gradData" ref="grad" v-show="logined && menu == 4"></graduation-info-table>
     </div>
   </div>
@@ -108,7 +108,6 @@ export default {
           res[i].합계 = '0'
           res[i].잔여 = '0'
           this.$store.commit("addGrad", res[i])
-          console.log(res[i])
         }
       }
       catch(err){
@@ -119,7 +118,6 @@ export default {
       try{
         let res = (await axios.get('/grad/view', {params: {stu_id: this.$store.getters.getUserID}})).data.list
         for(let j=0 ; j< res.length; j++){
-          console.log(res[j])
           this.gradData.졸업학점 += res[j].학점
           switch(res[j].이수구분코드명){
             case "전공심화": case "전공핵심":
@@ -172,9 +170,11 @@ export default {
       catch(err){
         alert(err)
       }
-      console.log(this.gradData)
       this.$refs.grad.update()
     }
+  },
+  getCourseInfo(data){ //수업정보 데이터 불러오기
+    this.menu = 3
   }
 };
 </script>
