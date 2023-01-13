@@ -31,6 +31,9 @@ export default createStore({
     getIsChange(state){
       return state.isChanged
     },
+    getIsChecked(state) {
+      return state.isChecked;
+    },
     getUserID(state){
       return state.user.stu_id
     },
@@ -47,21 +50,7 @@ export default createStore({
       return state.blocknumTable
     },
     getRecommend(state){
-      if(state.isChecked){
-        let temp = []
-        for(let x in state.grad){
-          if(x.잔여 != 0){
-            for(let y in state.records){
-              if(y.영역코드명 == x.이수명){
-                temp.push(y)
-                break;
-              }
-            }
-          }
-        }
-        return temp;
-      }
-      else return state.records
+        return state.records
     }
   },
   mutations: {

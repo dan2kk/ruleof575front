@@ -19,7 +19,24 @@ export default {
   },
   computed:{
     records(){
-      return this.$store.getters.getRecommend
+      if(this.$store.getters.getIsChecked){
+        let temp = []
+        for(let grad of this.$store.getters.getGrad){
+          if(grad.기준 > grad.이수){
+            for(let record of this.$store.getters.getRecommend){
+              if(grad.이수명 == record.영역코드명){
+                temp.push(record)
+                break;
+              }
+            }
+          }
+        }
+        console.log("ADSSAD");
+        return temp;
+      }
+      else {
+        return this.$store.getters.getRecommend
+      }
     }
   },
   data(){
