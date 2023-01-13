@@ -100,7 +100,7 @@ export default createStore({
                 data1.end = j + 0.5 + 8
                 break;
               default:
-                console.log("init table error!")
+                console.log(i + "/"+ j + "/"+ state.blocknumTable[i][j])
             }
             let day1 = null
             switch(i){
