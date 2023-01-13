@@ -4,6 +4,7 @@ export default createStore({
   state: {
     userTimetable:[],
     isChanged: false,
+    isChecked: true,
     user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
     selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
@@ -46,7 +47,21 @@ export default createStore({
       return state.blocknumTable
     },
     getRecommend(state){
-      return state.records
+      if(state.isChecked){
+        let temp = []
+        for(let x in state.grad){
+          if(x.잔여 != 0){
+            for(let y in state.records){
+              if(y.영역코드명 == x.이수명){
+                temp.push(y)
+                break;
+              }
+            }
+          }
+        }
+        return temp;
+      }
+      else return state.records
     }
   },
   mutations: {
