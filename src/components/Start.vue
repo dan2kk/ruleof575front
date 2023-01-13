@@ -20,7 +20,7 @@
 import UserInfoTimeTable from "./UserInfoTimeTable";
 import XMenu from "./XMenu";
 import axios from 'axios';
-import { assertTSAnyKeyword } from "@babel/types";
+import { pushScopeId } from "vue";
 
 export default {
   name: "Start",
@@ -31,7 +31,8 @@ export default {
   props: ["userInfoTimeTableProps", "xMenuProps"],
   data(){
     return{
-      userTimetable: [{수업번호:null, 과목명:null, 대표교강사명:null, 수업시간:null, value:false}]
+      userTimetable: [{수업번호:null, 과목명:null, 대표교강사명:null, 수업시간:null, value:false}],
+      recommendOnly: false
     }
   },
   methods: {
@@ -42,8 +43,14 @@ export default {
             result[key].sort((a, b) => { return a.start - b.start});
         }
         console.log(result)
-        let date = await axios.post('/recommend', {time_blocks: result, stu_id: this.$store.getters.getUserID})
-        
+        this.$store.getters.getRecommend.length = 0
+        let date = (await axios.post('/recommend', {time_blocks: result, stu_id: this.$store.getters.getUserID})).data
+        console.log(date)
+        for(let i =0; i< date.length; i++){
+          console.log(date[i])
+          this.$store.getters.getRecommend.push(date[i])
+        }
+        this.$refs.xmenu.menu = 2
       } 
       catch (error) {
         console.log(error)

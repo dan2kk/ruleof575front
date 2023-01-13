@@ -114,12 +114,9 @@ export default {
               let endTime = Number(timetabledata[i].끝시간[j].slice(0, -6))
               let startHalf = (timetabledata[i].시작시간[j].slice(-5, -3) != '00')
               let endHalf = (timetabledata[i].끝시간[j].slice(-5, -3) != '00')
-              //console.log(startTime+" "+endTime+" "+startHalf+" "+endHalf)
               for(let k=startTime - 8; k < endTime -8; k++){
                 this.$store.getters.getBlocknumTable[day][k] = timetabledata[i].수업번호
               }
-              //if(startHalf) this.$store.getters.getBlocknumTable[day][startTime-8] = 3
-              //if(endHalf) this.$store.getters.getBlocknumTable[day][endTime-8] = 2
               if(startHalf){
                 if(this.$store.getters.getBlocknumTable[day][startTime-8] != 1){ //이미 반칸
                   this.$store.getters.getBlocknumTable[day][startTime-8] = timetabledata[i].수업번호
