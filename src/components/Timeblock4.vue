@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     blockno() {
-        return this.$store.getters.getBlocknumTable[this.posx][this.posy]
+      return this.$store.getters.getBlocknumTable[this.posx][this.posy]
     },
     blocktext(){
       return this.$store.getters.getTextTable[this.posx][this.posy]

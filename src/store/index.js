@@ -124,7 +124,7 @@ export default createStore({
                 break;
             }
             let temp = state.selectedDateTime[day1].findIndex((x)=>(x.start == data1.start))
-            if(temp != -1){ //array 에 없을시
+            if(temp == -1){ //array 에 없을시
               state.selectedDateTime[day1].push(data1)
             }
           }

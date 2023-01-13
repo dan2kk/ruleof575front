@@ -171,11 +171,12 @@ export default {
         alert(err)
       }
       this.$refs.grad.update()
+    },
+    getCourseInfo(data){ //수업정보 데이터 불러오기
+      this.menu = 3
+      console.log(data)
     }
   },
-  getCourseInfo(data){ //수업정보 데이터 불러오기
-    this.menu = 3
-  }
 };
 </script>
 

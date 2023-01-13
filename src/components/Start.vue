@@ -39,9 +39,11 @@ export default {
       try {
         let result= this.$store.getters.getDateTime
         for(let key in result) {
-            result[key].sort((a, b) => { return a.start - b.start; });
+            result[key].sort((a, b) => { return a.start - b.start});
         }
+        console.log(result)
         let date = await axios.post('/test', {times: result, stu_id: this.$store.getters.getUserID})
+        
       } 
       catch (error) {
         console.log(error)
@@ -55,7 +57,7 @@ export default {
           this.$store.commit("addTimetable", timetabledata[i])
           //console.log(timetabledata[i])
           if(timetabledata[i].state == 1){ //시간표에 추가해야 할 것들
-            console.log(timetabledata[i])
+            //console.log(timetabledata[i])
             for(let j=0 ; j< timetabledata[i].요일.length; j++){
               let day = 0
               switch(timetabledata[i].요일[j]){
@@ -82,7 +84,7 @@ export default {
               let endTime = Number(timetabledata[i].끝시간[j].slice(0, -6))
               let startHalf = (timetabledata[i].시작시간[j].slice(-5, -3) != '00')
               let endHalf = (timetabledata[i].끝시간[j].slice(-5, -3) != '00')
-              console.log(startTime+" "+endTime+" "+startHalf+" "+endHalf)
+              //console.log(startTime+" "+endTime+" "+startHalf+" "+endHalf)
               for(let k=startTime - 8; k < endTime -8; k++){
                 this.$store.getters.getBlocknumTable[day][k] = timetabledata[i].수업번호
               }
@@ -113,7 +115,7 @@ export default {
       alert("receive course event to Start.vue")
       try{
         let coursedata = (await(axios.get('/details', {params: {lec_num: number}}))).data
-        this,$refs.xmenu.getCourseInfo(coursedata)
+        this.$refs.xmenu.getCourseInfo(coursedata)
       }
       catch(err){
         console.log(err)
