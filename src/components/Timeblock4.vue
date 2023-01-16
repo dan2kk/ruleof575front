@@ -36,7 +36,7 @@
     <div :class="[`timeblock-8`, posx, posy ]" v-show=" this.blockno == 8" @click="click()">
       <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-9`, posx, posy ]" v-show=" this.blockno >= 9" @click="click()">
+    <div :class="[`timeblock-9`, '-',this.blockno % 9 ]" v-show=" this.blockno >= 9" @click="click()">
       <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.blocktext }}</div>
     </div>
   </div>
@@ -250,5 +250,6 @@ export default {
   border-width: 0px
   border-style: solid
   border-color: $white
+
   
 </style>

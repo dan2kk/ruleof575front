@@ -16,11 +16,6 @@ export default {
     Titlebox,
   },
   props: [],
-  data(){
-    return{
-      records: []
-    }
-  },
   methods:{
     
   }

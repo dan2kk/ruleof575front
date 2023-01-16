@@ -8,6 +8,7 @@ export default createStore({
     user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
     selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
+    lectureInfo : {lec_info:{수업번호:0}},
     records: [],
     textTable: [
       ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
@@ -50,7 +51,10 @@ export default createStore({
       return state.blocknumTable
     },
     getRecommend(state){
-        return state.records
+      return state.records
+    },
+    getLecture(state){
+      return state.lectureInfo
     }
   },
   mutations: {
@@ -87,6 +91,9 @@ export default createStore({
     },
     changeText(state, data){
       state.textTable[data.x][data.y] = data.dat
+    },
+    changeLec(state, res){
+      state.lectureInfo = res
     },
     initBnum(state){
       for(let i=1 ; i< state.blocknumTable.length;i++){
