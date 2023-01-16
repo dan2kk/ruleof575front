@@ -50,7 +50,10 @@ export default createStore({
       return state.blocknumTable
     },
     getRecommend(state){
-        return state.recommList
+      return state.recommList
+    },
+    getLecture(state){
+      return state.lectureInfo
     }
   },
   mutations: {
@@ -87,6 +90,9 @@ export default createStore({
     },
     changeText(state, data){
       state.textTable[data.x][data.y] = data.dat
+    },
+    changeLec(state, res){
+      state.lectureInfo = res
     },
     initBnum(state){
       for(let i=1 ; i< state.blocknumTable.length;i++){
