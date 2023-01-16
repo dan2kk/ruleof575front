@@ -2,7 +2,7 @@
   <div class="gyoyang-table">
     <div v-for="record in records">
       <titlebox className="blueBold">{{record.영역코드명}}</titlebox>
-      <gyoyang-record :textData="text" v-for="text in record.수업목록"/>
+      <gyoyang-record :courseData = "text" v-for="text in record.수업목록"/>
     </div>
   </div>
 
@@ -31,7 +31,6 @@ export default {
             }
           }
         }
-        console.log("ADSSAD");
         return temp;
       }
       else {

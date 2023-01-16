@@ -1,11 +1,11 @@
 <template>
   <div :class="[`gyoyang-record-1-1`]">
     <div class="flex-row-1">
-      <textbox2 :text= "this.textData.과목명" className= "blue" size= "big"/>
-      <textbox2 :text= "this.textData.대표교강사명" className= "blue" size= "small"/>
-      <textbox2 :text= "this.textData.수업시간" className= "blue" size= "medium"/>
-      <imagebox_Search src= "./iconbuttons-1.png" className="blue" @click="addcart"/>
-      <imagebox_Search src= "./iconbuttons-2.png" className="blue" />
+      <textbox2 :text= "this.courseData.과목명" className= "blue" size= "big"/>
+      <textbox2 :text= "this.courseData.대표교강사명" className= "blue" size= "small"/>
+      <textbox2 :text= "this.courseData.수업시간" className= "blue" size= "medium"/>
+      <imagebox_Search src= "./iconbuttons-1.png" className="blue" @click="addToList"/>
+      <imagebox_Search src= "./iconbuttons-2.png" className="blue" @click="delRecomm"/>
     </div>
   </div>
 </template>
@@ -19,15 +19,16 @@ export default {
     Textbox2,
     Imagebox_Search
   },
-  props: ["textData"],
+  props: ["courseData"],
   methods:{
-    addcart(){
-      alert(this.textData.수업번호)
-      //this.$parent.$parent.$parent.userTimetable.push(this.textData)
-      //this.$parent.$parent.$parent.$refs.xmenu.update1()
-      this.$store.commit("addTimetable", this.textData)
-      this.$store.commit("toggleSwitch", true)
+    addToList(){
+      alert(this.courseData.수업번호)
+      this.$store.commit("addTimetable", this.courseData)
+      this.$store.commit("setIsChanged", true)
       alert(this.$store.getters.getIsChange)
+    },
+    delRecomm() {
+      this.$store.commit("delRecomm", this.courseData);
     }
   }
 };

@@ -8,7 +8,7 @@ export default createStore({
     user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
     selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
-    records: [],
+    recommList: [],
     textTable: [
       ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
       ["월요일", "", "", "", "", "", "", "", "", "", "", "", "",],
@@ -50,7 +50,7 @@ export default createStore({
       return state.blocknumTable
     },
     getRecommend(state){
-        return state.records
+        return state.recommList
     }
   },
   mutations: {
@@ -59,7 +59,7 @@ export default createStore({
         state.userTimetable.push(res)
       }
     },
-    toggleSwitch(state, tf){
+    setIsChanged(state, tf){
       state.isChanged = tf
     },
     addGrad(state, res){
@@ -137,6 +137,21 @@ export default createStore({
             }
           }
         }
+      }
+    },
+    //Delete from recommend list
+    delRecomm(state, lecToDel) {
+      let filed_idx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
+
+      if(filed_idx != -1) {
+          let lecList = state.recommList[filed_idx].수업목록;
+    
+    
+          let lec_idx = lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호);
+    
+          if(lec_idx != -1) {
+            state.recommList[filed_idx].수업목록.splice(lec_idx, 1);
+          }
       }
     }
   },
