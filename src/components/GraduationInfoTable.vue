@@ -1,7 +1,12 @@
 <template>
   <div class="graduation-info-table">
+    <div class = "upper-menu">
     <titlebox className="purpleBold">졸업사정 변동사항</titlebox>
-    <graduation-info-record :textData="record" v-for="record in this.$store.getters.getGrad"/>
+    <graduation-info-record :textData= "this.graduationInfo"/>
+    </div>
+    <div class = "lower-menu">
+      <graduation-info-record :textData="record" v-for="record in this.$store.getters.getGrad"/>
+    </div>
   </div>
 </template>
 
@@ -17,7 +22,8 @@ export default {
   data(){
     return{
       records: [],
-      graduationInfo: {a: "이수명", b: "배당", c: "취득",d: "변동", e: "합계", f: "잔여"},
+      graduationInfo: {이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"},
+
     }
   },
   methods:{
@@ -45,8 +51,10 @@ export default {
   display: flex
   flex-direction: column
   height: 550px
-  overflow-y: scroll
-  overflow-x: hidden
   position: relative
   width: 400px
+
+.lower-menu
+  overflow-y: overlay
+  overflow-x: hidden
 </style>

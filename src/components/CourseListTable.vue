@@ -1,7 +1,11 @@
 <template>
   <div class="course-list-table">
-    <titlebox className="redBold">내 수업목록</titlebox>
-    <course-list-record :textData="record" v-for="record in this.$store.getters.getTimetable"/>
+    <div class="upper-menu">
+      <titlebox className="redBold">내 수업목록</titlebox>
+    </div>
+    <div clas="lower-menu">
+      <course-list-record :textData="record" v-for="record in this.$store.getters.getTimetable"/>
+    </div>
   </div>
 </template>
 
@@ -31,11 +35,14 @@ export default {
   display: flex
   flex-direction: column
   height: 550px
-  overflow: hidden
-  overflow-y: scroll
+
   position: relative
   width: 400px
   border-width : 1px
   border-color : white
   border-style: solid
+
+.lower-menu
+  overflow-x: hidden
+  overflow-y: overlay
 </style>

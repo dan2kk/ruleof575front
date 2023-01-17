@@ -1,8 +1,13 @@
 <template>
   <div class="gyoyang-table">
-    <div v-for="record in records">
-      <titlebox className="blueBold">{{record.영역코드명}}</titlebox>
-      <gyoyang-record :courseData = "text" v-for="text in record.수업목록"/>
+    <div class="upper-menu">
+      <titlebox className="blueBold">내 시간표에 맞는 교양과목</titlebox>
+    </div>
+    <div class="lower-menu">
+      <div v-for="record in records">
+        <titlebox className="blueBold">{{record.영역코드명}}</titlebox>
+        <gyoyang-record :courseData = "text" v-for="text in record.수업목록"/>
+      </div>
     </div>
   </div>
 
@@ -59,10 +64,13 @@ export default {
   display: flex
   flex-direction: column
   height: 550px
-  overflow: hidden
-  overflow-y: scroll
+
   position: relative
   width: 400px
 .titlebox
   height: 40px
+
+.lower-menu
+  overflow-x: hidden
+  overflow-y: scroll
 </style>
