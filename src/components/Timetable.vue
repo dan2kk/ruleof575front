@@ -65,7 +65,7 @@ export default {
   align-items: center
   background-color: $white
   display: flex
-  gap: 3px
+  gap: 2px
   height: 520px
   position: relative
   width: 400px

@@ -136,10 +136,10 @@
     display: flex
     flex-direction: column
     height: var(--height)
-    width: 60px
-    border-style: solid
-    border-width: 0px
-    border-color: $pippin
+    width: 65px
+    border-style: none none solid
+    border-width: 2px
+    border-color: $white
     position: relative
     overflow: hidden
     
