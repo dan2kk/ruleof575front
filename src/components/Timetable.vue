@@ -65,12 +65,9 @@ export default {
   align-items: center
   background-color: $white
   display: flex
-  gap: 8px
+  gap: 3px
   height: 520px
   position: relative
   width: 400px
-  border-style: solid
-  border-color: white
-  border-width: 1px
 
 </style>
