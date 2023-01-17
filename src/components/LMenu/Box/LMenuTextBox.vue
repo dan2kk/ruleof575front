@@ -1,7 +1,7 @@
 <template>
-  <div class="user-info-text-box">
-    <div class="user-info-text-box-cart">
-      <div class="user-info-text-box-text valign-text-middle notosanskr-normal-white-12px">
+  <div class="l-menu-text-box">
+    <div class="l-menu-text-box-cart">
+      <div class="l-menu-text-box-text valign-text-middle notosanskr-normal-white-12px">
         {{ text }}
       </div>
     </div>
@@ -18,14 +18,14 @@ export default {
 <style lang="sass">
 @import '../../../../variables'
 
-.user-info-text-box
+.l-menu-text-box
   background-color: $silver
   border: 1px solid
   border-color: $white
   height: 30px
   min-width: 100px
 
-.user-info-text-box-cart
+.l-menu-text-box-cart
   align-items: flex-start
   border-radius: 5px
   display: flex
@@ -34,7 +34,7 @@ export default {
   top: 3px
   width: 100px
 
-.user-info-text-box-text
+.l-menu-text-box-text
   align-self: stretch
   flex: 1
   letter-spacing: 0

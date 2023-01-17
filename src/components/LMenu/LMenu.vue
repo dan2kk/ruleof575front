@@ -13,6 +13,13 @@ export default {
   components: {
     UserInfo,
     TimeTable
+  },
+  mounted() {
+    this.$store.commit("setUpTimeLines", '월');
+    this.$store.commit("setUpTimeLines", '화');
+    this.$store.commit("setUpTimeLines", '수');
+    this.$store.commit("setUpTimeLines", '목');
+    this.$store.commit("setUpTimeLines", '금');
   }
 };
 </script>

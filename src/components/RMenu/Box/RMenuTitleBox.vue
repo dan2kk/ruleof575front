@@ -1,6 +1,6 @@
 <template>
-  <div :class="[`list-title-box`, boxStyle || ``]">
-    <div class="list-title-box-text valign-text-middle notosanskr-bold-white-18px" >
+  <div :class="[`r-menu-title-box`, boxStyle || ``]">
+    <div class="r-menu-title-box-text valign-text-middle notosanskr-bold-white-18px" >
       <slot></slot>
     </div>
   </div>
@@ -16,7 +16,7 @@ export default {
 <style lang="sass">
 @import '../../../../variables'
 
-.list-title-box
+.r-menu-title-box
   border: 1px solid
   border-color: $white
   height: 40px
@@ -24,20 +24,20 @@ export default {
   position: relative
   align-items: stretch
 
-.list-title-box.redBold
+.r-menu-title-box.redBold
   background-color: #ED8B85
 
-.list-title-box.blueBold
+.r-menu-title-box.blueBold
   background-color: $pigeon-post
 
-.list-title-box.yellowBold
+.r-menu-title-box.yellowBold
   background-color: $orange-yellow
   
-.list-title-box.purpleBold
+.r-menu-title-box.purpleBold
   background-color: $lily
 
 
-.list-title-box-text
+.r-menu-title-box-text
   height: 40px
   letter-spacing: 0
   line-height: normal

@@ -1,6 +1,6 @@
 <template>
   <div class="login-screen">
-    <div class="login-btn" @click="onClick">
+    <div class="login-btn" @click="clickEvent">
       <div class="login-btn-cart">
         <div class="login-btn-text valign-text-middle notosanskr-normal-white-12px">{{ "Log In"}}</div>
       </div>
@@ -12,7 +12,7 @@
 export default {
   name: "LoginScreen",
   methods: {
-    onClick(){
+    clickEvent(){
 
       //웹 크롤링
       this.$emit("login-req")

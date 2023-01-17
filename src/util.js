@@ -67,3 +67,25 @@ export const fillTL = (lecsInTable) => {
 
     return ret;
 };
+
+export const temp = (lec, idx) => {
+    let startTime = Number(lec.시작시간[idx].slice(0, -6))
+    let endTime = Number(lec.끝시간[idx].slice(0, -6))
+    let startHalf = (lec.시작시간[idx].slice(-5, -3) != '00')
+    let endHalf = (lec.끝시간[idx].slice(-5, -3) != '00')
+
+    if(startHalf) {
+    startTime += 0.5;
+    }
+    if(endHalf) {
+    endTime += 0.5;
+    }
+
+    let lecToAdd = {
+    start : startTime,
+    end : endTime,
+    content : lec.과목명,
+    }
+
+    return lecToAdd;
+} 

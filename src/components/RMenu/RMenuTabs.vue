@@ -24,7 +24,8 @@ export default {
   name: "RMenuTabs",
   methods: {
     onClick(screenNum) {
-      this.$emit("changeScreen", screenNum)
+      // this.$emit("changeScreen", screenNum)
+      this.$store.commit("changeScreen", screenNum);
     }
   }
 };

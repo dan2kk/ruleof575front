@@ -4,8 +4,8 @@
       <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big"/>
       <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"/>
       <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium"/>
-      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToList"/>
-      <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delRecomm"/>
+      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList"/>
+      <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delFromRecommList"/>
     </div>
   </div>
 </template>
@@ -21,14 +21,13 @@ export default {
   },
   props: ["recommData"],
   methods:{
-    addToList(){
-      alert(this.recommData.수업번호)
-      this.$store.commit("addTimetable", this.recommData)
-      this.$store.commit("setIsChanged", true)
+    addToLecList(){
+      this.$store.commit("addLecList", this.recommData)
+      //this.$store.commit("setIsChanged", true)
       alert(this.$store.getters.getIsChange)
     },
-    delRecomm() {
-      this.$store.commit("delRecomm", this.recommData);
+    delFromRecommList() {
+      this.$store.commit("delRecommList", this.recommData);
     }
   }
 };

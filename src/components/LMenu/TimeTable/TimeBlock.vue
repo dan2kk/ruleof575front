@@ -7,6 +7,8 @@
 </template>
   
   <script>
+  import axios from "axios"
+
   export default {
     name: "TimeBlock",
     props: ["timeblockData"],
@@ -42,15 +44,19 @@
       }
     },
     methods:{
-      clickEvent(){
+      async clickEvent(){
         let timeLines
         let timeLine
-        console.log(this.timeblockData.blockKind)
+        let isLogined = this.$store.getters.getIsLogined
 
-        switch(this.timeblockData.blockKind){
+        if(!isLogined) {
+          return
+        }
+
+        switch(this.timeblockData.blockKind) {
           case "block":
             this.timeblockData.isSelected = !this.timeblockData.isSelected
-            alert(this.timeblockData.isSelected)
+            console.log(this.timeblockData.isSelected)
             break
           case "lecBlock":
             alert("1") // 미완
@@ -85,6 +91,8 @@
             break
           case "sendBtn":
             timeLines = this.$store.getters.getTimeLines
+            this.$store.commit("clearSelectedTimes")
+
             for(let x in timeLines){
               timeLines[x].forEach(y=> {
                 if(y.blockKind == "block" && y.isSelected) {
@@ -92,8 +100,33 @@
                 }
               })
             }
-            //백엔드 보내는 부분 추가
+            try {
+              let selectedTimes = this.$store.getters.getSelectedTimes
+              let stuId = this.$store.getters.getStuId
+
+              console.log(selectedTimes);
+
+              for(let day in selectedTimes) {
+                  selectedTimes[day].sort((a, b) => { return a.start - b.start});
+              }
+
+              this.$store.commit("clearRecommList")
+
+              let recommList = (await axios.post('/recommend', {time_blocks: selectedTimes})).data
+
+              for(let i =0; i< recommList.length; i++){
+                console.log(recommList[i])
+                this.$store.commit("addRecommList", recommList[i])
+              }
+
+            } 
+            catch (error) {
+                console.log(error)
+            }
+            this.$store.commit("changeScreen", 2)
+
             break
+
           default: 
            alert("error")
            break
@@ -155,18 +188,19 @@
     border: 2px solid
     border-color: $black
   
-  @keyframes fly-1
-    0%
-      transform: translateY(0.1em)
-    100%
-      transform: translateY(-0.1em)
-  
   .time-block-content
     height: 20px
     line-height: normal
     text-align: center
     width: 60px
     position: relative
+    
+  @keyframes fly-1
+    0%
+      transform: translateY(0.1em)
+    100%
+      transform: translateY(-0.1em)
+  
     
   </style>
   

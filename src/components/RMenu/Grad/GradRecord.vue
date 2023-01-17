@@ -1,6 +1,6 @@
 <template>
   <div class="grad-record">
-      <div class="grad-record-flex-row">
+      <div class="grad-record-cart">
         <RMenuTextBox :text= this.gradData.이수명 boxStyle= "purple" size= "big"/>
         <RMenuTextBox :text= this.gradData.기준 boxStyle= "purple" size= "small"/>
         <RMenuTextBox :text= this.gradData.이수 boxStyle= "purple" size= "small"/>
@@ -36,7 +36,7 @@ export default {
   position: relative
   width: 400
   
-.grad-record-flex-row
+.grad-record-cart
   align-items: center
   display: flex
   height: 40px

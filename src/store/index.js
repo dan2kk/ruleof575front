@@ -1,12 +1,15 @@
 import { createStore } from 'vuex'
 import { fillTL } from '@/util'
+import axios from "axios"
 
 export default createStore({
   state: {
-    userInfo: {stuId: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    isLogined: false,
 
+    userInfo: {stuId: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     isChanged: false,
     isChecked: true,
+    curScreen: 0,
 
     lecList:[],
     recommList: [],
@@ -60,11 +63,17 @@ export default createStore({
   },
   
   getters: {
+    getIsLogined(state) {
+      return state.isLogined
+    },
     getUserInfo(state) {
       return state.userInfo
     },
     getStuId(state) {
       return state.userInfo.stuId
+    },
+    getCurScreen(state) {
+      return state.curScreen
     },
     getIsChange(state){
       return state.isChanged
@@ -95,20 +104,126 @@ export default createStore({
     }
   },
 
+
   mutations: {
-    addLecList(state, lec){
-      if(state.lecList.findIndex((x)=> x.수업번호 == lec.수업번호) == -1){
-        state.lecList.push(lec)
+    setIsLogined(state, tf) {
+      state.isLogined = tf
+    },
+    addLecList(state, lecToAdd){
+      if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
+        state.lecList.push(lecToAdd)
+      }
+    },
+    delLecList(state, lecToDel) {
+      let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호) 
+      if(lecIdx != -1) {
+        state.lecList.splice(lecIdx, 1);
       }
     },
     setIsChanged(state, tf){
       state.isChanged = tf
     },
+    setCurScreen(state, screenNum) {
+      state.curScreen = screenNum
+    },
+    async changeScreen(state, screenNum) {      
+      if(state.isChanged){
+        let data = []
+        let temp = state.lecList
+
+        for(let i = 0 ; i< temp.length; i++){
+          data.push({수업번호: temp[i].수업번호, value: temp[i].value})
+        }
+        try {
+          await axios.post('/list/update', {list: data, stu_id: state.stuId})
+          state.isChanged = false;
+        }
+        catch(err) {
+            console.log(err)
+        }
+      }
+      if(screenNum == 4){
+        this.commit("setUpGradList")
+      }
+      state.curScreen = screenNum
+    },
+
     addGradList(state, record){
       if(state.gradList.findIndex((x)=> (x.이수명 == record.이수명) && (x.전공구분명 == record.전공구분명)) == -1) {
         state.gradList.push(record)
       }
     },
+    async setUpGradList(state) {
+      let gradData = {}
+
+      for(let i=1; i < state.gradList.length; i++){
+        gradData[state.gradList[i].이수명] = 0;
+      }
+      try{
+        let lecList = (await axios.get('/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
+        
+        for(let lec of lecList) {
+          gradData.졸업학점 += lec.학점
+          switch(lec.이수구분코드명){
+            case "전공심화": 
+            case "전공핵심":
+              gradData.전공학점 += lec.학점
+              break;
+            case "핵심교양":
+              gradData.핵심교양 += lec.학점
+              switch(lec.영역코드명){
+                case "인문과예술영역":
+                  gradData.인문과예술영역 += lec.학점
+                  break
+                case "사회와세계영역":
+                  gradData.사회와세계영역 += lec.학점
+                  break
+                case "미래산업과창업영역":
+                  gradData.미래산업과창업영역 += lec.학점
+                  break
+                case "글로벌언어와문화영역":
+                  gradData.글로벌언어와문화영역 += lec.학점
+                  break
+                case "과학과기술영역":
+                  gradData.과학과기술영역 += lec.학점
+                  break
+                case "고전읽기영역":
+                  gradData.고전읽기영역 += lec.학점
+                  break
+                }
+              break;
+            default:
+              console.log("이수구분코드명 없는것!")
+              break;
+          }
+          if(lec.영어전용){
+            gradData.영어전용강좌수 += 1
+          }
+          switch(lec.이수단위){
+            case "100단위": case "200단위": case "300단위":
+              gradData["100~300단위"] += lec.학점
+              break;
+            case "400단위":
+              gradData["400단위"] += lec.학점
+              break;
+            default:
+              console.log('단위부분 에러')
+              break;
+          }
+        }
+      }
+      catch(err){
+        alert(err)
+      }
+
+      for(let i=1; i< state.gradList.length; i++){
+        state.gradList[i].변동 = Number(gradData[state.gradList[i].이수명])
+        state.gradList[i].합계 = Number(state.gradList[i].변동) + Number(state.gradList[i].이수)
+        state.gradList[i].잔여 = Number(state.gradList[i].기준) - Number(state.gradList[i].합계)
+        if(state.gradList[i].잔여 < 0) state.gradList[i].잔여 = 0
+      }
+    },
+
     addSelectedTimes(state, res){
       // let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
       // if(temp != -1){ // array 존재시
@@ -124,19 +239,33 @@ export default createStore({
         state.selectedTimes[res.day].push(res.data)
       }
     },
+    clearSelectedTimes(state) {
+      state.selectedTimes['월'].length = 0
+      state.selectedTimes['화'].length = 0
+      state.selectedTimes['수'].length = 0
+      state.selectedTimes['목'].length = 0
+      state.selectedTimes['금'].length = 0
+    },
+    addRecommList(state, lecs) {
+      state.recommList.push(lecs)
+    },
     //Delete from recommend list
-    delRecomm(state, lecToDel) {
-      let filed_idx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
+    delRecommList(state, lecToDel) {
+      let filedIdx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
 
-      if(filed_idx != -1) {
-          let lecList = state.recommList[filed_idx].수업목록;
-          let lec_idx = lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호);
+      if(filedIdx != -1) {
+          let lecList = state.recommList[filedIdx].수업목록;
+          let lecIdx = lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호);
     
-          if(lec_idx != -1) {
-            state.recommList[filed_idx].수업목록.splice(lec_idx, 1);
+          if(lecIdx != -1) {
+            state.recommList[filedIdx].수업목록.splice(lecIdx, 1);
           }
       }
     },
+    clearRecommList(state) {
+      state.recommList.length = 0;
+    },
+
     addLecsInTableList(state, lec) {
       state.lecsInTableList[lec.day].push(lec.info);
     },
