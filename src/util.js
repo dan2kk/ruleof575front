@@ -66,7 +66,7 @@ export const fillTBL = (lecListInTT) => {
         if(head != lecStart) {
             ret.push({start: head, end: lecStart, isInTable: false, content : "", blockkind: "block", checked: "false"});
         }
-        ret.push({start: lecStart, end: lecEnd, isInTable: true, content : lecName, blockkind: "courseblock"})
+        ret.push({start: lecStart, end: lecEnd, isInTable: true, content : lecName, blockkind: "courseblock", colorIdx: lecColorIdx})
         head = tail = lecEnd;
     }
 

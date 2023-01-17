@@ -144,7 +144,6 @@ export default {
   transition: all 0.2s
   .span
     display: block 
-    margin-left: 0.3em 
     transition: all 0.3s ease-in-out 
   .svg
     display: block 

@@ -1,30 +1,56 @@
 <template>
   <div>
-    <div class="timeblock" :style="blockHeight" @click="clickEvent()">
+    <div class="timeblock" :style="blockStyle" @click="clickEvent()">
       <div class="timeblockContent notosanskr-normal-black-12px"> {{ this.timeblockData.content }}</div>
     </div>
   </div>
 </template>
   
-  <script>
-import { throwStatement } from '@babel/types';
+<script>
 
   export default {
     name: "Timeblock",
     props: ["timeblockData"],
     computed: {
-      blockHeight() {
+      blockStyle() {
+        var temp
+        switch (this.timeblockData.blockkind)
+        {
+          case "block":
+            if (this.timeblockData.isclicked)
+            {
+              temp = `#bdbdbd`
+            }
+            else
+            {
+              temp = `#f0f0f0`
+            }
+            break;
+          case "courseblock":
+              temp =  `${this.$store.getters.getColorList[this.timeblockData.colorIdx]}`
+              break;
+          case "dayblock":
+            temp = `#e0e0e0`
+            break;
+          case "hourblock":
+            temp = `#e0e0e0`
+            break;
+          default:
+            temp = `#ff00d6`
+            break;
+        }
         return {
           '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 40}px`,
-          '--color' : this.$store.getters.getColorList[this.timeblockData.lecColorIdx],
+          '--color'  : temp,
         }
-      }
+      },
     },
     methods:{
       clickEvent(){
         switch(this.timeblockData.blockkind){
           case "block":
             this.timeblockData.isclicked = !this.timeblockData.isclicked
+            alert(this.timeblockData.isclicked)
             break
           case "courseblock":
             alert("1") // 미완
@@ -38,7 +64,7 @@ import { throwStatement } from '@babel/types';
             }})
             this.timeblockData.isclicked = !this.timeblockData.isclicked
             break
-          case "timeblock":
+          case "hourblock":
             //console.log(this.$store.getters.getTimeblockLists)
             for(let x in this.$store.getters.getTimeblockLists){
               //console.log(x)
@@ -105,7 +131,7 @@ import { throwStatement } from '@babel/types';
   
   .timeblock
     align-items: center
-    background-color: $timeblock-background
+    background-color: var(--color)
     display: flex
     flex-direction: column
     height: var(--height)
@@ -114,10 +140,11 @@ import { throwStatement } from '@babel/types';
     border-width: 0px
     border-color: $pippin
     position: relative
+    overflow: hidden
     
   .timeblock:hover
-    transform: scale(1.1)
-    border: 1px solid
+    transform: scale(1.0)
+    border: 2px solid
     border-color: $black
   
   @keyframes fly-1
