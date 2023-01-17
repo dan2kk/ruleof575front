@@ -85,7 +85,7 @@ export default {
         let timetabledata = (await axios.get('/list/init', {params: {stu_id: this.$store.getters.getUserID}})).data
         for(let i=0; i< timetabledata.length;i++){
           this.$store.commit("addTimetable", timetabledata[i]);
-
+          
 
           if(timetabledata[i].state == 1){
             for(let j=0 ; j< timetabledata[i].요일.length; j++){              
@@ -109,7 +109,8 @@ export default {
                 start : startTime,
                 end : endTime,
                 isInTable : true,
-                content : timetabledata[i].과목명
+                content : timetabledata[i].과목명,
+                colorlist: i
               }
 
 
