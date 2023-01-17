@@ -7,6 +7,8 @@
 </template>
   
   <script>
+import { throwStatement } from '@babel/types';
+
   export default {
     name: "Timeblock",
     props: ["timeblockData"],
@@ -19,7 +21,49 @@
     },
     methods:{
       clickEvent(){
-        console.log("ADSSAD");
+        switch(this.timeblockData.blockkind){
+          case "block":
+            this.timeblockData.isclicked = !this.timeblockData.isclicked
+            break
+          case "courseblock":
+            alert("1") // 미완
+            break
+          case "dayblock":
+            console.log(this.timeblockData.content)
+            this.$store.getters.getTimeblockLists[this.timeblockData.content].forEach(x=> 
+            {if(this.timeblockData.isclicked != x.isclicked && x.blockkind =="block"){
+                x.isclicked = !x.isclicked
+                console.log(x.isclicked)
+            }})
+            this.timeblockData.isclicked = !this.timeblockData.isclicked
+            break
+          case "timeblock":
+            //console.log(this.$store.getters.getTimeblockLists)
+            for(let x in this.$store.getters.getTimeblockLists){
+              //console.log(x)
+              this.$store.getters.getTimeblockLists[x].forEach(y=>{
+                if(Math.floor(y.start) == this.timeblockData.start && y.blockkind == "block"
+                && this.timeblockData.isclicked != y.isclicked){
+                  y.isclicked = !y.isclicked
+                  console.log(y.isclicked)
+                }
+              })
+            }
+            this.timeblockData.isclicked = !this.timeblockData.isclicked
+            break
+          case "sendbox":
+            for(let x in this.$store.getters.getTimeblockLists){
+              //console.log(x)
+              this.$store.getters.getTimeblockLists[x].forEach(y=>{
+                if(y.blockkind == "block" && y.isclicked){
+                  this.$store.commit("clickDateTime", {day: x, data: y})
+              }})
+            }
+            break
+          default: 
+           alert("error")
+           break
+        }
       }
     }
   };

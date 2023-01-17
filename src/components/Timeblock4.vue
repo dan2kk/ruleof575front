@@ -1,25 +1,25 @@
 <template>
   <div>
-    <div :class="[`timeblock-1`, posx, posy ]" v-show=" this.blockno == 1" @click="click()">
+    <div :class="[`timeblock-1`]" v-show=" this.blockno == 1" @click="click()">
       <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-2`, posx, posy ]" v-show=" this.blockno == 2" @click="click()">
+    <div :class="[`timeblock-2`]" v-show=" this.blockno == 2" @click="click()">
       <div class="blocker"></div>
       <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-3`, posx, posy ]" v-show=" this.blockno == 3" @click="click()">
+    <div :class="[`timeblock-3`]" v-show=" this.blockno == 3" @click="click()">
       <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
       <div class="blocker"></div>
     </div>
-    <div :class="[`timeblock-4`, posx, posy ]" v-show=" this.blockno == 4" @click="click()">
+    <div :class="[`timeblock-4`]" v-show=" this.blockno == 4" @click="click()">
       <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
       <div class="blocker"></div>
     </div>
-    <div :class="[`timeblock-5`, posx, posy ]" v-show=" this.blockno == 5" @click="click()">
+    <div :class="[`timeblock-5`]" v-show=" this.blockno == 5" @click="click()">
       <div class="blocker"></div>
       <div class="timetext-2 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-6`, posx, posy ]" v-show=" this.blockno == 6" @click="click()">
+    <div :class="[`timeblock-6`]" v-show=" this.blockno == 6" @click="click()">
       <div class="timetext-1 notosanskr-normal-white-12px"> {{ this.blocktext }}</div>
     </div>
     <button class='timeblock-7' @click="sendboxclick" v-show="this.blockno == 7" >
@@ -33,10 +33,10 @@
       </div>
       <span class="span">Send</span>
     </button>
-    <div :class="[`timeblock-8`, posx, posy ]" v-show=" this.blockno == 8" @click="click()">
+    <div :class="[`timeblock-8`]" v-show=" this.blockno == 8" @click="click()">
       <div class="timetext-1 notosanskr-normal-black-12px"> {{ this.blocktext }}</div>
     </div>
-    <div :class="[`timeblock-9`, '-',this.blockno % 9 ]" v-show=" this.blockno >= 9" @click="click()">
+    <div :class="[`timeblock-9`]" v-show=" this.blockno >= 9" @click="click()">
       <div class="timetext-1 notosanskr-normal-white-10px"> {{ this.blocktext }}</div>
     </div>
   </div>

@@ -44,29 +44,29 @@ export const fillTBL = (lecListInTT) => {
             lecStart = lecListInTT[lecInTTIdx].start;
             lecEnd = lecListInTT[lecInTTIdx].end;
             lecName = lecListInTT[lecInTTIdx].content
+
             lecInTTIdx++;
         }
         else {
-            lecStart = 21;
+            lecStart = 22;
         }
 
         while(tail < lecStart) {
             if(head != tail) {
-                ret.push({start: head, end: tail, isInTable: false, content : ""});
+                ret.push({start: head, end: tail, isInTable: false, content : "", blockkind: "block", checked: "false"});
             }
             head = tail;
             tail = parseInt(head) + 1;
         }
 
-        if(tail >= 21) {
+        if(tail >= 22) {
             break;
         }
 
         if(head != lecStart) {
-            ret.push({start: head, end: lecStart, isInTable: false, content : ""});
+            ret.push({start: head, end: lecStart, isInTable: false, content : "", blockkind: "block", checked: "false"});
         }
-        ret.push({start: lecStart, end: lecEnd, isInTable: true, content : lecName})
-
+        ret.push({start: lecStart, end: lecEnd, isInTable: true, content : lecName, blockkind: "courseblock"})
         head = tail = lecEnd;
     }
 
