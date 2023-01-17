@@ -1,31 +1,31 @@
 <template>
-  <div class="textbox-4">
-    <div class="cart-3">
-      <div class="text-7 valign-text-middle notosanskr-normal-white-12px">{{ text }}</div>
+  <div class="text-box3">
+    <div class="text-box3-cart">
+      <div class="text-box3-text valign-text-middle notosanskr-normal-white-12px">
+        {{ text }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Textbox",
+  name: "TextBox3",
   props: ["text"],
 };
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../variables'
 
-.textbox-4,
-.textbox-5
+.text-box3
   background-color: $silver
   border: 1px solid
   border-color: $white
   height: 30px
   min-width: 100px
 
-.cart-3,
-.cart-4
+.text-box3-cart
   align-items: flex-start
   border-radius: 5px
   display: flex
@@ -34,8 +34,7 @@ export default {
   top: 3px
   width: 100px
 
-.text-7,
-.text-8
+.text-box3-text
   align-self: stretch
   flex: 1
   letter-spacing: 0

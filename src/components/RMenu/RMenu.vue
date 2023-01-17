@@ -1,64 +1,53 @@
 <template>
-  <div class="menu-1">
-    <div class="cart-5">
-      <textbox-menu-tab
-        :className="textboxMenuTabProps.className"
-        :textbox11Props="textboxMenuTabProps.textbox11Props"
-        :textbox12Props="textboxMenuTabProps.textbox12Props"
-        :textbox13Props="textboxMenuTabProps.textbox13Props"
-        :textbox14Props="textboxMenuTabProps.textbox14Props"
-        v-on:firstblockclick="updateevent(1)"
-        v-on:secondblockclick="updateevent(2)"
-        v-on:thirdblockclick="updateevent(3)"
-        v-on:forthblockclick="updateevent(4)"
-      />
-      <initial-menu :className="initialMenuProps.className" :loginButtonProps="initialMenuProps.loginButtonProps" v-on:loginf="loginevent()" v-if="!logined"/>
-      <course-list-table v-show="logined && menu == 1" ref="courselist"></course-list-table>
-      <gyoyang-table v-show="logined && menu == 2"></gyoyang-table>
-      <course-info-table v-show="logined && menu == 3" ref="course" ></course-info-table>
-      <graduation-info-table :data="this.gradData" ref="grad" v-show="logined && menu == 4"></graduation-info-table>
+  <div class="r-menu">
+    <div class="r-menu-cart">
+      <RMenuTabs v-on:changeScreen = "changeScreen"> </RMenuTabs>
+      <LoginScreen v-if="!isLogined" v-on:login-req="loginEvent()"> </LoginScreen>
+      <!-- <LecList v-show="isLogined && curScreen == 1"></LecList>
+      <RecommList v-show="isLogined && curScreen == 2"></RecommList>
+      <GradList : v-show="isLogined && curScreen == 4"></GradList>
+      <LecDetails v-show="isLogined && curScreen == 3"></LecDetails> -->
     </div>
   </div>
 </template>
 
 <script>
-import TextboxMenuTab from "./TextboxMenuTab";
-import InitialMenu from "./InitialMenu";
-import CourseInfoTable from "./CourseInfoTable.vue";
-import GraduationInfoTable from "./GraduationInfoTable.vue";
-import GyoyangTable from "./GyoyangTable.vue";
-import CourseListTable from "./CourseListTable.vue";
+import RMenuTabs from "./RMenuTabs";
+import LoginScreen from "./Login/LoginScreen";
+// import LecList from "./LecList/LecList";
+// import RecommList from "./Recomm/RecommList";
+// import LecDetails from "./Details/LecDetails";
+// import GradList from "./Grad/GradList";
 import axios from "axios";
+
 export default {
-  name: "XMenu",
+  name: "RMenu",
   components: {
-    TextboxMenuTab,
-    InitialMenu,
-    CourseInfoTable,
-    GraduationInfoTable,
-    GyoyangTable,
-    CourseListTable
-  },
-  props: ["textboxMenuTabProps", "initialMenuProps"],
+    RMenuTabs,
+    LoginScreen
+    // LecList,
+    // RecommList,
+    // GradList,
+    // LecDetails
+},
   data(){
     return{
-      logined: false,
-      menu: 0,
-      userTimetable: [],
-      gradData: {},
+      isLogined: false,
+      curScreen: 0,
     }
   },
   methods: {
-    loginevent(){
-        alert("event received")
-        this.$emit("logined")
-        this.logined = true
+    loginEvent(){
+        this.isLogined = true
+        
         this.initList()
         this.getJolupevent()
-        this.menu = 1
+        
+        this.curScreen = 1
     },
-    async updateevent(number){
-      alert(this.$store.getters.getIsChange)
+
+    //Tab 클릭시 화면 전환 이벤트
+    async changeScreen(screenNum) {
       if(this.$store.getters.getIsChange){
         let data = []
         let temp = this.$store.getters.getTimetable
@@ -75,11 +64,12 @@ export default {
             console.log(err)
         }
       }
-      if(number == 4){
-        this.updateJolupevent();
+      if(screenNum == 4){
+        this.updateJolupevent()
       }
-      this.menu = number
+      this.curScreen = screenNum
     },
+
     async initList() {
       try{
         let timetabledata = (await axios.get('/list/init', {params: {stu_id: this.$store.getters.getUserID}})).data
@@ -237,16 +227,16 @@ export default {
           let res = (await axios.get('/details', {params: {lec_num: number}})).data
           this.$store.commit("changeLec", res)
           console.log(res)
-          this.menu = 3
+          this.curScreen = 3
         }
         catch(err){
           console.log(err)
         }
-        this.menu = 3
+        this.curScreen = 3
         console.log(number)
         }
       else{
-        this.menu = 3
+        this.curScreen = 3
       }
     }
   },
@@ -254,14 +244,14 @@ export default {
 </script>
 
 <style lang="sass">
-.menu-1
+.r-menu
   align-items: flex-start
   display: flex
   flex-direction: column
   height: 600px
   width: 400px
 
-.cart-5
+.r-menu-cart
   align-items: flex-start
   background-color: #error-color
   display: flex

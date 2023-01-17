@@ -1,22 +1,22 @@
 <template>
-  <div :class="[`textbox-normal`, className, size || ``]">
-    <div class="cart-1">
-      <div class="text-3 valign-text-middle notosanskr-normal-black-12px" v-html="text"></div>
+  <div :class="[`lec-text-box`, boxStyle, size || ``]">
+    <div class="lec-text-box-cart">
+      <div class="lec-text-box-text valign-text-middle notosanskr-normal-black-12px" v-html="text"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Textbox2",
-  props: ["text", "className", "size"],
+  name: "LecTextBox",
+  props: ["text", "boxStyle", "size"],
 };
 </script>
 
 <style lang="sass">
 @import '../../variables'
 
-.textbox-normal
+.lec-text-box
   background-color: $error-color
   border: 1px solid
   border-color: $white
@@ -40,54 +40,54 @@ export default {
   text-align: center
 
 /*빨강 영역*/
-.textbox-normal.red
+.lec-text-box.red
   background-color: $pippin
 
-.textbox-normal.red.big
+.lec-text-box.red.big
   width: 150px
 
-.textbox-normal.red.small
+.lec-text-box.red.small
   width: 50px
 
-.textbox-normal.red.medium
+.lec-text-box.red.medium
   width: 100px
 /*파랑 영역*/
-.textbox-normal.blue
+.lec-text-box.blue
   background-color: $solitude
 
-.textbox-normal.blue.big
+.lec-text-box.blue.big
   width: 150px
 
-.textbox-normal.blue.small
+.lec-text-box.blue.small
   width: 50px
 
-.textbox-normal.blue.medium
+.lec-text-box.blue.medium
   width: 100px
 /*노랑 영역*/
 
-.textbox-normal.yellow
+.lec-text-box.yellow
   background-color: $geraldine
 
-.textbox-normal.yellow.big
+.lec-text-box.yellow.big
   width: 150px
 
-.textbox-normal.yellow.small
+.lec-text-box.yellow.small
   width: 50px
 
-.textbox-normal.yellow.medium
+.lec-text-box.yellow.medium
   width: 100px
 
 /*보라 영역*/
-.textbox-normal.purple
+.lec-text-box.purple
   background-color: $tutu
 
-.textbox-normal.purple.big
+.lec-text-box.purple.big
   width: 150px
 
-.textbox-normal.purple.small
+.lec-text-box.purple.small
   width: 50px
 
-.textbox-normal.purple.medium
+.lec-text-box.purple.medium
   width: 100px
 
 </style>

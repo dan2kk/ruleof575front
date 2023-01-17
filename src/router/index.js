@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Start from "../components/Start";
-import { startData } from "../data";
 
 const routes =[
   {
     path: "/",
     component: Start,
-    props: { userInfoTimeTableProps: startData.userInfoTimeTableProps, xMenuProps: startData.xMenuProps },
+    
   },
 ]
 

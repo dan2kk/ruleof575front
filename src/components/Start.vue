@@ -1,39 +1,21 @@
 <template>
-  <div class="start screen">
-    <user-info-time-table
-      :className="userInfoTimeTableProps.className"
-      :userInfoBoxProps="userInfoTimeTableProps.userInfoBoxProps"
-      :timetableProps="userInfoTimeTableProps.timetableProps"
-      v-on:sendDateandTime="sendTimeTable"
-    />
-    <x-menu ref="xmenu"
-      :textboxMenuTabProps="xMenuProps.textboxMenuTabProps" 
-      :initialMenuProps="xMenuProps.initialMenuProps"
-      :userTimetable="this.userTimetable"
-      v-on:logined="sendLoginInfo"
-    />
+  <div class="start">
+    <LMenu/>
+    <RMenu/>
   </div>
 </template>
 
-<script>
 
-import UserInfoTimeTable from "./UserInfoTimeTable";
-import XMenu from "./XMenu";
+<script>
+import LMenu from "./LMenu/LMenu";
+import RMenu from "./RMenu/RMenu";
 import axios from 'axios';
-import { pushScopeId } from "vue";
 
 export default {
   name: "Start",
   components: {
-    UserInfoTimeTable,
-    XMenu,
-  },
-  props: ["userInfoTimeTableProps", "xMenuProps"],
-  data(){
-    return{
-      userTimetable: [{수업번호:null, 과목명:null, 대표교강사명:null, 수업시간:null, value:false}],
-      recommendOnly: false
-    }
+    LMenu,
+    RMenu
   },
   methods: {
     async sendTimeTable(){
@@ -50,23 +32,10 @@ export default {
           console.log(date[i])
           this.$store.getters.getRecommend.push(date[i])
         }
-        this.$refs.xmenu.menu = 2
+        //this.$refs.RMenu.menu = 2
       } 
       catch (error) {
         console.log(error)
-      }
-    },
-    async sendLoginInfo(){
-      alert("receive login event to Start.vue")
-    },
-    async sendCourseInfo(number){ //미완
-      alert("receive course event to Start.vue")
-      try{
-        let coursedata = (await(axios.get('/details', {params: {lec_num: number}}))).data
-        this.$refs.xmenu.getCourseInfo(coursedata)
-      }
-      catch(err){
-        console.log(err)
       }
     }
   },

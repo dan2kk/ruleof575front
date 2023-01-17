@@ -1,16 +1,25 @@
 import { createStore } from 'vuex'
-import { fillTBL } from '../util'
+import { fillTBL } from '@/util'
 
 export default createStore({
   state: {
-    userTimetable:[],
+    userInfo: {stuId: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+
     isChanged: false,
     isChecked: true,
-    user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
-    grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
-    selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
-    recommList: [],
 
+    lecList:[],
+    recommList: [],
+    gradList: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
+
+    selectedTimes: { 
+      월:[], 
+      화:[], 
+      수:[], 
+      목:[], 
+      금:[]
+    },
+    
     lecsInTable: {
       월 : [],
       화 : [],
@@ -19,7 +28,7 @@ export default createStore({
       금 : []
     },
 
-    timeblockLists: {
+    timeLines: {
       시간 : [  
         { start: 9, end: 10, isInTT: false, content: '09:00' },
         { start: 10, end: 11, isInTT: false, content: '10:00' },
@@ -40,81 +49,64 @@ export default createStore({
       금 : [ ]
     }
   },
+  
   getters: {
-    getTimetable(state){
-      return state.userTimetable
+    getUserInfo(state) {
+      return state.userInfo
+    },
+    getStuId(state) {
+      return state.userInfo.stuId
     },
     getIsChange(state){
       return state.isChanged
     },
     getIsChecked(state) {
-      return state.isChecked;
+      return state.isChecked
     },
-    getUserID(state){
-      return state.user.stu_id
+    getLecList(state) {
+      return state.lecList
     },
-    getGrad(state){
-      return state.grad
-    },
-    getDateTime(state){
-      return state.selectedDateTime
-    },
-    getTextTable(state){
-      return state.textTable
-    },
-    getBlocknumTable(state){
-      return state.blocknumTable
-    },
-    getRecommend(state){
+    getRecommList(state) {
       return state.recommList
     },
-    getLecture(state){
-      return state.lectureInfo
+    getGradList(state){
+      return state.gradList
     },
-    getTimeblockLists(state) {
-      return state.timeblockLists;
+    getSelectedTimes(state){
+      return state.selectedTimes
     },
     getLecsInTable(state) {
-      return state.lecsInTable;
+      return state.lecsInTable
+    },
+    getTimeLines(state) {
+      return state.timeLines
     }
   },
+
   mutations: {
-    addTimetable(state, res){
-      if(state.userTimetable.findIndex((x)=> x.수업번호 == res.수업번호) == -1){
-        state.userTimetable.push(res)
+    addLecList(state, lec){
+      if(state.lecList.findIndex((x)=> x.수업번호 == lec.수업번호) == -1){
+        state.lecList.push(lec)
       }
     },
     setIsChanged(state, tf){
       state.isChanged = tf
     },
-    addGrad(state, res){
-      if(state.grad.findIndex((x)=> (x.이수명 == res.이수명) &&(x.전공구분명 == res.전공구분명)) == -1){
-        state.grad.push(res)
+    addGradList(state, record){
+      if(state.gradList.findIndex((x)=> (x.이수명 == record.이수명) && (x.전공구분명 == record.전공구분명)) == -1) {
+        state.gradList.push(record)
       }
     },
-    clickDateTime(state, res){
-      let temp = state.selectedDateTime[res.day].findIndex((x)=>(x.start == res.data.start))
+    addSelectedTimes(state, res){
+      let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
       if(temp != -1){ // array 존재시
-        state.selectedDateTime[res.day].splice(temp, 1)
-        console.log("delete "+res.day+ " " + res.data)
+        state.selectedTimes[res.day].splice(temp, 1)
+        console.log("delete "+res.day + " " + res.data)
       }
       else{ //array 에 없을시
-        state.selectedDateTime[res.day].push(res.data)
-        console.log("add "+res.day+" " + res.data)
+        state.selectedTimes[res.day].push(res.data)
+        console.log("add "+res.day + " " + res.data)
       }
-    },
-    clickCourse(state, res){ // res.day, res.time
-      let temp = null
-      
-    },
-    changeBnum(state, data){
-      state.blocknumTable[data.x][data.y] = data.dat
-    },
-    changeText(state, data){
-      state.textTable[data.x][data.y] = data.dat
-    },
-    changeLec(state, res){
-      state.lectureInfo = res
     },
     //Delete from recommend list
     delRecomm(state, lecToDel) {
@@ -131,7 +123,7 @@ export default createStore({
           }
       }
     },
-    addToLecsInTable(state, lec) {
+    addLecsInTable(state, lec) {
       state.lecsInTable[lec.day].push(lec.info);
     },
     sortLecsInTable(state, day) {
@@ -139,7 +131,7 @@ export default createStore({
           return a.start - b.start;
         });
     },
-    setTimeblockLists(state, day) {
+    setUpTimeLines(state, day) {
       state.timeblockLists[day] = fillTBL(state.lecsInTable[day]);
     }
   },

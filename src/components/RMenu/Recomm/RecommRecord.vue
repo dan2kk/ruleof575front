@@ -15,7 +15,7 @@ import Textbox2 from "./Textbox2";
 import Imagebox_Search from "./Imagebox_Search";
 export default {
   name: "GyoyangRecord",
-  components: {
+  components: { 
     Textbox2,
     Imagebox_Search
   },

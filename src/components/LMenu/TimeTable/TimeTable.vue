@@ -1,30 +1,39 @@
 <template>
-  <div :class="[`timetable`]">
-    <timeline :day = 0 />
-    <timeline :day = 1 />
-    <timeline :day = 2 />
-    <timeline :day = 3 />
-    <timeline :day = 4 />
-    <timeline :day = 5 />
+  <div class="time-table">
+    <TimeLine :day = 월 />
+    <TimeLine :day = 화 />
+    <TimeLine :day = 수 />
+    <TimeLine :day = 목 />
+    <TimeLine :day = 금 />
+    <TimeLine :day = 토 />
   </div>
+
 </template>
 
 <script>
-import Timeline from "./Timeline";
+import TimeLine from "./TimeLine";
 export default {
-  name: "Timetable",
+  name: "TimeTable",
   components: {
-    Timeline,
-  },
-  props: [ ],
-  methods: {
-    
-  },
+    TimeLine
+  }
 };
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../../variables'
+
+.time-table
+  align-items: center
+  background-color: $white
+  display: flex
+  gap: 8px
+  height: 520px
+  position: relative
+  width: 400px
+  border-style: solid
+  border-color: white
+  border-width: 1px
 
 .sendBtn
     font-size: 13px 
@@ -56,16 +65,5 @@ export default {
 .sendBtn:active
   transform: scale(0.95)
 
-.timetable
-  align-items: center
-  background-color: $white
-  display: flex
-  gap: 8px
-  height: 520px
-  position: relative
-  width: 400px
-  border-style: solid
-  border-color: white
-  border-width: 1px
 
 </style>

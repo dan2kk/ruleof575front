@@ -1,6 +1,6 @@
 <template>
-  <div :class="[`textbox-1`, className || ``]">
-    <div class="text-2 valign-text-middle notosanskr-bold-white-18px" >
+  <div :class="[`list-title-box`, boxStyle || ``]">
+    <div class="list-title-box-text valign-text-middle notosanskr-bold-white-18px" >
       <slot></slot>
     </div>
   </div>
@@ -8,15 +8,15 @@
 
 <script>
 export default {
-  name: "Titlebox",
-  props: ["className"],
+  name: "ListTitleBox",
+  props: ["boxStyle"],
 };
 </script>
 
 <style lang="sass">
 @import '../../variables'
 
-.textbox-1
+.list-title-box
   border: 1px solid
   border-color: $white
   height: 40px
@@ -24,18 +24,20 @@ export default {
   position: relative
   align-items: stretch
 
-.textbox-1.redBold
+.list-title-box.redBold
   background-color: #ED8B85
 
-.textbox-1.blueBold
+.list-title-box.blueBold
   background-color: $pigeon-post
 
-.textbox-1.yellowBold
+.list-title-box.yellowBold
   background-color: $orange-yellow
   
-.textbox-1.purpleBold
+.list-title-box.purpleBold
   background-color: $lily
-.text-2
+
+
+.list-title-box-text
   height: 40px
   letter-spacing: 0
   line-height: normal

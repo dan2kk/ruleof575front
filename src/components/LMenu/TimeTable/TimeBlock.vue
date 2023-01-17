@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <div class="timeblock" :style="blockHeight" @click="clickEvent()">
-      <div class="timeblockContent notosanskr-normal-black-12px"> {{ this.timeblockData.content }}</div>
+  <div class="time-block" :style="blockHeight" @click="clickEvent()">
+    <div class="timeblockContent notosanskr-normal-black-12px"> 
+      {{ this.timeblockData.content }}
     </div>
   </div>
 </template>
   
   <script>
   export default {
-    name: "Timeblock",
+    name: "TimeBlock",
     props: ["timeblockData"],
     computed: {
       blockHeight() {
@@ -27,7 +27,7 @@
   </script>
   
   <style lang="sass">
-  @import '../../variables'
+  @import '../../../../variables'
   .sendBtn
     font-size: 13px 
     background: $orange-yellow
@@ -58,7 +58,7 @@
   .sendBtn:active
     transform: scale(0.95)
   
-  .timeblock
+  .time-block
     align-items: center
     background-color: $timeblock-background
     display: flex
@@ -70,7 +70,7 @@
     border-color: $pippin
     position: relative
     
-  .timeblock:hover
+  .time-block:hover
     transform: scale(1.1)
     border: 1px solid
     border-color: $black
