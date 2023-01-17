@@ -54,7 +54,7 @@ export default {
   flex-direction: column
   height: 520px
   position: relative
-  width: 60px
+  width: 65px
 .timeblock1,
 .timeblock2,
 .timeblock3,
