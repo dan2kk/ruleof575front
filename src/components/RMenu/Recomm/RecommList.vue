@@ -1,29 +1,31 @@
 <template>
-  <div class="gyoyang-table">
-    <div v-for="record in records">
-      <titlebox className="blueBold">{{record.영역코드명}}</titlebox>
-      <gyoyang-record :courseData = "text" v-for="text in record.수업목록"/>
+  <div class="recomm-list">
+    <div v-for="recomms in recommList" :key="recomms">
+      <RMenuTitleBox boxStyle="blueBold">{{recomm.영역코드명}}</RMenuTitleBox>
+      <RecommRecord :recommData = "lec" v-for="lec in recomms.수업목록" :key="lec"/>
     </div>
   </div>
 
 </template>
 
 <script>
-import Titlebox from "./Titlebox";
-import GyoyangRecord from "./GyoyangRecord";
+import RMenuTitleBox from "../Box/RMenuTitleBox";
+import RecommRecord from "./RecommRecord";
 export default {
-  name: "GyoyangTable",
+  name: "RecommList",
   components: {
-    Titlebox,
-    GyoyangRecord,
+    RMenuTitleBox,
+    RecommRecord
   },
   computed:{
-    records(){
+    recommList(){
       if(this.$store.getters.getIsChecked){
+        let gradList = this.$store.getters.getGradList
+        let recomms = this.$store.getters.getRecommList
         let temp = []
-        for(let grad of this.$store.getters.getGrad){
+        for(let grad of gradList) {
           if(grad.기준 > grad.이수){
-            for(let record of this.$store.getters.getRecommend){
+            for(let record of recomms){
               if(grad.이수명 == record.영역코드명){
                 temp.push(record)
                 break;
@@ -38,19 +40,13 @@ export default {
       }
     }
   },
-  data(){
-    return{
-      mockup: {과목명: "소프트웨어공학", 대표교강사명: "김윤호", 수업시간: "월 13:00~15:00<br />수 13:00 ~15:00"}
-    }
-  }
 };
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../../variables'
 
-
-.gyoyang-table
+.recomm-list
   align-items: center
   background-color: $solitude
   border-style: solid
@@ -63,6 +59,5 @@ export default {
   overflow-y: scroll
   position: relative
   width: 400px
-.titlebox
-  height: 40px
+
 </style>

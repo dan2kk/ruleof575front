@@ -1,6 +1,6 @@
-export const fillTBL = (lecListInTT) => {
-    let lecInTTIdx = 0;
-    let len = lecListInTT.length;
+export const fillTL = (lecsInTable) => {
+    let lecIdx = 0;
+    let len = lecsInTable.length;
 
     let ret = [];
     
@@ -10,62 +10,57 @@ export const fillTBL = (lecListInTT) => {
     let lecStart;
     let lecEnd;
     let lecName;
-
-    // while(tail <= 20) {
-    //     if(lecInTTIdx < len) {
-    //         lecStart = lecListInTT[lecInTTIdx].start;
-    //         lecEnd = lecListInTT[lecInTTIdx].end;
-    //     }
-    //     else {
-    //         lecStart = -1;
-    //     }
-        
-    //     if(tail == lecStart) {
-    //         if(head != tail) {
-    //             ret.push({start: head, end: tail, isInTable: false});
-    //         }
-    //         ret.push({start: lecStart, end: lecEnd, isInTable: true});
-    //         lecInTTIdx++;
-    //         head = tail = lecEnd;
-    //     }
-    //     else {
-    //         if(head != tail && tail % 1 == 0) {
-    //             ret.push({start: head, end: tail, isInTable: false});
-    //             head = tail;
-    //         }
-    //         else {
-    //             tail += 0.5;
-    //         }
-    //     }
-    // }
+    let lecColorIdx;
 
     while(1) {
-        if(lecInTTIdx < len) {
-            lecStart = lecListInTT[lecInTTIdx].start;
-            lecEnd = lecListInTT[lecInTTIdx].end;
-            lecName = lecListInTT[lecInTTIdx].content
-            lecInTTIdx++;
+        if(lecIdx < len) {
+            lecStart = lecsInTable[lecIdx].start;
+            lecEnd = lecsInTable[lecIdx].end;
+            lecName = lecsInTable[lecIdx].content
+            lecColorIdx = lecsInTable[lecIdx].colorIdx
+            lecIdx++;
         }
         else {
-            lecStart = 21;
+            lecStart = 22;
         }
 
         while(tail < lecStart) {
             if(head != tail) {
-                ret.push({start: head, end: tail, isInTable: false, content : ""});
+                ret.push({
+                    start: head, 
+                    end: tail, 
+                    content : "",
+                    blockKind: "block",
+                    isSelected: false,
+                    colorIdx: 0
+                });
             }
             head = tail;
             tail = parseInt(head) + 1;
         }
 
-        if(tail >= 21) {
+        if(tail >= 22) {
             break;
         }
 
         if(head != lecStart) {
-            ret.push({start: head, end: lecStart, isInTable: false, content : ""});
+            ret.push({
+                start: head, 
+                end: lecStart, 
+                content : "",
+                blockKind: "block",
+                isSelected: false,
+                colorIdx: 0
+            });
         }
-        ret.push({start: lecStart, end: lecEnd, isInTable: true, content : lecName})
+        ret.push({
+            start: lecStart,
+            end: lecEnd, 
+            content: lecName,
+            blockKind: "lecBlock",
+            isSelected: false,
+            colorIdx: lecColorIdx
+        })
 
         head = tail = lecEnd;
     }

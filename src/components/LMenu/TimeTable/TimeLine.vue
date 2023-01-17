@@ -1,6 +1,6 @@
 <template>
   <div class="time-line">
-    <TimeBlock :timeblockData="element" v-for="element in this.timeblockList"/>
+    <TimeBlock :timeblockData="element" v-for="element in this.timeLines" :key="element.수업번호"/>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
     "day"
   ],
   computed: {
-    timeblockList() {
+    timeLines() {
       if(this.day == 0) {
         return this.$store.getters.getTimeLines.시간;
       }

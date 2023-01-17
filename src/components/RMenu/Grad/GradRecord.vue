@@ -1,24 +1,24 @@
 <template>
-  <div class="graduation-info-record">
-      <div class="flex-row-1">
-        <textbox2 :text="this.textData.이수명" className= "purple" size= "big"/>
-        <textbox2 :text= "this.textData.기준" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.이수" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.변동" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.합계" className= "purple" size= "small"/>
-        <textbox2 :text= "this.textData.잔여" className= "purple" size= "small"/>
+  <div class="grad-record">
+      <div class="grad-record-flex-row">
+        <RMenuTextBox :text= this.gradData.이수명 boxStyle= "purple" size= "big"/>
+        <RMenuTextBox :text= this.gradData.기준 boxStyle= "purple" size= "small"/>
+        <RMenuTextBox :text= this.gradData.이수 boxStyle= "purple" size= "small"/>
+        <RMenuTextBox :text= this.gradData.변동 boxStyle= "purple" size= "small"/>
+        <RMenuTextBox :text= this.gradData.합계 boxStyle= "purple" size= "small"/>
+        <RMenuTextBox :text= this.gradData.잔여 boxStyle= "purple" size= "small"/>
       </div>
   </div>
 </template>
 
 <script>
-import Textbox2 from "./Textbox2";
+import RMenuTextBox from "../Box/RMenuTextBox";
 export default {
-  name: "GraduationInfoRecord",
+  name: "GradRecord",
   components: {
-    Textbox2,
+    RMenuTextBox,
   },
-  props: ["textData"],
+  props: ["gradData"],
 };
 
 
@@ -26,8 +26,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../variables'
-.graduation-info-record-1
+@import '../../../../variables'
+.grad-record
   align-items: flex-start
   background-color: $tutu
   border: 1px solid
@@ -36,13 +36,11 @@ export default {
   position: relative
   width: 400
   
-.flex-row-1
+.grad-record-flex-row
   align-items: center
   display: flex
   height: 40px
   min-width: 394px
   position: relative
-
-
 
 </style>

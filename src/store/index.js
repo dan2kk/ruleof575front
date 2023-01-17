@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTBL } from '@/util'
+import { fillTL } from '@/util'
 
 export default createStore({
   state: {
@@ -20,34 +20,43 @@ export default createStore({
       금:[]
     },
     
-    lecsInTable: {
+    lecsInTableList: {
       월 : [],
       화 : [],
       수 : [],
       목 : [],
       금 : []
     },
-
+    
     timeLines: {
       시간 : [  
-        { start: 9, end: 10, isInTT: false, content: '09:00' },
-        { start: 10, end: 11, isInTT: false, content: '10:00' },
-        { start: 11, end: 12, isInTT: false, content: '11:00' },
-        { start: 12, end: 13, isInTT: false, content: '12:00' },
-        { start: 13, end: 14, isInTT: false, content: '13:00' },
-        { start: 14, end: 15, isInTT: false, content: '14:00' },
-        { start: 15, end: 16, isInTT: false, content: '15:00' },
-        { start: 16, end: 17, isInTT: false, content: '16:00' },
-        { start: 17, end: 18, isInTT: false, content: '17:00' },
-        { start: 18, end: 19, isInTT: false, content: '18:00' },
-        { start: 19, end: 20, isInTT: false, content: '19:00' }
+        { start: 0, end: 1, content: null, blockKind: "sendBtn"},
+        { start: 9, end: 10, content: '09:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 10, end: 11, content: '10:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 11, end: 12, content: '11:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 12, end: 13, content: '12:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 13, end: 14, content: '13:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 14, end: 15, content: '14:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 15, end: 16, content: '15:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 16, end: 17, content: '16:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 17, end: 18, content: '17:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 18, end: 19, content: '18:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 19, end: 20, content: '19:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
+        { start: 20, end: 21, content: '20:00+', blockKind: "hourBlock", isSelected : false, colorIdx: 0}
       ],
       월 : [ ],
       화 : [ ],
       수 : [ ], 
       목 : [ ], 
       금 : [ ]
-    }
+    },
+    colorList: [
+      "#ffb3b7", "#fedcdd", "#dbe5f1", "#a5bcde", "#7d9dcd", "#ffa970", "#ffd77f", 
+      "#edf3c3", "#acd8d9", "#7fbcff", "#a9e5cc", "#dcedc1", "#fed2b5", "#ffaba7", 
+      "#ff8b94", "#94cfc9", "#6db3bf", "#4699b7", "#20566e", "#183641", "#cde4d2", 
+      "#d2e1a8", "#d8de7e", "#deda52", "#aacd67", "#b9c8e7", "#8fbae5", "#6e91e3", 
+      "#7978c6", "#8b55a9", "#f1a8bc", "#eee58a", "#c4ecb0"
+    ]
   },
   
   getters: {
@@ -75,11 +84,14 @@ export default createStore({
     getSelectedTimes(state){
       return state.selectedTimes
     },
-    getLecsInTable(state) {
-      return state.lecsInTable
+    getLecsInTableList(state) {
+      return state.lecsInTableList
     },
     getTimeLines(state) {
       return state.timeLines
+    },
+    getColorList(state) {
+      return state.colorList
     }
   },
 
@@ -98,14 +110,18 @@ export default createStore({
       }
     },
     addSelectedTimes(state, res){
-      let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
-      if(temp != -1){ // array 존재시
-        state.selectedTimes[res.day].splice(temp, 1)
-        console.log("delete "+res.day + " " + res.data)
-      }
-      else{ //array 에 없을시
+      // let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
+      // if(temp != -1){ // array 존재시
+      //   state.selectedTimes[res.day].splice(temp, 1)
+      //   console.log("delete "+res.day + " " + res.data)
+      // }
+      // else{ //array 에 없을시
+      //   state.selectedTimes[res.day].push(res.data)
+      //   console.log("add "+res.day + " " + res.data)
+      // }
+      let temp = state.selectedTimes[res.day].findIndex((x)=>(x.start == res.data.start))
+      if(temp == -1) {
         state.selectedTimes[res.day].push(res.data)
-        console.log("add "+res.day + " " + res.data)
       }
     },
     //Delete from recommend list
@@ -114,8 +130,6 @@ export default createStore({
 
       if(filed_idx != -1) {
           let lecList = state.recommList[filed_idx].수업목록;
-    
-    
           let lec_idx = lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호);
     
           if(lec_idx != -1) {
@@ -123,16 +137,17 @@ export default createStore({
           }
       }
     },
-    addLecsInTable(state, lec) {
-      state.lecsInTable[lec.day].push(lec.info);
+    addLecsInTableList(state, lec) {
+      state.lecsInTableList[lec.day].push(lec.info);
     },
-    sortLecsInTable(state, day) {
-        state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
-          return a.start - b.start;
-        });
+    sortLecsInTableList(state, day) {
+      state.lecsInTableList[day] = state.lecsInTableList[day].sort((a, b) => {
+        return a.start - b.start;
+      });
     },
     setUpTimeLines(state, day) {
-      state.timeblockLists[day] = fillTBL(state.lecsInTable[day]);
+      state.timeLines[day] = fillTL(state.lecsInTableList[day])
+      state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
     }
   },
   actions: {

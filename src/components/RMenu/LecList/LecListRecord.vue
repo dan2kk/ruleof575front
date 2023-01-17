@@ -1,30 +1,35 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <TextBoxLec :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
-      <TextBoxLec :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
-      <TextBoxLec :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
-      <ImageBoxSearch src= './iconbuttons-3.png' boxStyle ="red" />
-      <ImageBoxSearch src= './iconbuttons-2.png' boxStyle ="red" />
+      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
+      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
+      <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" />
+      <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" />
     </div>
   </div>
 </template>
 
 <script>
-import TextBoxLec from "@@/Box/TextBoxLec";
-import ImageBoxSearch from "@@/Box/ImageBoxSearch";
+import RMenuTextBox from "../Box/RMenuTextBox";
+import SearchImageBox from "../Box/SearchImageBox";
 export default {
   name: "LecListRecord",
   components: {
-    TextBoxLec,
-    ImageBoxSearch
+    RMenuTextBox,
+    SearchImageBox
   },
-  props: ["lecData"]
+  props: ["lecData"],
+  methods : {
+    onClick() {
+
+    }
+  }
 };
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../../variables'
 
 .lec-list-record
   align-items: flex-start

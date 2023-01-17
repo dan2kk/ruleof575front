@@ -3,10 +3,10 @@
     <div class="r-menu-cart">
       <RMenuTabs v-on:changeScreen = "changeScreen"> </RMenuTabs>
       <LoginScreen v-if="!isLogined" v-on:login-req="loginEvent()"> </LoginScreen>
-      <!-- <LecList v-show="isLogined && curScreen == 1"></LecList>
+      <LecList v-show="isLogined && curScreen == 1"></LecList>
       <RecommList v-show="isLogined && curScreen == 2"></RecommList>
-      <GradList : v-show="isLogined && curScreen == 4"></GradList>
-      <LecDetails v-show="isLogined && curScreen == 3"></LecDetails> -->
+      <GradList v-show="isLogined && curScreen == 4"></GradList>
+      <LecDetails v-show="isLogined && curScreen == 3"></LecDetails>
     </div>
   </div>
 </template>
@@ -14,22 +14,22 @@
 <script>
 import RMenuTabs from "./RMenuTabs";
 import LoginScreen from "./Login/LoginScreen";
-// import LecList from "./LecList/LecList";
-// import RecommList from "./Recomm/RecommList";
-// import LecDetails from "./Details/LecDetails";
-// import GradList from "./Grad/GradList";
+import LecList from "./LecList/LecList";
+import RecommList from "./Recomm/RecommList";
+import GradList from "./Grad/GradList";
+import LecDetails from "./Details/LecDetails";
 import axios from "axios";
 
 export default {
   name: "RMenu",
   components: {
     RMenuTabs,
-    LoginScreen
-    // LecList,
-    // RecommList,
-    // GradList,
-    // LecDetails
-},
+    LoginScreen,
+    LecList,
+    RecommList,
+    GradList,
+    LecDetails
+  },
   data(){
     return{
       isLogined: false,
@@ -41,7 +41,7 @@ export default {
         this.isLogined = true
         
         this.initList()
-        this.getJolupevent()
+        // this.getJolupevent()
         
         this.curScreen = 1
     },
@@ -72,9 +72,11 @@ export default {
 
     async initList() {
       try{
-        let timetabledata = (await axios.get('/list/init', {params: {stu_id: this.$store.getters.getUserID}})).data
+
+        let stuId = this.$store.getters.getStuId
+        let timetabledata = (await axios.get('/list/init', {params: {stu_id: stuId}})).data
         for(let i=0; i< timetabledata.length;i++){
-          this.$store.commit("addTimetable", timetabledata[i]);
+          this.$store.commit("addLecList", timetabledata[i]);
 
 
           if(timetabledata[i].state == 1){
@@ -98,36 +100,37 @@ export default {
               let lecToAdd = {
                 start : startTime,
                 end : endTime,
-                isInTable : true,
-                content : timetabledata[i].과목명
+                content : timetabledata[i].과목명,
+                colorIdx : i
               }
 
 
-              this.$store.commit("addToLecsInTable", {
+              this.$store.commit("addLecsInTableList", {
                   day: timetabledata[i].요일[j], 
                   info: lecToAdd
               });
             }
           }
         }
-        this.$store.commit("sortLecsInTable", '월');
-        this.$store.commit("sortLecsInTable", '화');
-        this.$store.commit("sortLecsInTable", '수');
-        this.$store.commit("sortLecsInTable", '목');
-        this.$store.commit("sortLecsInTable", '금');
+        this.$store.commit("sortLecsInTableList", '월');
+        this.$store.commit("sortLecsInTableList", '화');
+        this.$store.commit("sortLecsInTableList", '수');
+        this.$store.commit("sortLecsInTableList", '목');
+        this.$store.commit("sortLecsInTableList", '금');
 
 
-        this.$store.commit("setTimeblockLists", '월');
-        this.$store.commit("setTimeblockLists", '화');
-        this.$store.commit("setTimeblockLists", '수');
-        this.$store.commit("setTimeblockLists", '목');
-        this.$store.commit("setTimeblockLists", '금');
+        this.$store.commit("setUpTimeLines", '월');
+        this.$store.commit("setUpTimeLines", '화');
+        this.$store.commit("setUpTimeLines", '수');
+        this.$store.commit("setUpTimeLines", '목');
+        this.$store.commit("setUpTimeLines", '금');
 
       }
       catch(err){
         alert(err)
       }
     },
+
     async getJolupevent(){
       try{
         let res = (await axios.get('/grad/init', {params: {stu_id: this.$store.getters.getUserID}})).data.status
@@ -163,6 +166,7 @@ export default {
         alert(err)
       }
     },
+
     async updateJolupevent(){
       try{
         let res = (await axios.get('/grad/view', {params: {stu_id: this.$store.getters.getUserID}})).data.list
@@ -221,6 +225,7 @@ export default {
       }
       this.$refs.grad.update()
     },
+
     async getCourseInfo(number){ //수업정보 데이터 불러오기
       if(number != this.$store.getters.getLecture.lec_info.수업번호){
         try{
@@ -239,7 +244,7 @@ export default {
         this.curScreen = 3
       }
     }
-  },
+  }
 };
 </script>
 

@@ -1,23 +1,22 @@
 <template>
-  <div class="graduation-info-table">
-    <titlebox className="purpleBold">졸업사정 변동사항</titlebox>
-    <graduation-info-record :textData="record" v-for="record in this.$store.getters.getGrad"/>
+  <div class="grad-list">
+    <RMenuTitleBox boxStyle="purpleBold">졸업사정 변동사항</RMenuTitleBox>
+    <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec"/>
   </div>
 </template>
 
 <script>
-import Titlebox from "./Titlebox";
-import GraduationInfoRecord from "./GraduationInfoRecord";
+import RMenuTitleBox from "../Box/RMenuTitleBox";
+import GradRecord from "./GradRecord";
 export default {
-  name: "GraduationInfoTable",
+  name: "GradList",
   components: {
-    Titlebox, GraduationInfoRecord
+    RMenuTitleBox, 
+    GradRecord
   },
-  props: ["data"],
-  data(){
-    return{
-      records: [],
-      graduationInfo: {a: "이수명", b: "배당", c: "취득",d: "변동", e: "합계", f: "잔여"},
+  computed : {
+    gradList() {
+      return this.$store.getters.getGradList;
     }
   },
   methods:{
@@ -31,15 +30,14 @@ export default {
       alert("updated!")
     }
   }
-
 };
 
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../../variables'
 
-.graduation-info-table
+.grad-list
   align-items: center
   background-color: $tutu
   display: flex

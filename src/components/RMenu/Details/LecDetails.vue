@@ -1,26 +1,26 @@
 <template>
-  <div class="course-info-table">
-    <titlebox className="yellowBold" v-for="text in texts">{{text}}</titlebox>
+  <div class="lec-details">
+    <RMenuTitleBox boxStyle="yellowBold" v-for="temp in temps" :key="temp">{{temp}}</RMenuTitleBox>
   </div>
 </template>
 
 <script>
-import Titlebox from "./Titlebox";
+import RMenuTitleBox from "../Box/RMenuTitleBox";
 export default {
   name: "CourseInfoTable",
   components: {
-    Titlebox,
+    RMenuTitleBox,
   },
   data(){
     return{
-      texts: ["해줘", "응애", "노예야", "일해라"]
+      temps: ["해줘", "응애", "노예야", "일해라"]
     }
   }
 };
 </script>
 
 <style lang="sass">
-.course-info-table
+.lec-details
   align-items: center
   background-color: #ffefc6
   display: flex

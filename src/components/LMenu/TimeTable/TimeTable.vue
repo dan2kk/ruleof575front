@@ -1,11 +1,11 @@
 <template>
   <div class="time-table">
-    <TimeLine :day = 월 />
-    <TimeLine :day = 화 />
-    <TimeLine :day = 수 />
-    <TimeLine :day = 목 />
-    <TimeLine :day = 금 />
-    <TimeLine :day = 토 />
+    <TimeLine :day = 0 />
+    <TimeLine :day = 1 />
+    <TimeLine :day = 2 />
+    <TimeLine :day = 3 />
+    <TimeLine :day = 4 />
+    <TimeLine :day = 5 />
   </div>
 
 </template>

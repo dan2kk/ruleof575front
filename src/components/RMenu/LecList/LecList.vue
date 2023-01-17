@@ -1,32 +1,32 @@
 <template>
   <div class="lec-list">
-    <ListTitleBox boxStyle="redBold">내 수업목록</ListTitleBox>
-    <LecListRecord 
-      :lecData="lec" v-for="lec in lecList">
+    <RMenuTitleBox boxStyle="redBold">내 수업목록</RMenuTitleBox>
+    <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
+      {{lec.수업번호}}
     </LecListRecord>
   </div>
 </template>
 
 <script>
-import ListTitleBox from "@@/ListTitleBox";
-import LecListRecord from "@@/LecListRecord";
+import RMenuTitleBox from "../Box/RMenuTitleBox";
+import LecListRecord from "./LecListRecord";
 
 export default {
   name: "LecList",
+  components: {
+    RMenuTitleBox,
+    LecListRecord
+  },
   computed : {
     lecList() {
       return this.$store.getters.getLecList;
     }
   },
-  components: {
-    ListTitleBox,
-    LecListRecord
-  },
 };
 </script>
 
 <style lang="sass">
-@import '../../variables'
+@import '../../../../variables'
 
 .lec-list
   align-items: center

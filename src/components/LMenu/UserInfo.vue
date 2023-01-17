@@ -1,18 +1,18 @@
 <template>
   <div class="user-info">
-    <TextBox3 text= "이름"/>
-    <TextBox3 text= "학과" />
-    <TextBox3 text= "학번" />
-    <TextBox3 text= "학년" />
+    <LMenuTextBox text= "이름"/>
+    <LMenuTextBox text= "학과" />
+    <LMenuTextBox text= "학번" />
+    <LMenuTextBox text= "학년" />
   </div>
 </template>
 
 <script>
-import TextBox3 from "../Box/TextBox3";
+import LMenuTextBox from "./Box/LMenuTextBox";
 export default {
   name: "UserInfo",
   components : {
-    TextBox3
+    LMenuTextBox
   }
 };
 </script>
