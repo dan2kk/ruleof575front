@@ -1,33 +1,41 @@
 <template>
-  <div class="timeline-1">
-    <timeblock4  :posx = this.posx :posy = 0 v-on:sendboxclicked="sendTable(posx, posy)" />
-    <timeblock4  :posx = this.posx :posy = 1 />
-    <timeblock4  :posx = this.posx :posy = 2 />
-    <timeblock4  :posx = this.posx :posy = 3 />
-    <timeblock4  :posx = this.posx :posy = 4 />
-    <timeblock4  :posx = this.posx :posy = 5 />
-    <timeblock4  :posx = this.posx :posy = 6 />
-    <timeblock4  :posx = this.posx :posy = 7 />
-    <timeblock4  :posx = this.posx :posy = 8 />
-    <timeblock4  :posx = this.posx :posy = 9 />
-    <timeblock4  :posx = this.posx :posy = 10 />
-    <timeblock4  :posx = this.posx :posy = 11 />
-    <timeblock4  :posx = this.posx :posy = 12 />
+  <div class="timeline">
+    <timeblock  :timeblockData="element" v-for="element in this.timeblockList"/>
   </div>
 </template>
 
 <script>
-import Timeblock4 from "./Timeblock4";
+import Timeblock from "./Timeblock";
 export default {
   name: "Timeline",
   components: {
-    Timeblock4,
+    Timeblock,
   },
   props: [
-    "blocknumArray",
-    "textArray",
-    "posx"
+    "day"
   ],
+  computed: {
+    timeblockList() {
+      if(this.day == 0) {
+        return this.$store.getters.getTimeblockLists.시간;
+      }
+      else if(this.day == 1){
+        return this.$store.getters.getTimeblockLists.월;
+      }
+      else if(this.day == 2){
+        return this.$store.getters.getTimeblockLists.화;
+      }
+      else if(this.day == 3){
+        return this.$store.getters.getTimeblockLists.수;
+      }
+      else if(this.day == 4){
+        return this.$store.getters.getTimeblockLists.목;
+      }
+      else if(this.day == 5){
+        return this.$store.getters.getTimeblockLists.금;
+      }
+    }
+  },
   data(){
     return{
     }

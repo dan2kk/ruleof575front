@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { fillTBL } from '../util'
 
 export default createStore({
   state: {
@@ -9,20 +10,35 @@ export default createStore({
     grad: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
     selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
     recommList: [],
-    textTable: [
-      ["?", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00+"],
-      ["월요일", "", "", "", "", "", "", "", "", "", "", "", "",],
-      ["화요일", "", "", "", "", "", "", "", "", "", "", "", "",],
-      ["수요일", "", "", "", "", "", "", "", "", "", "", "", "",],
-      ["목요일", "", "", "", "", "", "", "", "", "", "", "", "",],
-      ["금요일", "", "", "", "", "", "", "", "", "", "", "", "",]],
-    blocknumTable: [
-        [7,8,8,8,8,8,8,8,8,8,8,8,8],
-        [8,1,1,1,1,1,1,1,1,1,1,1,1],
-        [8,1,1,1,1,1,1,1,1,1,1,1,1],
-        [8,1,1,1,1,1,1,1,1,1,1,1,1],
-        [8,1,1,1,1,1,1,1,1,1,1,1,1],
-        [8,1,1,1,1,1,1,1,1,1,1,1,1]],
+
+    lecsInTable: {
+      월 : [],
+      화 : [],
+      수 : [],
+      목 : [],
+      금 : []
+    },
+
+    timeblockLists: {
+      시간 : [  
+        { start: 9, end: 10, isInTT: false, content: '09:00' },
+        { start: 10, end: 11, isInTT: false, content: '10:00' },
+        { start: 11, end: 12, isInTT: false, content: '11:00' },
+        { start: 12, end: 13, isInTT: false, content: '12:00' },
+        { start: 13, end: 14, isInTT: false, content: '13:00' },
+        { start: 14, end: 15, isInTT: false, content: '14:00' },
+        { start: 15, end: 16, isInTT: false, content: '15:00' },
+        { start: 16, end: 17, isInTT: false, content: '16:00' },
+        { start: 17, end: 18, isInTT: false, content: '17:00' },
+        { start: 18, end: 19, isInTT: false, content: '18:00' },
+        { start: 19, end: 20, isInTT: false, content: '19:00' }
+      ],
+      월 : [ ],
+      화 : [ ],
+      수 : [ ], 
+      목 : [ ], 
+      금 : [ ]
+    }
   },
   getters: {
     getTimetable(state){
@@ -54,6 +70,12 @@ export default createStore({
     },
     getLecture(state){
       return state.lectureInfo
+    },
+    getTimeblockLists(state) {
+      return state.timeblockLists;
+    },
+    getLecsInTable(state) {
+      return state.lecsInTable;
     }
   },
   mutations: {
@@ -94,57 +116,6 @@ export default createStore({
     changeLec(state, res){
       state.lectureInfo = res
     },
-    initBnum(state){
-      for(let i=1 ; i< state.blocknumTable.length;i++){
-        for(let j=1; j< state.blocknumTable[i].length; j++){
-          if(state.blocknumTable[i][j] < 7){
-            state.blocknumTable[i][j] = 7 - state.blocknumTable[i][j] //클릭된 상태 만들기
-            let data1 = {start: 0, end: 0}
-            switch(state.blocknumTable[i][j]){
-              case 6: // 풀칸 클릭 가능
-                data1.start = j + 8
-                data1.end = j + 1 + 8
-                break;
-              case 5:  // 아랫칸 클릭 가능
-                data1.start = j + 0.5 + 8
-                data1.end = j + 1 + 8
-                break;
-              case 4:  // 윗칸 클릭 가능
-                data1.start = j + 8
-                data1.end = j + 0.5 + 8
-                break;
-              default:
-                console.log(i + "/"+ j + "/"+ state.blocknumTable[i][j])
-            }
-            let day1 = null
-            switch(i){
-              case 1:
-                day1 = '월'
-                break;
-              case 2:
-                day1 = '화'
-                break;
-              case 3:
-                day1 = '수'
-                break;
-              case 4:
-                day1 = '목'
-                break;
-              case 5:
-                day1 = '금'
-                break;
-              default:
-                console.log("init table err!")
-                break;
-            }
-            let temp = state.selectedDateTime[day1].findIndex((x)=>(x.start == data1.start))
-            if(temp == -1){ //array 에 없을시
-              state.selectedDateTime[day1].push(data1)
-            }
-          }
-        }
-      }
-    },
     //Delete from recommend list
     delRecomm(state, lecToDel) {
       let filed_idx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
@@ -159,6 +130,17 @@ export default createStore({
             state.recommList[filed_idx].수업목록.splice(lec_idx, 1);
           }
       }
+    },
+    addToLecsInTable(state, lec) {
+      state.lecsInTable[lec.day].push(lec.info);
+    },
+    sortLecsInTable(state, day) {
+        state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
+          return a.start - b.start;
+        });
+    },
+    setTimeblockLists(state, day) {
+      state.timeblockLists[day] = fillTBL(state.lecsInTable[day]);
     }
   },
   actions: {

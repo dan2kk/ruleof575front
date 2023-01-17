@@ -84,55 +84,55 @@ export default {
       try{
         let timetabledata = (await axios.get('/list/init', {params: {stu_id: this.$store.getters.getUserID}})).data
         for(let i=0; i< timetabledata.length;i++){
-          this.$store.commit("addTimetable", timetabledata[i])
-          //console.log(timetabledata[i])
-          if(timetabledata[i].state == 1){ //시간표에 추가해야 할 것들
-            //console.log(timetabledata[i])
-            for(let j=0 ; j< timetabledata[i].요일.length; j++){
-              let day = 0
-              switch(timetabledata[i].요일[j]){
-                case '월': 
-                  day=1 
-                  break
-                case '화': 
-                  day=2
-                  break
-                case '수': 
-                  day=3
-                  break
-                case '목': 
-                  day=4
-                  break
-                case '금': 
-                  day=5
-                  break
-                default:
-                  alert("null")
-                  continue
+          this.$store.commit("addTimetable", timetabledata[i]);
+
+
+          if(timetabledata[i].state == 1){
+            for(let j=0 ; j< timetabledata[i].요일.length; j++){              
+              if(timetabledata[i].요일[j] == '시간미지정강좌') {
+                continue;
               }
+
               let startTime = Number(timetabledata[i].시작시간[j].slice(0, -6))
               let endTime = Number(timetabledata[i].끝시간[j].slice(0, -6))
               let startHalf = (timetabledata[i].시작시간[j].slice(-5, -3) != '00')
               let endHalf = (timetabledata[i].끝시간[j].slice(-5, -3) != '00')
-              for(let k=startTime - 8; k < endTime -8; k++){
-                this.$store.getters.getBlocknumTable[day][k] = timetabledata[i].수업번호
+
+              if(startHalf) {
+                startTime += 0.5;
               }
-              if(startHalf){
-                if(this.$store.getters.getBlocknumTable[day][startTime-8] != 1){ //이미 반칸
-                  this.$store.getters.getBlocknumTable[day][startTime-8] = timetabledata[i].수업번호
-                }
-                else this.$store.getters.getBlocknumTable[day][startTime-8] = 3
+              if(endHalf) {
+                endTime += 0.5;
               }
-              if(endHalf){
-                if(this.$store.getters.getBlocknumTable[day][endTime-8] != 1){ //이미 반칸
-                  this.$store.getters.getBlocknumTable[day][endTime-8] = timetabledata[i].수업번호
-                }
-                else this.$store.getters.getBlocknumTable[day][endTime-8] = 2
-              } 
+
+              let lecToAdd = {
+                start : startTime,
+                end : endTime,
+                isInTable : true,
+                content : timetabledata[i].과목명
+              }
+
+
+              this.$store.commit("addToLecsInTable", {
+                  day: timetabledata[i].요일[j], 
+                  info: lecToAdd
+              });
             }
           }
         }
-        this.$store.commit("initBnum")
+        this.$store.commit("sortLecsInTable", '월');
+        this.$store.commit("sortLecsInTable", '화');
+        this.$store.commit("sortLecsInTable", '수');
+        this.$store.commit("sortLecsInTable", '목');
+        this.$store.commit("sortLecsInTable", '금');
+
+
+        this.$store.commit("setTimeblockLists", '월');
+        this.$store.commit("setTimeblockLists", '화');
+        this.$store.commit("setTimeblockLists", '수');
+        this.$store.commit("setTimeblockLists", '목');
+        this.$store.commit("setTimeblockLists", '금');
+
       }
       catch(err){
         alert(err)

@@ -1,9 +1,9 @@
 <template>
   <div :class="[`gyoyang-record-1-1`]">
     <div class="flex-row-1">
-      <textbox2 :text= "this.courseData.과목명" className= "blue" size= "big"/>
-      <textbox2 :text= "this.courseData.대표교강사명" className= "blue" size= "small"/>
-      <textbox2 :text= "this.courseData.수업시간" className= "blue" size= "medium"/>
+      <textbox2 :text= "this.courseData.과목명" className= "blue" size= "big" @click="courseinfo(this.courseData.수업번호)"/>
+      <textbox2 :text= "this.courseData.대표교강사명" className= "blue" size= "small" @click="courseinfo(this.courseData.수업번호)"/>
+      <textbox2 :text= "this.courseData.수업시간" className= "blue" size= "medium" @click="courseinfo(this.courseData.수업번호)"/>
       <imagebox_Search src= "./iconbuttons-1.png" className="blue" @click="addToList"/>
       <imagebox_Search src= "./iconbuttons-2.png" className="blue" @click="delRecomm"/>
     </div>
@@ -29,6 +29,9 @@ export default {
     },
     delRecomm() {
       this.$store.commit("delRecomm", this.courseData);
+    },
+    courseinfo(number){
+      this.$parent.$parent.getCourseInfo(number)
     }
   }
 };
