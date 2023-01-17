@@ -15,7 +15,8 @@ import { throwStatement } from '@babel/types';
     computed: {
       blockHeight() {
         return {
-          '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 40}px`
+          '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 40}px`,
+          '--color' : this.$store.getters.getColorList[this.timeblockData.lecColorIdx],
         }
       }
     },

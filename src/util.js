@@ -10,7 +10,7 @@ export const fillTBL = (lecListInTT) => {
     let lecStart;
     let lecEnd;
     let lecName;
-
+    let lecColorIdx;
     // while(tail <= 20) {
     //     if(lecInTTIdx < len) {
     //         lecStart = lecListInTT[lecInTTIdx].start;
@@ -43,8 +43,8 @@ export const fillTBL = (lecListInTT) => {
         if(lecInTTIdx < len) {
             lecStart = lecListInTT[lecInTTIdx].start;
             lecEnd = lecListInTT[lecInTTIdx].end;
-            lecName = lecListInTT[lecInTTIdx].content
-
+            lecName = lecListInTT[lecInTTIdx].content;
+            lecColorIdx = lecListInTT[lecInTTIdx].colorlist;
             lecInTTIdx++;
         }
         else {
