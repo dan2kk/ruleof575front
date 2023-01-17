@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
 import Timeline from "./Timeline";
 export default {
   name: "Timetable",
@@ -18,9 +19,13 @@ export default {
   },
   props: [ ],
   methods: {
-    
+    onMounted()
+      {
+        this.$store.mutations.setTimeblockLists(state, day);
+      }
   },
 };
+
 </script>
 
 <style lang="sass">
