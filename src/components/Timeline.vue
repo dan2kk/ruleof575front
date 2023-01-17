@@ -53,13 +53,8 @@ export default {
   flex-direction: column
   height: 520px
   position: relative
-<<<<<<< HEAD
-  width: 64px
-  border: 2px solid
-  border-color: #ffffff
-=======
   width: 65px
->>>>>>> 291fbe98527600d284dca7f48e0e3009ef3a1343
+  
 .timeblock1,
 .timeblock2,
 .timeblock3,

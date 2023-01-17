@@ -77,7 +77,6 @@
                 }
               })
             }
-            this.timeblockData.isclicked = !this.timeblockData.isclicked
             break
           case "sendbox":
             for(let x in this.$store.getters.getTimeblockLists){
