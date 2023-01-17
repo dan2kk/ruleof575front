@@ -10,7 +10,6 @@ export default createStore({
     grad: [],
     selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
     recommList: [],
-
     lecsInTable: {
       월 : [],
       화 : [],
@@ -18,7 +17,8 @@ export default createStore({
       목 : [],
       금 : []
     },
-    
+    colorList: ["#ffb3b7", "#fedcdd", "#dbe5f1", "#a5bcde", "#7d9dcd", "#ffa970", "#ffd77f", "#edf3c3", "#acd8d9", "#7fbcff", "#a9e5cc", "#dcedc1", "#fed2b5", "#ffaba7", "#ff8b94", "#94cfc9", "#6db3bf", "#4699b7", "#20566e", "#183641", "#cde4d2", "#d2e1a8", "#d8de7e", "#deda52", "#aacd67", "#b9c8e7", "#8fbae5", "#6e91e3", "#7978c6", "#8b55a9", "#f1a8bc", "#eee58a", "#c4ecb0"],
+    lecCount: 0,
     timeblockLists: {
       시간 : [  
         { start: 0, end: 1, isInTT: false, content: null, blockkind: "sendbox"},
@@ -78,6 +78,9 @@ export default createStore({
     },
     getLecsInTable(state) {
       return state.lecsInTable;
+    },
+    getColorList(state){
+      return state.colorList;
     }
   },
   mutations: {
