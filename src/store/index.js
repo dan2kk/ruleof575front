@@ -14,8 +14,8 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [],
-    lecDetail1: {state:false},
-    lecDetail2: {state:false},
+    lecDetailsLeft: {state: false},
+    lecDetailsRight: {state: false},
 
     selectedTimes: { 
       월:[], 
@@ -104,11 +104,11 @@ export default createStore({
     getColorList(state) {
       return state.colorList
     },
-    getLecDetail1(state){
-      return state.lecDetail1
+    getLecDetailsLeft(state){
+      return state.lecDetailsLeft
     },
-    getLecDetail2(state){
-      return state.lecDetail2
+    getLecDetailsRight(state){
+      return state.lecDetailsRight
     }
   },
 
@@ -286,24 +286,21 @@ export default createStore({
       state.timeLines[day] = fillTL(state.lecsInTableList[day])
       state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
     },
-    async getCourseInfo(state, number){ //수업정보 데이터 불러오기
+
+    async addLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
-        let res = (await axios.get('/details', {params: {lec_num: number}})).data
-        res["state"] = true
-        alert(state.lecDetail1["state"])
-        if(state.lecDetail1["state"]){
-          state.lecDetail2 = res
-          console.log(state.lecDetail2)
+        let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
+        details["state"] = true
+        if(state.lecDetailsLeft["state"]){
+          state.lecDetailsRight = details
         }
         else{
-          state.lecDetail1 = res
-          console.log(state.lecDetail1)
+          state.lecDetailsLeft = details
         }
       }
       catch(err){
         console.log(err)
       }
-      console.log(number)
     }
   },
   actions: {

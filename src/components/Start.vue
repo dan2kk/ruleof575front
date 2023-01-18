@@ -2,12 +2,12 @@
   <div class="start">
     <LMenu/>
     <RMenu/>
-    <courseinfomodal class="left-modal" v-if="leftmodal" v-on:modal-close="LmodalClose()">
-      {{this.$store.getters.getLecDetail1}}
-    </courseinfomodal>
-    <courseinfomodal class="right-modal" v-if="rightmodal" v-on:modal-close="RmodalClose()">
-      {{this.$store.getters.getLecDetail2}}
-    </courseinfomodal>
+    <LecDetailsModal class="left-modal" v-if="onLeftModal" v-on:modal-close="leftModalClose()">
+      {{this.$store.getters.getLecDetailsLeft}}
+    </LecDetailsModal>
+    <LecDetailsModal class="right-modal" v-if="onRightModal" v-on:modal-close="rightModalClose()">
+      {{this.$store.getters.getLecDetailsRight}}
+    </LecDetailsModal>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
 <script>
 import LMenu from "./LMenu/LMenu";
 import RMenu from "./RMenu/RMenu";
-import CourseInfoModal from "./CourseInfoModal";
+import LecDetailsModal from "./LecDetailsModal";
 import axios from 'axios';
 
 export default {
@@ -23,22 +23,22 @@ export default {
   components: {
     LMenu,
     RMenu,
-    CourseInfoModal,
+    LecDetailsModal,
   },
   computed:{
-    leftmodal(){
-      return this.$store.getters.getLecDetail1.state
+    onLeftModal(){
+      return this.$store.getters.getLecDetailsLeft.state
     },
-    rightmodal(){
-      return this.$store.getters.getLecDetail2.state
+    onRightModal(){
+      return this.$store.getters.getLecDetailsRight.state
     }
   },
   methods:{
-    LmodalClose(){
-      this.$store.getters.getLecDetail1.state = false
+    leftModalClose(){
+      this.$store.getters.getLecDetailsLeft.state = false
     },
-    RmodalClose(){
-      this.$store.getters.getLecDetail2.state = false
+    rightModalClose(){
+      this.$store.getters.getLecDetailsRight.state = false
     }
   }
 };

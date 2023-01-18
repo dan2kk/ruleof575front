@@ -1,9 +1,9 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
+      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="showDetails"/>
       <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" @click="addToTimeTable"/>
       <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" @click="delFromLecList"/>
     </div>
@@ -21,8 +21,8 @@ export default {
   },
   props: ["lecData"],
   methods : {
-    onClick() {
-      this.$store.commit("getCourseInfo", this.lecData.수업번호);
+    showDetails() {
+      this.$store.commit("addLecDetails", this.lecData.수업번호);
     },
     addToTimeTable() {
     },
