@@ -1,9 +1,20 @@
 <template>
-  <div class="time-block" :style="blcokStyle" @click="clickEvent()">
+  <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeblockData.blockKind != "sendBtn"'>
     <div class="time-block-content notosanskr-normal-black-12px"> 
       {{ this.timeblockData.content }}
     </div>
   </div>
+  <button class="send-btn" @click="clickEvent" v-show='this.timeblockData.blockKind == "sendBtn"' >
+    <div class="svg-wrapper-1" @click="click()">
+      <div class="svg-wrapper">
+        <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+          <path fill="none" d="M0 0h24v24H0z"></path>
+          <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+        </svg>
+      </div>
+    </div>
+    <span class="span">Send</span>
+  </button> 
 </template>
   
   <script>
@@ -140,7 +151,7 @@
   <style lang="sass">
   @import '../../../../variables'
 
-  .sendBtn
+  .send-btn
     font-size: 13px 
     background: $orange-yellow
     color: white 
@@ -160,14 +171,14 @@
       display: block 
       transform-origin: center center 
       transition: transform 0.3s ease-in-out 
-  .sendBtn:hover
+  .send-btn:hover
     .svg-wrapper
       animation: fly-1 0.6s ease-in-out infinite alternate 
     .svg
       transform: translateX(1.2em) rotate(45deg) scale(1.1) 
     .span
       transform: translateX(5em)
-  .sendBtn:active
+  .send-btn:active
     transform: scale(0.95)
   
   .time-block
