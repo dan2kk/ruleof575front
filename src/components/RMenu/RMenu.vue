@@ -19,7 +19,7 @@ import RecommList from "./Recomm/RecommList";
 import GradList from "./Grad/GradList";
 import LecDetails from "./Details/LecDetails";
 import axios from "axios";
-import { temp } from '@/util'
+import { processLec } from '@/util'
 
 export default {
   name: "RMenu",
@@ -72,7 +72,7 @@ export default {
               let lecToAdd = {
                 colorIdx : i
               }
-              Object.assign(lecToAdd, temp(lecList[i], j));
+              Object.assign(lecToAdd, processLec(lecList[i], j));
 
               this.$store.commit("addLecsInTableList", {
                   day: lecList[i].요일[j], 
