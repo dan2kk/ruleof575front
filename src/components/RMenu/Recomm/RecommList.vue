@@ -60,4 +60,12 @@ export default {
   position: relative
   width: 400px
 
+.recomm-list::-webkit-scrollbar 
+  display: none
+
+.recomm-list
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+
 </style>

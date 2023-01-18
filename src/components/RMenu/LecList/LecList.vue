@@ -1,10 +1,10 @@
 <template>
   <div class="lec-list">
-    <div class = "upper-menu">
+    <div class = "lec-list-upper-menu">
       <RMenuTitleBox boxStyle="redBold">내 수업목록</RMenuTitleBox>
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
-    <div class = "lower-menu">
+    <div class = "lec-list-lower-menu">
       <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
         {{lec.수업번호}}
       </LecListRecord>
@@ -52,9 +52,18 @@ export default {
   border-width : 1px
   border-color : white
   border-style: solid
-.lower-menu
+
+.lec-list-lower-menu
   overflow-y: overlay
   overflow-x: hidden
+
+.lec-list-lower-menu::-webkit-scrollbar 
+  display: none
+
+.lec-list-lower-menu
+  -ms-overflow-style: none
+  scrollbar-width: none
+
 -webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px

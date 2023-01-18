@@ -288,7 +288,7 @@ export default createStore({
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
     },
 
-    async addLecDetails(state, lecNum){ //수업정보 데이터 불러오기
+    async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
         let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
         details["state"] = true

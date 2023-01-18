@@ -1,5 +1,5 @@
 <template>
-  <div class="time-cart">
+  <div class="time-table-cart">
     <div class="time-table">
       <TimeLine :day = 0 />
       <TimeLine :day = 1 />
@@ -12,7 +12,6 @@
       시간미지정강좌 넣을곳
     </div>
   </div>
-
 </template>
 
 <script>
@@ -27,8 +26,14 @@ export default {
 
 <style lang="sass">
 @import '../../../../variables'
+.time-table-cart::-webkit-scrollbar 
+  display: none
 
-.time-cart
+.time-table-cart
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+.time-table-cart
   align-items: flex-start
   background-color: $white
   height: 520px
