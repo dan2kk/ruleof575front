@@ -5,7 +5,7 @@
     </div>
   </div>
   <button class="send-btn" @click="clickEvent" v-show='this.timeblockData.blockKind == "sendBtn"' >
-    <div class="svg-wrapper-1" @click="click()">
+    <div class="svg-wrapper-1">
       <div class="svg-wrapper">
         <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
           <path fill="none" d="M0 0h24v24H0z"></path>
@@ -162,7 +162,7 @@
     border-radius: 4px 
     overflow: hidden
     height: 40px
-    width: 60px
+    width: 65px
     transition: all 0.2s
     .span
       display: block 
