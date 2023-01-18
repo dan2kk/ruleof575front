@@ -9,13 +9,6 @@ export default createStore({
     userInfo: {stuId: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     isChanged: false,
     isChecked: true,
-<<<<<<< HEAD
-    user: {stu_id: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", username: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
-    grad: [],
-    selectedDateTime: { 월:[], 화:[], 수:[], 목:[], 금:[]},
-    recommList: [],
-    lecsInTable: {
-=======
     curScreen: 0,
 
     lecList:[],
@@ -31,32 +24,12 @@ export default createStore({
     },
     
     lecsInTableList: {
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645
       월 : [],
       화 : [],
       수 : [],
       목 : [],
       금 : []
     },
-<<<<<<< HEAD
-    colorList: ["#ffb3b7", "#fedcdd", "#dbe5f1", "#a5bcde", "#7d9dcd", "#ffa970", "#ffd77f", "#edf3c3", "#acd8d9", "#7fbcff", "#a9e5cc", "#dcedc1", "#fed2b5", "#ffaba7", "#ff8b94", "#94cfc9", "#6db3bf", "#4699b7", "#20566e", "#183641", "#cde4d2", "#d2e1a8", "#d8de7e", "#deda52", "#aacd67", "#b9c8e7", "#8fbae5", "#6e91e3", "#7978c6", "#8b55a9", "#f1a8bc", "#eee58a", "#c4ecb0"],
-    lecCount: 0,
-    timeblockLists: {
-      시간 : [  
-        { start: 0, end: 1, isInTT: false, content: null, blockkind: "sendbox"},
-        { start: 9, end: 10, isInTT: false, content: '09:00', blockkind: "hourblock"},
-        { start: 10, end: 11, isInTT: false, content: '10:00', blockkind: "hourblock", isclicked: false},
-        { start: 11, end: 12, isInTT: false, content: '11:00', blockkind: "hourblock", isclicked: false },
-        { start: 12, end: 13, isInTT: false, content: '12:00', blockkind: "hourblock", isclicked: false },
-        { start: 13, end: 14, isInTT: false, content: '13:00', blockkind: "hourblock", isclicked: false },
-        { start: 14, end: 15, isInTT: false, content: '14:00', blockkind: "hourblock", isclicked: false },
-        { start: 15, end: 16, isInTT: false, content: '15:00', blockkind: "hourblock", isclicked: false },
-        { start: 16, end: 17, isInTT: false, content: '16:00', blockkind: "hourblock", isclicked: false },
-        { start: 17, end: 18, isInTT: false, content: '17:00', blockkind: "hourblock", isclicked: false },
-        { start: 18, end: 19, isInTT: false, content: '18:00', blockkind: "hourblock", isclicked: false },
-        { start: 19, end: 20, isInTT: false, content: '19:00', blockkind: "hourblock", isclicked: false },
-        { start: 20, end: 21, isInTT: false, content: '20:00+', blockkind: "hourblock", isclicked: false}
-=======
     
     timeLines: {
       시간 : [  
@@ -73,7 +46,6 @@ export default createStore({
         { start: 18, end: 19, content: '18:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
         { start: 19, end: 20, content: '19:00', blockKind: "hourBlock", isSelected : false, colorIdx: 0},
         { start: 20, end: 21, content: '20:00+', blockKind: "hourBlock", isSelected : false, colorIdx: 0}
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645
       ],
       월 : [ ],
       화 : [ ],
@@ -189,11 +161,6 @@ export default createStore({
         state.gradList.push(record)
       }
     },
-<<<<<<< HEAD
-    clickDateTime(state, res){
-      let temp = state.selectedDateTime[res.day].findIndex((x)=>(x.start == res.start))
-      if(temp == -1) state.selectedDateTime[res.day].push(res.data)
-=======
     async setUpGradList(state) {
       let gradData = {}
 
@@ -279,7 +246,6 @@ export default createStore({
       if(temp == -1) {
         state.selectedTimes[res.day].push(res.data)
       }
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645
     },
     clearSelectedTimes(state) {
       state.selectedTimes['월'].length = 0
@@ -311,11 +277,6 @@ export default createStore({
     addLecsInTableList(state, lec) {
       state.lecsInTableList[lec.day].push(lec.info);
     },
-<<<<<<< HEAD
-    setTimeblockLists(state, day) {
-      state.timeblockLists[day] = fillTBL(state.lecsInTable[day])
-      state.timeblockLists[day].unshift({ start: 0, end: 1, isInTT: false, content: day, blockkind: "dayblock", isclicked: false})
-=======
     sortLecsInTableList(state, day) {
       state.lecsInTableList[day] = state.lecsInTableList[day].sort((a, b) => {
         return a.start - b.start;
@@ -324,7 +285,6 @@ export default createStore({
     setUpTimeLines(state, day) {
       state.timeLines[day] = fillTL(state.lecsInTableList[day])
       state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645
     }
   },
   actions: {
