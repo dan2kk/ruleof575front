@@ -27,6 +27,7 @@ export default {
     addToTimeTable() {
     },
     delFromLecList() {
+      //this.$store.commit("setIsChanged", true)
       this.$store.commit("delLecList", this.lecData);
     }
   }
