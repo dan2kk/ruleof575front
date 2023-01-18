@@ -13,7 +13,7 @@ export default createStore({
 
     lecList:[],
     recommList: [],
-    gradList: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
+    gradList: [],
 
     selectedTimes: { 
       월:[], 
