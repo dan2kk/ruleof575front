@@ -38,7 +38,6 @@ export default {
 
 .time-table-cart::-webkit-scrollbar 
   width : 2px
-  height: 1px
 
 .time-table-cart::-webkit-scrollbar-thumb
     background-color: rgba(0,0,0)
