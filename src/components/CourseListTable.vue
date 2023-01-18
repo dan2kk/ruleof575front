@@ -20,6 +20,13 @@ export default {
     Titlebox,
   },
   props: [],
+  data()
+  {
+    return{
+      courseList: {과목명: "과목명", 대표교강사명: "대표교강사명", 수업시간: "수업시간", 수업담기: "수업담기", 상세보기: "상세보기"}
+
+    }
+  },
   methods:{
     
   }

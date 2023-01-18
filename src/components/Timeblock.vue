@@ -13,35 +13,38 @@
     props: ["timeblockData"],
     computed: {
       blockStyle() {
-        var temp
+        var blockcolor
         switch (this.timeblockData.blockkind)
         {
           case "block":
             if (this.timeblockData.isclicked)
             {
-              temp = `#bdbdbd`
+              blockcolor = `#bdbdbd`
             }
             else
             {
-              temp = `#f0f0f0`
+              blockcolor = `#f0f0f0`
             }
             break;
           case "courseblock":
-              temp =  `${this.$store.getters.getColorList[this.timeblockData.colorIdx]}`
+              blockcolor =  `${this.$store.getters.getColorList[this.timeblockData.colorIdx]}`
               break;
           case "dayblock":
-            temp = `#e0e0e0`
+            blockcolor = `#e0e0e0`
             break;
           case "hourblock":
-            temp = `#e0e0e0`
+            blockcolor = `#e0e0e0`
+            break;
+          case "sendbox":
+            blockcolor = `#2DB400`
             break;
           default:
-            temp = `#ff00d6`
+            blockcolor = `#ff00d6`
             break;
         }
         return {
           '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 40}px`,
-          '--color'  : temp,
+          '--color'  : blockcolor,
         }
       },
     },
