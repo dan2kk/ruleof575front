@@ -38,7 +38,6 @@ export const fillTL = (lecsInTable) => {
             head = tail;
             tail = parseInt(head) + 1;
         }
-
         if(tail >= 22) {
             break;
         }
@@ -88,4 +87,4 @@ export const temp = (lec, idx) => {
     }
 
     return lecToAdd;
-} 
+}
