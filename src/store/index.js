@@ -315,7 +315,6 @@ export default createStore({
       catch(err){
         console.log(err)
       }
-<<<<<<< HEAD
       console.log(number)
     },
     addShadowLec(state, lecDat){
@@ -345,9 +344,6 @@ export default createStore({
         }
       }
     },
-=======
-    }
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
   },
   actions: {
   },
