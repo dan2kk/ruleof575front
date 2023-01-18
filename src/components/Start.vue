@@ -2,21 +2,12 @@
   <div class="start">
     <LMenu/>
     <RMenu/>
-<<<<<<< HEAD
     <CourseInfoModal class="left-modal" v-if="leftmodal" v-on:modal-close="LmodalClose()">
       {{this.$store.getters.getLecDetail1}}
     </CourseInfoModal>
     <CourseInfoModal class="right-modal" v-if="rightmodal" v-on:modal-close="RmodalClose()">
       {{this.$store.getters.getLecDetail2}}
     </CourseInfoModal>
-=======
-    <LecDetailsModal class="left-modal" v-if="onLeftModal" v-on:modal-close="leftModalClose()">
-      {{this.$store.getters.getLecDetailsLeft}}
-    </LecDetailsModal>
-    <LecDetailsModal class="right-modal" v-if="onRightModal" v-on:modal-close="rightModalClose()">
-      {{this.$store.getters.getLecDetailsRight}}
-    </LecDetailsModal>
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
   </div>
 </template>
 

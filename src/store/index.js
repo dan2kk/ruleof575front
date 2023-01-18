@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL, processLec } from '@/util'
+import { fillTL } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -14,14 +14,8 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [],
-<<<<<<< HEAD
-    lecDetail1: {state:false},
-    lecDetail2: {state:false},
-    shadowList: [[],[],[],[],[]],
-=======
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
 
     selectedTimes: { 
       월:[], 
@@ -113,16 +107,8 @@ export default createStore({
     getLecDetailsLeft(state){
       return state.lecDetailsLeft
     },
-<<<<<<< HEAD
-    getLecDetail2(state){
-      return state.lecDetail2
-    },
-    getShadowLec(state){
-      return state.shadowList
-=======
     getLecDetailsRight(state){
       return state.lecDetailsRight
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
     }
   },
 
@@ -315,39 +301,7 @@ export default createStore({
       catch(err){
         console.log(err)
       }
-<<<<<<< HEAD
-      console.log(number)
-    },
-    addShadowLec(state, lecDat){
-      for(let i=0; i<5;i++){
-        state.shadowList[i].length = 0
-      }
-      for(let j=0 ; j< lecDat.요일.length; j++){              
-        if(lecDat.요일[j] == '시간미지정강좌') {
-          continue;
-        }
-        switch(lecDat.요일[j]){
-          case '월':
-            state.shadowList[0].push(processLec(lecDat, j))
-            break
-          case '화':
-            state.shadowList[1].push(processLec(lecDat, j))
-            break
-          case '수':
-            state.shadowList[2].push(processLec(lecDat, j))
-            break
-          case '목':
-            state.shadowList[3].push(processLec(lecDat, j))
-            break
-          case '금':
-            state.shadowList[4].push(processLec(lecDat, j))
-            break
-        }
-      }
-    },
-=======
     }
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
   },
   actions: {
   },
