@@ -14,14 +14,9 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [],
-<<<<<<< HEAD
-    lecDetail1: {state:false},
-    lecDetail2: {state:false},
     shadowList: [[],[],[],[],[]],
-=======
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
 
     selectedTimes: { 
       월:[], 
@@ -113,16 +108,8 @@ export default createStore({
     getLecDetailsLeft(state){
       return state.lecDetailsLeft
     },
-<<<<<<< HEAD
-    getLecDetail2(state){
-      return state.lecDetail2
-    },
-    getShadowLec(state){
-      return state.shadowList
-=======
     getLecDetailsRight(state){
       return state.lecDetailsRight
->>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
     }
   },
 
