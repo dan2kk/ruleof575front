@@ -22,7 +22,7 @@ export default {
   props: ["lecData"],
   methods : {
     onClick() {
-      this.$store.commit("changeScreen", 3);
+      this.$store.commit("getCourseInfo", this.lecData.수업번호);
     },
     addToTimeTable() {
     },

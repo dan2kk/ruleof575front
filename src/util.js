@@ -11,12 +11,8 @@ export const fillTL = (lecsInTable) => {
     let lecEnd;
     let lecName;
     let lecColorIdx;
-<<<<<<< HEAD
     let lec_num;
     
-=======
-
->>>>>>> 3d48d657a33b01f297ac914f1b343a980be0e608
     while(1) {
         if(lecIdx < len) {
             lecStart = lecsInTable[lecIdx].start;

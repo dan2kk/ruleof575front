@@ -6,7 +6,7 @@
       {{this.$store.getters.getLecDetail1}}
     </courseinfomodal>
     <courseinfomodal class="right-modal" v-if="rightmodal" v-on:modal-close="RmodalClose()">
-      world!
+      {{this.$store.getters.getLecDetail2}}
     </courseinfomodal>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
       this.$store.getters.getLecDetail1.state = false
     },
     RmodalClose(){
-      return this.$store.getters.getLecDetail2.state = false
+      this.$store.getters.getLecDetail2.state = false
     }
   }
 };

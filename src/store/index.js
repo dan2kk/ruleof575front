@@ -14,6 +14,8 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
+    lecDetail1: {state:false},
+    lecDetail2: {state:false},
 
     selectedTimes: { 
       월:[], 
@@ -288,7 +290,8 @@ export default createStore({
       try{
         let res = (await axios.get('/details', {params: {lec_num: number}})).data
         res["state"] = true
-        if(state.lecDetail1[state]){
+        alert(state.lecDetail1["state"])
+        if(state.lecDetail1["state"]){
           state.lecDetail2 = res
           console.log(state.lecDetail2)
         }
