@@ -25,7 +25,7 @@ export default createStore({
       금:[]
     },
     
-    lecsInTableList: {
+    lecsInTable: {
       월 : [],
       화 : [],
       수 : [],
@@ -95,8 +95,8 @@ export default createStore({
     getSelectedTimes(state){
       return state.selectedTimes
     },
-    getLecsInTableList(state) {
-      return state.lecsInTableList
+    getLecsInTable(state) {
+      return state.lecsInTable
     },
     getTimeLines(state) {
       return state.timeLines
@@ -274,16 +274,16 @@ export default createStore({
       state.recommList.length = 0;
     },
 
-    addLecsInTableList(state, lec) {
-      state.lecsInTableList[lec.day].push(lec.info);
+    addLecsInTable(state, lec) {
+      state.lecsInTable[lec.day].push(lec.info);
     },
-    sortLecsInTableList(state, day) {
-      state.lecsInTableList[day] = state.lecsInTableList[day].sort((a, b) => {
+    sortLecsInTable(state, day) {
+      state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
         return a.start - b.start;
       });
     },
     setUpTimeLines(state, day) {
-      state.timeLines[day] = fillTL(state.lecsInTableList[day])
+      state.timeLines[day] = fillTL(state.lecsInTable[day])
       state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
     },
 

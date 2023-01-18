@@ -1,6 +1,6 @@
-export const fillTL = (lecsInTable) => {
+export const fillTL = (lecs) => {
     let lecIdx = 0;
-    let len = lecsInTable.length;
+    let len = lecs.length;
 
     let ret = [];
     
@@ -16,11 +16,11 @@ export const fillTL = (lecsInTable) => {
     
     while(1) {
         if(lecIdx < len) {
-            lecStart = lecsInTable[lecIdx].start;
-            lecEnd = lecsInTable[lecIdx].end;
-            lecName = lecsInTable[lecIdx].content
-            lecColorIdx = lecsInTable[lecIdx].colorIdx
-            lecNum = lecsInTable[lecIdx].lecNum
+            lecStart = lecs[lecIdx].start;
+            lecEnd = lecs[lecIdx].end;
+            lecName = lecs[lecIdx].content
+            lecColorIdx = lecs[lecIdx].colorIdx
+            lecNum = lecs[lecIdx].lecNum
             lecIdx++;
         }
         else {

@@ -74,18 +74,18 @@ export default {
               }
               Object.assign(lecToAdd, processLec(lecList[i], j));
 
-              this.$store.commit("addLecsInTableList", {
+              this.$store.commit("addLecsInTable", {
                   day: lecList[i].요일[j], 
                   info: lecToAdd
               });
             }
           }
         }
-        this.$store.commit("sortLecsInTableList", '월');
-        this.$store.commit("sortLecsInTableList", '화');
-        this.$store.commit("sortLecsInTableList", '수');
-        this.$store.commit("sortLecsInTableList", '목');
-        this.$store.commit("sortLecsInTableList", '금');
+        this.$store.commit("sortLecsInTable", '월');
+        this.$store.commit("sortLecsInTable", '화');
+        this.$store.commit("sortLecsInTable", '수');
+        this.$store.commit("sortLecsInTable", '목');
+        this.$store.commit("sortLecsInTable", '금');
 
 
         this.$store.commit("setUpTimeLines", '월');
