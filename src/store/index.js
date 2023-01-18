@@ -13,7 +13,7 @@ export default createStore({
 
     lecList:[],
     recommList: [],
-    gradList: [],
+    gradList: [{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"}],
 
     selectedTimes: { 
       월:[], 
@@ -101,6 +101,12 @@ export default createStore({
     },
     getColorList(state) {
       return state.colorList
+    },
+    getLecDetail1(state){
+      return state.lecDetail1
+    },
+    getLecDetail2(state){
+      return state.lecDetail2
     }
   },
 
@@ -277,6 +283,24 @@ export default createStore({
     setUpTimeLines(state, day) {
       state.timeLines[day] = fillTL(state.lecsInTableList[day])
       state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
+    },
+    async getCourseInfo(state, number){ //수업정보 데이터 불러오기
+      try{
+        let res = (await axios.get('/details', {params: {lec_num: number}})).data
+        res["state"] = true
+        if(state.lecDetail1[state]){
+          state.lecDetail2 = res
+          console.log(state.lecDetail2)
+        }
+        else{
+          state.lecDetail1 = res
+          console.log(state.lecDetail1)
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+      console.log(number)
     }
   },
   actions: {

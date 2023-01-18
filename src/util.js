@@ -11,13 +11,19 @@ export const fillTL = (lecsInTable) => {
     let lecEnd;
     let lecName;
     let lecColorIdx;
+<<<<<<< HEAD
+    let lec_num;
+    
+=======
 
+>>>>>>> 3d48d657a33b01f297ac914f1b343a980be0e608
     while(1) {
         if(lecIdx < len) {
             lecStart = lecsInTable[lecIdx].start;
             lecEnd = lecsInTable[lecIdx].end;
             lecName = lecsInTable[lecIdx].content
             lecColorIdx = lecsInTable[lecIdx].colorIdx
+            lec_num = lecsInTable[lecIdx].lec_num
             lecIdx++;
         }
         else {
@@ -58,7 +64,8 @@ export const fillTL = (lecsInTable) => {
             content: lecName,
             blockKind: "lecBlock",
             isSelected: false,
-            colorIdx: lecColorIdx
+            colorIdx: lecColorIdx,
+            lecNum: lec_num
         })
 
         head = tail = lecEnd;
@@ -84,6 +91,7 @@ export const temp = (lec, idx) => {
     start : startTime,
     end : endTime,
     content : lec.과목명,
+    lec_num : lec.수업번호
     }
 
     return lecToAdd;

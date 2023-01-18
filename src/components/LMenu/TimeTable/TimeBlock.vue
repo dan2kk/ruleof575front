@@ -70,7 +70,8 @@
             console.log(this.timeblockData.isSelected)
             break
           case "lecBlock":
-            alert("1") // 미완
+            console.log(this.timeblockData.lecNum)
+            this.$store.commit("getCourseInfo", this.timeblockData.lecNum)
             break
           case "dayBlock":
             console.log(this.timeblockData.content)
