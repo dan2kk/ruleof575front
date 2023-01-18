@@ -19,20 +19,14 @@ export default {
     RMenuTitleBox, 
     GradRecord
   },
-<<<<<<< HEAD
-  data(){
-    return{
-      gradListHead :{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"},
-    } 
+  data() {
+    return {
+      gradListHead : {이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"},
+    }
   },
-=======
->>>>>>> 0f333d74d8fc2df62a0ca4d65fbfc19d96504adf
   computed : {
     gradList() {
       return this.$store.getters.getGradList
-    },
-    gradListHead() {
-      return this.$store.getters.getGradList[0]
     }
   },
   methods:{
