@@ -232,24 +232,7 @@ export default {
       }
       this.$refs.grad.update()
     },
-    async getCourseInfo(number){ //수업정보 데이터 불러오기
-      if(number != this.$store.getters.getLecture.lec_info.수업번호){
-        try{
-          let res = (await axios.get('/details', {params: {lec_num: number}})).data
-          this.$store.commit("changeLec", res)
-          console.log(res)
-          this.menu = 3
-        }
-        catch(err){
-          console.log(err)
-        }
-        this.menu = 3
-        console.log(number)
-        }
-      else{
-        this.menu = 3
-      }
-    }
+    
   },
 };
 </script>

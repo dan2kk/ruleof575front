@@ -11,29 +11,12 @@
 </template>
 
 <script>
-<<<<<<< HEAD:src/components/Timetable.vue
-import { onMounted } from "vue";
-import Timeline from "./Timeline";
-=======
 import TimeLine from "./TimeLine";
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645:src/components/LMenu/TimeTable/TimeTable.vue
 export default {
   name: "TimeTable",
   components: {
-<<<<<<< HEAD:src/components/Timetable.vue
-    Timeline,
-  },
-  props: [ ],
-  methods: {
-    onMounted()
-      {
-        this.$store.mutations.setTimeblockLists(state, day);
-      }
-  },
-=======
     TimeLine
   }
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645:src/components/LMenu/TimeTable/TimeTable.vue
 };
 
 </script>
@@ -83,16 +66,5 @@ export default {
 .sendBtn:active
   transform: scale(0.95)
 
-<<<<<<< HEAD:src/components/Timetable.vue
-.timetable
-  align-items: center
-  background-color: $white
-  display: flex
-  gap: 2px
-  height: 520px
-  position: relative
-  width: 400px
-=======
->>>>>>> 3f928a54e557583a1bc9f2587389201f5566d645:src/components/LMenu/TimeTable/TimeTable.vue
 
 </style>
