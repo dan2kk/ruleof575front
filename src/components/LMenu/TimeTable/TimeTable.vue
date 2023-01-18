@@ -26,12 +26,6 @@ export default {
 
 <style lang="sass">
 @import '../../../../variables'
-.time-table-cart::-webkit-scrollbar 
-  display: none
-
-.time-table-cart
-  -ms-overflow-style: none
-  scrollbar-width: none
 
 .time-table-cart
   align-items: flex-start
@@ -41,6 +35,15 @@ export default {
   width: 400px
   overflow-x: hidden
   overflow-y: overlay
+
+.time-table-cart::-webkit-scrollbar 
+  width : 2px
+  height: 1px
+
+.time-table-cart::-webkit-scrollbar-thumb
+    background-color: rgba(0,0,0)
+    height: 95%
+
 .time-table
   align-items: flex-start
   display: flex
