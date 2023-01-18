@@ -18,7 +18,6 @@ export default {
     TimeLine
   }
 };
-
 </script>
 
 <style lang="sass">

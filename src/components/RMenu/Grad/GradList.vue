@@ -1,7 +1,17 @@
 <template>
   <div class="grad-list">
+<<<<<<< HEAD
     <RMenuTitleBox boxStyle="purpleBold">졸업사정 변동사항</RMenuTitleBox>
     <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec"/>
+=======
+    <div class = "upper-menu">
+      <RMenuTitleBox boxStyle="purpleBold">졸업사정 변동사항</RMenuTitleBox>
+      <GradRecord :gradData = "this.gradListHead"/>
+    </div>
+    <div class = "lower-menu">
+      <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec"/>
+    </div>
+>>>>>>> 3d48d657a33b01f297ac914f1b343a980be0e608
   </div>
 </template>
 
@@ -14,6 +24,14 @@ export default {
     RMenuTitleBox, 
     GradRecord
   },
+<<<<<<< HEAD
+=======
+  data(){
+    return{
+      gradListHead :{이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"},
+    } 
+  },
+>>>>>>> 3d48d657a33b01f297ac914f1b343a980be0e608
   computed : {
     gradList() {
       return this.$store.getters.getGradList;
@@ -45,8 +63,10 @@ export default {
   height: 550px
   position: relative
   width: 400px
-
 .lower-menu
   overflow-y: overlay
   overflow-x: hidden
+-webkit-scrollbar-thumb
+  background-color: hsla(0, 0%, 42%, 0.49)
+  border-radius: 100px
 </style>

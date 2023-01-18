@@ -1,21 +1,34 @@
 <template>
   <div class="lec-list">
-    <RMenuTitleBox boxStyle="redBold">내 수업목록</RMenuTitleBox>
-    <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
-      {{lec.수업번호}}
-    </LecListRecord>
+    <div class = "upper-menu">
+      <RMenuTitleBox boxStyle="redBold">내 수업목록</RMenuTitleBox>
+      <LecListHead :lecHeadData="lecListHead"/>
+    </div>
+    <div class = "lower-menu">
+      <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
+        {{lec.수업번호}}
+      </LecListRecord>
+    </div>
+
   </div>
 </template>
 
 <script>
 import RMenuTitleBox from "../Box/RMenuTitleBox";
 import LecListRecord from "./LecListRecord";
+import LecListHead from "./LecListHead";
 
 export default {
   name: "LecList",
   components: {
     RMenuTitleBox,
-    LecListRecord
+    LecListRecord,
+    LecListHead
+  },
+  data(){
+    return{
+      lecListHead :{과목명: "과목명", 대표교강사명: "강사명", 수업시간: "수업시간", 담기: "담기", 더보기: "더보기",},
+    }
   },
   computed : {
     lecList() {
@@ -34,12 +47,16 @@ export default {
   display: flex
   flex-direction: column
   height: 550px
-  overflow: hidden
-  overflow-y: scroll
   position: relative
   width: 400px
   border-width : 1px
   border-color : white
   border-style: solid
+.lower-menu
+  overflow-y: overlay
+  overflow-x: hidden
+-webkit-scrollbar-thumb
+  background-color: hsla(0, 0%, 42%, 0.49)
+  border-radius: 100px
 
 </style>
