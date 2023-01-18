@@ -283,7 +283,7 @@ export default createStore({
       });
     },
     setUpTimeLines(state, day) {
-      state.timeLines[day] = fillTL(state.lecsInTableList[day])
+      state.timeLines[day] = fillTL(state.lecsInTable[day])
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
     },
 
