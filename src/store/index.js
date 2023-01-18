@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL } from '@/util'
+import { fillTL, processLec } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -16,6 +16,7 @@ export default createStore({
     gradList: [],
     lecDetail1: {state:false},
     lecDetail2: {state:false},
+    shadowList: [[],[],[],[],[]],
 
     selectedTimes: { 
       월:[], 
@@ -109,6 +110,9 @@ export default createStore({
     },
     getLecDetail2(state){
       return state.lecDetail2
+    },
+    getShadowLec(state){
+      return state.shadowList
     }
   },
 
@@ -304,7 +308,34 @@ export default createStore({
         console.log(err)
       }
       console.log(number)
-    }
+    },
+    addShadowLec(state, lecDat){
+      for(let i=0; i<5;i++){
+        state.shadowList[i].length = 0
+      }
+      for(let j=0 ; j< lecDat.요일.length; j++){              
+        if(lecDat.요일[j] == '시간미지정강좌') {
+          continue;
+        }
+        switch(lecDat.요일[j]){
+          case '월':
+            state.shadowList[0].push(processLec(lecDat, j))
+            break
+          case '화':
+            state.shadowList[1].push(processLec(lecDat, j))
+            break
+          case '수':
+            state.shadowList[2].push(processLec(lecDat, j))
+            break
+          case '목':
+            state.shadowList[3].push(processLec(lecDat, j))
+            break
+          case '금':
+            state.shadowList[4].push(processLec(lecDat, j))
+            break
+        }
+      }
+    },
   },
   actions: {
   },

@@ -1,6 +1,7 @@
 <template>
   <div class="time-line">
     <TimeBlock :timeblockData="element" v-for="element in this.timeLines" :key="element.수업번호"/>
+    <div class="shadowbox" :style="blcokStyle(element)" v-for="element in this.shadowLines"/>
   </div>
 </template>
 
@@ -34,6 +35,12 @@ export default {
       else if(this.day == 5){
         return this.$store.getters.getTimeLines.금;
       }
+    },
+    shadowLines(){
+      return this.$store.getters.getShadowLec[this.day - 1];
+    },
+    blcokStyle(element){
+      let height = 
     }
   }
 };
@@ -50,11 +57,5 @@ export default {
   position: relative
   width: 60px
 
-
-@keyframes fly-1
-  0%
-    transform: translateY(0.1em)
-  100%
-    transform: translateY(-0.1em)
 
 </style>
