@@ -14,6 +14,7 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [],
+    shadowList: [[],[],[],[],[]],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
 
@@ -301,7 +302,34 @@ export default createStore({
       catch(err){
         console.log(err)
       }
-    }
+    },
+    addShadowLec(state, lecDat){
+      for(let i=0; i<5;i++){
+        state.shadowList[i].length = 0
+      }
+      for(let j=0 ; j< lecDat.요일.length; j++){              
+        if(lecDat.요일[j] == '시간미지정강좌') {
+          continue;
+        }
+        switch(lecDat.요일[j]){
+          case '월':
+            state.shadowList[0].push(processLec(lecDat, j))
+            break
+          case '화':
+            state.shadowList[1].push(processLec(lecDat, j))
+            break
+          case '수':
+            state.shadowList[2].push(processLec(lecDat, j))
+            break
+          case '목':
+            state.shadowList[3].push(processLec(lecDat, j))
+            break
+          case '금':
+            state.shadowList[4].push(processLec(lecDat, j))
+            break
+        }
+      }
+    },
   },
   actions: {
   },
