@@ -13,6 +13,7 @@
     props: ["timeblockData"],
     computed: {
       blockStyle() {
+        
         var blockcolor
         switch (this.timeblockData.blockkind)
         {
@@ -60,26 +61,26 @@
             break
           case "dayblock":
             console.log(this.timeblockData.content)
-            this.timeblockData.isclicked = !this.timeblockData.isclicked
             this.$store.getters.getTimeblockLists[this.timeblockData.content].forEach(x=> 
             {if(this.timeblockData.isclicked != x.isclicked && x.blockkind =="block"){
-                x.isclicked = this.timeblockData.isclicked
+                x.isclicked = !x.isclicked
                 console.log(x.isclicked)
             }})
+            this.timeblockData.isclicked = !this.timeblockData.isclicked
             break
           case "hourblock":
             //console.log(this.$store.getters.getTimeblockLists)
-            this.timeblockData.isclicked = !this.timeblockData.isclicked
             for(let x in this.$store.getters.getTimeblockLists){
               //console.log(x)
               this.$store.getters.getTimeblockLists[x].forEach(y=>{
                 if(Math.floor(y.start) == this.timeblockData.start && y.blockkind == "block"
                 && this.timeblockData.isclicked != y.isclicked){
-                  y.isclicked = this.timeblockData.isclicked
+                  y.isclicked = !y.isclicked
                   console.log(y.isclicked)
                 }
               })
             }
+            this.timeblockData.isclicked = !this.timeblockData.isclicked
             break
           case "sendbox":
             for(let x in this.$store.getters.getTimeblockLists){
