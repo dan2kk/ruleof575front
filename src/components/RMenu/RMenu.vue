@@ -5,8 +5,8 @@
       <LoginScreen v-if="!isLogined" v-on:login-req="loginEvent()"> </LoginScreen>
       <LecList v-show="isLogined && curScreen == 1"></LecList>
       <RecommList v-show="isLogined && curScreen == 2"></RecommList>
+      <Known v-show="isLogined && curScreen == 3"></Known>
       <GradList v-show="isLogined && curScreen == 4"></GradList>
-      <LecDetails v-show="isLogined && curScreen == 3"></LecDetails>
     </div>
   </div>
 </template>
@@ -16,8 +16,8 @@ import RMenuTabs from "./RMenuTabs";
 import LoginScreen from "./Login/LoginScreen";
 import LecList from "./LecList/LecList";
 import RecommList from "./Recomm/RecommList";
+import Known from "./Known/Known";
 import GradList from "./Grad/GradList";
-import LecDetails from "./Details/LecDetails";
 import axios from "axios";
 import { processLec } from '@/util'
 
@@ -28,8 +28,8 @@ export default {
     LoginScreen,
     LecList,
     RecommList,
-    GradList,
-    LecDetails
+    Known,
+    GradList
   },
   computed : {
     isLogined() {

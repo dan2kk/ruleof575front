@@ -1,5 +1,5 @@
 <template>
-  <div class="lec-details">
+  <div class="known">
     <RMenuTitleBox boxStyle="yellowBold" v-for="temp in temps" :key="temp">{{temp}}</RMenuTitleBox>
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 import RMenuTitleBox from "../Box/RMenuTitleBox";
 export default {
-  name: "CourseInfoTable",
+  name: "Known",
   components: {
     RMenuTitleBox,
   },
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="sass">
-.lec-details
+.known
   align-items: center
   background-color: #ffefc6
   display: flex

@@ -9,7 +9,7 @@
     </div>
 
     <div :class="[`r-menu-tab`, `yellow`]" @click="onClick(3)">
-      <div class="r-menu-tab-text valign-text-middle notosanskr-bold-white-18px" >수업상세</div>
+      <div class="r-menu-tab-text valign-text-middle notosanskr-bold-white-18px" >아시나요</div>
     </div>
 
     <div :class="[`r-menu-tab`, `purple`]" @click="onClick(4)">
