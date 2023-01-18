@@ -53,7 +53,7 @@ export default {
   align-items: flex-start
   display: flex
   flex-direction: column
-  height: 520px
+  height: 780px
   position: relative
   width: 60px
 

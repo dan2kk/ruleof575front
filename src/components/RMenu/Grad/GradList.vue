@@ -27,7 +27,7 @@ export default {
   computed : {
     gradList() {
       return this.$store.getters.getGradList
-    }
+    },
   },
   methods:{
     update(){

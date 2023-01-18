@@ -49,7 +49,7 @@
             break;
         }
         return {
-          '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 40}px`,
+          '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 60}px`,
           '--color' : color
         }
       }
@@ -71,7 +71,7 @@
             break
           case "lecBlock":
             console.log(this.timeblockData.lecNum)
-            this.$store.commit("getCourseInfo", this.timeblockData.lecNum)
+            this.$store.commit("addLecDetails", this.timeblockData.lecNum)
             break
           case "dayBlock":
             console.log(this.timeblockData.content)
@@ -161,7 +161,7 @@
     border: none 
     border-radius: 4px 
     overflow: hidden
-    height: 40px
+    height: 30px
     width: 65px
     transition: all 0.2s
     .span

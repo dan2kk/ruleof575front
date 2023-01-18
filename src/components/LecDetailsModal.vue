@@ -1,7 +1,7 @@
 <template>
-    <div class ="course-info-modal">
+    <div class ="lec-details-modal">
         <div class= "overlay" @click="$emit('modal-close')"/>
-        <div class= "modal-card">
+        <div class= "lec-details-modal-card">
             <slot/>
         </div>
     </div>
@@ -12,7 +12,7 @@ export default{};
 </script>
 
 <style lang="sass">
-.course-info-modal,
+.lec-details-modal,
 .overlay
     width: 400px
     height: 100%
@@ -22,7 +22,7 @@ export default{};
 .overlay
     opacity: 0.3
     background-color: black
-.modal-card
+.lec-details-modal-card
     position: absolute
     max: width 40%
     width: 350px

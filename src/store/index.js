@@ -14,9 +14,14 @@ export default createStore({
     lecList:[],
     recommList: [],
     gradList: [],
+<<<<<<< HEAD
     lecDetail1: {state:false},
     lecDetail2: {state:false},
     shadowList: [[],[],[],[],[]],
+=======
+    lecDetailsLeft: {state: false},
+    lecDetailsRight: {state: false},
+>>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
 
     selectedTimes: { 
       월:[], 
@@ -26,7 +31,7 @@ export default createStore({
       금:[]
     },
     
-    lecsInTableList: {
+    lecsInTable: {
       월 : [],
       화 : [],
       수 : [],
@@ -96,8 +101,8 @@ export default createStore({
     getSelectedTimes(state){
       return state.selectedTimes
     },
-    getLecsInTableList(state) {
-      return state.lecsInTableList
+    getLecsInTable(state) {
+      return state.lecsInTable
     },
     getTimeLines(state) {
       return state.timeLines
@@ -105,14 +110,19 @@ export default createStore({
     getColorList(state) {
       return state.colorList
     },
-    getLecDetail1(state){
-      return state.lecDetail1
+    getLecDetailsLeft(state){
+      return state.lecDetailsLeft
     },
+<<<<<<< HEAD
     getLecDetail2(state){
       return state.lecDetail2
     },
     getShadowLec(state){
       return state.shadowList
+=======
+    getLecDetailsRight(state){
+      return state.lecDetailsRight
+>>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
     }
   },
 
@@ -278,35 +288,34 @@ export default createStore({
       state.recommList.length = 0;
     },
 
-    addLecsInTableList(state, lec) {
-      state.lecsInTableList[lec.day].push(lec.info);
+    addLecsInTable(state, lec) {
+      state.lecsInTable[lec.day].push(lec.info);
     },
-    sortLecsInTableList(state, day) {
-      state.lecsInTableList[day] = state.lecsInTableList[day].sort((a, b) => {
+    sortLecsInTable(state, day) {
+      state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
         return a.start - b.start;
       });
     },
     setUpTimeLines(state, day) {
-      state.timeLines[day] = fillTL(state.lecsInTableList[day])
-      state.timeLines[day].unshift({ start: 0, end: 1, content: day, blockKind: "dayBlock", isSelected: false})
+      state.timeLines[day] = fillTL(state.lecsInTable[day])
+      state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
     },
-    async getCourseInfo(state, number){ //수업정보 데이터 불러오기
+
+    async addLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
-        let res = (await axios.get('/details', {params: {lec_num: number}})).data
-        res["state"] = true
-        alert(state.lecDetail1["state"])
-        if(state.lecDetail1["state"]){
-          state.lecDetail2 = res
-          console.log(state.lecDetail2)
+        let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
+        details["state"] = true
+        if(state.lecDetailsLeft["state"]){
+          state.lecDetailsRight = details
         }
         else{
-          state.lecDetail1 = res
-          console.log(state.lecDetail1)
+          state.lecDetailsLeft = details
         }
       }
       catch(err){
         console.log(err)
       }
+<<<<<<< HEAD
       console.log(number)
     },
     addShadowLec(state, lecDat){
@@ -336,6 +345,9 @@ export default createStore({
         }
       }
     },
+=======
+    }
+>>>>>>> 842dfd80f314a63a2ccac7e265945303336ba29d
   },
   actions: {
   },
