@@ -28,7 +28,7 @@ export default {
   background-color: $white
   display: flex
   gap: 8px
-  height: 520px
+  height: 1040px
   position: relative
   width: 400px
   border-style: solid
