@@ -47,14 +47,14 @@ export default {
 
 <style lang="sass">
 @import '../../variables'
-.timeline-1,
-.timeline-2
+.timeline
   align-items: flex-start
   display: flex
   flex-direction: column
   height: 520px
   position: relative
   width: 65px
+  
 .timeblock1,
 .timeblock2,
 .timeblock3,
