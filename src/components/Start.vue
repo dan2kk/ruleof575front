@@ -15,7 +15,7 @@
 <script>
 import LMenu from "./LMenu/LMenu";
 import RMenu from "./RMenu/RMenu";
-import courseinfomodal from "./CourseInfoModal";
+import CourseInfoModal from "./CourseInfoModal";
 import axios from 'axios';
 
 export default {
@@ -23,7 +23,7 @@ export default {
   components: {
     LMenu,
     RMenu,
-    courseinfomodal,
+    CourseInfoModal,
   },
   computed:{
     leftmodal(){
