@@ -95,8 +95,4 @@ export const temp = (lec, idx) => {
     }
 
     return lecToAdd;
-<<<<<<< HEAD
-} 
-=======
 }
->>>>>>> 3d48d657a33b01f297ac914f1b343a980be0e608
