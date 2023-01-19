@@ -1,11 +1,12 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50"/>
+      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
-      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="addToTimeTable" @mouseover="addShadowToTT"/>
-      <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="delFromLecList"/>
+      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.state == 0"/>
+      <SearchImageBox src= './iconbuttons-1.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.state == 1"/>
+      <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="clickDelBtn"/>
     </div>
   </div>
 </template>
@@ -33,6 +34,14 @@ export default {
       else {
         this.delFromTimeTable()
       }
+    },
+    clickDelBtn() {
+      //this.$store.commit("setIsChanged", true)
+      if(this.lecData.state == 1) {
+        this.delFromTimeTable();
+      }
+      
+      this.$store.commit("delLecList", this.lecData);
     },
     addToTimeTable() {
       let lecsInTable = this.$store.getters.getLecsInTable
@@ -118,13 +127,8 @@ export default {
       console.log(this.lecData)
       this.$store.commit("addShadowLec", this.lecData)
     },
-    delFromLecList() {
-      //this.$store.commit("setIsChanged", true)
-      if(this.lecData.state == 1) {
-        this.delFromTimeTable();
-      }
-      
-      this.$store.commit("delLecList", this.lecData);
+    clearShadowLec() {
+      this.$store.commit("clearShadowLec")
     }
   }
 };
