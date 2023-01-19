@@ -69,15 +69,14 @@ export default {
 
               let lecToAdd = processLec(lecList[i], j);
               lecToAdd['color'] = this.$store.getters.getColor;
-              console.log(this.$store.getters.getColor)
 
               this.$store.commit("addLecsInTable", {
                   day: lecList[i].요일[j], 
                   info: lecToAdd
               });
             }
+            this.$store.commit("setNextColor")
           }
-          this.$store.commit("setNextColor")
         }
 
         this.$store.commit("setUpTimeLines", '월');

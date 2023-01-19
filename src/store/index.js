@@ -56,7 +56,7 @@ export default createStore({
       목 : [ ], 
       금 : [ ]
     },
-    colorIdx : 0,
+    colorIdx : 1,//Math.floor(Math.random() * 32),
     colorList: [
       `#ffb3b7`, `#fedcdd`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
@@ -116,6 +116,7 @@ export default createStore({
       return state.colorList
     },
     getColor(state) {
+      console.log(state.colorList[state.colorIdx])
       return state.colorList[state.colorIdx]
     }
   },
@@ -371,7 +372,23 @@ export default createStore({
       else state.isChecked = true;
     },
     setNextColor(state) {
-      state.colorIdx = (state.colorIdx + 1)% state.colorList.length 
+      let nextIdx = state.colorIdx
+      let nextColor
+      let colorsInUse = state.lecsInTable['월'].concat(
+        state.lecsInTable['화'], 
+        state.lecsInTable['수'],
+        state.lecsInTable['목'],
+        state.lecsInTable['금'])
+
+      while(1) {
+        //nextIdx = (nextIdx + Math.floor(Math.random() * 32)) % state.colorList.length
+        nextIdx = (nextIdx + 1) % state.colorList.length
+        nextColor = state.colorList[nextIdx] 
+        if(colorsInUse.findIndex(lec => lec.color == nextColor) == -1) {
+          break
+        }
+      }      
+      state.colorIdx = nextIdx 
     }
   },
   actions: {
