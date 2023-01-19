@@ -360,6 +360,11 @@ export default createStore({
       for(let i=0; i<5;i++){
         state.shadowList[i].length = 0
       }
+    },
+    setIsChecked(state)
+    {
+      if (state.isChecked) state.isChecked = false;
+      else state.isChecked = true;
     }
   },
   actions: {
