@@ -44,7 +44,7 @@ export default {
           itemPos = `flex-bottom`
           break;
         default:
-          itemPos = `flex-start`
+          itemPos = `center`
           break;
       }
       if (this.size != undefined){

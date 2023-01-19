@@ -2,11 +2,9 @@
   <div class="start">
     <LMenu/>
     <RMenu/>
-    <LecDetailsModal class="left-modal" v-if="onLeftModal" v-on:modal-close="leftModalClose()">
-      {{this.$store.getters.getLecDetailsLeft}}
+    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose()">
     </LecDetailsModal>
-    <LecDetailsModal class="right-modal" v-if="onRightModal" v-on:modal-close="rightModalClose()">
-      {{this.$store.getters.getLecDetailsRight}}
+    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onRightModal" v-on:modal-close="rightModalClose()">
     </LecDetailsModal>
   </div>
 </template>
