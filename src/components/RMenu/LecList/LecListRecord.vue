@@ -88,6 +88,7 @@ export default {
       }
       else {
         this.lecData.state = 1;
+        console.log(this.$store.getters.getColor)
         this.$store.commit("setNextColor")
         for(let idx = 0; idx < this.lecData.요일.length; idx++) {
           curDay = this.lecData.요일[idx]
@@ -125,7 +126,6 @@ export default {
       }
     },
     addShadowToTT(){
-      console.log(this.lecData)
       this.$store.commit("addShadowLec", this.lecData)
     },
     clearShadowLec() {

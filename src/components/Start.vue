@@ -16,7 +16,6 @@
 import LMenu from "./LMenu/LMenu";
 import RMenu from "./RMenu/RMenu";
 import LecDetailsModal from "./LecDetailsModal";
-import axios from 'axios';
 
 export default {
   name: "Start",
