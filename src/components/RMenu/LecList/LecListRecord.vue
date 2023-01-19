@@ -4,7 +4,7 @@
       <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150"/>
       <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50"/>
       <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
-      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="addToTimeTable" @hover="addShadowToTT"/>
+      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="addToTimeTable" @mouseover="addShadowToTT"/>
       <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="delFromLecList"/>
     </div>
   </div>

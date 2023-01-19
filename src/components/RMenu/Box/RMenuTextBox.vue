@@ -19,7 +19,7 @@ export default {
           color = `#ffe0de`
           break;
         case "blue":
-          color = `#b6b4b4`
+          color = `#e8f0ff`
           break;
         case "yellow":
           color = `#ffefc6`
