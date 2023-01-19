@@ -56,14 +56,14 @@ export default {
   display: flex
   width: var(--width)
   height: 40px
+  overflow: hidden
 
 .r-menu-text-box-cart
   align-items: flex-start
   border-radius: 5px
   display: flex
   flex: 1
-  height: 40px
-  width: 150px
+
 
 .r-menu-text-box-text
   flex: 1
