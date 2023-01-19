@@ -1,10 +1,11 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
-      <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" @click="addToTimeTable" @mouseover="addShadowToTT"/>
+      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="showDetails"/>
+      <SearchImageBox src="./iconbuttons-3.png" boxStyle ="red" @click="clickAddBtn" @hover="addShadowToTT" v-show="lecData.state == 0"/>
+      <SearchImageBox src="./iconbuttons-1.png" boxStyle ="red" @click="clickAddBtn" @hover="addShadowToTT" v-show="lecData.state == 1"/>
       <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" @click="delFromLecList"/>
     </div>
   </div>
@@ -13,6 +14,7 @@
 <script>
 import RMenuTextBox from "../Box/RMenuTextBox";
 import SearchImageBox from "../Box/SearchImageBox";
+import {processLec} from "../../../util"
 export default {
   name: "LecListRecord",
   components: {
@@ -24,8 +26,94 @@ export default {
     showDetails() {
       this.$store.commit("setLecDetails", this.lecData.수업번호);
     },
-    addToTimeTable() {
+    clickAddBtn() {
       
+      if(this.lecData.state == 0) {
+        this.addToTimeTable()
+      }
+      else {
+        this.delFromTimeTable()
+      }
+    },
+    addToTimeTable() {
+      let lecsInTable = this.$store.getters.getLecsInTable
+      let lecs
+      let curDay
+      let lecToAdd = []
+      let isOverlapped = false
+
+      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+        curDay = this.lecData.요일[idx]
+
+        if(curDay == '시간미지정강좌') {
+          continue
+        }
+
+        lecs = lecsInTable[curDay]
+
+        lecToAdd[idx] = processLec(this.lecData, idx)
+        lecToAdd[idx]['colorIdx'] = 20;
+
+
+        for(let lec of lecs) {
+          if(lecToAdd[idx].start < lec.start && lecToAdd[idx].end > lec.start) {
+            isOverlapped = true
+            break
+          }
+          if(lecToAdd[idx].start < lec.end && lecToAdd[idx].end > lec.end) {
+            isOverlapped = true
+            break
+          }
+          if(lecToAdd[idx].start >= lec.start && lecToAdd[idx].end <= lec.end) {
+            isOverlapped = true
+            break
+          }
+        }
+
+        if(isOverlapped) {
+          break
+        }
+      }
+
+      if(isOverlapped) {
+        alert("겹치는 수업이 있습니다")
+      }
+      else {
+        this.lecData.state = 1;
+        for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+          curDay = this.lecData.요일[idx]
+
+          if(curDay == '시간미지정강좌') {
+            continue
+          }
+
+          this.$store.commit("addLecsInTable", {
+              day : curDay, 
+              info: lecToAdd[idx]
+          });
+          this.$store.commit("setUpTimeLines", curDay);
+        }
+      }
+    },
+    delFromTimeTable() {
+      let lecsInTable = this.$store.getters.getLecsInTable
+      let lecs
+      let curDay
+      let lecIdx
+
+      this.lecData.state = 0;
+      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+        curDay = this.lecData.요일[idx]
+
+        if(curDay == '시간미지정강좌') {
+          continue
+        }
+
+        lecs = lecsInTable[curDay]
+        lecIdx = lecs.findIndex(lec => lec.lecNum == this.lecData.수업번호)
+        lecs = lecs.splice(lecIdx, 1);
+        this.$store.commit("setUpTimeLines", curDay);
+      }
     },
     addShadowToTT(){
       console.log(this.lecData)
@@ -33,6 +121,10 @@ export default {
     },
     delFromLecList() {
       //this.$store.commit("setIsChanged", true)
+      if(this.lecData.state == 1) {
+        this.delFromTimeTable();
+      }
+      
       this.$store.commit("delLecList", this.lecData);
     }
   }

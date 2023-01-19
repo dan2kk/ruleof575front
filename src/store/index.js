@@ -281,14 +281,37 @@ export default createStore({
     addLecsInTable(state, lec) {
       state.lecsInTable[lec.day].push(lec.info);
     },
-    sortLecsInTable(state, day) {
+    setUpTimeLines(state, day) {
       state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
         return a.start - b.start;
       });
-    },
-    setUpTimeLines(state, day) {
+
+      let selectedBlocks = [];
+
+      for(let block of state.timeLines[day]) {
+        if(block.isSelected) {
+          selectedBlocks.push( {
+            start : block.start,
+            end : block.end
+          })
+        }
+      }
       state.timeLines[day] = fillTL(state.lecsInTable[day])
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
+      
+      for(let block of state.timeLines[day]) {
+        if(selectedBlocks.length == 0) {
+          break
+        }
+
+        if(block.start == selectedBlocks[0].start || block.end == selectedBlocks[0].end) {
+          if(block.blockKind == "block") {
+              block.isSelected = true
+          }
+          selectedBlocks.shift();
+        }
+      }
+
     },
 
     async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기

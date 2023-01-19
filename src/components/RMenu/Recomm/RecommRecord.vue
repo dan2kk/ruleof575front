@@ -1,10 +1,11 @@
 <template>
   <div class="recomm-list-record">
     <div class="recomm-list-record-cart">
-      <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big" @click="onClick"/>
-      <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"  @click="onClick"/>
-      <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium" @click="onClick"/>
-      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList" @mouseover="addShadowToTT"/>
+      <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big" @click="showDetails"/>
+      <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"  @click="showDetails"/>
+      <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium" @click="showDetails"/>
+      <SearchImageBox src= "./iconbuttons-3.png" boxStyle="blue" @click="addToLecList" v-show="isInLecList"/>
+      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList" v-show="!isInLecList"/>
       <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delFromRecommList"/>
     </div>
   </div>
@@ -20,22 +21,33 @@ export default {
     SearchImageBox
   },
   props: ["recommData"],
+  computed: {
+    isInLecList() {
+      let lecList = this.$store.getters.getLecList
+
+      if(lecList.findIndex(x => x.수업번호 == this.recommData.수업번호) == -1) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+  }, 
   methods:{
+    showDetails() {
+      this.$store.commit("setLecDetails", this.lecData.수업번호);
+    },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
       //this.$store.commit("setIsChanged", true)
-      alert(this.$store.getters.getIsChange)
     },
     delFromRecommList() {
       this.$store.commit("delRecommList", this.recommData);
     },
-    onClick(){
-      this.$store.commit("getCourseInfo", this.recommData.수업번호);
-    },
     addShadowToTT(){
       console.log(this.recommData)
       this.$store.commit("addShadowLec", this.recommData)
-    },
+    }
   }
 };
 </script>
