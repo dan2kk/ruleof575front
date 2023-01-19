@@ -1,5 +1,5 @@
 <template>
-  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``]">
+  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``, itemPos || ``]">
     <div class="r-menu-text-box-cart">
       <div class="r-menu-text-box-text valign-text-middle notosanskr-normal-black-12px" v-html="text"></div>
     </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "RMenuTextBox",
-  props: ["text", "color", "size"],
+  props: ["text", "color", "size", "itemPos"],
   computed:{
     setStyle(){
       let color
@@ -31,15 +31,33 @@ export default {
           color = `#ff00d6`
           break;
       }
+      let itemPos
+      switch(this.itemPos)
+      {
+        case "top":
+          itemPos = `flex-start`
+          break;
+        case "center":
+          itemPos = `center`
+          break;
+        case "bottom":
+          itemPos = `flex-bottom`
+          break;
+        default:
+          itemPos = `flex-start`
+          break;
+      }
       if (this.size != undefined){
         return{
           '--width' : `${this.size}px`,
-          '--color' : color
+          '--color' : color,
+          '--itemPos' : itemPos
         }
       }
       else return{
         '--width' : `400px`,
-        '--color' : color
+        '--color' : color,
+        '--itemPos' : itemPos
       }
     }
   }
@@ -56,18 +74,18 @@ export default {
   display: flex
   width: var(--width)
   height: 40px
+  overflow: hidden
 
 .r-menu-text-box-cart
-  align-items: flex-start
+  align-items: var(--itemPos)
   border-radius: 5px
   display: flex
   flex: 1
-  height: 40px
-  width: 150px
+
 
 .r-menu-text-box-text
+  flex-direction: row
   flex: 1
-  height: 40px
   letter-spacing: 0
   line-height: normal
   text-align: center
