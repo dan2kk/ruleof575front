@@ -1,7 +1,8 @@
 <template>
-  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``]">
+  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``,]">
       <slot></slot>
   </div>
+
 </template>
 
 <script>

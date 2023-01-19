@@ -27,7 +27,6 @@ export default {
 
 .search-image-box.blue
   background-color: $solitude
-
 .search-image-box-cart
   align-items: center
   display: flex
