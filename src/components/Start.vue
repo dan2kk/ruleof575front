@@ -4,7 +4,7 @@
     <RMenu/>
     <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose()">
     </LecDetailsModal>
-    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onRightModal" v-on:modal-close="rightModalClose()">
+    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose()">
     </LecDetailsModal>
   </div>
 </template>

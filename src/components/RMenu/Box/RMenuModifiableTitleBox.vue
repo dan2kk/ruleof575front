@@ -1,13 +1,12 @@
 <template>
-  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``,]" >
-      <slot></slot>
+  <div :style="setStyle" v-html="text" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``,]" >
   </div>
 
 </template>
 
 <script>
 export default {
-  name: "ListTitleBox",
+  name: "ModTitleBox",
   props: ["text", "color", "size"],
   computed:{
     setStyle(){
