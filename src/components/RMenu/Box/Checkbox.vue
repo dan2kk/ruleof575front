@@ -2,7 +2,7 @@
   <div class = "checkbox-cart">
     <label class="container">
       <input checked="checked" type="checkbox">
-      <div class="checkmark"></div>
+      <span class="checkmark"></span>
     </label>
   </div>
 </template>
@@ -25,17 +25,15 @@ export default {
   border-color: white
   border-radius: 1px
   background-color: $pigeon-post
+  padding-top: 7px
 
 .container 
+  display: block 
   position: relative 
+  padding-left: 25px
   cursor: pointer 
-  font-size: 15px 
-  width: 2em 
-  height: 2em 
+  font-size: 22px 
   user-select: none 
-  border: 5px solid
-  border-color: #47da99
-  border-radius: 5px
   input 
     position: absolute 
     opacity: 0 
@@ -44,24 +42,31 @@ export default {
     width: 0 
     &:checked 
       & ~ .checkmark 
+        background-color: #2196F3 
+        border-radius: 5px
         &:after 
-          transform: scale(1) 
+          display: block 
+.checkmark 
+  &:after 
+    left: 9px 
+    top: 5px 
+    width: 5px 
+    height: 10px 
+    border: solid white 
+    border-width: 0 3px 3px 0 
+    transform: rotate(45deg) 
 .checkmark 
   position: absolute 
   top: 0 
   left: 0 
-  width: 100% 
-  height: 100% 
+  height: 25px 
+  width: 25px 
+  background-color: #ccc 
+  border-radius: 5px
   &:after 
-    content: '' 
+    content: "" 
     position: absolute 
-    top: 25% 
-    left: 25% 
-    background-color: #47da99 
-    border-radius:1px
-    width: 50% 
-    height: 50% 
-    transform: scale(0) 
-    transition: .1s ease 
+    display: none 
+
 
 </style>
