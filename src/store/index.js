@@ -155,7 +155,7 @@ export default createStore({
         }
       }
       if(screenNum == 4){
-        this.commit("setUpGradList")
+        this.commit("calGrad")
       }
       state.curScreen = screenNum
     },
@@ -165,7 +165,7 @@ export default createStore({
         state.gradList.push(record)
       }
     },
-    async setUpGradList(state) {
+    async calGrad(state) {
       let gradData = {}
 
       for(let i=1; i < state.gradList.length; i++){

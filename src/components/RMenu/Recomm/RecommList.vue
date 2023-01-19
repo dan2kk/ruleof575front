@@ -58,7 +58,6 @@ export default {
   border-style: solid
   border-width: 1px
   border-color: $white
-  display: flex
   flex-direction: column
   height: 550px
   overflow: hidden
@@ -68,10 +67,6 @@ export default {
 
 .recomm-list::-webkit-scrollbar 
   display: none
-
-.recomm-list
-  -ms-overflow-style: none
-  scrollbar-width: none
 
 .upper-menu
   display: flex
