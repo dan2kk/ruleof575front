@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL, processLec } from '@/util'
+import { fillTL } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -291,7 +291,7 @@ export default createStore({
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
     },
 
-    async addLecDetails(state, lecNum){ //수업정보 데이터 불러오기
+    async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
         let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
         details["state"] = true
@@ -305,7 +305,6 @@ export default createStore({
       catch(err){
         console.log(err)
       }
-      console.log(number)
     },
     addShadowLec(state, lecDat){
       for(let i=0; i<5;i++){

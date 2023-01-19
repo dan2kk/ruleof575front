@@ -71,7 +71,7 @@
             break
           case "lecBlock":
             console.log(this.timeblockData.lecNum)
-            this.$store.commit("addLecDetails", this.timeblockData.lecNum)
+            this.$store.commit("setLecDetails", this.timeblockData.lecNum)
             break
           case "dayBlock":
             console.log(this.timeblockData.content)

@@ -1,10 +1,10 @@
 <template>
   <div class="grad-list">
-    <div class = "upper-menu">
+    <div class = "grad-list-upper-menu">
       <RMenuTitleBox boxStyle="purpleBold">졸업사정 변동사항</RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>
-    <div class = "lower-menu">
+    <div class = "grad-list-lower-menu">
       <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec"/>
     </div>
   </div>
@@ -55,9 +55,18 @@ export default {
   height: 550px
   position: relative
   width: 400px
-.lower-menu
+
+.grad-list-lower-menu
   overflow-y: overlay
   overflow-x: hidden
+
+.grad-list-lower-menu::-webkit-scrollbar 
+  display: none
+
+.grad-list-lower-menu
+  -ms-overflow-style: none
+  scrollbar-width: none
+
 -webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
