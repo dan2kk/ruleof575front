@@ -13,6 +13,7 @@
 <script>
 import RMenuTextBox from "../Box/RMenuTextBox";
 import SearchImageBox from "../Box/SearchImageBox";
+import {processLec} from "../../../util"
 export default {
   name: "LecListRecord",
   components: {
@@ -24,14 +25,105 @@ export default {
     showDetails() {
       this.$store.commit("setLecDetails", this.lecData.수업번호);
     },
-    addToTimeTable() {
+    clickAddBtn() {
       
+      if(this.lecData.state == 0) {
+        this.addToTimeTable()
+      }
+      else {
+        this.delFromTimeTable()
+      }
+    },
+    addToTimeTable() {
+      let lecsInTable = this.$store.getters.getLecsInTable
+      let lecs
+      let curDay
+      let lecToAdd = []
+      let isOverlapped = false
+
+      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+        curDay = this.lecData.요일[idx]
+
+        if(curDay == '시간미지정강좌') {
+          continue
+        }
+
+        lecs = lecsInTable[curDay]
+
+        lecToAdd[idx] = processLec(this.lecData, idx)
+        lecToAdd[idx]['colorIdx'] = 20;
+
+
+        for(let lec of lecs) {
+          if(lecToAdd[idx].start < lec.start && lecToAdd[idx].end > lec.start) {
+            isOverlapped = true
+            break
+          }
+          if(lecToAdd[idx].start < lec.end && lecToAdd[idx].end > lec.end) {
+            isOverlapped = true
+            break
+          }
+          if(lecToAdd[idx].start >= lec.start && lecToAdd[idx].end <= lec.end) {
+            isOverlapped = true
+            break
+          }
+        }
+
+        if(isOverlapped) {
+          break
+        }
+      }
+
+      if(isOverlapped) {
+        alert("겹치는 수업이 있습니다")
+      }
+      else {
+        this.lecData.state = 1;
+        for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+          curDay = this.lecData.요일[idx]
+
+          if(curDay == '시간미지정강좌') {
+            continue
+          }
+
+          this.$store.commit("addLecsInTable", {
+              day : curDay, 
+              info: lecToAdd[idx]
+          });
+          this.$store.commit("setUpTimeLines", curDay);
+        }
+      }
+    },
+    delFromTimeTable() {
+      let lecsInTable = this.$store.getters.getLecsInTable
+      let lecs
+      let curDay
+      let lecIdx
+
+      this.lecData.state = 0;
+      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
+        curDay = this.lecData.요일[idx]
+
+        if(curDay == '시간미지정강좌') {
+          continue
+        }
+
+        lecs = lecsInTable[curDay]
+        lecIdx = lecs.findIndex(lec => lec.lecNum == this.lecData.수업번호)
+        lecs = lecs.splice(lecIdx, 1);
+        this.$store.commit("setUpTimeLines", curDay);
+      }
     },
     addShadowToTT(){
-      this.$store.commit("getShadowLec", this.lecData)
+      console.log(this.lecData)
+      this.$store.commit("addShadowLec", this.lecData)
     },
     delFromLecList() {
       //this.$store.commit("setIsChanged", true)
+      if(this.lecData.state == 1) {
+        this.delFromTimeTable();
+      }
+      
       this.$store.commit("delLecList", this.lecData);
     }
   }

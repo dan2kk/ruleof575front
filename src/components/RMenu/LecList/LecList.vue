@@ -60,11 +60,7 @@ export default {
 .lec-list-lower-menu::-webkit-scrollbar 
   display: none
 
-.lec-list-lower-menu
-  -ms-overflow-style: none
-  scrollbar-width: none
-
--webkit-scrollbar-thumb
+.lec-list-lower-menu::-webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
 

@@ -24,6 +24,7 @@ export default {
   name: "RMenuTabs",
   methods: {
     onClick(screenNum) {
+      this.$store.commit("clearShadowLec")
       // this.$emit("changeScreen", screenNum)
       this.$store.commit("changeScreen", screenNum);
     }

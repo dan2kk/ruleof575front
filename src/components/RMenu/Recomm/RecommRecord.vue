@@ -20,17 +20,32 @@ export default {
     SearchImageBox
   },
   props: ["recommData"],
+  computed: {
+    isInLecList() {
+      let lecList = this.$store.getters.getLecList
+
+      if(lecList.findIndex(x => x.수업번호 == this.recommData.수업번호) == -1) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+  }, 
   methods:{
+    showDetails() {
+      this.$store.commit("setLecDetails", this.lecData.수업번호);
+    },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
       //this.$store.commit("setIsChanged", true)
-      alert(this.$store.getters.getIsChange)
     },
     delFromRecommList() {
       this.$store.commit("delRecommList", this.recommData);
     },
-    onClick(){
-      this.$store.commit("getCourseInfo", this.recommData.수업번호);
+    addShadowToTT(){
+      console.log(this.recommData)
+      this.$store.commit("addShadowLec", this.recommData)
     }
   }
 };

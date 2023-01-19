@@ -49,10 +49,8 @@ export default {
   methods: {
     loginEvent(){
         this.$store.commit("setIsLogined", true);
-        
         this.initList()
         this.initGrad()
-        
         this.$store.commit("setCurScreen", 1);
     },
 
@@ -69,10 +67,8 @@ export default {
                 continue;
               }
 
-              let lecToAdd = {
-                colorIdx : i
-              }
-              Object.assign(lecToAdd, processLec(lecList[i], j));
+              let lecToAdd = processLec(lecList[i], j);
+              lecToAdd['colorIdx'] = i;
 
               this.$store.commit("addLecsInTable", {
                   day: lecList[i].요일[j], 
@@ -81,13 +77,6 @@ export default {
             }
           }
         }
-        this.$store.commit("sortLecsInTable", '월');
-        this.$store.commit("sortLecsInTable", '화');
-        this.$store.commit("sortLecsInTable", '수');
-        this.$store.commit("sortLecsInTable", '목');
-        this.$store.commit("sortLecsInTable", '금');
-
-
         this.$store.commit("setUpTimeLines", '월');
         this.$store.commit("setUpTimeLines", '화');
         this.$store.commit("setUpTimeLines", '수');
