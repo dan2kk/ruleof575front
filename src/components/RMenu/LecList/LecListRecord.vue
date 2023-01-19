@@ -4,8 +4,8 @@
       <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="showDetails"/>
-      <SearchImageBox src="./iconbuttons-3.png" boxStyle ="red" @click="clickAddBtn" @hover="addShadowToTT" v-show="lecData.state == 0"/>
-      <SearchImageBox src="./iconbuttons-1.png" boxStyle ="red" @click="clickAddBtn" @hover="addShadowToTT" v-show="lecData.state == 1"/>
+      <SearchImageBox src="./iconbuttons-3.png" boxStyle ="red" @click="clickAddBtn" @mouseover="addShadowToTT" v-show="lecData.state == 0"/>
+      <SearchImageBox src="./iconbuttons-1.png" boxStyle ="red" @click="clickAddBtn" v-show="lecData.state == 1"/>
       <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" @click="delFromLecList"/>
     </div>
   </div>

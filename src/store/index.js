@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL } from '@/util'
+import { fillTL, processLec } from '@/util'
 import axios from "axios"
 
 export default createStore({

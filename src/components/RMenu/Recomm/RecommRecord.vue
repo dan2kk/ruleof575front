@@ -4,8 +4,8 @@
       <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big" @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"  @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium" @click="showDetails"/>
-      <SearchImageBox src= "./iconbuttons-3.png" boxStyle="blue" @click="addToLecList" v-show="isInLecList"/>
-      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList" v-show="!isInLecList"/>
+      <SearchImageBox src= "./iconbuttons-3.png" boxStyle="blue" @click="addToLecList" v-show="this.isInLecList"/>
+      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList" v-show="!this.isInLecList"/>
       <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delFromRecommList"/>
     </div>
   </div>
