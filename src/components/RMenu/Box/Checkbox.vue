@@ -1,7 +1,7 @@
 <template>
   <div class = "checkbox-cart">
     <label class="container">
-      <input type="checkbox" checked="checked">
+      <input checked="checked" type="checkbox">
       <div class="checkmark"></div>
     </label>
   </div>
@@ -20,17 +20,23 @@ export default {
   height: 40px
   width: 50px
   align-items: center
+  display: flex
+  flex-direction: column
   border-color: white
   border-radius: 1px
   background-color: $pigeon-post
 
 .container 
-  display: block 
   position: relative 
   cursor: pointer 
-  font-size: 20px 
+  font-size: 15px 
+  width: 2em 
+  height: 2em 
   user-select: none 
-  .input
+  border: 5px solid
+  border-color: #47da99
+  border-radius: 5px
+  input 
     position: absolute 
     opacity: 0 
     cursor: pointer 
@@ -38,40 +44,24 @@ export default {
     width: 0 
     &:checked 
       & ~ .checkmark 
-      background-color: #47da99 
-      animation: pop 0.5s 
-      animation-direction: alternate 
-      &:after 
-        display: block 
-  .checkmark 
-    &:after 
-      left: 0.45em 
-      top: 0.25em 
-      width: 0.25em 
-      height: 0.5em 
-      border: solid white 
-      border-width: 0 0.15em 0.15em 0 
-      transform: rotate(45deg) 
+        &:after 
+          transform: scale(1) 
 .checkmark 
-  position: relative 
+  position: absolute 
   top: 0 
   left: 0 
-  height: 1.3em 
-  width: 1.3em 
-  background-color: #ccc 
-  transition: all 0.3s 
-  border-radius: 5px 
+  width: 100% 
+  height: 100% 
   &:after 
-    content: "" 
+    content: '' 
     position: absolute 
-    display: none 
-
-@keyframes pop
-  0%
-    transform: scale(1) 
-  50%
-    transform: scale(0.9) 
-  100% 
-    transform: scale(1)
+    top: 25% 
+    left: 25% 
+    background-color: #47da99 
+    border-radius:1px
+    width: 50% 
+    height: 50% 
+    transform: scale(0) 
+    transition: .1s ease 
 
 </style>
