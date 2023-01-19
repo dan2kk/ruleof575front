@@ -35,7 +35,7 @@ export default {
   }, 
   methods:{
     showDetails() {
-      this.$store.commit("setLecDetails", this.lecData.수업번호);
+      this.$store.commit("setLecDetails", this.recommData.수업번호);
     },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
