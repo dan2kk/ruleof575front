@@ -1,5 +1,5 @@
   <template>
-  <div :class="[`search-image-box`, boxStyle || ``]">
+  <div :class="[`search-image-box`, color || ``]">
     <div class="search-image-box-cart">
       <img class="search-image-box-btn" :src="src" alt="IconButtons"/>
     </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "ImageBoxSearch",
-  props: ["src", "boxStyle"],
+  props: ["src", "color"],
 };
 </script>
 

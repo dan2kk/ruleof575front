@@ -1,7 +1,7 @@
 <template>
   <div class="grad-list">
     <div class = "grad-list-upper-menu">
-      <RMenuTitleBox boxStyle="purpleBold">졸업사정 변동사항</RMenuTitleBox>
+      <RMenuTitleBox color="purple">졸업사정 변동사항</RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>
     <div class = "grad-list-lower-menu">

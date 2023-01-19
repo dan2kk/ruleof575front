@@ -1,11 +1,11 @@
 <template>
   <div class="recomm-list-record">
     <div class="recomm-list-record-cart">
-      <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big" @click="onClick"/>
-      <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"  @click="onClick"/>
-      <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium" @click="onClick"/>
-      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList"/>
-      <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delFromRecommList"/>
+      <RMenuTextBox :text= this.recommData.과목명 color= "blue" size= "150" @click="onClick"/>
+      <RMenuTextBox :text= this.recommData.대표교강사명 color= "blue" size= "50"  @click="onClick"/>
+      <RMenuTextBox :text= this.recommData.수업시간 color= "blue" size= "100" @click="onClick"/>
+      <SearchImageBox src= "./iconbuttons-1.png" color="blue" @click="addToLecList"/>
+      <SearchImageBox src= "./iconbuttons-2.png" color="blue" @click="delFromRecommList"/>
     </div>
   </div>
 </template>

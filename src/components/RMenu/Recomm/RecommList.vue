@@ -1,7 +1,7 @@
 <template>
   <div class="recomm-list">
       <div v-for="lecs in recommList" :key="lecs">
-        <RMenuTitleBox boxStyle="blueBold">{{lecs.영역코드명}}</RMenuTitleBox>
+        <RMenuTitleBox color="blue">{{lecs.영역코드명}}</RMenuTitleBox>
         <RecommRecord :recommData = "lec" v-for="lec in lecs.수업목록" :key="lec"/>
       </div>
   </div>

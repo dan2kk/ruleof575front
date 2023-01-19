@@ -1,7 +1,7 @@
 <template>
   <div class="lec-list">
     <div class = "lec-list-upper-menu">
-      <RMenuTitleBox boxStyle="redBold">내 수업목록</RMenuTitleBox>
+      <RMenuTitleBox color="red">내 수업목록</RMenuTitleBox>
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
     <div class = "lec-list-lower-menu">

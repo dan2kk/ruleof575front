@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`r-menu-text-box`, boxStyle, size || ``]">
+  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``]">
     <div class="r-menu-text-box-cart">
       <div class="r-menu-text-box-text valign-text-middle notosanskr-normal-black-12px" v-html="text"></div>
     </div>
@@ -9,7 +9,40 @@
 <script>
 export default {
   name: "RMenuTextBox",
-  props: ["text", "boxStyle", "size"],
+  props: ["text", "color", "size"],
+  computed:{
+    setStyle(){
+      let color
+      switch(this.color)
+      {
+        case "red":
+          color = `#ffe0de`
+          break;
+        case "blue":
+          color = `#b6b4b4`
+          break;
+        case "yellow":
+          color = `#ffefc6`
+          break;
+        case "purple":
+          color = `#ffe7fb`
+          break;
+        default:
+          color = `#ff00d6`
+          break;
+      }
+      if (this.size != undefined){
+        return{
+          '--width' : `${this.size}px`,
+          '--color' : color
+        }
+      }
+      else return{
+        '--width' : `400px`,
+        '--color' : color
+      }
+    }
+  }
 };
 </script>
 
@@ -17,11 +50,11 @@ export default {
 @import '../../../../variables'
 
 .r-menu-text-box
-  background-color: $error-color
+  background-color: var(--color)
   border: 1px solid
   border-color: $white
   display: flex
-  width: 150px
+  width: var(--width)
   height: 40px
 
 .r-menu-text-box-cart
@@ -38,56 +71,5 @@ export default {
   letter-spacing: 0
   line-height: normal
   text-align: center
-
-/*빨강 영역*/
-.r-menu-text-box.red
-  background-color: $pippin
-
-.r-menu-text-box.red.big
-  width: 150px
-
-.r-menu-text-box.red.small
-  width: 50px
-
-.r-menu-text-box.red.medium
-  width: 100px
-/*파랑 영역*/
-.r-menu-text-box.blue
-  background-color: $solitude
-
-.r-menu-text-box.blue.big
-  width: 150px
-
-.r-menu-text-box.blue.small
-  width: 50px
-
-.r-menu-text-box.blue.medium
-  width: 100px
-/*노랑 영역*/
-
-.r-menu-text-box.yellow
-  background-color: $geraldine
-
-.r-menu-text-box.yellow.big
-  width: 150px
-
-.r-menu-text-box.yellow.small
-  width: 50px
-
-.r-menu-text-box.yellow.medium
-  width: 100px
-
-/*보라 영역*/
-.r-menu-text-box.purple
-  background-color: $tutu
-
-.r-menu-text-box.purple.big
-  width: 150px
-
-.r-menu-text-box.purple.small
-  width: 50px
-
-.r-menu-text-box.purple.medium
-  width: 100px
 
 </style>

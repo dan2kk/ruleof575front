@@ -1,15 +1,46 @@
 <template>
-  <div :class="[`r-menu-title-box`, boxStyle || ``]">
-    <div class="r-menu-title-box-text valign-text-middle notosanskr-bold-white-18px" >
+  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``]">
       <slot></slot>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "ListTitleBox",
-  props: ["boxStyle"],
+  props: ["color", "size"],
+  computed:{
+    setStyle(){
+      let color
+      switch(this.color)
+      {
+        case "red":
+          color = `#ED8B85`
+          break;
+        case "blue":
+          color = `#b2c3e1`
+          break;
+        case "yellow":
+          color = `#f7d16c`
+          break;
+        case "purple":
+          color = `#c49fbe`
+          break;
+        default:
+          color = `#ff00d6`
+          break;
+      }
+      if (this.size != undefined){
+        return{
+          '--width' : `${this.size}px`,
+          '--color' : color
+        }
+      }
+      else return{
+        '--width' : `400px`,
+        '--color' : color
+      }
+    }
+  }
 };
 </script>
 
@@ -20,28 +51,10 @@ export default {
   border: 1px solid
   border-color: $white
   height: 40px
-  width: 400px
+  width: var(--width)
   position: relative
-  align-items: stretch
-
-.r-menu-title-box.redBold
-  background-color: #ED8B85
-
-.r-menu-title-box.blueBold
-  background-color: $pigeon-post
-
-.r-menu-title-box.yellowBold
-  background-color: $orange-yellow
-  
-.r-menu-title-box.purpleBold
-  background-color: $lily
+  background-color: var(--color)
 
 
-.r-menu-title-box-text
-  height: 40px
-  letter-spacing: 0
-  line-height: normal
-  text-align: center
-  width: 400px
-  top: -5px
+
 </style>

@@ -1,11 +1,11 @@
 <template>
     <div class="lec-list-head">
       <div class="lec-list-head-cart">
-        <RMenuTextBox :text= this.lecHeadData.과목명 boxStyle= "red" size= "big" />
-        <RMenuTextBox :text= this.lecHeadData.대표교강사명 boxStyle= "red" size= "small" />
-        <RMenuTextBox :text= this.lecHeadData.수업시간 boxStyle = "red" size= "medium" />
-        <RMenuTextBox :text= this.lecHeadData.담기 boxStyle = "red" size= "small" />
-        <RMenuTextBox :text= this.lecHeadData.더보기 boxStyle = "red" size= "small" />
+        <RMenuTextBox :text= this.lecHeadData.과목명 color= "red" size= "150" />
+        <RMenuTextBox :text= this.lecHeadData.대표교강사명 color= "red" size= "50" />
+        <RMenuTextBox :text= this.lecHeadData.수업시간 color = "red" size= "100" />
+        <RMenuTextBox :text= this.lecHeadData.담기 color = "red" size= "50" />
+        <RMenuTextBox :text= this.lecHeadData.더보기 color = "red" size= "50" />
       </div>
     </div>
   </template>

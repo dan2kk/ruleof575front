@@ -1,11 +1,11 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
-      <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
-      <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" @click="addToTimeTable" @hover="addShadowToTT"/>
-      <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" @click="delFromLecList"/>
+      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50"/>
+      <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
+      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="addToTimeTable" @hover="addShadowToTT"/>
+      <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="delFromLecList"/>
     </div>
   </div>
 </template>
