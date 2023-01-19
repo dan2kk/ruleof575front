@@ -118,7 +118,8 @@ export default {
       console.log(this.$store.getters.getLecList);
     },
     addShadowToTT(){
-      this.$store.commit("getShadowLec", this.lecData)
+      console.log(this.lecData)
+      this.$store.commit("addShadowLec", this.lecData)
     },
     delFromLecList() {
       //this.$store.commit("setIsChanged", true)
