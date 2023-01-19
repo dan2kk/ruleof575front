@@ -1,6 +1,6 @@
 <template>
   <div class="known">
-    <RMenuTitleBox boxStyle="yellowBold" v-for="temp in temps" :key="temp">{{temp}}</RMenuTitleBox>
+    <RMenuTitleBox :size="400" boxStyle="yellowBold" v-for="temp in temps" :key="temp">{{temp}}</RMenuTitleBox>
   </div>
 </template>
 
