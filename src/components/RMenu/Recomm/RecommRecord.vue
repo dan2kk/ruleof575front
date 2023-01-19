@@ -4,7 +4,7 @@
       <RMenuTextBox :text= this.recommData.과목명 boxStyle= "blue" size= "big" @click="onClick"/>
       <RMenuTextBox :text= this.recommData.대표교강사명 boxStyle= "blue" size= "small"  @click="onClick"/>
       <RMenuTextBox :text= this.recommData.수업시간 boxStyle= "blue" size= "medium" @click="onClick"/>
-      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList"/>
+      <SearchImageBox src= "./iconbuttons-1.png" boxStyle="blue" @click="addToLecList" @mouseover="addShadowToTT"/>
       <SearchImageBox src= "./iconbuttons-2.png" boxStyle="blue" @click="delFromRecommList"/>
     </div>
   </div>
@@ -31,7 +31,11 @@ export default {
     },
     onClick(){
       this.$store.commit("getCourseInfo", this.recommData.수업번호);
-    }
+    },
+    addShadowToTT(){
+      console.log(this.recommData)
+      this.$store.commit("addShadowLec", this.recommData)
+    },
   }
 };
 </script>

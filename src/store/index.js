@@ -110,6 +110,9 @@ export default createStore({
     },
     getLecDetailsRight(state){
       return state.lecDetailsRight
+    },
+    getShadowList(state){
+      return state.shadowList
     }
   },
 
@@ -331,6 +334,11 @@ export default createStore({
         }
       }
     },
+    clearShadowLec(state){
+      for(let i=0; i<5;i++){
+        state.shadowList[i].length = 0
+      }
+    }
   },
   actions: {
   },

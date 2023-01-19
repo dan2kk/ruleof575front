@@ -4,7 +4,7 @@
       <RMenuTextBox :text= this.lecData.과목명 boxStyle= "red" size= "big" @click="onClick"/>
       <RMenuTextBox :text= this.lecData.대표교강사명 boxStyle= "red" size= "small" @click="onClick"/>
       <RMenuTextBox :text= this.lecData.수업시간 boxStyle = "red" size= "medium" @click="onClick"/>
-      <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" @click="addToTimeTable" @hover="addShadowToTT"/>
+      <SearchImageBox src= './iconbuttons-3.png' boxStyle ="red" @click="addToTimeTable" @mouseover="addShadowToTT"/>
       <SearchImageBox src= './iconbuttons-2.png' boxStyle ="red" @click="delFromLecList"/>
     </div>
   </div>
@@ -28,7 +28,8 @@ export default {
       
     },
     addShadowToTT(){
-      this.$store.commit("getShadowLec", this.lecData)
+      console.log(this.lecData)
+      this.$store.commit("addShadowLec", this.lecData)
     },
     delFromLecList() {
       //this.$store.commit("setIsChanged", true)
