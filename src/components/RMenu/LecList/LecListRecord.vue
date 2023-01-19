@@ -93,7 +93,6 @@ export default {
           });
           this.$store.commit("setUpTimeLines", curDay);
         }
-        console.log(this.$store.getters.getTimeLines);
       }
     },
     delFromTimeTable() {
@@ -115,7 +114,6 @@ export default {
         lecs = lecs.splice(lecIdx, 1);
         this.$store.commit("setUpTimeLines", curDay);
       }
-      console.log(this.$store.getters.getLecList);
     },
     addShadowToTT(){
       console.log(this.lecData)

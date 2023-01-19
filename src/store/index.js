@@ -296,11 +296,8 @@ export default createStore({
           })
         }
       }
-      console.log(selectedBlocks);
-      
       state.timeLines[day] = fillTL(state.lecsInTable[day])
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
-      console.log(selectedBlocks);
       
       for(let block of state.timeLines[day]) {
         if(selectedBlocks.length == 0) {
