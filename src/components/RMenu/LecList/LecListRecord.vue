@@ -60,7 +60,7 @@ export default {
         lecs = lecsInTable[curDay]
 
         lecToAdd[idx] = processLec(this.lecData, idx)
-        lecToAdd[idx]['colorIdx'] = 20;
+        lecToAdd[idx]['color'] = this.$store.getters.getColor;
 
 
         for(let lec of lecs) {
@@ -88,6 +88,7 @@ export default {
       }
       else {
         this.lecData.state = 1;
+        this.$store.commit("setNextColor")
         for(let idx = 0; idx < this.lecData.요일.length; idx++) {
           curDay = this.lecData.요일[idx]
 

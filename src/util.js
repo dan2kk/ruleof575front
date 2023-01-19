@@ -10,7 +10,7 @@ export const fillTL = (lecs) => {
     let lecStart;
     let lecEnd;
     let lecName;
-    let lecColorIdx;
+    let lecColor;
     let lec_num;
     let lecNum;
     
@@ -19,7 +19,7 @@ export const fillTL = (lecs) => {
             lecStart = lecs[lecIdx].start;
             lecEnd = lecs[lecIdx].end;
             lecName = lecs[lecIdx].content
-            lecColorIdx = lecs[lecIdx].colorIdx
+            lecColor = lecs[lecIdx].color
             lecNum = lecs[lecIdx].lecNum
             lecIdx++;
         }
@@ -35,7 +35,7 @@ export const fillTL = (lecs) => {
                     content : "",
                     blockKind: "block",
                     isSelected: false,
-                    colorIdx: 0
+                    color: 0
                 });
             }
             head = tail;
@@ -52,7 +52,7 @@ export const fillTL = (lecs) => {
                 content : "",
                 blockKind: "block",
                 isSelected: false,
-                colorIdx: 0
+                color: 0
             });
         }
         ret.push({
@@ -61,7 +61,7 @@ export const fillTL = (lecs) => {
             content: lecName,
             blockKind: "lecBlock",
             isSelected: false,
-            colorIdx: lecColorIdx,
+            color: lecColor,
             lecNum: lecNum
         })
 

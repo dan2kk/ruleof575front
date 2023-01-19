@@ -1,10 +1,10 @@
 <template>
-  <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeblockData.blockKind != "sendBtn"'>
+  <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeBlockData.blockKind != "sendBtn"'>
     <div class="time-block-content notosanskr-normal-black-12px"> 
-      {{ this.timeblockData.content }}
+      {{ this.timeBlockData.content }}
     </div>
   </div>
-  <button class="send-btn" @click="clickEvent" v-show='this.timeblockData.blockKind == "sendBtn"' >
+  <button class="send-btn" @click="clickEvent" v-show='this.timeBlockData.blockKind == "sendBtn"' >
     <div class="svg-wrapper-1">
       <div class="svg-wrapper">
         <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
@@ -22,13 +22,13 @@
 
   export default {
     name: "TimeBlock",
-    props: ["timeblockData"],
+    props: ["timeBlockData"],
     computed: {
       blcokStyle() {
         let color
-        switch (this.timeblockData.blockKind) {
+        switch (this.timeBlockData.blockKind) {
           case "block":
-            if (this.timeblockData.isSelected) {
+            if (this.timeBlockData.isSelected) {
               color = `#bdbdbd`
             }
             else {
@@ -36,7 +36,7 @@
             }
             break;
           case "lecBlock":
-            color =  `${this.$store.getters.getColorList[this.timeblockData.colorIdx]}`
+            color = this.timeBlockData.color
             break;
           case "dayBlock":
             color = `#e0e0e0`
@@ -49,7 +49,7 @@
             break;
         }
         return {
-          '--height' : `${(this.timeblockData.end - this.timeblockData.start) * 60}px`,
+          '--height' : `${(this.timeBlockData.end - this.timeBlockData.start) * 60}px`,
           '--color' : color
         }
       }
@@ -60,42 +60,44 @@
         let timeLine
         let isLogined = this.$store.getters.getIsLogined
 
+        console.log(this.$store.getters.getLecsInTable);
+
         if(!isLogined) {
           return
         }
 
-        switch(this.timeblockData.blockKind) {
+        switch(this.timeBlockData.blockKind) {
           case "block":
-            this.timeblockData.isSelected = !this.timeblockData.isSelected
-            console.log(this.timeblockData.isSelected)
+            this.timeBlockData.isSelected = !this.timeBlockData.isSelected
+            console.log(this.timeBlockData.isSelected)
             break
           case "lecBlock":
-            console.log(this.timeblockData.lecNum)
-            this.$store.commit("setLecDetails", this.timeblockData.lecNum)
+            console.log(this.timeBlockData.lecNum)
+            this.$store.commit("setLecDetails", this.timeBlockData.lecNum)
             break
           case "dayBlock":
-            console.log(this.timeblockData.content)
-            this.timeblockData.isSelected = !this.timeblockData.isSelected
+            console.log(this.timeBlockData.content)
+            this.timeBlockData.isSelected = !this.timeBlockData.isSelected
             timeLines = this.$store.getters.getTimeLines
-            timeLine = timeLines[this.timeblockData.content] 
+            timeLine = timeLines[this.timeBlockData.content] 
 
             timeLine.forEach(x=> {
-              if(this.timeblockData.isSelected != x.isSelected && x.blockKind =="block") {
-                x.isSelected = this.timeblockData.isSelected
+              if(this.timeBlockData.isSelected != x.isSelected && x.blockKind =="block") {
+                x.isSelected = this.timeBlockData.isSelected
               }
             })
             break
           case "hourBlock":
             //console.log(this.$store.getters.getTimeblockLists)
-            this.timeblockData.isSelected = !this.timeblockData.isSelected
+            this.timeBlockData.isSelected = !this.timeBlockData.isSelected
             timeLines = this.$store.getters.getTimeLines
             
             for(let x in timeLines){
               //console.log(x)
               timeLines[x].forEach(y =>{
-                if(Math.floor(y.start) == this.timeblockData.start && y.blockKind == "block"
-                  && this.timeblockData.isSelected != y.isSelected) {
-                  y.isSelected = this.timeblockData.isSelected
+                if(Math.floor(y.start) == this.timeBlockData.start && y.blockKind == "block"
+                  && this.timeBlockData.isSelected != y.isSelected) {
+                  y.isSelected = this.timeBlockData.isSelected
                   console.log(y.isSelected)
                 }
               })
