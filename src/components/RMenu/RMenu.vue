@@ -68,7 +68,8 @@ export default {
               }
 
               let lecToAdd = processLec(lecList[i], j);
-              lecToAdd['colorIdx'] = i;
+              lecToAdd['color'] = this.$store.getters.getColor;
+              console.log(this.$store.getters.getColor)
 
               this.$store.commit("addLecsInTable", {
                   day: lecList[i].요일[j], 
@@ -76,13 +77,14 @@ export default {
               });
             }
           }
+          this.$store.commit("setNextColor")
         }
+
         this.$store.commit("setUpTimeLines", '월');
         this.$store.commit("setUpTimeLines", '화');
         this.$store.commit("setUpTimeLines", '수');
         this.$store.commit("setUpTimeLines", '목');
         this.$store.commit("setUpTimeLines", '금');
-
       }
       catch(err){
         alert(err)

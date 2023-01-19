@@ -1,6 +1,6 @@
 <template>
   <div class="time-line">
-    <TimeBlock :timeblockData="element" v-for="element in this.timeLines" :key="element.수업번호"/>
+    <TimeBlock :timeBlockData="element" v-for="element in this.timeLines" :key="element.수업번호"/>
     <div 
       class="shadowbox" :style="blcokStyle(item)" v-for="item in this.shadowLines" :key="item">
     </div>/>
