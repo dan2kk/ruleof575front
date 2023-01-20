@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL, processLec } from '@/util'
+import { fillTL, processLec, transformGradName } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -160,7 +160,7 @@ export default createStore({
         }
       }
       if(screenNum == 4){
-        this.commit("calGrad")
+        this.commit("calGradStat")
       }
       state.curScreen = screenNum
     },
@@ -170,74 +170,98 @@ export default createStore({
         state.gradList.push(record)
       }
     },
-    async calGrad(state) {
-      let gradData = {}
 
-      for(let i=1; i < state.gradList.length; i++){
-        gradData[state.gradList[i].이수명] = 0;
+    async calGradStat(state) {
+      let gradData = {
+        '졸업학점' : 0,
+        '핵심교양' : 0,
+        '글로벌언어와문화영역' : 0,
+        '언어와표현영역(글로벌언어와문화영역)' : 0,
+        '외국어영역(언어와표현,글로벌언어와문화)' : 0,
+        '사회와세계영역' : 0,
+        '인문과예술영역' : 0,
+        "고전읽기영역" : 0,
+        '미래산업과창업영역' : 0,
+        '비지니스와리더쉽영역(미래산업과창업영역)' : 0,
+        '과학과기술영역' : 0,
+        '소프트웨어영역' : 0,
+        '과학과기술영역(과학과기술,소프트웨어영역)' : 0,
+        '영어전용강좌수' : 0
       }
+      // let transformedName;
+
+      // for(let gradRec of state.gradList) {
+      //   transformedName = transformGradName(gradRec.이수명);
+
+      //   if(Array.isArray(transformedName)) {
+      //     for(let tn of transformedName) {
+      //       gradData[tn] = 0;
+      //     }
+      //   } 
+      //   else {
+      //     gradData[transformedName] = 0
+      //   }
+
+      // }
       try{
         let lecList = (await axios.get('/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
         
         for(let lec of lecList) {
-          gradData.졸업학점 += lec.학점
+          gradData['졸업학점'] += lec.학점
+          
           switch(lec.이수구분코드명){
-            case "전공심화": 
-            case "전공핵심":
-              gradData.전공학점 += lec.학점
-              break;
             case "핵심교양":
-              gradData.핵심교양 += lec.학점
+              gradData['핵심교양'] += lec.학점
               switch(lec.영역코드명){
-                case "인문과예술영역":
-                  gradData.인문과예술영역 += lec.학점
+                case "글로벌언어와문화영역":
+                  gradData['글로벌언어와문화영역'] += lec.학점
+                  gradData['언어와표현영역(글로벌언어와문화영역)'] += lec.학점
+                  gradData['외국어영역(언어와표현,글로벌언어와문화)'] += lec.학점
                   break
                 case "사회와세계영역":
-                  gradData.사회와세계영역 += lec.학점
+                  gradData['사회와세계영역'] += lec.학점
+                  break
+                  case "인문과예술영역":
+                    gradData['인문과예술영역'] += lec.학점
+                    break
+                case "고전읽기영역":
+                  gradData['고전읽기영역'] += lec.학점
                   break
                 case "미래산업과창업영역":
-                  gradData.미래산업과창업영역 += lec.학점
-                  break
-                case "글로벌언어와문화영역":
-                  gradData.글로벌언어와문화영역 += lec.학점
+                  gradData['미래산업과창업영역'] += lec.학점
+                  gradData['비지니스와리더쉽영역(미래산업과창업영역)'] += lec.학점
                   break
                 case "과학과기술영역":
-                  gradData.과학과기술영역 += lec.학점
+                  gradData['과학과기술영역'] += lec.학점
+                  gradData['과학과기술영역(과학과기술,소프트웨어영역)'] += lec.학점
                   break
-                case "고전읽기영역":
-                  gradData.고전읽기영역 += lec.학점
+                case "소프트웨어영역":
+                  gradData['소프트웨어영역'] += lec.학점
+                  gradData['과학과기술영역(과학과기술,소프트웨어영역)'] += lec.학점
                   break
                 }
               break;
             default:
-              console.log("이수구분코드명 없는것!")
+              console.log("교양 X")
               break;
           }
           if(lec.영어전용){
-            gradData.영어전용강좌수 += 1
-          }
-          switch(lec.이수단위){
-            case "100단위": case "200단위": case "300단위":
-              gradData["100~300단위"] += lec.학점
-              break;
-            case "400단위":
-              gradData["400단위"] += lec.학점
-              break;
-            default:
-              console.log('단위부분 에러')
-              break;
+            gradData['영어전용강좌수'] += 1
           }
         }
+        console.log(gradData);
       }
       catch(err){
         alert(err)
       }
 
-      for(let i=1; i< state.gradList.length; i++){
-        state.gradList[i].변동 = Number(gradData[state.gradList[i].이수명])
-        state.gradList[i].합계 = Number(state.gradList[i].변동) + Number(state.gradList[i].이수)
-        state.gradList[i].잔여 = Number(state.gradList[i].기준) - Number(state.gradList[i].합계)
-        if(state.gradList[i].잔여 < 0) state.gradList[i].잔여 = 0
+      for(let gradRec of state.gradList) {
+        gradRec.변동 = Number(gradData[gradRec.이수명])
+        gradRec.합계 = Number(gradRec.변동) + Number(gradRec.이수)
+        gradRec.잔여 = Number(gradRec.기준) - Number(gradRec.합계)
+        if(gradRec.잔여 < 0) {
+          gradRec.잔여 = 0
+        }
       }
     },
 

@@ -19,7 +19,7 @@ import RecommList from "./Recomm/RecommList";
 import Known from "./Known/Known";
 import GradList from "./Grad/GradList";
 import axios from "axios";
-import { processLec } from '@/util'
+import { processLec, getGradNames } from '@/util'
 
 export default {
   name: "RMenu",
@@ -93,32 +93,37 @@ export default {
     async initGrad(){
       try{
         let stuId = this.$store.getters.getStuId
-        let status = (await axios.get('/grad/init', {params: {stu_id: stuId}})).data.status
-        for(let i=0 ; i< status.length; i++){
-          if(status[i].이수명 != "졸업평점(성적증명평점과 상이)"){
-            if(status[i].기준 != null){
-              status[i].기준= status[i].기준.slice(0, -3)
-            }
-            if(status[i].이수 != null){
-              status[i].이수= status[i].이수.slice(0, -3)
+        let gradRecList = (await axios.get('/grad/init', {params: {stu_id: stuId}})).data.grads
+        let gradNames = getGradNames();
+        
+        for(let gradRec of gradRecList) {
+
+          if(!gradNames.includes(gradRec.이수명)) {
+            continue
+          }
+
+          if(gradRec.기준 != null){
+            gradRec.기준= gradRec.기준.slice(0, -3)
+          }
+          if(gradRec.이수 != null){
+            gradRec.이수= gradRec.이수.slice(0, -3)
+          }
+          else{
+            gradRec.이수 = "0"
+          }
+          if(gradRec.기준 === "1"){
+            gradRec.기준 = "Y"
+            if(gradRec.이수 === "1"){
+              gradRec.이수 = "Y"
             }
             else{
-              status[i].이수 = "0"
-            }
-            if(status[i].기준 === "1"){
-              status[i].기준 = "Y"
-              if(status[i].이수 === "1"){
-                status[i].이수 = "Y"
-              }
-              else{
-                status[i].이수 = "N"
-              }
+              gradRec.이수 = "N"
             }
           }
-          status[i].변동 = '0'
-          status[i].합계 = '0'
-          status[i].잔여 = '0'
-          this.$store.commit("addGradList", status[i])
+          gradRec.변동 = '0'
+          gradRec.합계 = '0'
+          gradRec.잔여 = '0'
+          this.$store.commit("addGradList", gradRec)
         }
       }
       catch(err){
