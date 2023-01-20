@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL, processLec, transformGradName } from '@/util'
+import { fillTL, processLec, fieldOrder } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -33,7 +33,7 @@ export default createStore({
       목 : [],
       금 : []
     },
-    
+    lecsInTableNT : [],
     timeLines: {
       시간 : [  
         { start: 0, end: 1, content: null, blockKind: "sendBtn"},
@@ -100,6 +100,9 @@ export default createStore({
     getLecsInTable(state) {
       return state.lecsInTable
     },
+    getLecsInTableNT(state) {
+      return state.lecsInTableNT
+    },
     getTimeLines(state) {
       return state.timeLines
     },
@@ -116,7 +119,6 @@ export default createStore({
       return state.colorList
     },
     getColor(state) {
-      console.log(state.colorList[state.colorIdx])
       return state.colorList[state.colorIdx]
     }
   },
@@ -292,23 +294,55 @@ export default createStore({
     },
     //Delete from recommend list
     delRecommList(state, lecToDel) {
-      let filedIdx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
+      let fieldIdx = state.recommList.findIndex((x) => x.영역코드명 == lecToDel.영역코드명);
 
-      if(filedIdx != -1) {
-          let lecList = state.recommList[filedIdx].수업목록;
+      if(fieldIdx != -1) {
+          let lecList = state.recommList[fieldIdx].수업목록;
           let lecIdx = lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호);
     
           if(lecIdx != -1) {
-            state.recommList[filedIdx].수업목록.splice(lecIdx, 1);
+            state.recommList[fieldIdx].수업목록.splice(lecIdx, 1);
           }
       }
     },
     clearRecommList(state) {
       state.recommList.length = 0;
     },
-
+    sortRecommList(state) {
+      state.recommList = state.recommList.sort((a, b) => fieldOrder.indexOf(a.영역코드명) - fieldOrder.indexOf(b.영역코드명));
+    },
+    setIsRecommShow(state, fieldNmae) {
+      let fieldIdx = state.recommList.findIndex(x => x.영역코드명 == fieldNmae)
+      if(fieldIdx != -1) {
+        if(state.recommList[fieldIdx].isRecommShow == false) {
+          state.recommList[fieldIdx].isRecommShow = true
+        }
+        else {
+          state.recommList[fieldIdx].isRecommShow = false
+        }
+      }
+    },
     addLecsInTable(state, lec) {
       state.lecsInTable[lec.day].push(lec.info);
+    },
+    delLecsInTable(state, lec) {
+      console.log(state.lecsInTable[lec.day])
+      console.log(lec);
+      let lecIdx = state.lecsInTable[lec.day].findIndex(x => x.lecNum == lec.lecNum)
+      if(lecIdx != -1) {
+        state.lecsInTable[lec.day].splice(lecIdx, 1);
+      }
+    },
+    addLecsInTableNT(state, lec) {
+      if(state.lecsInTableNT.findIndex(x => x.수업번호 == lec.수업번호) == -1) {
+        state.lecsInTableNT.push(lec);
+      }
+    },
+    delLecsInTableNT(state, lec) {
+      let lecIdx = state.lecsInTableNT.findIndex(x => x.수업번호 == lec.수업번호)
+      if(lecIdx != -1) {
+        state.lecsInTableNT.splice(lecIdx, 1);
+      }
     },
     setUpTimeLines(state, day) {
       state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
@@ -342,7 +376,6 @@ export default createStore({
       }
 
     },
-
     async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
         let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
@@ -392,8 +425,12 @@ export default createStore({
     },
     setIsChecked(state)
     {
-      if (state.isChecked) state.isChecked = false;
-      else state.isChecked = true;
+      if (state.isChecked) {
+        state.isChecked = false;
+      }
+      else {
+        state.isChecked = true;
+      }
     },
     setNextColor(state) {
       let nextIdx = state.colorIdx

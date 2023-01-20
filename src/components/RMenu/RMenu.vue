@@ -64,16 +64,17 @@ export default {
           if(lecList[i].state == 1){
             for(let j=0 ; j< lecList[i].요일.length; j++){              
               if(lecList[i].요일[j] == '시간미지정강좌') {
-                continue;
+                this.$store.commit("addLecsInTableNT", lecList[i])
               }
-
-              let lecToAdd = processLec(lecList[i], j);
-              lecToAdd['color'] = this.$store.getters.getColor;
-
-              this.$store.commit("addLecsInTable", {
-                  day: lecList[i].요일[j], 
-                  info: lecToAdd
-              });
+              else {
+                let lecToAdd = processLec(lecList[i], j);
+                lecToAdd['color'] = this.$store.getters.getColor;
+  
+                this.$store.commit("addLecsInTable", {
+                    day: lecList[i].요일[j], 
+                    info: lecToAdd
+                });
+              }
             }
             this.$store.commit("setNextColor")
           }

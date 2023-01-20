@@ -24,10 +24,10 @@ export default {
   props: ["lecData"],
   methods : {
     showDetails() {
+      console.log(this.$store.getters.getLecsInTableNT);
       this.$store.commit("setLecDetails", this.lecData.수업번호);
     },
     clickAddBtn() {
-      
       if(this.lecData.state == 0) {
         this.addToTimeTable()
       }
@@ -94,7 +94,8 @@ export default {
           curDay = this.lecData.요일[idx]
 
           if(curDay == '시간미지정강좌') {
-            continue
+            this.$store.commit("addLecsInTableNT", this.lecData)
+            continue;
           }
 
           this.$store.commit("addLecsInTable", {
@@ -108,20 +109,27 @@ export default {
     delFromTimeTable() {
       let lecsInTable = this.$store.getters.getLecsInTable
       let lecs
-      let curDay
       let lecIdx
+      let curDay
 
       this.lecData.state = 0;
       for(let idx = 0; idx < this.lecData.요일.length; idx++) {
         curDay = this.lecData.요일[idx]
 
         if(curDay == '시간미지정강좌') {
+          this.$store.commit("delLecsInTableNT", this.lecData)
           continue
         }
-
-        lecs = lecsInTable[curDay]
-        lecIdx = lecs.findIndex(lec => lec.lecNum == this.lecData.수업번호)
-        lecs = lecs.splice(lecIdx, 1);
+        
+        // lecs = lecsInTable[curDay]
+        // lecIdx = lecs.findIndex(lec => lec.lecNum == this.lecData.수업번호)
+        // lecs.splice(lecIdx, 1);
+        // this.$store.commit("setUpTimeLines", curDay);
+        
+        this.$store.commit("delLecsInTable", {
+              day : curDay,
+              lecNum: this.lecData.수업번호
+        })
         this.$store.commit("setUpTimeLines", curDay);
       }
     },
