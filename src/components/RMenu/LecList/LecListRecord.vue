@@ -4,8 +4,8 @@
       <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
-      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.state == 0"/>
-      <SearchImageBox src= './iconbuttons-1.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.state == 1"/>
+      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
+      <SearchImageBox src= './iconbuttons-1.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
       <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="clickDelBtn"/>
     </div>
   </div>
@@ -14,7 +14,7 @@
 <script>
 import RMenuTextBox from "../Box/RMenuTextBox";
 import SearchImageBox from "../Box/SearchImageBox";
-import {processLec} from "../../../util"
+import {timeToNum} from "../../../util"
 export default {
   name: "LecListRecord",
   components: {
@@ -24,112 +24,84 @@ export default {
   props: ["lecData"],
   methods : {
     showDetails() {
-      console.log(this.$store.getters.getLecsInTableNT);
+      console.log(this.$store.getters.getLecList);
       this.$store.commit("setLecDetails", this.lecData.수업번호);
     },
     clickAddBtn() {
-      if(this.lecData.state == 0) {
+      if(this.lecData.isInTable == 0) {
         this.addToTimeTable()
       }
       else {
         this.delFromTimeTable()
       }
+      this.$store.commit("setIsChanged", true)
+
     },
     clickDelBtn() {
-      //this.$store.commit("setIsChanged", true)
-      if(this.lecData.state == 1) {
+      if(this.lecData.isInTable == 1) {
         this.delFromTimeTable();
       }
-      
       this.$store.commit("delLecList", this.lecData);
+      this.$store.commit("setIsChanged", true)
     },
     addToTimeTable() {
-      let lecsInTable = this.$store.getters.getLecsInTable
-      let lecs
+      let timeLines = this.$store.getters.getTimeLines 
+      let timeLine
       let curDay
-      let lecToAdd = []
+      let startToEnd
       let isOverlapped = false
 
-      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
-        curDay = this.lecData.요일[idx]
+      //겹치는 시간의 수업이 있는지 요일별 타임라인을 확인
+      for(let i = 0; i < this.lecData.요일.length; i++) {
+        curDay = this.lecData.요일[i]
 
         if(curDay == '시간미지정강좌') {
           continue
         }
 
-        lecs = lecsInTable[curDay]
-
-        lecToAdd[idx] = processLec(this.lecData, idx)
-        lecToAdd[idx]['color'] = this.$store.getters.getColor;
+        timeLine = timeLines[curDay]
+        startToEnd = timeToNum(this.lecData.시작시간[i], this.lecData.끝시간[i])
 
 
-        for(let lec of lecs) {
-          if(lecToAdd[idx].start < lec.start && lecToAdd[idx].end > lec.start) {
-            isOverlapped = true
-            break
-          }
-          if(lecToAdd[idx].start < lec.end && lecToAdd[idx].end > lec.end) {
-            isOverlapped = true
-            break
-          }
-          if(lecToAdd[idx].start >= lec.start && lecToAdd[idx].end <= lec.end) {
-            isOverlapped = true
-            break
+        for(let block of timeLine) {
+          if(block.blockKind == "lecBlock") {
+            if(startToEnd.start < block.start && startToEnd.end > block.start) {
+              isOverlapped = true
+              break
+            }
+            if(startToEnd.start < block.end && startToEnd.end > block.end) {
+              isOverlapped = true
+              break
+            }
+            if(startToEnd.start >= block.start && startToEnd.end <= block.end) {
+              isOverlapped = true
+              break
+            }
           }
         }
-
         if(isOverlapped) {
           break
         }
       }
 
-      if(isOverlapped) {
-        alert("겹치는 수업이 있습니다")
-      }
-      else {
-        this.lecData.state = 1;
-        console.log(this.$store.getters.getColor)
+      if(!isOverlapped) {
+        this.lecData.isInTable = 1;
+        this.lecData['color'] = this.$store.getters.getColor
         this.$store.commit("setNextColor")
-        for(let idx = 0; idx < this.lecData.요일.length; idx++) {
-          curDay = this.lecData.요일[idx]
-
-          if(curDay == '시간미지정강좌') {
-            this.$store.commit("addLecsInTableNT", this.lecData)
-            continue;
-          }
-
-          this.$store.commit("addLecsInTable", {
-              day : curDay, 
-              info: lecToAdd[idx]
-          });
+        for(let i = 0; i < this.lecData.요일.length; i++) {
+          curDay = this.lecData.요일[i]
           this.$store.commit("setUpTimeLines", curDay);
         }
       }
+      else {
+        alert("겹치는 수업이 있습니다")
+      }
     },
     delFromTimeTable() {
-      let lecsInTable = this.$store.getters.getLecsInTable
-      let lecs
-      let lecIdx
       let curDay
-
-      this.lecData.state = 0;
-      for(let idx = 0; idx < this.lecData.요일.length; idx++) {
-        curDay = this.lecData.요일[idx]
-
-        if(curDay == '시간미지정강좌') {
-          this.$store.commit("delLecsInTableNT", this.lecData)
-          continue
-        }
-        
-        // lecs = lecsInTable[curDay]
-        // lecIdx = lecs.findIndex(lec => lec.lecNum == this.lecData.수업번호)
-        // lecs.splice(lecIdx, 1);
-        // this.$store.commit("setUpTimeLines", curDay);
-        
-        this.$store.commit("delLecsInTable", {
-              day : curDay,
-              lecNum: this.lecData.수업번호
-        })
+      this.lecData.isInTable = 0;
+      for(let i = 0; i < this.lecData.요일.length; i++) {
+        curDay = this.lecData.요일[i]
         this.$store.commit("setUpTimeLines", curDay);
       }
     },

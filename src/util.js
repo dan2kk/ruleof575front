@@ -1,30 +1,30 @@
 export const fillTL = (lecs) => {
-    let lecIdx = 0;
-    let len = lecs.length;
+    let ret = []
 
-    let ret = [];
+    let lecIdx = 0
+    let len = lecs.length
     
-    let head = 9; 
-    let tail = 9;
+    let head = 9 
+    let tail = 9
 
-    let lecStart;
-    let lecEnd;
-    let lecName;
-    let lecColor;
-    let lec_num;
-    let lecNum;
+    let lecStart
+    let lecEnd
+    let lecContent
+    let lecColor
+    let lec_num
+    let lecNum
     
     while(1) {
         if(lecIdx < len) {
-            lecStart = lecs[lecIdx].start;
-            lecEnd = lecs[lecIdx].end;
-            lecName = lecs[lecIdx].content
-            lecColor = lecs[lecIdx].color
+            lecStart = lecs[lecIdx].start
+            lecEnd = lecs[lecIdx].end
+            lecContent = lecs[lecIdx].content
             lecNum = lecs[lecIdx].lecNum
-            lecIdx++;
+            lecColor = lecs[lecIdx].color
+            lecIdx++
         }
         else {
-            lecStart = 22;
+            lecStart = 22
         }
 
         while(tail < lecStart) {
@@ -33,16 +33,17 @@ export const fillTL = (lecs) => {
                     start: head, 
                     end: tail, 
                     content : "",
+                    color: 0,
+                    lecNum : 0,
                     blockKind: "block",
-                    isSelected: false,
-                    color: 0
-                });
+                    isSelected: false
+                })
             }
-            head = tail;
-            tail = parseInt(head) + 1;
+            head = tail
+            tail = parseInt(head) + 1
         }
         if(tail >= 22) {
-            break;
+            break
         }
 
         if(head != lecStart) {
@@ -50,48 +51,76 @@ export const fillTL = (lecs) => {
                 start: head, 
                 end: lecStart, 
                 content : "",
+                color: 0,
+                lecNum : 0,
                 blockKind: "block",
-                isSelected: false,
-                color: 0
-            });
+                isSelected: false
+            })
         }
         ret.push({
             start: lecStart,
             end: lecEnd, 
-            content: lecName,
-            blockKind: "lecBlock",
-            isSelected: false,
+            content: lecContent,
+            lecNum: lecNum,
             color: lecColor,
-            lecNum: lecNum
+            blockKind: "lecBlock",
+            isSelected: false
         })
 
-        head = tail = lecEnd;
+        head = tail = lecEnd
     }
 
-    return ret;
-};
+    return ret
+}
 
-export const processLec = (lec, idx) => {
-    let startTime = Number(lec.시작시간[idx].slice(0, -6))
-    let endTime = Number(lec.끝시간[idx].slice(0, -6))
-    let startHalf = (lec.시작시간[idx].slice(-5, -3) != '00')
-    let endHalf = (lec.끝시간[idx].slice(-5, -3) != '00')
+export const timeToNum = (startTime, endTime) => {
+    let startNum
+    let endNum
+    let startHalf
+    let endHalf
+
+    startNum = Number(startTime.slice(0, -6))
+    endNum = Number(endTime.slice(0, -6))
+    startHalf = (startTime.slice(-5, -3) != '00')
+    endHalf = (endTime.slice(-5, -3) != '00')
 
     if(startHalf) {
-    startTime += 0.5;
+        startNum += 0.5
     }
     if(endHalf) {
-    endTime += 0.5;
+        endNum += 0.5
     }
 
-    let lecToAdd = {
-        start : startTime,
-        end : endTime,
-        content : lec.과목명,
-        lecNum : lec.수업번호
+    return {
+        start : startNum,
+        end : endNum
     }
+}
 
-    return lecToAdd;
+export const processLec = (lec, day) => {
+    let ret = []
+
+    let curDay
+    let startToEnd
+
+    for(let i = 0; i < lec.요일.length; i++) {
+        curDay = lec.요일[i]
+
+        if(curDay == '시간미지정강좌' || curDay != day) {
+            continue
+        }
+
+        startToEnd = timeToNum(lec.시작시간[i], lec.끝시간[i])
+
+        ret.push({
+            start : startToEnd.start,
+            end : startToEnd.end,
+            content : lec.과목명,
+            lecNum : lec.수업번호,
+            color : lec.color
+        })
+    }
+    return ret
 }
 
 const gradNameDic = {

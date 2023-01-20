@@ -39,7 +39,7 @@ export default {
     },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
-      //this.$store.commit("setIsChanged", true)
+      this.$store.commit("setIsChanged", true)
     },
     delFromRecommList() {
       this.$store.commit("delRecommList", this.recommData);

@@ -19,7 +19,7 @@ import RecommList from "./Recomm/RecommList";
 import Known from "./Known/Known";
 import GradList from "./Grad/GradList";
 import axios from "axios";
-import { processLec, getGradNames } from '@/util'
+import { getGradNames } from '@/util'
 
 export default {
   name: "RMenu",
@@ -58,26 +58,14 @@ export default {
       try{
         let stuId = this.$store.getters.getStuId
         let lecList = (await axios.get('/list/init', {params: {stu_id: stuId}})).data
-        for(let i = 0; i< lecList.length;i++){
-          this.$store.commit("addLecList", lecList[i]);
+        console.log(lecList);
 
-          if(lecList[i].state == 1){
-            for(let j=0 ; j< lecList[i].요일.length; j++){              
-              if(lecList[i].요일[j] == '시간미지정강좌') {
-                this.$store.commit("addLecsInTableNT", lecList[i])
-              }
-              else {
-                let lecToAdd = processLec(lecList[i], j);
-                lecToAdd['color'] = this.$store.getters.getColor;
-  
-                this.$store.commit("addLecsInTable", {
-                    day: lecList[i].요일[j], 
-                    info: lecToAdd
-                });
-              }
-            }
+        for(let lec of lecList) {
+          if(lec.isInTable == 1) {
+            lec['color'] = this.$store.getters.getColor
             this.$store.commit("setNextColor")
           }
+          this.$store.commit("addLecList", lec);
         }
 
         this.$store.commit("setUpTimeLines", '월');

@@ -60,8 +60,6 @@
         let timeLine
         let isLogined = this.$store.getters.getIsLogined
 
-        console.log(this.$store.getters.getLecsInTable);
-
         if(!isLogined) {
           return
         }
@@ -80,7 +78,6 @@
             this.timeBlockData.isSelected = !this.timeBlockData.isSelected
             timeLines = this.$store.getters.getTimeLines
             timeLine = timeLines[this.timeBlockData.content] 
-
             timeLine.forEach(x=> {
               if(this.timeBlockData.isSelected != x.isSelected && x.blockKind =="block") {
                 x.isSelected = this.timeBlockData.isSelected

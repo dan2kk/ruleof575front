@@ -25,15 +25,6 @@ export default createStore({
       목:[], 
       금:[]
     },
-    
-    lecsInTable: {
-      월 : [],
-      화 : [],
-      수 : [],
-      목 : [],
-      금 : []
-    },
-    lecsInTableNT : [],
     timeLines: {
       시간 : [  
         { start: 0, end: 1, content: null, blockKind: "sendBtn"},
@@ -56,7 +47,7 @@ export default createStore({
       목 : [ ], 
       금 : [ ]
     },
-    colorIdx : 1,//Math.floor(Math.random() * 32),
+    colorIdx : 0,//Math.floor(Math.random() * 32),
     colorList: [
       `#ffb3b7`, `#fedcdd`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
@@ -96,12 +87,6 @@ export default createStore({
     },
     getSelectedTimes(state){
       return state.selectedTimes
-    },
-    getLecsInTable(state) {
-      return state.lecsInTable
-    },
-    getLecsInTableNT(state) {
-      return state.lecsInTableNT
     },
     getTimeLines(state) {
       return state.timeLines
@@ -148,13 +133,12 @@ export default createStore({
     async changeScreen(state, screenNum) {      
       if(state.isChanged){
         let data = []
-        let temp = state.lecList
 
-        for(let i = 0 ; i< temp.length; i++){
-          data.push({수업번호: temp[i].수업번호, value: temp[i].value})
+        for(let lec of state.lecList){
+          data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
         }
         try {
-          await axios.post('/list/update', {list: data, stu_id: state.stuId})
+          await axios.post('/list/update', {list: data, stu_id: state.userInfo.stuId})
           state.isChanged = false;
         }
         catch(err) {
@@ -190,21 +174,7 @@ export default createStore({
         '과학과기술영역(과학과기술,소프트웨어영역)' : 0,
         '영어전용강좌수' : 0
       }
-      // let transformedName;
 
-      // for(let gradRec of state.gradList) {
-      //   transformedName = transformGradName(gradRec.이수명);
-
-      //   if(Array.isArray(transformedName)) {
-      //     for(let tn of transformedName) {
-      //       gradData[tn] = 0;
-      //     }
-      //   } 
-      //   else {
-      //     gradData[transformedName] = 0
-      //   }
-
-      // }
       try{
         let lecList = (await axios.get('/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
         
@@ -322,60 +292,54 @@ export default createStore({
         }
       }
     },
-    addLecsInTable(state, lec) {
-      state.lecsInTable[lec.day].push(lec.info);
-    },
-    delLecsInTable(state, lec) {
-      console.log(state.lecsInTable[lec.day])
-      console.log(lec);
-      let lecIdx = state.lecsInTable[lec.day].findIndex(x => x.lecNum == lec.lecNum)
-      if(lecIdx != -1) {
-        state.lecsInTable[lec.day].splice(lecIdx, 1);
-      }
-    },
-    addLecsInTableNT(state, lec) {
-      if(state.lecsInTableNT.findIndex(x => x.수업번호 == lec.수업번호) == -1) {
-        state.lecsInTableNT.push(lec);
-      }
-    },
-    delLecsInTableNT(state, lec) {
-      let lecIdx = state.lecsInTableNT.findIndex(x => x.수업번호 == lec.수업번호)
-      if(lecIdx != -1) {
-        state.lecsInTableNT.splice(lecIdx, 1);
-      }
-    },
     setUpTimeLines(state, day) {
-      state.lecsInTable[day] = state.lecsInTable[day].sort((a, b) => {
-        return a.start - b.start;
-      });
 
-      let selectedBlocks = [];
-
+      let prevSelected = [];
+      let psIdx = 0;
+      let lecsInTable = [];
+      let processed;
       for(let block of state.timeLines[day]) {
-        if(block.isSelected) {
-          selectedBlocks.push( {
+        if(block.isSelected && block.blockKind == "block") {
+          prevSelected.push( {
             start : block.start,
             end : block.end
           })
         }
       }
-      state.timeLines[day] = fillTL(state.lecsInTable[day])
-      state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
-      
-      for(let block of state.timeLines[day]) {
-        if(selectedBlocks.length == 0) {
-          break
-        }
 
-        if(block.start == selectedBlocks[0].start || block.end == selectedBlocks[0].end) {
-          if(block.blockKind == "block") {
-              block.isSelected = true
-          }
-          selectedBlocks.shift();
+      for(let lec of state.lecList) {
+        if(lec.isInTable == 0) {
+          continue;
+        }
+        processed = processLec(lec, day)
+        for(let p of processed) {
+          lecsInTable.push(p);
         }
       }
 
+      lecsInTable = lecsInTable.sort((a,b) => { return a.start - b.start });
+
+      state.timeLines[day] = fillTL(lecsInTable)
+      state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
+      
+      for(let block of state.timeLines[day]) {
+        if(prevSelected.length == 0) {
+          break
+        }
+        if(block.blockKind == "dayBlock") {
+          continue
+        }
+        if(psIdx < prevSelected.length) {
+          if(block.start == prevSelected[psIdx].start || block.end == prevSelected[psIdx].end) {
+            if(block.blockKind == "block") {
+                block.isSelected = true
+            }
+            psIdx++;
+          }
+        }
+      }
     },
+
     async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
         let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
@@ -391,30 +355,41 @@ export default createStore({
         console.log(err)
       }
     },
-    addShadowLec(state, lecDat){
+    addShadowLec(state, lecData){
+
+      let curDay
+      let processed
+
       for(let i=0; i<5;i++){
         state.shadowList[i].length = 0
       }
-      for(let j=0 ; j< lecDat.요일.length; j++){              
-        if(lecDat.요일[j] == '시간미지정강좌') {
+      for(let j=0 ; j< lecData.요일.length; j++){    
+        curDay =lecData.요일[j]
+        
+        if(curDay == '시간미지정강좌') {
           continue;
         }
-        switch(lecDat.요일[j]){
-          case '월':
-            state.shadowList[0].push(processLec(lecDat, j))
-            break
-          case '화':
-            state.shadowList[1].push(processLec(lecDat, j))
-            break
-          case '수':
-            state.shadowList[2].push(processLec(lecDat, j))
-            break
-          case '목':
-            state.shadowList[3].push(processLec(lecDat, j))
-            break
-          case '금':
-            state.shadowList[4].push(processLec(lecDat, j))
-            break
+
+        processed = processLec(lecData, curDay)
+
+        for(let p of processed) {
+          switch(curDay){
+            case '월':
+              state.shadowList[0].push(p)
+              break
+            case '화':
+              state.shadowList[1].push(p)
+              break
+            case '수':
+              state.shadowList[2].push(p)
+              break
+            case '목':
+              state.shadowList[3].push(p)
+              break
+            case '금':
+              state.shadowList[4].push(p)
+              break
+          }
         }
       }
     },
@@ -435,21 +410,16 @@ export default createStore({
     setNextColor(state) {
       let nextIdx = state.colorIdx
       let nextColor
-      let colorsInUse = state.lecsInTable['월'].concat(
-        state.lecsInTable['화'], 
-        state.lecsInTable['수'],
-        state.lecsInTable['목'],
-        state.lecsInTable['금'])
 
       while(1) {
         //nextIdx = (nextIdx + Math.floor(Math.random() * 32)) % state.colorList.length
         nextIdx = (nextIdx + 1) % state.colorList.length
         nextColor = state.colorList[nextIdx] 
-        if(colorsInUse.findIndex(lec => lec.color == nextColor) == -1) {
+        if(state.lecList.findIndex(lec => (lec.isInTable == 1) && (lec.color == nextColor)) == -1) {
           break
         }
       }      
-      state.colorIdx = nextIdx 
+      state.colorIdx = nextIdx
     }
   },
   actions: {
