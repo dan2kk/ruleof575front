@@ -294,6 +294,10 @@ export default createStore({
     },
     setUpTimeLines(state, day) {
 
+      if(day == '시간미지정강좌') {
+        return
+      }
+
       let prevSelected = [];
       let lecsInTable = [];
       let processed;

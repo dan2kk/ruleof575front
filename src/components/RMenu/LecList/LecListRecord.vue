@@ -24,7 +24,6 @@ export default {
   props: ["lecData"],
   methods : {
     showDetails() {
-      console.log(this.$store.getters.getLecList);
       this.$store.commit("setLecDetails", this.lecData.수업번호);
     },
     clickAddBtn() {

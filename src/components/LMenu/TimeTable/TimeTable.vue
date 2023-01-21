@@ -8,18 +8,34 @@
       <TimeLine :day = 4 />
       <TimeLine :day = 5 />
     </div>
-    <div class = "non-time-lec">
-      시간미지정강좌 넣을곳
-    </div>
+    <NTLecBlock :lecData="lec" v-for="lec in this.nTLecsList" :key="lec"/>
   </div>
 </template>
 
 <script>
 import TimeLine from "./TimeLine";
+import NTLecBlock from "./NTLecBlock"
 export default {
   name: "TimeTable",
   components: {
-    TimeLine
+    TimeLine,
+    NTLecBlock
+  },
+  computed : {
+    nTLecsList() {
+      let ret = []
+      let lecList = this.$store.getters.getLecList
+
+      for(let lec of lecList) {
+        if(lec.isInTable == 1) {
+          if(lec.요일.includes('시간미지정강좌')) {
+            ret.push(lec);
+          }
+
+        }
+      }
+      return ret
+    }
   }
 };
 </script>
@@ -49,11 +65,5 @@ export default {
   height: 750px
   gap: 8px
   position: relative
-  
-.non-time-lec
-  align-items: center
-  height: 30px
-  position: relative
-  background-color: $error-color
 
 </style>
