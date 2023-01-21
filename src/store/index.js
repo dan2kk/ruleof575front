@@ -295,7 +295,6 @@ export default createStore({
     setUpTimeLines(state, day) {
 
       let prevSelected = [];
-      let psIdx = 0;
       let lecsInTable = [];
       let processed;
       for(let block of state.timeLines[day]) {
@@ -322,20 +321,25 @@ export default createStore({
       state.timeLines[day] = fillTL(lecsInTable)
       state.timeLines[day].unshift({ start: 0, end: 0.5, content: day, blockKind: "dayBlock", isSelected: false})
       
-      for(let block of state.timeLines[day]) {
-        if(prevSelected.length == 0) {
-          break
-        }
-        if(block.blockKind == "dayBlock") {
-          continue
-        }
-        if(psIdx < prevSelected.length) {
-          if(block.start == prevSelected[psIdx].start || block.end == prevSelected[psIdx].end) {
-            if(block.blockKind == "block") {
-                block.isSelected = true
-            }
-            psIdx++;
+
+      let prevIdx = 0;
+      let newIdx = 1;
+      let newTimeLine = state.timeLines[day]
+
+      while(prevIdx < prevSelected.length && newIdx < newTimeLine.length) {
+
+        if(newTimeLine[newIdx].start == prevSelected[prevIdx].start || newTimeLine[newIdx].end == prevSelected[prevIdx].end) {
+          if(newTimeLine[newIdx].blockKind == "block") {
+            newTimeLine[newIdx].isSelected = true
           }
+          prevIdx ++;
+          newIdx++
+        }
+        else if(newTimeLine[newIdx].start >= prevSelected[prevIdx].end) {
+          prevIdx++;
+        }
+        else if(newTimeLine[newIdx].end <= prevSelected[prevIdx].start) {
+          newIdx++;
         }
       }
     },
