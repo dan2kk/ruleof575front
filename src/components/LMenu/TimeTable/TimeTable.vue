@@ -49,6 +49,7 @@ export default {
   height: 750px
   gap: 8px
   position: relative
+  
 .non-time-lec
   align-items: center
   height: 30px

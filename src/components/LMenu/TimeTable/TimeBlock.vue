@@ -60,8 +60,6 @@
         let timeLine
         let isLogined = this.$store.getters.getIsLogined
 
-        console.log(this.$store.getters.getLecsInTable);
-
         if(!isLogined) {
           return
         }
@@ -80,7 +78,6 @@
             this.timeBlockData.isSelected = !this.timeBlockData.isSelected
             timeLines = this.$store.getters.getTimeLines
             timeLine = timeLines[this.timeBlockData.content] 
-
             timeLine.forEach(x=> {
               if(this.timeBlockData.isSelected != x.isSelected && x.blockKind =="block") {
                 x.isSelected = this.timeBlockData.isSelected
@@ -128,11 +125,11 @@
 
               let recommList = (await axios.post('/recommend', {time_blocks: selectedTimes})).data
 
-              for(let i =0; i< recommList.length; i++){
-                console.log(recommList[i])
-                this.$store.commit("addRecommList", recommList[i])
+              for(let recomms of recommList) {
+                recomms['isRecommShow'] = true
+                this.$store.commit("addRecommList", recomms)
               }
-
+              this.$store.commit("sortRecommList")
             } 
             catch (error) {
                 console.log(error)
