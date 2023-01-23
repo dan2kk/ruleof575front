@@ -1,12 +1,12 @@
 <template>
   <div class="grad-record">
       <div class="grad-record-cart">
-        <RMenuTextBox :text= this.gradData.이수명 color= "purple" size= "150"/>
-        <RMenuTextBox :text= this.gradData.기준 color= "purple" size= "50"/>
-        <RMenuTextBox :text= this.gradData.이수 color= "purple" size= "50"/>
-        <RMenuTextBox :text= this.gradData.변동 color= "purple" size= "50"/>
-        <RMenuTextBox :text= this.gradData.합계 color= "purple" size= "50"/>
-        <RMenuTextBox :text= this.gradData.잔여 color= "purple" size= "50"/>
+        <RMenuTextBox :text= this.gradData.이수명 :color= this.setColor size= "150"/>
+        <RMenuTextBox :text= this.gradData.기준 :color= this.setColor size= "50"/>
+        <RMenuTextBox :text= this.gradData.이수 :color= this.setColor size= "50"/>
+        <RMenuTextBox :text= this.gradData.변동 :color= this.setColor size= "50"/>
+        <RMenuTextBox :text= this.gradData.합계 :color= this.setColor size= "50"/>
+        <RMenuTextBox :text= this.gradData.잔여 :color= this.setColor size= "50"/>
       </div>
   </div>
 </template>
@@ -19,6 +19,33 @@ export default {
     RMenuTextBox,
   },
   props: ["gradData"],
+  computed:{
+    setColor()
+    {
+      let color
+      if (this.gradData.이수명 != "이수명")
+      {
+        if (this.gradData.변동 > 0)
+        {
+          if (parseInt(this.gradData.합계) > parseInt(this.gradData.기준))
+          {
+            color = "#FFCCCC"
+          }
+          else
+            color = "#99FF99"
+        }
+        else
+        {
+          if (parseInt(this.gradData.이수) >= parseInt(this.gradData.기준))
+            color = "#E0E0E0"
+          else
+            color = "#purple"
+        }
+      }
+      else color = "purple"
+      return color
+    }
+  }
 };
 
 

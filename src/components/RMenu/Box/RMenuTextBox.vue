@@ -1,5 +1,5 @@
 <template>
-  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``, itemPos || ``]">
+  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``]">
     <div class="r-menu-text-box-cart">
       <div class="r-menu-text-box-text valign-text-middle notosanskr-normal-black-12px" v-html="text"></div>
     </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "RMenuTextBox",
-  props: ["text", "color", "size", "itemPos"],
+  props: ["text", "color", "size"],
   computed:{
     setStyle(){
       let color
@@ -28,24 +28,43 @@ export default {
           color = `#ffe7fb`
           break;
         default:
-          color = `#ff00d6`
+          color = this.color
           break;
       }
+      var pattern1 = /[a-zA-Z]/
+      var pattern2 =/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
       let itemPos
-      switch(this.itemPos)
-      {
-        case "top":
-          itemPos = `flex-start`
-          break;
-        case "center":
-          itemPos = `center`
-          break;
-        case "bottom":
-          itemPos = `flex-bottom`
-          break;
-        default:
-          itemPos = `center`
-          break;
+      if (pattern1.test(this.text)){
+        switch(this.size)
+        {
+          case "150":
+            if (this.text.length > 40)
+              itemPos = `flex-start`
+            else
+              itemPos = `center`
+            break;
+          case "50":
+            if (this.text.length > 8)
+              itemPos = `flex-start`
+            else
+              itemPos = `center`
+        }
+      }
+      if (pattern2.test(this.text)){
+        switch(this.size)
+        {
+          case "150":
+            if (this.text.length > 26)
+              itemPos = `flex-start`
+            else
+              itemPos = `center`
+            break;
+          case "50":
+            if (this.text.length > 8)
+              itemPos = `flex-start`
+            else
+              itemPos = `center`
+        }
       }
       if (this.size != undefined){
         return{
