@@ -429,7 +429,7 @@ export default createStore({
       if (state.isChecked) {
         state.isChecked = false; 
         (async () => {
-          const response = await chrome.runtime.sendMessage({type: "hello"});
+          const response = await chrome.runtime.sendMessage({type: "import", param: "wanted"});
           // do something with response here, not outside the function
           console.log(response);
         })();
@@ -437,7 +437,7 @@ export default createStore({
       else {
         state.isChecked = true;
         (async () => {
-          const response = await chrome.runtime.sendMessage({type: "goodbye"});
+          const response = await chrome.runtime.sendMessage({type: "import", param: "grad"});
           // do something with response here, not outside the function
           console.log(response);
         })();
