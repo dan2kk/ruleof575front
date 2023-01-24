@@ -1,7 +1,7 @@
   <template>
   <div :style="setStyle" :class="[`search-image-box`, color || ``]">
     <div class="search-image-box-cart">
-      <img class="search-image-box-btn" :src="src" alt="IconButtons"/>
+      <img class="search-image-box-btn" :src="src"/>
     </div>
   </div>
 </template>
@@ -29,6 +29,9 @@ export default {
           break;
         case "green":
           color = `#CCFFE4`
+          break;
+        case "light-grey":
+          color = `#e0e0e0`
           break;
         default:
           color = this.color

@@ -30,6 +30,9 @@ export default {
         case "green":
           color = `#CCFFE4`
           break;
+        case "light-grey":
+          color = `#e0e0e0`
+          break;
         default:
           color = this.color
           break;

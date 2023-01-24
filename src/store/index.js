@@ -17,7 +17,7 @@ export default createStore({
     shadowList: [[],[],[],[],[]],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
-
+    searchModal: {state: false},
     selectedTimes: { 
       월:[], 
       화:[], 
@@ -105,6 +105,9 @@ export default createStore({
     },
     getColor(state) {
       return state.colorList[state.colorIdx]
+    },
+    getSearchModal(state){
+      return state.searchModal
     }
   },
 
@@ -363,6 +366,21 @@ export default createStore({
         console.log(err)
       }
     },
+    async setSearchModal(state)
+    {
+      try{
+        if(!state.searchModal["state"]){
+          state.searchModal["state"] = true
+        }
+        else{
+          state.searchModal["state"] = false
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+    },
+    
     addShadowLec(state, lecData){
 
       let curDay

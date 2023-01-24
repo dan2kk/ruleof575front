@@ -2,10 +2,11 @@
   <div class="start">
     <LMenu/>
     <RMenu/>
-    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose()">
+    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose">
     </LecDetailsModal>
-    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose()">
+    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose">
     </LecDetailsModal>
+    <SearchModal class="search-modal" v-if ="onSearchModal" v-on:modal-close="searchModalClose"></SearchModal>
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import LMenu from "./LMenu/LMenu";
 import RMenu from "./RMenu/RMenu";
 import LecDetailsModal from "./LecDetailsModal";
+import SearchModal from "./SearchModal";
 
 export default {
   name: "Start",
@@ -21,6 +23,7 @@ export default {
     LMenu,
     RMenu,
     LecDetailsModal,
+    SearchModal,
   },
   computed:{
     onLeftModal(){
@@ -28,6 +31,9 @@ export default {
     },
     onRightModal(){
       return this.$store.getters.getLecDetailsRight.state
+    },
+    onSearchModal(){
+      return this.$store.getters.getSearchModal.state
     }
   },
   methods:{
@@ -36,6 +42,9 @@ export default {
     },
     rightModalClose(){
       this.$store.getters.getLecDetailsRight.state = false
+    },
+    searchModalClose(){
+      this.$store.getters.getSearchModal.state = false
     }
   }
 };
@@ -53,6 +62,8 @@ export default {
   position: absolute
   width: 800px
 .right-modal
+  left: 400px
+.search-modal
   left: 400px
   
 </style>
