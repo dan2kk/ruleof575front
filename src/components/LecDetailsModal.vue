@@ -134,7 +134,7 @@ const ctx = document.getElementById('myChart');
 .lec-details-modal,
 .overlay
     width: 400px
-    height: 100%
+    height: 600px
     position: absolute
     left:0
     top:0

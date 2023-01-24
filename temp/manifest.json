@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "qwe",
+    "description": "qwe",
+    "version": "0.0.1",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://portal.hanyang.ac.kr/sugang/*"],
+            "js": ["/content.js"]
+        }
+    ],
+    "web_accessible_resources": [{
+        "resources": ["/index.html"],
+        "matches": ["<all_urls>"]
+    }]
+}

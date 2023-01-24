@@ -47,13 +47,12 @@ export default {
 .search-modal,
 .overlay
     width: 400px
-    height: 100%
+    height: 600px
     position: absolute
     align-items: center
 .overlay
     opacity: 0.4
     background-color: black
-    
 .search-modal-card
     background-color: $error-color
     position: absolute

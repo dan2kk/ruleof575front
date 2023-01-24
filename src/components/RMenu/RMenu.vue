@@ -57,7 +57,7 @@ export default {
     async initList() {
       try{
         let stuId = this.$store.getters.getStuId
-        let lecList = (await axios.get('/list/init', {params: {stu_id: stuId}})).data
+        let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
         console.log(lecList);
 
         for(let lec of lecList) {
@@ -82,7 +82,7 @@ export default {
     async initGrad(){
       try{
         let stuId = this.$store.getters.getStuId
-        let gradRecList = (await axios.get('/grad/init', {params: {stu_id: stuId}})).data.grads
+        let gradRecList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
         let gradNames = getGradNames();
         
         for(let gradRec of gradRecList) {

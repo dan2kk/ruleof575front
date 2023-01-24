@@ -13,7 +13,7 @@ export default {
   name: "LoginScreen",
   methods: {
     clickEvent(){
-
+      console.log("ASDSADSD");
       //웹 크롤링
       this.$emit("login-req")
     }
