@@ -46,7 +46,7 @@ export default {
   background-color: $pippin
   display: flex
   flex-direction: column
-  height: 550px
+  height: 560px
   position: relative
   width: 400px
   border-width : 1px

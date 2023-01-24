@@ -31,7 +31,7 @@ export default {
   background-color: $bon-jour
   display: flex
   flex-direction: column
-  height: 550px
+  height: 560px
   justify-content: center
   position: relative
   width: 400px

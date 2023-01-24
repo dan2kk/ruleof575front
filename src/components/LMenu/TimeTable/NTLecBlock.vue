@@ -1,12 +1,14 @@
 <template>
-  <div class="non-time-lec-block" @click="showDetails">
-      {{ this.lecData.과목명 }}
-  </div>
+  <RMenuTextBox :text = this.lecData.과목명 color="yellow" size= "400" @click="showDetails"/>
+
 </template>
 
 <script>
+import RMenuTextBox from "../../RMenu/Box/RMenuTextBox";
+
 export default {
   name: "NTLecBlock",
+  components:{RMenuTextBox},
   props: ["lecData"],
   methods : {
     showDetails() {
@@ -20,7 +22,6 @@ export default {
 @import '../../../../variables'
 .non-time-lec-block
   align-items: center
-  height: 30px
   position: relative
   background-color: $error-color
 </style>

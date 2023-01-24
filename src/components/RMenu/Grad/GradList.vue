@@ -52,7 +52,7 @@ export default {
   background-color: $tutu
   display: flex
   flex-direction: column
-  height: 550px
+  height: 560px
   position: relative
   width: 400px
 

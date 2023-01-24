@@ -26,6 +26,9 @@ export default {
         case "purple":
           color = `#c49fbe`
           break;
+        case "green":
+          color = `#49c282`
+          break;
         default:
           color = `#ff00d6`
           break;

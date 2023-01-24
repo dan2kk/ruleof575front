@@ -153,7 +153,7 @@
 
   .send-btn
     font-size: 13px 
-    background: $orange-yellow
+    background: $green
     color: white 
     display: flex 
     align-items: center 

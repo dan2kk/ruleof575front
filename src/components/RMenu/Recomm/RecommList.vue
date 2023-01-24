@@ -1,7 +1,7 @@
 <template>
   <div class="recomm-list">
     <div class="upper-menu">
-      <RMenuTitleBox color="blue" style="position: relative">
+      <RMenuTitleBox color="green" style="position: relative">
           <div style="position: absolute text-align: center">
             내 졸업사정에 필요한 교양만 추천받기
           </div>
@@ -14,7 +14,7 @@
       </RMenuTitleBox>
     </div>
     <div v-for="recomms in recommList" :key="recomms">
-        <RMenuTitleBox color="blue" style="position: relative">
+        <RMenuTitleBox color="green" style="position: relative">
           <div style="position: absolute text-align: center">
             {{recomms.영역코드명}}
           </div>
@@ -94,12 +94,12 @@ export default {
 
 .recomm-list
   align-items: start
-  background-color: $solitude
+  background-color: $light-green
   border-style: solid
   border-width: 1px
   border-color: $white
   flex-direction: column
-  height: 550px
+  height: 560px
   overflow: hidden
   overflow-y: scroll
   position: relative

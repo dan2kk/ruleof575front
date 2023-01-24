@@ -1,5 +1,5 @@
   <template>
-  <div :class="[`search-image-box`, color || ``]">
+  <div :style="setStyle" :class="[`search-image-box`, color || ``]">
     <div class="search-image-box-cart">
       <img class="search-image-box-btn" :src="src" alt="IconButtons"/>
     </div>
@@ -10,6 +10,35 @@
 export default {
   name: "ImageBoxSearch",
   props: ["src", "color"],
+  computed:{
+    setStyle(){
+      let color
+      switch(this.color)
+      {
+        case "red":
+          color = `#ffe0de`
+          break;
+        case "blue":
+          color = `#e8f0ff`
+          break;
+        case "yellow":
+          color = `#ffefc6`
+          break;
+        case "purple":
+          color = `#ffe7fb`
+          break;
+        case "green":
+          color = `#CCFFE4`
+          break;
+        default:
+          color = this.color
+          break;
+      }
+      return {
+        '--color' : color
+      }
+    }
+  }
 };
 </script>
 
@@ -21,12 +50,8 @@ export default {
   display: flex
   height: 40px
   width: 50px
+  background-color: var(--color)
 
-.search-image-box.red
-  background-color: $pippin
-
-.search-image-box.blue
-  background-color: $solitude
 .search-image-box-cart
   align-items: center
   display: flex

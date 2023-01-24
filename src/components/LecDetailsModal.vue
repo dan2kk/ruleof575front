@@ -73,20 +73,21 @@ export default {
       {
       labels: [],
       datasets: [{
-        label: '# of Votes',
+        label: '인원수',
         data: [],
         backgroundColor: [
-          'rgb(255, 99, 132, 0.6)',
-          'rgb(255, 159, 64, 0.6)',
-          'rgb(255, 205, 86, 0.6)',
-          'rgb(75, 192, 192, 0.6)',
-          'rgb(54, 162, 235, 0.6)',
-          `rgb(0, 0, 255, 0.6)`,
-          'rgb(153, 51, 255, 0.6)',
-          'rgb(255, 51, 255, 0.6)',
-          'rgb(160, 160, 160, 0.6)',
+          '#C59315',
+          '#FFBC11',
+          '#FFD15A',
+          '#FFE39A',
+          '#D9D9D9',
+          '#A5A5A5'
         ],
-        borderColor: ['rgba(255, 255, 255)'],
+        borderColor: [
+          'rgba(255, 255, 255, 1)',
+
+
+        ],
         borderWidth: 2
       }]}
       //PF과목
@@ -99,15 +100,12 @@ export default {
       //non-PF과목
       else
       {
-        data.labels = [ 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F' ]
+        data.labels = [ 'A+', 'A', 'B+', 'B', 'Others', 'F' ]
         data.datasets[0].data.push(this.modalData.lec_info['A+'])
         data.datasets[0].data.push(this.modalData.lec_info['A+'])
         data.datasets[0].data.push(this.modalData.lec_info['B+'])
         data.datasets[0].data.push(this.modalData.lec_info['B0'])
-        data.datasets[0].data.push(this.modalData.lec_info['C+'])
-        data.datasets[0].data.push(this.modalData.lec_info['C0'])
-        data.datasets[0].data.push(this.modalData.lec_info['D+'])
-        data.datasets[0].data.push(this.modalData.lec_info['D0'])
+        data.datasets[0].data.push(this.modalData.lec_info['C+']+this.modalData.lec_info['C0']+this.modalData.lec_info['D+']+this.modalData.lec_info['D0'])
         data.datasets[0].data.push(this.modalData.lec_info['F'])
 
       }
