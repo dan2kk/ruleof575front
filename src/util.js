@@ -160,3 +160,12 @@ export const fieldOrder = [
     "일반영역",
     "영역없음"
 ]
+
+export const dayOrder = [
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "시간미지정강좌"
+]

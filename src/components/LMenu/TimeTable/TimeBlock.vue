@@ -19,6 +19,7 @@
   
   <script>
   import axios from "axios"
+  import { dayOrder } from '../../../util'
 
   export default {
     name: "TimeBlock",
@@ -127,6 +128,9 @@
 
               for(let recomms of recommList) {
                 recomms['isRecommShow'] = true
+                recomms.수업목록 = recomms.수업목록.sort((a, b) => {
+                    return dayOrder.indexOf(a.요일[0]) - dayOrder.indexOf(b.요일[0]) 
+                });
                 this.$store.commit("addRecommList", recomms)
               }
               this.$store.commit("sortRecommList")
