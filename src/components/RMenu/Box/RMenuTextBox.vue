@@ -30,6 +30,9 @@ export default {
         case "green":
           color = `#CCFFE4`
           break;
+        case "light-grey":
+          color = `#e0e0e0`
+          break;
         default:
           color = this.color
           break;
@@ -38,35 +41,45 @@ export default {
       var pattern2 =/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
       let itemPos
       if (pattern1.test(this.text)){
-        switch(this.size)
-        {
-          case "150":
-            if (this.text.length > 40)
-              itemPos = `flex-start`
-            else
-              itemPos = `center`
-            break;
-          case "50":
-            if (this.text.length > 8)
-              itemPos = `flex-start`
-            else
-              itemPos = `center`
+        if (this.text == null) {
+          itemPos = `center`
+        }
+        else{
+          switch(this.size)
+          {
+            case "150":
+              if (this.text.length > 40)
+                itemPos = `flex-start`
+              else
+                itemPos = `center`
+              break;
+            case "50":
+              if (this.text.length > 8)
+                itemPos = `flex-start`
+              else
+                itemPos = `center`
+          }
         }
       }
       if (pattern2.test(this.text)){
-        switch(this.size)
-        {
-          case "150":
-            if (this.text.length > 26)
-              itemPos = `flex-start`
-            else
-              itemPos = `center`
-            break;
-          case "50":
-            if (this.text.length > 8)
-              itemPos = `flex-start`
-            else
-              itemPos = `center`
+        if (this.text == null) {
+          itemPos = `center`
+        }
+        else{
+          switch(this.size)
+          {
+            case "150":
+              if (this.text.length > 26)
+                itemPos = `flex-start`
+              else
+                itemPos = `center`
+              break;
+            case "50":
+              if (this.text.length > 8)
+                itemPos = `flex-start`
+              else
+                itemPos = `center`
+          }
         }
       }
       if (this.size != undefined){

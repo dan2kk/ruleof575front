@@ -4,9 +4,9 @@
       <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50" @click="showDetails"/>
       <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
-      <SearchImageBox src= './iconbuttons-3.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
-      <SearchImageBox src= './iconbuttons-1.png' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
-      <SearchImageBox src= './iconbuttons-2.png' color ="red" @click="clickDelBtn"/>
+      <SearchImageBox src= './addbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
+      <SearchImageBox src= './subtractbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
+      <SearchImageBox src= './deletebutton.svg' color ="red" @click="clickDelBtn"/>
     </div>
   </div>
 </template>

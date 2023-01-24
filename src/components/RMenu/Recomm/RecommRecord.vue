@@ -4,9 +4,9 @@
       <RMenuTextBox :text= this.recommData.과목명 color= "green" size= "150" @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "50" @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100" @click="showDetails"/>
-      <SearchImageBox src="./iconbuttons-3.png" color ="green" @click="addToLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"/>
-      <SearchImageBox src="./iconbuttons-1.png" color ="green" @click="addToLecList" @mouseleave="clearShadowLec" v-show="!isInLecList"/>
-      <SearchImageBox src= "./iconbuttons-2.png" color="green" @click="delFromRecommList"/>
+      <SearchImageBox src="./addbutton.svg" color ="green" @click="addToLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"/>
+      <SearchImageBox src="./checkbutton.svg" color ="green" @click="addToLecList" @mouseleave="clearShadowLec" v-show="!isInLecList"/>
+      <SearchImageBox src= "./deletebutton.svg" color="green" @click="delFromRecommList"/>
     </div>
   </div>
 </template>

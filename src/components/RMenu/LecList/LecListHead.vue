@@ -5,7 +5,7 @@
         <RMenuTextBox :text= this.lecHeadData.대표교강사명 color= "red" size= "50" />
         <RMenuTextBox :text= this.lecHeadData.수업시간 color = "red" size= "100" />
         <RMenuTextBox :text= this.lecHeadData.담기 color = "red" size= "50" />
-        <RMenuTextBox :text= this.lecHeadData.더보기 color = "red" size= "50" />
+        <RMenuTextBox :text= this.lecHeadData.빼기 color = "red" size= "50" />
       </div>
     </div>
   </template>

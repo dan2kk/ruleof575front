@@ -8,6 +8,9 @@
       <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
         {{lec.수업번호}}
       </LecListRecord>
+      <div class = "search-box">
+        <SearchImageBox src= "./searchbutton.svg" color="red" @click="openSearchModal"/>
+      </div> 
     </div>
 
   </div>
@@ -15,25 +18,34 @@
 
 <script>
 import RMenuTitleBox from "../Box/RMenuTitleBox";
+import RMenuTextBox from "../Box/RMenuTextBox";
 import LecListRecord from "./LecListRecord";
 import LecListHead from "./LecListHead";
+import SearchImageBox from "../Box/SearchImageBox";
 
 export default {
   name: "LecList",
   components: {
     RMenuTitleBox,
     LecListRecord,
-    LecListHead
+    LecListHead,
+    RMenuTextBox,
+    SearchImageBox
   },
   data(){
     return{
-      lecListHead :{과목명: "과목명", 대표교강사명: "강사명", 수업시간: "수업시간", 담기: "담기", 더보기: "더보기",},
+      lecListHead :{과목명: "과목명", 대표교강사명: "강사명", 수업시간: "수업시간", 담기: "담기", 빼기: "빼기",},
     }
   },
   computed : {
     lecList() {
       return this.$store.getters.getLecList;
     }
+  },
+  methods:{
+    openSearchModal() {
+      this.$store.commit("setSearchModal")
+    },
   },
 };
 </script>
@@ -63,5 +75,10 @@ export default {
 .lec-list-lower-menu::-webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
+
+.search-box
+  display: flex
+  flex-direction: column
+  align-items: center
 
 </style>

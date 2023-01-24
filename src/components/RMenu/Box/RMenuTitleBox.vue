@@ -58,6 +58,7 @@ export default {
   width: var(--width)
   position: relative
   background-color: var(--color)
+  align-items: center
 
 
 

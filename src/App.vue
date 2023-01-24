@@ -1,12 +1,13 @@
 <template>
-  <div class="app">
-      <LMenu/>
-      <RMenu/>
-      <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose()">
-      </LecDetailsModal>
-      <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose()">
-      </LecDetailsModal>
-    </div>
+  <div class="start">
+    <LMenu/>
+    <RMenu/>
+    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose">
+    </LecDetailsModal>
+    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose">
+    </LecDetailsModal>
+    <SearchModal class="search-modal" v-if ="onSearchModal" v-on:modal-close="searchModalClose"></SearchModal>
+  </div>
 </template>
 
 
@@ -15,6 +16,7 @@ import LMenu from "./components/LMenu/LMenu";
 import RMenu from "./components/RMenu/RMenu";
 import LecDetailsModal from "./components/LecDetailsModal";
 import { h } from 'vue'
+import SearchModal from "./components/SearchModal";
 
 export default {
   name: "Start",
@@ -22,6 +24,7 @@ export default {
     LMenu,
     RMenu,
     LecDetailsModal,
+    SearchModal,
   },
   computed:{
     onLeftModal(){
@@ -29,6 +32,9 @@ export default {
     },
     onRightModal(){
       return this.$store.getters.getLecDetailsRight.state
+    },
+    onSearchModal(){
+      return this.$store.getters.getSearchModal.state
     }
   },
   methods:{
@@ -37,10 +43,10 @@ export default {
     },
     rightModalClose(){
       this.$store.getters.getLecDetailsRight.state = false
+    },
+    searchModalClose(){
+      this.$store.getters.getSearchModal.state = false
     }
-  },
-  render() {
-    return h('p', {})
   }
 };
 </script>
@@ -48,7 +54,7 @@ export default {
 <style lang="sass">
 @import '../variables'
 
-.app
+.start
   align-items: flex-start
   background-color: $error-color
   border: 1px none
@@ -56,6 +62,8 @@ export default {
   height: 600px
   width: 800px
 .right-modal
+  left: 400px
+.search-modal
   left: 400px
   
 </style>
