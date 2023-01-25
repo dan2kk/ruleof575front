@@ -347,10 +347,10 @@ export default createStore({
           prevIdx ++;
           newIdx++
         }
-        else if(newTimeLine[newIdx].start >= prevSelected[prevIdx].end) {
+        else if(newTimeLine[newIdx].start >= prevSelected[prevIdx].start) {
           prevIdx++;
         }
-        else if(newTimeLine[newIdx].end <= prevSelected[prevIdx].start) {
+        else {
           newIdx++;
         }
       }

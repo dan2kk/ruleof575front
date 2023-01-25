@@ -9,51 +9,37 @@
             <input type="text" class="search-box" id="searchbox"  placeholder="원하는 과목 직접 검색"/>
             <input type="submit" class="button" value="검색" @click="getSearchText()">
           </div>
-          <RMenuTextBox :text= this.sendSearchText() color= "red" size= "150"/>
-
+          <SearchModalRecord :lecData=lec v-for="lec in this.lecList" :key="lec"></SearchModalRecord>
         </div>
     </div>
   </template>
   
 
 <script>
-import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox";
-import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
-import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
-import SearchImageBox from "./RMenu/Box/SearchImageBox";
+import SearchModalRecord from "./SearchModalRecord";
 import axios from "axios"
 
 export default {
   name: "Modal",
   props: [],
   components: {
-    RMenuTitleBox,
-    RMenuTextBox,
-    RMenuModifiableTitleBox,
-    SearchImageBox,
-    RMenuTextBox
-  },
-  computed:{
-
+    SearchModalRecord
   },
   data(){
     return{
-    input: ""
+      input: "",
+      lecList : []
     }
   },
   methods:{
     async getSearchText(){
-      var temp = document.getElementById("searchbox").value
-      this.input=temp
+      this.input = document.getElementById("searchbox").value
       try{
-        let recommList = (await axios.post('http://3.37.249.210:1324/list/search', {keyword: this.input})).data
+        this.lecList = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data
       }
       catch(error){
         console.log(error)
       }
-    },
-    sendSearchText(){
-      return this.input
     }
   }
 };

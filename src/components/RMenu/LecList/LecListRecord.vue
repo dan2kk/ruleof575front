@@ -58,9 +58,9 @@ export default {
           continue
         }
 
+        
         timeLine = timeLines[curDay]
         startToEnd = timeToNum(this.lecData.시작시간[i], this.lecData.끝시간[i])
-
 
         for(let block of timeLine) {
           if(block.blockKind == "lecBlock") {
