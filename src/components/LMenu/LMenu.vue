@@ -29,7 +29,7 @@ export default {
 
 .l-menu
   align-items: center
-  background-color: $error-color
+  background-color: $silver
   display: flex
   flex-direction: column
   height: 600px
