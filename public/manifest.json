@@ -9,7 +9,6 @@
     "content_scripts": [
         {
             "matches": ["https://portal.hanyang.ac.kr/sugang/*"],
-            "runAt" : "document_start",
             "js": ["/content.js"]
         }
     ],

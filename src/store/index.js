@@ -114,7 +114,14 @@ export default createStore({
 
   mutations: {
     setIsLogined(state, tf) {
-      state.isLogined = tf
+      (async () => {
+        const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
+        let data = response.data
+        state.userInfo.stuId = data.stuNum
+        state.userInfo.userName = data.stuName
+        state.userInfo.grade = data.stuGrad
+        state.isLogined = tf
+      })();
     },
     addLecList(state, lecToAdd){
       if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
@@ -427,12 +434,7 @@ export default createStore({
     setIsChecked(state)
     {
       if (state.isChecked) {
-        state.isChecked = false; 
-        (async () => {
-          const response = await chrome.runtime.sendMessage({type: "extension", param: "wanted"});
-          // do something with response here, not outside the function
-          console.log(response);
-        })();
+        state.isChecked = false;
       }
       else {
         state.isChecked = true;

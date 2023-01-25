@@ -1,6 +1,10 @@
 //console.log("ASDSDASD")
-let elements = document.querySelectorAll('#snb > ul > li')
-let loginInfo = document.querySelectorAll('#logo-area> div > div > span')
+var elements = document.querySelectorAll('#snb > ul > li')
+var loginInfo = document.querySelectorAll('#logo-area> div > div > span')
+var jolupInfo = null
+var wantedInfo = null
+var sgscInfo = null
+var defaultInfo = null 
 let hashArray = [
     "#!UDMxOTEzMCRAXnN1Z2FuZy8kQF4kQF5NMzE4Njc3JEBe7KG47JeF7IKs7KCV7KGw7ZqMJEBeTTMxODY3NyRAXmZiM2VjOTI1OTE3OGNmMmFmMmQ3ZDQ3Y2IxOTlmZGUyMTViNWU4ZWQ1ZGI2MGI4ZTZjOTk3NTgyZTQ2YzIzOWM=", //졸업사정
     "#!UDMxMDI5OCRAXnN1Z2FuZy8kQF4kQF5NMDA4OTU4JEBe7Z2s66ed7IiY7JeFJEBeTTAwODk1OCRAXjFkOThmNjkxN2Y2YzAzMTg1YTcwYWQ4NzBkYzBiOGYxY2FhNzJkN2MyOWY1ZDVmZjNmZTMxNjY4NTg5MjU3NTY=", //희망수업
@@ -57,19 +61,29 @@ if(loginInfo.length == 3){ //로그인 성공시 로그인 정보
         console.log(response);
     })();   
 }
-function locationHashChanged() { //창이동 트리거 이벤트
-    if(location.hash == hashArray[0]){
-        console.log("졸업사정")
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      console.log("content-script event handler")
+      if(request.type == "import"){
+        if(request.data == "wanted"){
+            wantedInfo = document.querySelectorAll('#gdMain > tbody > tr')
+            console.log(wantedInfo)
+            sendResponse({data: wantedInfo})
+        }
+        if(request.data =="grad"){
+            jolupInfo = document.querySelectorAll('#gdDtl1 > tbody > tr')
+            console.log(jolupInfo)
+            sendResponse({data: jolupInfo})
+        }
+        if(request.data == "sugang"){
+            sgscInfo = document.querySelectorAll('#gdMain > tbody > tr')
+            console.log(sgscInfo)
+            sendResponse({data: sgscInfo})
+        }
+      }
+      else{
+        sendResponse("error")
+      }
     }
-    else if(location.hash == hashArray[1]){
-        console.log("희망수업")
-    }
-    else if(location.hash == hashArray[2]){
-        console.log("수강신청")
-    }
-    else if(location.hash == hashArray[3]){
-        console.log("기본수업")
-    }
-  }
-  
-  window.onhashchange = locationHashChanged;
+  );
+
