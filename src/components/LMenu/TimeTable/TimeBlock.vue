@@ -124,7 +124,7 @@
 
               this.$store.commit("clearRecommList")
 
-              let recommList = (await axios.post('/recommend', {time_blocks: selectedTimes})).data
+              let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
 
               for(let recomms of recommList) {
                 recomms['isRecommShow'] = true
