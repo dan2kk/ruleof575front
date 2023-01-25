@@ -9,7 +9,8 @@
         {{lec.수업번호}}
       </LecListRecord>
       <div class = "search-box">
-        <SearchImageBox src= "./searchbutton.svg" color="red" @click="openSearchModal"/>
+        <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
+
       </div> 
     </div>
 
@@ -77,8 +78,9 @@ export default {
   border-radius: 100px
 
 .search-box
-  display: flex
-  flex-direction: column
-  align-items: center
-
+  width: 400px
+.open-button
+  width: 30%
+  position: absolute
+  left: 130px
 </style>

@@ -114,15 +114,17 @@ export default createStore({
 
   mutations: {
     setIsLogined(state, tf) {
-      (async () => {
-        const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
-        let data = response.data
-        state.userInfo.stuId = data.stuNum.trim()
-        state.userInfo.userName = data.stuName.trim()
-        state.userInfo.grade = data.stuGrad.trim()
-        console.log(state.userInfo)
-        state.isLogined = tf
-      })();
+      // (async () => {
+      //   const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
+      //   let data = response.data
+      //   state.userInfo.stuId = data.stuNum.trim()
+      //   state.userInfo.userName = data.stuName.trim()
+      //   state.userInfo.grade = data.stuGrad.trim()
+      //   console.log(state.userInfo)
+      //   state.isLogined = tf
+      // })();
+      state.isLogined = tf
+
     },
     addLecList(state, lecToAdd){
       if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
