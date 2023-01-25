@@ -353,12 +353,7 @@ export default createStore({
 
     async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
-<<<<<<< HEAD
-        let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
-        console.log(details);
-=======
         let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
->>>>>>> 197d16861bbd22b3485b6821a4e94716f912d74c
         details["state"] = true
         if(state.lecDetailsLeft["state"]){
           state.lecDetailsRight = details

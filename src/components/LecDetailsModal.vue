@@ -44,7 +44,7 @@
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
-      <div v-for="prev in this.modalData.prev_infos" :key="prev" style="border: solid 2px red; margin-top: 20px; margin-bottom:20px">
+      <div v-for="prev in this.modalData.prev_infos" :key="prev" style="border: solid 2px red; margin-bottom:40px">
         <div class= "row">
           <RMenuTitleBox color="yellow" size="72">정원</RMenuTitleBox>
           <RMenuTitleBox color="yellow" size="72">수강</RMenuTitleBox>
