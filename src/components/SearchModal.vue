@@ -46,7 +46,8 @@ export default {
       var temp = document.getElementById("searchbox").value
       this.input=temp
       try{
-        let recommList = (await axios.post('http://3.37.249.210:1324/list/search', {keyword: this.input})).data
+        let a = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data
+        console.log(a)
       }
       catch(error){
         console.log(error)

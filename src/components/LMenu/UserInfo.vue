@@ -1,9 +1,9 @@
 <template>
   <div class="user-info">
-    <LMenuTextBox text= "이름"/>
-    <LMenuTextBox text= "학과" />
-    <LMenuTextBox text= "학번" />
-    <LMenuTextBox text= "학년" />
+    <LMenuTextBox :text= 'this.getUserInfo.userName'/>
+    <LMenuTextBox :text= 'this.getUserInfo.major'/>
+    <LMenuTextBox :text= 'this.getUserInfo.stuId'/>
+    <LMenuTextBox :text= 'this.getUserInfo.grade'/>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   name: "UserInfo",
   components : {
     LMenuTextBox
+  },
+  computed:{
+    getUserInfo(){
+      return this.$store.getters.getUserInfo
+    }
   }
 };
 </script>
