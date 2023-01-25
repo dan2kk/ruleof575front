@@ -47,8 +47,8 @@ export default {
   //   }
   // },
   methods: {
-    loginEvent(){
-        this.$store.commit("setIsLogined", true);
+    async loginEvent(){
+        await this.$store.commit("setIsLogined", true);
         this.initList()
         this.initGrad()
         this.$store.commit("setCurScreen", 1);
