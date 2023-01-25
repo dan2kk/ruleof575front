@@ -5,10 +5,12 @@
           창을 닫으려면 바깥을 클릭
         </div>
         <div class= "search-modal-card">
-          <div class="row">
-            <RMenuTextBox color="light-grey" size="360" text="원하는 과목 직접 검색"/>
-            <SearchImageBox src= "./searchbutton.svg" color="light-grey"/>
+          <div class="search">
+            <input type="text" class="search-box" id="searchbox"  placeholder="원하는 과목 직접 검색"/>
+            <input type="submit" class="button" value="검색" @click="getSearchText()">
           </div>
+          <RMenuTextBox :text= this.sendSearchText() color= "red" size= "150"/>
+
         </div>
     </div>
   </template>
@@ -27,14 +29,26 @@ export default {
     RMenuTitleBox,
     RMenuTextBox,
     RMenuModifiableTitleBox,
-    SearchImageBox
+    SearchImageBox,
+    RMenuTextBox
   },
   computed:{
 
   },
+  data(){
+    return{
+    input: "abcd"
+    }
+  },
   methods:{
+    getSearchText(){
+      var temp = document.getElementById("searchbox").value
+      this.input=temp
+    },
+    sendSearchText(){
+      return this.input
+    }
   }
-
 };
 
 
@@ -53,6 +67,7 @@ export default {
 .overlay
     opacity: 0.4
     background-color: black
+
 .search-modal-card
     background-color: $error-color
     position: absolute
@@ -63,7 +78,6 @@ export default {
     background-color: $pippin
     height : 500px
     z-index: 10
-    border: 3px solid white
     overflow-y: overlay
 
 .search-modal-card::-webkit-scrollbar 
@@ -78,7 +92,19 @@ export default {
   height: 520px
   opacity: 0
   background-color: black
-
-
-
+.search 
+  position: relative 
+  display: flex
+  width: 400px 
+.search-box
+  width:80%
+  font-size: 14px 
+.button
+  width:20%
+.search-icon
+  position : absolute
+  width: 25px
+  top: 7px
+  right: 10px
+  margin: 0
 </style>
