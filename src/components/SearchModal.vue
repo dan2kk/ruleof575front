@@ -21,6 +21,7 @@ import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox";
 import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import SearchImageBox from "./RMenu/Box/SearchImageBox";
+import axios from "axios"
 
 export default {
   name: "Modal",
@@ -37,13 +38,19 @@ export default {
   },
   data(){
     return{
-    input: "abcd"
+    input: ""
     }
   },
   methods:{
-    getSearchText(){
+    async getSearchText(){
       var temp = document.getElementById("searchbox").value
       this.input=temp
+      try{
+        let recommList = (await axios.post('http://3.37.249.210:1324/list/search', {keyword: this.input})).data
+      }
+      catch(error){
+        console.log(error)
+      }
     },
     sendSearchText(){
       return this.input
