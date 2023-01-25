@@ -117,9 +117,10 @@ export default createStore({
       (async () => {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
         let data = response.data
-        state.userInfo.stuId = data.stuNum
-        state.userInfo.userName = data.stuName
-        state.userInfo.grade = data.stuGrad
+        state.userInfo.stuId = data.stuNum.trim()
+        state.userInfo.userName = data.stuName.trim()
+        state.userInfo.grade = data.stuGrad.trim()
+        console.log(state.userInfo)
         state.isLogined = tf
       })();
     },
