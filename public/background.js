@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
                   let gradData = response.data
                   console.log("background received gradData")
-                  sendResponse(gradData)
+                  sendResponse({data: gradData})
                 });
             })
         }

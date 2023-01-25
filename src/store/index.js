@@ -436,10 +436,10 @@ export default createStore({
       }
       else {
         state.isChecked = true;
-        (async () => {
-          const response = await chrome.runtime.sendMessage({type: "extension", param: "grad"});
+        (async() => {
+          const response1 = await chrome.runtime.sendMessage({type: "extension", param: "grad"});
           // do something with response here, not outside the function
-          console.log(response);
+          console.log(response1.data);
         })();
       }
     },
