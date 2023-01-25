@@ -19,7 +19,7 @@ export default {
 @import '../../../../variables'
 
 .l-menu-text-box
-  background-color: $error-color
+  background-color: $silver
   border: 1px solid
   border-color: $white
   height: 30px

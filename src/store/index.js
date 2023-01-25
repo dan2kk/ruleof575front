@@ -141,7 +141,7 @@ export default createStore({
           data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
         }
         try {
-          await axios.post('/list/update', {list: data, stu_id: state.userInfo.stuId})
+          await axios.post('http://3.37.249.210:1324/list/update', {list: data, stu_id: state.userInfo.stuId})
           state.isChanged = false;
         }
         catch(err) {
@@ -179,7 +179,7 @@ export default createStore({
       }
 
       try{
-        let lecList = (await axios.get('/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
+        let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
         
         for(let lec of lecList) {
           gradData['졸업학점'] += lec.학점
@@ -353,7 +353,7 @@ export default createStore({
 
     async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
       try{
-        let details = (await axios.get('/details', {params: {lec_num: lecNum}})).data
+        let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
         details["state"] = true
         if(state.lecDetailsLeft["state"]){
           state.lecDetailsRight = details
@@ -427,10 +427,20 @@ export default createStore({
     setIsChecked(state)
     {
       if (state.isChecked) {
-        state.isChecked = false;
+        state.isChecked = false; 
+        (async () => {
+          const response = await chrome.runtime.sendMessage({type: "extension", param: "wanted"});
+          // do something with response here, not outside the function
+          console.log(response);
+        })();
       }
       else {
         state.isChecked = true;
+        (async () => {
+          const response = await chrome.runtime.sendMessage({type: "extension", param: "grad"});
+          // do something with response here, not outside the function
+          console.log(response);
+        })();
       }
     },
     setNextColor(state) {

@@ -34,3 +34,4 @@ if(elements.length == 16) {
     });
 
 }
+alert('Hello, world!');

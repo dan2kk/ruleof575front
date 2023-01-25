@@ -23,6 +23,9 @@ export default {
         case "yellow":
           color = `#f7d16c`
           break;
+        case "darkYellow":
+          color = `#eea900`
+          break;
         case "purple":
           color = `#c49fbe`
           break;
