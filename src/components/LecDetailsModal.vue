@@ -64,8 +64,8 @@
         </div>
         <div class="detail-info-row" v-show="isWantedShow == true">
           <div v-for="detailInfo in prev.희망수업세부정보" :key="detailInfo">
-            <RMenuTitleBox color="yellow" size="175" @click="isWantedShow = !isWantedShow">{{detailInfo.희망신청소속}}</RMenuTitleBox>
-            <RMenuTextBox color="yellow" size="175" @click="isWantedShow = !isWantedShow" :text=detailInfo.학생수></RMenuTextBox>
+            <RMenuTitleBox color="yellow" size="87" @click="isWantedShow = !isWantedShow">{{detailInfo.희망신청소속}}</RMenuTitleBox>
+            <RMenuTextBox color="yellow" size="87" @click="isWantedShow = !isWantedShow" :text=detailInfo.학생수></RMenuTextBox>
           </div>
         </div>
         <div class= "row">
