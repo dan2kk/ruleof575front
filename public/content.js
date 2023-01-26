@@ -95,14 +95,32 @@ chrome.runtime.onMessage.addListener(
         let url = window.location
         if(url.hash != hashArray[idx]) {
             url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[idx])}
-        let data = null
-        if(idx == 0){
+        let returnData = []
+        if(idx == 0){ //졸업사정 불러오기
             data = document.querySelectorAll('#gdDtl1 > tbody > tr')
+            for(let x of data){
+                let temp = []
+                for(let y of x.textContent.split("\n")){
+                    temp.push(y.trim())
+                }
+                let recData ={이수명: temp[1], 기준: temp[2], 이수: temp[4], 잔여: temp[7]}
+                returnData.push(recData)
+            }
         }
         else{
             data = document.querySelectorAll('#gdMain > tbody > tr')
+            for(let x of data){
+                let temp = []
+                for(let y of x.textContent.split("\n")){
+                    temp.push(y.trim())
+                }
+                let recData ={과목명: temp[11], 수업번호: temp[9], 대표교강사명: temp[19], 강좌유형: temp[23],
+                    강의시간: temp[25]
+                }
+                returnData.push(recData)
+            }
         }
-        resolve(data)
+        resolve(returnData)
     });
   };
 
