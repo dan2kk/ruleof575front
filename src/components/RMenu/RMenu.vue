@@ -2,7 +2,7 @@
   <div class="r-menu">
     <div class="r-menu-cart">
       <RMenuTabs> </RMenuTabs>
-      <LoginScreen v-if="!isLogined" v-on:login-req="loginEvent()"> </LoginScreen>
+      <LoginScreen v-if="!isLogined"> </LoginScreen>
       <LecList v-show="isLogined && curScreen == 1"></LecList>
       <RecommList v-show="isLogined && curScreen == 2"></RecommList>
       <Known v-show="isLogined && curScreen == 3"></Known>
@@ -39,18 +39,7 @@ export default {
       return this.$store.getters.getCurScreen
     }
 
-  },
-  // data(){
-  //   return{
-  //     isLogined: false,
-  //     curScreen: 0,
-  //   }
-  // },
-  methods: {
-    loginEvent(){
-      this.$store.commit("loginMain");
-    },
-  },
+  }
 };
 </script>
 

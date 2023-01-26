@@ -113,7 +113,7 @@ export default createStore({
     }
   },
   mutations: {
-    beforeLogin(state){
+    async beforeLogin(state){
       (async () => {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
         let data = response.data
@@ -130,6 +130,11 @@ export default createStore({
       this.commit("setCurScreen", 1)
       if(state.userInfo.stuId != null) state.isLogined = true;
       else  state.isLogined=false;
+    },
+    addLecList(state, lecToAdd){
+      if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
+        state.lecList.push(lecToAdd)
+      }
     },
     delLecList(state, lecToDel) {
       let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호) 
@@ -467,9 +472,6 @@ export default createStore({
           if(lec.isInTable == 1) {
             lec['color'] = state.colorList[state.colorIdx]
             this.commit("setNextColor")
-          }
-          if(state.lecList.findIndex((x)=> x.수업번호 == lec.수업번호) == -1){
-            state.lecList.push(lec)
           }
         }
         this.commit("setUpTimeLines", '월');

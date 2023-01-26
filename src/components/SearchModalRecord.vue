@@ -39,10 +39,10 @@ export default {
       this.$store.commit("addLecList", this.lecData);
     },
     addShadowToTT(lec){
-    this.$store.commit("addShadowLec", this.lecData)
+      this.$store.commit("addShadowLec", this.lecData)
     },
     clearShadowLec() {
-    this.$store.commit("clearShadowLec")
+      this.$store.commit("clearShadowLec")
     }
   }
 

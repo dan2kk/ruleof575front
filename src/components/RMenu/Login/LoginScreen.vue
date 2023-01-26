@@ -14,7 +14,7 @@ export default {
   methods: {
     async clickEvent(){
       await this.$store.commit("beforeLogin")
-      setTimeout(()=>{this.$emit("login-req")}, 500)
+      this.$store.commit("loginMain")
     }
   }
 
