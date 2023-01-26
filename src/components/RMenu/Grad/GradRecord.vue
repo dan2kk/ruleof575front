@@ -1,12 +1,12 @@
 <template>
   <div class="grad-record">
       <div class="grad-record-cart">
-        <RMenuTextBox :text= this.gradData.이수명 :color= this.setColor size= "150"/>
-        <RMenuTextBox :text= this.gradData.기준 :color= this.setColor size= "50"/>
-        <RMenuTextBox :text= this.gradData.이수 :color= this.setColor size= "50"/>
-        <RMenuTextBox :text= this.gradData.변동 :color= this.setColor size= "50"/>
-        <RMenuTextBox :text= this.gradData.합계 :color= this.setColor size= "50"/>
-        <RMenuTextBox :text= this.gradData.잔여 :color= this.setColor size= "50"/>
+        <RMenuTextBox :text= this.gradData.이수명 :color= this.setColor size= "225"/>
+        <RMenuTextBox :text= this.gradData.기준 :color= this.setColor size= "75"/>
+        <RMenuTextBox :text= this.gradData.이수 :color= this.setColor size= "75"/>
+        <RMenuTextBox :text= this.gradData.변동 :color= this.setColor size= "75"/>
+        <RMenuTextBox :text= this.gradData.합계 :color= this.setColor size= "75"/>
+        <RMenuTextBox :text= this.gradData.잔여 :color= this.setColor size= "75"/>
       </div>
   </div>
 </template>

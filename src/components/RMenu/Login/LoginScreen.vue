@@ -2,7 +2,7 @@
   <div class="login-screen">
     <div class="login-btn" @click="clickEvent">
       <div class="login-btn-cart">
-        <div class="login-btn-text valign-text-middle notosanskr-normal-white-12px">{{ "Log In"}}</div>
+        <div class="login-btn-text valign-text-middle notosanskr-normal-white-14px">{{ "Log In"}}</div>
       </div>
   </div>
   </div>
@@ -31,10 +31,10 @@ export default {
   background-color: $bon-jour
   display: flex
   flex-direction: column
-  height: 560px
+  height: 100%
   justify-content: center
   position: relative
-  width: 400px
+  width: 100%
   border-style: solid
   border-width: 1px
   border-color: $white

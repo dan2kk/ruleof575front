@@ -1,6 +1,6 @@
 <template>
   <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeBlockData.blockKind != "sendBtn"'>
-    <div class="time-block-content notosanskr-normal-black-12px"> 
+    <div class="time-block-content notosanskr-normal-black-14px"> 
       {{ this.timeBlockData.content }}
     </div>
   </div>
@@ -50,7 +50,7 @@
             break;
         }
         return {
-          '--height' : `${(this.timeBlockData.end - this.timeBlockData.start) * 60}px`,
+          '--height' : `${(this.timeBlockData.end - this.timeBlockData.start) * 96}px`,
           '--color' : color
         }
       }
@@ -164,8 +164,8 @@
     border: none 
     border-radius: 4px 
     overflow: hidden
-    height: 30px
-    width: 65px
+    height: 48px
+    width: 100%
     transition: all 0.2s
     .span
       display: block 
@@ -191,7 +191,7 @@
     display: flex
     flex-direction: column
     height: var(--height)
-    width: 65px
+    width: 100%
     border-style: none none solid
     border-width: 2px
     border-color: $white
@@ -204,10 +204,10 @@
     border-color: $black
   
   .time-block-content
-    height: 20px
+    height: 100%
     line-height: normal
     text-align: center
-    width: 60px
+    width: 100%
     position: relative
     
   @keyframes fly-1

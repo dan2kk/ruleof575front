@@ -1,6 +1,6 @@
 <template>
   <div class="textbox-3">
-    <div class="text-4 valign-text-middle notosanskr-bold-white-18px">수강생의 전공 비율</div>
+    <div class="text-4 valign-text-middle notosanskr-bold-white-20px">수강생의 전공 비율</div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
   border: 1px solid
   border-color: $white
   height: 40px
-  min-width: 400px
+  min-width: 600px
   position: relative
 
 .text-4

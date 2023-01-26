@@ -1,6 +1,6 @@
 <template>
     <div class="search-modal">
-        <div class= "overlay valign-text-middle notosanskr-semibold-white-16px" @click="$emit('modal-close')" >
+        <div class= "overlay-search valign-text-middle notosanskr-bold-white-24px" @click="$emit('modal-close')" >
           <div class = empty-cart></div>
           창을 닫으려면 바깥을 클릭
         </div>
@@ -66,27 +66,30 @@ export default {
 <style lang="sass">
 @import '../../variables'
 
-.search-modal,
-.overlay
-    width: 400px
-    height: 600px
-    position: absolute
-    align-items: center
-.overlay
-    opacity: 0.4
-    background-color: black
+.search-modal
+  width: 600px
+  height: 960px
+  position: absolute
+.overlay-search
+  width: 100%
+  height: 100%
+  position: absolute
+  opacity: 0.3
+  background-color: $black
+  align-items: center
 
 .search-modal-card
-    background-color: $error-color
-    position: absolute
-    width: 400px
-    top: -40px
-    margin: auto
-    margin-top: 20%
-    background-color: $pippin
-    height : 500px
-    z-index: 10
-    overflow-y: overlay
+  background-color: $error-color
+  position: absolute
+  left: 5%
+  width: 90%
+  height : 80%
+  margin: auto
+  margin-top: 5%
+  background-color: $pippin
+  z-index: 10
+  border: 3px solid white
+  overflow-y: overlay
 
 .search-modal-card::-webkit-scrollbar 
   width : 1px
@@ -96,23 +99,28 @@ export default {
   height: 95%
 
 .empty-cart
-  width: 400px
-  height: 520px
+  width: 100%
+  height: 80%
   opacity: 0
   background-color: black
-.search 
+
+.search
   position: relative 
   display: flex
-  width: 400px 
+  width:100%
+
 .search-box
   width:80%
-  font-size: 14px 
+  font-size: 20px 
+  border: 2px solid
+  border-color: $geraldine
+  font-family: "Noto Sans KR", Helvetica
+
 .button
   width:20%
-.search-icon
-  position : absolute
-  width: 25px
-  top: 7px
-  right: 10px
-  margin: 0
+  font-size: 20px
+  border: 2px solid
+  border-color: $geraldine
+  font-family: "Noto Sans KR", Helvetica
+  
 </style>

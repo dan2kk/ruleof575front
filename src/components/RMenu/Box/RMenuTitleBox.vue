@@ -1,5 +1,5 @@
 <template>
-  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle notosanskr-bold-white-18px` , color, size || ``,]" >
+  <div :style="setStyle" :class="[`r-menu-title-box valign-text-middle` , color, size || ``, fontsize || ``,]" >
       <slot></slot>
   </div>
 
@@ -7,11 +7,14 @@
 
 <script>
 export default {
-  name: "ListTitleBox",
-  props: ["text", "color", "size"],
+  name: "RMenuTitleBox",
+  props: ["text", "color", "size", "fontsize"],
   computed:{
     setStyle(){
       let color
+      let fontsize
+      if (this.fontsize == undefined) fontsize = "20"
+      else fontsize = this.fontsize
       switch(this.color)
       {
         case "red":
@@ -39,12 +42,14 @@ export default {
       if (this.size != undefined){
         return{
           '--width' : `${this.size}px`,
-          '--color' : color
+          '--color' : color,
+          '--fontsize' : `${fontsize}px`,
         }
       }
       else return{
-        '--width' : `400px`,
-        '--color' : color
+        '--width' : `600px`,
+        '--color' : color,
+        '--fontsize': `${fontsize}px`,
       }
     }
   }
@@ -55,14 +60,15 @@ export default {
 @import '../../../../variables'
 
 .r-menu-title-box
-  border: 1px solid
-  border-color: $white
-  height: 40px
+  height: 48px
   width: var(--width)
   position: relative
   background-color: var(--color)
   align-items: center
-
-
+  color: $white
+  font-family: "Noto Sans KR", Helvetica
+  font-size: var(--fontsize)
+  font-style: normal
+  font-weight: 700
 
 </style>

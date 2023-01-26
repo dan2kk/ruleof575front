@@ -1,6 +1,7 @@
 <template>
-  <RMenuTextBox :text = this.lecData.과목명 color="yellow" size= "400" @click="showDetails"/>
-
+  <div class: non-time-lec-block>
+    <RMenuTextBox :text = this.lecData.과목명 color="yellow" size= "600" @click="showDetails"/>
+  </div>
 </template>
 
 <script>
@@ -24,4 +25,5 @@ export default {
   align-items: center
   position: relative
   background-color: $error-color
+
 </style>

@@ -25,9 +25,9 @@ export default {
   background-color: #e8f0ff
   display: flex
   flex-direction: column
-  height: 560px
+  height: 100%
   position: relative
-  width: 400px
+  width: 100%
 .row
   align-items: center
   display: flex
