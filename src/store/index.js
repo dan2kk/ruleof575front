@@ -201,9 +201,14 @@ export default createStore({
           gradRec.변동 = '0'
           gradRec.합계 = '0'
           gradRec.잔여 = '0'
-          if(state.gradList.findIndex((x)=> (x.이수명 == gradRec.이수명) && (x.전공구분명 == gradRec.전공구분명)) == -1) {
+          let idx = state.gradList.findIndex((x)=> (x.이수명 == gradRec.이수명) && (x.전공구분명 == gradRec.전공구분명))
+          if(idx == -1) {
             state.gradList.push(gradRec)
           }
+          else{
+            state.gradList[idx] = gradRec
+          }
+
         }
       }
       catch(err){
@@ -498,17 +503,40 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
+    },
+    setGradData(state, payload){
+      for(let x in payload){
+        console.log(state.gradList)
+        let idx = state.gradList.findIndex((y)=> (y.이수명 == x.이수명) && (y.전공구분명 == x.전공구분명))
+        if(idx == -1) {
+          state.gradList.push(x)
+        }
+        else{
+          console.log(state.gradList[idx])
+          state.gradList[idx].기준 = x.기준
+          state.gradList[idx].이수 = x.이수
+        }
+      }
     }
   },
   actions: {
     crawlingGradData(context){
-      let gradData = null
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
-            gradData = response.data
-            console.log("background received gradData")
-            console.log(gradData)
-            context.commit("initGradList", gradData)
+            let gradDataTemp = response.data
+            console.log(gradDataTemp)
+            if(gradDataTemp.length == 0) return
+            context.commit("setGradData", gradDataTemp)
+      });})
+    },
+    crawlingWantedData(context){
+      let wantedData = null
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
+          wantedData = response.data
+          console.log("background received gradData")
+          console.log(wantedData)
+          context.commit("initLecList", wantedData)
       });})
     },
 

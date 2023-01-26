@@ -43,8 +43,7 @@ export default {
       alert("updated!")
     },
     loadGrad(){
-      let data = this.commit("getGradUpdate")
-      console.log(data)
+      this.$store.dispatch('crawlingGradData')
     }
   }
 };
