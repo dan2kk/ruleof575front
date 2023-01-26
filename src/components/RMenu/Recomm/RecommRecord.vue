@@ -34,8 +34,8 @@ export default {
     }
   }, 
   methods:{
-    showDetails() {
-      this.$store.dispatch("setLecDetails", this.recommData.수업번호);
+    async showDetails() {
+      await this.$store.dispatch("setLecDetails", this.recommData.수업번호);
     },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)

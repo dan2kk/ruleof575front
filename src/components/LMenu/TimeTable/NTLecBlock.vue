@@ -12,8 +12,8 @@ export default {
   components:{RMenuTextBox},
   props: ["lecData"],
   methods : {
-    showDetails() {
-      this.$store.dispatch("fetchLecDetails", this.lecData.수업번호);
+    async showDetails() {
+      await this.$store.dispatch("fetchLecDetails", this.lecData.수업번호);
     },
   }
 };

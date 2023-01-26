@@ -170,10 +170,8 @@ export default createStore({
       }
     },
 
-
     initGradList(state, gradRecList){
       try{
-        let stuId = state.userInfo.stuId
         let gradNames = getGradNames();
         
         for(let gradRec of gradRecList) {
@@ -500,21 +498,18 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
-    },
-    getGradUpdate(state, payload){
-      return payload
     }
   },
   actions: {
-    getGradUpdate1: function(context){
+    crawlingGradData(context){
       let gradData = null
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
             gradData = response.data
             console.log("background received gradData")
             console.log(gradData)
+            context.commit("initGradList", gradData)
       });})
-      return this.commit("getGradUpdate", gradData)
     },
 
     async loginReq(context) {

@@ -69,7 +69,7 @@
             break
           case "lecBlock":
             console.log(this.timeBlockData.lecNum)
-            this.$store.dispatch("fetchLecDetails", this.timeBlockData.lecNum)
+            await this.$store.dispatch("fetchLecDetails", this.timeBlockData.lecNum)
             break
           case "dayBlock":
             console.log(this.timeBlockData.content)
