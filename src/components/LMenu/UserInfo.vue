@@ -29,7 +29,7 @@ export default {
   align-items: flex-start
   background-color: $silver
   display: flex
-  height: 80px
+  height: 10%
   position: relative
-  width: 400px
+  width: 100%
 </style>

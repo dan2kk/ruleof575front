@@ -18,8 +18,6 @@ import LecList from "./LecList/LecList";
 import RecommList from "./Recomm/RecommList";
 import Known from "./Known/Known";
 import GradList from "./Grad/GradList";
-import axios from "axios";
-
 
 export default {
   name: "RMenu",
@@ -38,7 +36,6 @@ export default {
     curScreen() {
       return this.$store.getters.getCurScreen
     }
-
   }
 };
 </script>
@@ -48,15 +45,15 @@ export default {
   align-items: flex-start
   display: flex
   flex-direction: column
-  height: 600px
-  width: 400px
+  width: 50%
+  height: 100%
 
 .r-menu-cart
   align-items: flex-start
-  background-color: #error-color
+  background-color: #E0E0E0
   display: flex
   flex-direction: column
-  height: 600px
+  width: 100%
+  height: 100%
   position: relative
-  width: 400px
 </style>

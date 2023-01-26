@@ -1,6 +1,6 @@
 <template>
   <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeBlockData.blockKind != "sendBtn"'>
-    <div class="time-block-content notosanskr-normal-black-12px"> 
+    <div class="time-block-content notosanskr-normal-black-14px"> 
       {{ this.timeBlockData.content }}
     </div>
   </div>
@@ -18,9 +18,6 @@
 </template>
   
   <script>
-  import axios from "axios"
-  import { dayOrder } from '../../../util'
-
   export default {
     name: "TimeBlock",
     props: ["timeBlockData"],
@@ -50,7 +47,7 @@
             break;
         }
         return {
-          '--height' : `${(this.timeBlockData.end - this.timeBlockData.start) * 60}px`,
+          '--height' : `${(this.timeBlockData.end - this.timeBlockData.start) * 96}px`,
           '--color' : color
         }
       }
@@ -72,7 +69,7 @@
             break
           case "lecBlock":
             console.log(this.timeBlockData.lecNum)
-            this.$store.commit("setLecDetails", this.timeBlockData.lecNum)
+            this.$store.dispatch("fetchLecDetails", this.timeBlockData.lecNum)
             break
           case "dayBlock":
             console.log(this.timeBlockData.content)
@@ -112,32 +109,8 @@
                 }
               })
             }
-            try {
-              let selectedTimes = this.$store.getters.getSelectedTimes
-              let stuId = this.$store.getters.getStuId
-
-              console.log(selectedTimes);
-
-              for(let day in selectedTimes) {
-                  selectedTimes[day].sort((a, b) => { return a.start - b.start});
-              }
-
-              this.$store.commit("clearRecommList")
-
-              let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
-
-              for(let recomms of recommList) {
-                recomms['isRecommShow'] = true
-                recomms.수업목록 = recomms.수업목록.sort((a, b) => {
-                    return dayOrder.indexOf(a.요일[0]) - dayOrder.indexOf(b.요일[0]) 
-                });
-                this.$store.commit("addRecommList", recomms)
-              }
-              this.$store.commit("sortRecommList")
-            } 
-            catch (error) {
-                console.log(error)
-            }
+            this.$store.commit("clearRecommList")
+            await this.$store.dispatch("fetchRecommList")
             this.$store.commit("changeScreen", 2)
 
             break
@@ -164,8 +137,8 @@
     border: none 
     border-radius: 4px 
     overflow: hidden
-    height: 30px
-    width: 65px
+    height: 48px
+    width: 100%
     transition: all 0.2s
     .span
       display: block 
@@ -191,7 +164,7 @@
     display: flex
     flex-direction: column
     height: var(--height)
-    width: 65px
+    width: 100%
     border-style: none none solid
     border-width: 2px
     border-color: $white
@@ -204,10 +177,10 @@
     border-color: $black
   
   .time-block-content
-    height: 20px
+    height: 100%
     line-height: normal
     text-align: center
-    width: 60px
+    width: 100%
     position: relative
     
   @keyframes fly-1

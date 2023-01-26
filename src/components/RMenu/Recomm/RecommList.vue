@@ -99,11 +99,11 @@ export default {
   border-width: 1px
   border-color: $white
   flex-direction: column
-  height: 560px
+  height: 100%
   overflow: hidden
   overflow-y: scroll
   position: relative
-  width: 400px
+  width: 100%
 
 .recomm-list::-webkit-scrollbar 
   display: none
@@ -114,8 +114,8 @@ export default {
 
 .recomm-checkbox-cart
   position: absolute
-  left : 363px
-  top : 7px
+  left : 93%
+  top: 25%
 
 .recomm-container
   display: block 

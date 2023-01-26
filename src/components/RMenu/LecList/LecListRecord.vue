@@ -1,9 +1,9 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150" @click="showDetails"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50" @click="showDetails"/>
-      <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"/>
+      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "325" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "75" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100" fontsize="13"/>
       <SearchImageBox src= './addbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
       <SearchImageBox src= './subtractbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
       <SearchImageBox src= './deletebutton.svg' color ="red" @click="clickDelBtn"/>
@@ -23,8 +23,8 @@ export default {
   },
   props: ["lecData"],
   methods : {
-    showDetails() {
-      this.$store.commit("setLecDetails", this.lecData.수업번호);
+    async showDetails() {
+      await this.$store.dispatch("fetchLecDetails", this.lecData.수업번호);
     },
     clickAddBtn() {
       if(this.lecData.isInTable == 0) {
@@ -124,7 +124,7 @@ export default {
   border-color: $white
   display: flex
   position: relative
-  width: 400px
+  width: 100%
 
 .lec-list-record-cart
   align-items: center

@@ -1,7 +1,10 @@
 <template>
   <div class="grad-list">
     <div class = "grad-list-upper-menu">
-      <RMenuTitleBox color="purple">졸업사정 변동사항</RMenuTitleBox>
+      <RMenuTitleBox color="purple">
+        졸업사정 변동사항
+        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGrad">
+      </RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>
     <div class = "grad-list-lower-menu">
@@ -38,6 +41,10 @@ export default {
         if(this.$store.getters.getGrad[i].잔여 < 0) this.$store.getters.getGrad[i].잔여 = 0
       }
       alert("updated!")
+    },
+    loadGrad(){
+      let data = this.commit("getGradUpdate")
+      console.log(data)
     }
   }
 };
@@ -52,9 +59,9 @@ export default {
   background-color: $tutu
   display: flex
   flex-direction: column
-  height: 560px
+  height: 100%
   position: relative
-  width: 400px
+  width: 100%
 
 .grad-list-lower-menu
   overflow-y: overlay
@@ -70,4 +77,16 @@ export default {
 -webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
+
+.load-grad-list
+  width: 26%
+  height: 70%
+  border: 3px solid
+  border-color: $tutu
+  border-radius: 10px
+  background-color: $white
+  position: absolute
+  left: 72%
+  color: $lily
+  font-weight: 1000
 </style>

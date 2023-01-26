@@ -37,6 +37,7 @@ export default {
   methods :{ 
     addLecList(){
       this.$store.commit("addLecList", this.lecData);
+      this.$store.commit("setIsChanged", true)
     },
     addShadowToTT(lec){
       this.$store.commit("addShadowLec", this.lecData)

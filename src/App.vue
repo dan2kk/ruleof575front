@@ -1,11 +1,9 @@
 <template>
-  <div class="start">
+  <div class="app">
     <LMenu/>
     <RMenu/>
-    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose">
-    </LecDetailsModal>
-    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose">
-    </LecDetailsModal>
+    <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose"/>
+    <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose"/>
     <SearchModal class="search-modal" v-if ="onSearchModal" v-on:modal-close="searchModalClose"></SearchModal>
   </div>
 </template>
@@ -54,16 +52,16 @@ export default {
 <style lang="sass">
 @import '../variables'
 
-.start
+.app
   align-items: flex-start
   background-color: $error-color
   border: 1px none
   display: flex
-  height: 600px
-  width: 800px
+  width: 1200px
+  height: 960px
 .right-modal
-  left: 400px
+  left: 600px
 .search-modal
-  left: 400px
+  left: 600px
   
 </style>

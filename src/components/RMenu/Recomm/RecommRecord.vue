@@ -1,8 +1,8 @@
 <template>
   <div class="recomm-list-record">
     <div class="recomm-list-record-cart">
-      <RMenuTextBox :text= this.recommData.과목명 color= "green" size= "150" @click="showDetails"/>
-      <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "50" @click="showDetails"/>
+      <RMenuTextBox :text= this.recommData.과목명 color= "green" size= "325" @click="showDetails"/>
+      <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "75" @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100" @click="showDetails"/>
       <SearchImageBox src="./addbutton.svg" color ="green" @click="addToLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"/>
       <SearchImageBox src="./checkbutton.svg" color ="green" @click="addToLecList" @mouseleave="clearShadowLec" v-show="!isInLecList"/>
@@ -35,7 +35,7 @@ export default {
   }, 
   methods:{
     showDetails() {
-      this.$store.commit("setLecDetails", this.recommData.수업번호);
+      this.$store.dispatch("setLecDetails", this.recommData.수업번호);
     },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
@@ -62,7 +62,7 @@ export default {
   background-color: $solitude
   border-color: $white
   height: 40px
-  min-width: 400px
+  min-width: 100%
 
 .recomm-list-record-cart
   align-items: center

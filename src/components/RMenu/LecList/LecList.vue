@@ -1,7 +1,10 @@
 <template>
   <div class="lec-list">
     <div class = "lec-list-upper-menu">
-      <RMenuTitleBox color="red">내 수업목록</RMenuTitleBox>
+      <RMenuTitleBox color="red">
+        내 수업목록
+        <input type="submit" class="load-pref-lec" value="내 희망수업 불러오기" @click="loadPrefLec">
+      </RMenuTitleBox>
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
     <div class = "lec-list-lower-menu">
@@ -44,6 +47,9 @@ export default {
     openSearchModal() {
       this.$store.commit("setSearchModal")
     },
+    loadPrefLec(){
+
+    }
   },
 };
 </script>
@@ -56,14 +62,15 @@ export default {
   background-color: $pippin
   display: flex
   flex-direction: column
-  height: 560px
+  height: 95%
   position: relative
-  width: 400px
-  border-width : 1px
-  border-color : white
-  border-style: solid
+  width: 100%
+.lec-list-upper-menu
+  width: 100%
+  height: 10%
 
 .lec-list-lower-menu
+  width: 100%
   overflow-y: overlay
   overflow-x: hidden
 
@@ -75,9 +82,29 @@ export default {
   border-radius: 100px
 
 .search-box
-  width: 400px
+  width: 100%
+
 .open-button
-  width: 30%
+  width: 20%
+  height: 5%
+  border: 3px solid white
+  border-radius: 10px
+  background-color: $geraldine
   position: absolute
-  left: 130px
+  left: 40%
+  top: 90%
+  color: $white
+  
+.load-pref-lec
+  width: 26%
+  height: 70%
+  border: 3px solid
+  border-color: $pippin
+  border-radius: 10px
+  background-color: $white
+  position: absolute
+  left: 72%
+  color: $geraldine
+  font-weight: 1000
+
 </style>

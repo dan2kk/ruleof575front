@@ -46,9 +46,9 @@ export default {
 .time-table-cart
   align-items: flex-start
   background-color: $white
-  height: 520px
+  height: 100%
   position: relative
-  width: 400px
+  width: 100%
   overflow-x: hidden
   overflow-y: overlay
 
@@ -62,7 +62,7 @@ export default {
 .time-table
   align-items: flex-start
   display: flex
-  height: 750px
+  height: 100%
   gap: 8px
   position: relative
 

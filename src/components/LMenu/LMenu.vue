@@ -32,8 +32,8 @@ export default {
   background-color: $silver
   display: flex
   flex-direction: column
-  height: 600px
+  height: 100%
   position: relative
-  width: 400px
+  width: 50%
 
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="time-line">
+  <div class="time-line" :style="setWidth">
     <TimeBlock :timeBlockData="element" v-for="element in this.timeLines" :key="element.수업번호"/>
     <div 
-      class="shadowbox" :style="blcokStyle(item)" v-for="item in this.shadowLines" :key="item">
+      class="shadowbox" :style="blockStyle(item)" v-for="item in this.shadowLines" :key="item">
     </div>
   </div>
 </template>
@@ -14,10 +14,14 @@ export default {
   components: {
     TimeBlock
   },
-  props: [
-    "day"
-  ],
+  props: ["day"],
   computed: {
+    setWidth(){
+      let temp
+      if (this.day== 0) temp = `10%`
+      else temp = `18%`
+      return { '--width': temp}
+    },
     timeLines() {
       if(this.day == 0) {
         return this.$store.getters.getTimeLines.시간;
@@ -42,10 +46,10 @@ export default {
       if(this.day == 0) return null
       return this.$store.getters.getShadowList[(this.day-1)];
     },
-    blcokStyle(){
+    blockStyle(){
       return (item) => {return {
-        '--height' : `${(item.end - item.start) * 60}px`,
-        '--top': `${((item.start - 8) * 60)-30}px`
+        '--height' : `${(item.end - item.start) * 96}px`,
+        '--top': `${((item.start - 9) * 96) + 48}px`,
       }}
     }
   },
@@ -59,14 +63,13 @@ export default {
   align-items: flex-start
   display: flex
   flex-direction: column
-  height: 780px
+  height: 150%
   position: relative
-  width: 60px
+  width: var(--width)
 .shadowbox
   height: var(--height)
-  width: 65px
+  width: 100%
   top: var(--top)
-  left: 0
   opacity: 0.5
   background-color: black
   position: absolute

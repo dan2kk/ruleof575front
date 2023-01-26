@@ -27,8 +27,8 @@ if(elements.length == 16) { //로그인 성공후 메뉴창
             let temp2 = document.createElement("iframe")
             temp2.id = "qwer"
             temp2.src = chrome.runtime.getURL('./index.html')
-            temp2.width = `800px`
-            temp2.height = `800px`
+            temp2.width = `1200px`
+            temp2.height = `960px`
             temp2.style.top = '86px'
             temp2.style.right = '0px'
             temp2.style.position = 'absolute'
@@ -74,15 +74,7 @@ chrome.runtime.onMessage.addListener(
         }
         if(request.data =="grad"){
             let jolupInfo = await getItems(0);
-            if(jolupInfo.length != 0){
-                console.log(1)
-                sendResponse({data: jolupInfo})
-            }
-            else{
-                console.log(2)
-                jolupInfo = await getItems(0);
-                await sendResponse({data: jolupInfo})
-            }
+            sendResponse({data:jolupInfo})
         }
         if(request.data == "sugang"){
             sgscInfo = wantedInfo = await getItems(2)
@@ -110,7 +102,6 @@ chrome.runtime.onMessage.addListener(
         else{
             data = document.querySelectorAll('#gdMain > tbody > tr')
         }
-        if(data.length == 0) data = document.querySelectorAll('#gdDtl1 > tbody > tr')
         resolve(data)
     });
   };

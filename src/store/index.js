@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import { fillTL, processLec, fieldOrder } from '@/util'
-import { getGradNames } from '@/util'
+import { getGradNames, dayOrder } from '@/util'
 import axios from "axios"
 
 export default createStore({
@@ -72,7 +72,7 @@ export default createStore({
     getCurScreen(state) {
       return state.curScreen
     },
-    getIsChange(state){
+    getIsChanged(state){
       return state.isChanged
     },
     getIsChecked(state) {
@@ -113,23 +113,50 @@ export default createStore({
     }
   },
   mutations: {
-    async beforeLogin(state){
-      (async () => {
-        const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
-        let data = response.data
-        console.log(data)
-        state.userInfo.stuId = data.stuNum.trim()
-        state.userInfo.userName = data.stuName.trim()
-        state.userInfo.grade = data.stuGrad.trim()
-        console.log(state.userInfo)
-      })();
+    setUserInfo(state, data) { 
+      state.userInfo.stuId = data.stuNum.trim()
+      state.userInfo.userName = data.stuName.trim()
+      state.userInfo.grade = data.stuGrad.trim()
     },
+
     loginMain(state){
-      this.commit("initList")
-      this.commit("initGrad")
-      this.commit("setCurScreen", 1)
-      if(state.userInfo.stuId != null) state.isLogined = true;
-      else  state.isLogined=false;
+      if(state.userInfo.stuId != null) {
+        state.isLogined = true;
+        this.dispatch("fetchLecList")
+        this.dispatch("fetchGradList")
+        state.curScreen = 1
+      }
+    },
+
+
+    setIsChanged(state, tf){
+      state.isChanged = tf
+    },
+    setCurScreen(state, screenNum) {
+      state.curScreen = screenNum
+    },
+
+
+    initLecList(state, lecList) {
+      try{
+        console.log(state.userInfo);
+
+        for(let lec of lecList) {
+          if(lec.isInTable == 1) {
+            lec['color'] = state.colorList[state.colorIdx]
+            this.commit("setNextColor")
+          }
+          this.commit("addLecList", lec)
+        }
+        this.commit("setUpTimeLines", '월')
+        this.commit("setUpTimeLines", '화')
+        this.commit("setUpTimeLines", '수')
+        this.commit("setUpTimeLines", '목')
+        this.commit("setUpTimeLines", '금')
+      }
+      catch(err){
+        alert(err)
+      }
     },
     addLecList(state, lecToAdd){
       if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
@@ -142,33 +169,50 @@ export default createStore({
         state.lecList.splice(lecIdx, 1);
       }
     },
-    setIsChanged(state, tf){
-      state.isChanged = tf
-    },
-    setCurScreen(state, screenNum) {
-      state.curScreen = screenNum
-    },
-    async changeScreen(state, screenNum) {      
-      if(state.isChanged){
-        let data = []
 
-        for(let lec of state.lecList){
-          data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
-        }
-        try {
-          await axios.post('http://3.37.249.210:1324/list/update', {list: data, stu_id: state.userInfo.stuId})
-          state.isChanged = false;
-        }
-        catch(err) {
-            console.log(err)
+
+    initGradList(state, gradRecList){
+      try{
+        let stuId = state.userInfo.stuId
+        let gradNames = getGradNames();
+        
+        for(let gradRec of gradRecList) {
+
+          if(!gradNames.includes(gradRec.이수명)) {
+            continue
+          }
+
+          if(gradRec.기준 != null){
+            gradRec.기준= gradRec.기준.slice(0, -3)
+          }
+          if(gradRec.이수 != null){
+            gradRec.이수= gradRec.이수.slice(0, -3)
+          }
+          else{
+            gradRec.이수 = "0"
+          }
+          if(gradRec.기준 === "1"){
+            gradRec.기준 = "Y"
+            if(gradRec.이수 === "1"){
+              gradRec.이수 = "Y"
+            }
+            else{
+              gradRec.이수 = "N"
+            }
+          }
+          gradRec.변동 = '0'
+          gradRec.합계 = '0'
+          gradRec.잔여 = '0'
+          if(state.gradList.findIndex((x)=> (x.이수명 == gradRec.이수명) && (x.전공구분명 == gradRec.전공구분명)) == -1) {
+            state.gradList.push(gradRec)
+          }
         }
       }
-      if(screenNum == 4){
-        this.commit("calGradStat")
+      catch(err){
+        alert(err)
       }
-      state.curScreen = screenNum
     },
-    async calGradStat(state) {
+    calGradStat(state, lecList) {
       let gradData = {
         '졸업학점' : 0,
         '핵심교양' : 0,
@@ -187,11 +231,8 @@ export default createStore({
       }
 
       try{
-        let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: state.userInfo.stuId}})).data.list
-        
         for(let lec of lecList) {
           gradData['졸업학점'] += lec.학점
-          
           switch(lec.이수구분코드명){
             case "핵심교양":
               gradData['핵심교양'] += lec.학점
@@ -250,15 +291,6 @@ export default createStore({
     
 
     addSelectedTimes(state, res){
-      // let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
-      // if(temp != -1){ // array 존재시
-      //   state.selectedTimes[res.day].splice(temp, 1)
-      //   console.log("delete "+res.day + " " + res.data)
-      // }
-      // else{ //array 에 없을시
-      //   state.selectedTimes[res.day].push(res.data)
-      //   console.log("add "+res.day + " " + res.data)
-      // }
       let temp = state.selectedTimes[res.day].findIndex((x)=>(x.start == res.data.start))
       if(temp == -1) {
         state.selectedTimes[res.day].push(res.data)
@@ -270,6 +302,17 @@ export default createStore({
       state.selectedTimes['수'].length = 0
       state.selectedTimes['목'].length = 0
       state.selectedTimes['금'].length = 0
+    },
+
+
+    setIsChecked(state)
+    {
+      if (state.isChecked) {
+        state.isChecked = false;
+      }
+      else {
+        state.isChecked = true;
+      }
     },
     addRecommList(state, lecs) {
       state.recommList.push(lecs)
@@ -287,6 +330,8 @@ export default createStore({
           }
       }
     },
+
+
     clearRecommList(state) {
       state.recommList.length = 0;
     },
@@ -304,6 +349,9 @@ export default createStore({
         }
       }
     },
+
+
+
     setUpTimeLines(state, day) {
 
       if(day == '시간미지정강좌') {
@@ -360,9 +408,10 @@ export default createStore({
       }
     },
 
-    async setLecDetails(state, lecNum){ //수업정보 데이터 불러오기
+
+
+    setLecDetails(state, details){ //수업정보 데이터 불러오기
       try{
-        let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
         details["state"] = true
         if(state.lecDetailsLeft["state"]){
           state.lecDetailsRight = details
@@ -375,6 +424,7 @@ export default createStore({
         console.log(err)
       }
     },
+
     async setSearchModal(state)
     {
       try{
@@ -390,6 +440,8 @@ export default createStore({
       }
     },
     
+
+
     addShadowLec(state, lecData){
 
       let curDay
@@ -433,21 +485,8 @@ export default createStore({
         state.shadowList[i].length = 0
       }
     },
-    async setIsChecked(state)
-    {
-      if (state.isChecked) {
-        state.isChecked = false;
-      }
-      else {
-        state.isChecked = true;
-        await chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
-              let gradData = response.data
-              console.log("background received gradData")
-              console.log(gradData)
-          });})
-      }
-    },
+
+
     setNextColor(state) {
       let nextIdx = state.colorIdx
       let nextColor
@@ -462,73 +501,83 @@ export default createStore({
       }      
       state.colorIdx = nextIdx
     },
-    async initList(state) {
-      try{
-        let stuId = state.userInfo.stuId
-        let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
-        console.log(lecList);
-
-        for(let lec of lecList) {
-          if(lec.isInTable == 1) {
-            lec['color'] = state.colorList[state.colorIdx]
-            this.commit("setNextColor")
-          }
-        }
-        this.commit("setUpTimeLines", '월');
-        this.commit("setUpTimeLines", '화');
-        this.commit("setUpTimeLines", '수');
-        this.commit("setUpTimeLines", '목');
-        this.commit("setUpTimeLines", '금');
-      }
-      catch(err){
-        alert(err)
-      }
-    },
-
-    async initGrad(state){
-      try{
-        let stuId = state.userInfo.stuId
-        let gradRecList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
-        let gradNames = getGradNames();
-        
-        for(let gradRec of gradRecList) {
-
-          if(!gradNames.includes(gradRec.이수명)) {
-            continue
-          }
-
-          if(gradRec.기준 != null){
-            gradRec.기준= gradRec.기준.slice(0, -3)
-          }
-          if(gradRec.이수 != null){
-            gradRec.이수= gradRec.이수.slice(0, -3)
-          }
-          else{
-            gradRec.이수 = "0"
-          }
-          if(gradRec.기준 === "1"){
-            gradRec.기준 = "Y"
-            if(gradRec.이수 === "1"){
-              gradRec.이수 = "Y"
-            }
-            else{
-              gradRec.이수 = "N"
-            }
-          }
-          gradRec.변동 = '0'
-          gradRec.합계 = '0'
-          gradRec.잔여 = '0'
-          if(state.gradList.findIndex((x)=> (x.이수명 == gradRec.이수명) && (x.전공구분명 == gradRec.전공구분명)) == -1) {
-            state.gradList.push(gradRec)
-          }
-        }
-      }
-      catch(err){
-        alert(err)
-      }
-    },
+    getGradUpdate(state, payload){
+      return payload
+    }
   },
   actions: {
+    getGradUpdate1: function(context){
+      let gradData = null
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
+            gradData = response.data
+            console.log("background received gradData")
+            console.log(gradData)
+      });})
+      return this.commit("getGradUpdate", gradData)
+    },
+
+    async loginReq(context) {
+        const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
+        context.commit("setUserInfo", response.data)
+    },
+
+    async changeScreen(context, screenNum) {      
+      if(context.getters.getIsChanged){
+        try {
+          let data = []
+          let lecList = context.getters.getLecList
+          let stuId = context.getters.getStuId
+          for(let lec of lecList){
+            data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
+          }
+          await axios.post('http://3.37.249.210:1324/list/update', {list: data, stu_id: stuId})
+          context.commit('setIsChanged', false)
+        }
+        catch(err) {
+            console.log(err)
+        }
+      }
+      if(screenNum == 4){
+        await context.dispatch("fetchGradStat")
+      }
+      context.commit("setCurScreen", screenNum);
+    },
+    async fetchLecList(context) {
+      let stuId = context.getters.getStuId
+      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
+      context.commit("initLecList", lecList)
+    },
+    async fetchGradList(context) {
+      let stuId = context.getters.getStuId
+      let lecList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
+      context.commit("initGradList", lecList)
+    },
+
+    async fetchGradStat(context) {
+      let stuId = context.getters.getStuId
+      let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: stuId}})).data.list
+      context.commit("calGradStat", lecList)
+    },
+    async fetchLecDetails(context, lecNum) {
+      let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
+      context.commit("setLecDetails", details)
+    },
+    async fetchRecommList(context) {
+      let selectedTimes = context.state.selectedTimes
+      for(let day in selectedTimes) {
+          selectedTimes[day].sort((a, b) => { return a.start - b.start});
+      }
+      let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
+      for(let recomms of recommList) {
+        recomms['isRecommShow'] = true
+        recomms.수업목록 = recomms.수업목록.sort((a, b) => {
+            return dayOrder.indexOf(a.요일[0]) - dayOrder.indexOf(b.요일[0]) 
+        });
+        context.commit("addRecommList", recomms)
+      }
+      context.commit("sortRecommList")
+    }
   },
   modules: {
   }
