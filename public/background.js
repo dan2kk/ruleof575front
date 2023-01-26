@@ -1,4 +1,5 @@
 var loginInfo = null
+var gradData = null
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(sender.tab);
@@ -10,9 +11,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         else if(request.param === "grad"){
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                 chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
-                  let gradData = response.data
-                  console.log("background received gradData")
-                  sendResponse({data: gradData})
+                    gradData = response.data
+                    console.log("background received gradData")
+                    console.log(gradData)
+                    sendResponse({data: gradData})
                 });
             })
         }

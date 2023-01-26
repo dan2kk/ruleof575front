@@ -8,6 +8,7 @@ export default createStore({
     isLogined: false,
 
     userInfo: {stuId: null, userName: null, major: null, grade: null},
+    gradInfo : null,
     isChanged: false,
     isChecked: true,
     curScreen: 0,
@@ -122,14 +123,12 @@ export default createStore({
         state.userInfo.grade = data.stuGrad.trim()
         console.log(state.userInfo)
       })();
-      console.log(1)
     },
     loginMain(state){
-      console.log(2)
       this.commit("initList")
       this.commit("initGrad")
       this.commit("setCurScreen", 1)
-      if(state.userInfo.stuId != null) state.isLogined= true;
+      if(state.userInfo.stuId != null) state.isLogined = true;
       else  state.isLogined=false;
     },
     delLecList(state, lecToDel) {
@@ -429,18 +428,19 @@ export default createStore({
         state.shadowList[i].length = 0
       }
     },
-    setIsChecked(state)
+    async setIsChecked(state)
     {
       if (state.isChecked) {
         state.isChecked = false;
       }
       else {
         state.isChecked = true;
-        (async() => {
-          const response1 = await chrome.runtime.sendMessage({type: "extension", param: "grad"});
-          // do something with response here, not outside the function
-          console.log(response1.data);
-        })();
+        await chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
+              let gradData = response.data
+              console.log("background received gradData")
+              console.log(gradData)
+          });})
       }
     },
     setNextColor(state) {

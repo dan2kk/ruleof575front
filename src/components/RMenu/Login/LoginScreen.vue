@@ -12,10 +12,9 @@
 export default {
   name: "LoginScreen",
   methods: {
-    clickEvent(){
-      console.log("ASDSADSD");
-      //웹 크롤링
-      this.$emit("login-req")
+    async clickEvent(){
+      await this.$store.commit("beforeLogin")
+      setTimeout(()=>{this.$emit("login-req")}, 500)
     }
   }
 

@@ -1,7 +1,7 @@
+
 //console.log("ASDSDASD")
 var elements = document.querySelectorAll('#snb > ul > li')
 var loginInfo = document.querySelectorAll('#logo-area> div > div > span')
-var jolupInfo = null
 var wantedInfo = null
 var sgscInfo = null
 var defaultInfo = null 
@@ -11,8 +11,7 @@ let hashArray = [
     "#!UDMxNTM2NSRAXnN1Z2FuZy8kQF4wJEBeTTAwNjYzMiRAXuyImOqwleyLoOyyrSRAXk0wMDY2MzIkQF5mNjcwYWU1NWI5YTkzZmJkMzE3YTJkYjFmYTU3OTZlNTJkOWUzMDk0YmQ1MDJmMmE5Zjg3OTg0NWNkNjZmZGIz", //수강신청
     "#!UDMyMTYwOSRAXnN1Z2FuZy8kQF4kQF5NMzIwNDE3JEBe6riw67O47IiY7JeFJEBeTTMyMDQxNyRAXjhmNjg1Y2RhZmFlMzM3ZjE4MTZmM2YzYjY4OWRkNzM3MzI2N2E2Y2IyN2FkZDc0MDM3YWM0MmU1YjU2OGIwZGQ=" //기본수업
 ] // 졸사, 희망, 수강, 기본수업 해시값
-console.log(loginInfo)
-//console.log(elements)
+
 
 if(elements.length == 16) { //로그인 성공후 메뉴창
     elements[15].insertAdjacentHTML('beforebegin', '<li id="test"><a style="cursor: pointer"> 도우미 </a></li>')
@@ -62,22 +61,35 @@ if(loginInfo.length == 3){ //로그인 성공시 로그인 정보
     })();   
 }
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    async function(request, sender, sendResponse) {
       console.log("content-script event handler")
       if(request.type == "import"){
         if(request.data == "wanted"){
-            wantedInfo = document.querySelectorAll('#gdMain > tbody > tr')
+            wantedInfo = await getItems(1)
             console.log(wantedInfo)
+            if(wantedInfo.length == 0){
+                wantedInfo = await getItems(1)
+            }
             sendResponse({data: wantedInfo})
         }
         if(request.data =="grad"){
-            jolupInfo = document.querySelectorAll('#gdDtl1 > tbody > tr')
-            console.log(jolupInfo)
-            sendResponse({data: jolupInfo})
+            let jolupInfo = await getItems(0);
+            if(jolupInfo.length != 0){
+                console.log(1)
+                sendResponse({data: jolupInfo})
+            }
+            else{
+                console.log(2)
+                jolupInfo = await getItems(0);
+                await sendResponse({data: jolupInfo})
+            }
         }
         if(request.data == "sugang"){
-            sgscInfo = document.querySelectorAll('#gdMain > tbody > tr')
+            sgscInfo = wantedInfo = await getItems(2)
             console.log(sgscInfo)
+            if(sgscInfo.length == 0){
+                sgscInfo = await getItems(2)
+            }
             sendResponse({data: sgscInfo})
         }
       }
@@ -85,5 +97,21 @@ chrome.runtime.onMessage.addListener(
         sendResponse("error")
       }
     }
-  );
+);
+  function getItems(idx) {
+    return new Promise(function(resolve, reject) {
+        let url = window.location
+        if(url.hash != hashArray[idx]) {
+            url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[idx])}
+        let data = null
+        if(idx == 0){
+            data = document.querySelectorAll('#gdDtl1 > tbody > tr')
+        }
+        else{
+            data = document.querySelectorAll('#gdMain > tbody > tr')
+        }
+        if(data.length == 0) data = document.querySelectorAll('#gdDtl1 > tbody > tr')
+        resolve(data)
+    });
+  };
 

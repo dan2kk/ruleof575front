@@ -48,7 +48,6 @@ export default {
   // },
   methods: {
     loginEvent(){
-      this.$store.commit("beforeLogin")
       this.$store.commit("loginMain");
     },
   },
