@@ -47,7 +47,7 @@ export default {
 
 .user-info
   display: flex
-  background-color: $silver
+  background-color: $white
   height: 10%
   position: relative
   width: 100%
@@ -56,10 +56,17 @@ export default {
   background-color: $white
   height: 100%
   width: 25%
+
+
 .column2-userinfo
   background-color: $white
   height: 100%
   width: 12.5%
+  border-top-right-radius: 15px
+  border-top-left-radius: 15px
 .round-top
-  background-color: $silver
+  background-color: #437eb4
+  border-top-right-radius: 15px
+  border-top-left-radius: 15px
+
 </style>

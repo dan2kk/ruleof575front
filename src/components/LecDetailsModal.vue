@@ -33,10 +33,7 @@
         <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
         <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.학점></RMenuTextBox>
       </div>
-      <div class = "row">
-        <RMenuTitleBox color="darkYellow" size="570" style="margin-top: 20px">과목 성적분포</RMenuTitleBox>
-      </div>
-      <canvas ref="barChart">
+      <canvas ref="pieChart">
       </canvas>
       <div class= "row">
         <RMenuTitleBox color="darkYellow" size="570" style="margin-top: 20px">작년 학기 인원 정보</RMenuTitleBox>
@@ -101,6 +98,8 @@ import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import {Chart, registerables} from 'chart.js'
 import { assertDeclareModule } from "@babel/types";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 Chart.register(...registerables)
 
 export default {
@@ -120,37 +119,32 @@ export default {
     }
   },
   mounted(){
-    this.createChart()
+    this.setChart()
   },
   methods:{
-    setChart(){
+    setData(){
       let data =     
       {
       labels: [],
       datasets: [{
-        label: '인원수',
         data: [],
-        backgroundColor: [
-          '#C59315',
-          '#FFBC11',
-          '#FFD15A',
-          '#FFE39A',
-          '#D9D9D9',
-          '#A5A5A5'
-        ],
+        backgroundColor: [],
         borderColor: [
           'rgba(255, 255, 255, 1)',
-
-
         ],
+        label: '인원수',
         borderWidth: 2
-      }]}
+      }]
+    }
       //PF과목
       if (this.modalData.lec_info.Pass != 0)
       {
         data.labels = ['P', 'F']
         data.datasets[0].data.push(this.modalData.lec_info.Pass)
         data.datasets[0].data.push(this.modalData.lec_info.F)
+        data.datasets[0].backgroundColor =
+        [ '#4BC204',
+          '#FF1746',]
       }
       //non-PF과목
       else
@@ -162,15 +156,59 @@ export default {
         data.datasets[0].data.push(this.modalData.lec_info['B0'])
         data.datasets[0].data.push(this.modalData.lec_info['C+']+this.modalData.lec_info['C0']+this.modalData.lec_info['D+']+this.modalData.lec_info['D0'])
         data.datasets[0].data.push(this.modalData.lec_info['F'])
+        data.datasets[0].backgroundColor =
+        [ 
+          '#097f09',
+          '#4BC204',
+          '#FEDA00',
+          '#FEA000',
+          '#FF1746',
+          '#747474']
 
       }
       return data
     },
-    createChart(){
-      new Chart(this.$refs.barChart, {
+    setOptions(){
+      let options={
+        plugins: {
+          title: {
+            display: true,
+            text: this.modalData.lec_info.과목명 + ' 성적 분포',
+            position: 'top',
+            color: '#000000',
+            font: {
+              size: 25,
+            }
+          },
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            enabled: false
+          },
+          datalabels: {
+            color: '#FFF',
+            textAlign: 'center',
+            align: top,
+            font: {
+                size: 25,
+            },
+            formatter: function(value, ctx) {
+                return ctx.chart.data.labels[ctx.dataIndex] + '\n' + value;
+            }
+          }
+        },
+        maintainAspectRatio : true,
+        animation: false,
+      }
+      return options
+    },
+    setChart(){
+      new Chart(this.$refs.pieChart, {
+        plugins:[ChartDataLabels],
         type:'pie',
-        data:this.setChart(),
-        options:this.options
+        data:this.setData(),
+        options:this.setOptions(),
       })
 
     }
@@ -197,7 +235,9 @@ const ctx = document.getElementById('myChart');
   position: absolute
   opacity: 0.3
   background-color: $black
-  align-items: center
+  align-items: center  
+  border-radius: 15px
+
     
 .lec-details-modal-card
   background-color: $error-color
@@ -210,8 +250,10 @@ const ctx = document.getElementById('myChart');
   background-color: white
   height : 80%
   z-index: 10
-  border: 3px solid white
+  border: 3px solid #eea900
   overflow-y: overlay
+  border-top-left-radius: 15px
+  border-top-right-radius: 15px
 
 .empty-cart
   width: 100%

@@ -55,6 +55,8 @@ export default {
   overflow-y: overlay
   border-top: 3px solid white
   border-bottom: 3px solid white
+  border-radius: 15px
+
 .time-table-cart::-webkit-scrollbar 
   width : 2px
 

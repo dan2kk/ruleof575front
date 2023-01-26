@@ -56,8 +56,6 @@ export default {
 @import '../../../../variables'
 
 .r-menu-title-box-m
-  border: 1px solid
-  border-color: $white
   height: 48px
   width: var(--width)
   position: relative

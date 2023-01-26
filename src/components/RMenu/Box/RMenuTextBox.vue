@@ -15,7 +15,7 @@ export default {
       let color
       let fontsize
       let fontweight
-      if (this.fontsize == undefined) fontsize = "14"
+      if (this.fontsize == undefined) fontsize = "16"
       else fontsize = this.fontsize      
       if (this.fontweight == undefined) fontweight = "400"
       else fontweight = this.fontweight

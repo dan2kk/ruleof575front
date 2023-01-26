@@ -170,6 +170,7 @@
     border-color: $white
     position: relative
     overflow: hidden
+    border-radius: 5px
     
   .time-block:hover
     transform: scale(1.0)

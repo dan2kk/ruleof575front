@@ -120,7 +120,6 @@ export default {
 .lec-list-record
   align-items: flex-start
   background-color: $pippin
-  border: 1px solid
   border-color: $white
   display: flex
   position: relative

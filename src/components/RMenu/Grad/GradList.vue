@@ -3,7 +3,7 @@
     <div class = "grad-list-upper-menu">
       <RMenuTitleBox color="purple">
         졸업사정 변동사항
-        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGrad">
+        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGradList">
       </RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>
@@ -42,9 +42,8 @@ export default {
       }
       alert("updated!")
     },
-    loadGrad(){
-      let data = this.commit("getGradUpdate")
-      console.log(data)
+    loadGradList(){
+
     }
   }
 };
@@ -62,6 +61,8 @@ export default {
   height: 100%
   position: relative
   width: 100%
+  border-bottom-right-radius: 15px
+  border-bottom-left-radius: 15px
 
 .grad-list-lower-menu
   overflow-y: overlay
@@ -89,5 +90,4 @@ export default {
   left: 72%
   color: $lily
   font-weight: 1000
-
 </style>

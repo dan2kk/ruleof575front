@@ -28,6 +28,8 @@ export default {
   height: 100%
   position: relative
   width: 100%
+  border-bottom-right-radius: 15px
+  border-bottom-left-radius: 15px
 .row
   align-items: center
   display: flex

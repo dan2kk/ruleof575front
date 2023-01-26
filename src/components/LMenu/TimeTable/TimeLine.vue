@@ -66,6 +66,7 @@ export default {
   max-height: 200%
   position: relative
   width: var(--width)
+
 .shadowbox
   height: var(--height)
   width: 100%

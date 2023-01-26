@@ -5,6 +5,7 @@
           창을 닫으려면 바깥을 클릭
         </div>
         <div class= "search-modal-card">
+          <RMenuTitleBox color= "red" size="540">과목 직접 담기</RMenuTitleBox>
           <div class="search">
             <input type="text" class="search-box" id="searchbox"  placeholder="원하는 과목 직접 검색"/>
             <input type="submit" class="button" value="검색" @click="getSearchText()">
@@ -17,13 +18,14 @@
 
 <script>
 import SearchModalRecord from "./SearchModalRecord";
+import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox"
 import axios from "axios"
 
 export default {
   name: "Modal",
   props: [],
   components: {
-    SearchModalRecord
+    SearchModalRecord, RMenuTitleBox
   },
   data(){
     return{
@@ -55,6 +57,7 @@ export default {
   width: 600px
   height: 960px
   position: absolute
+  
 .overlay-search
   width: 100%
   height: 100%
@@ -62,19 +65,21 @@ export default {
   opacity: 0.3
   background-color: $black
   align-items: center
-
+  border-radius: 15px
+  
 .search-modal-card
   background-color: $error-color
   position: absolute
   left: 5%
   width: 90%
   height : 80%
-  margin: auto
   margin-top: 5%
   background-color: $pippin
   z-index: 10
-  border: 3px solid white
+  border: 3px solid $geraldine
   overflow-y: overlay
+  border-top-left-radius: 15px
+  border-top-right-radius: 15px
 
 .search-modal-card::-webkit-scrollbar 
   width : 1px

@@ -40,7 +40,8 @@ export default {
   border-style: solid
   border-width: 1px
   border-color: $white
-
+  border-bottom-right-radius: 15px
+  border-bottom-left-radius: 15px
 .login-btn
   align-items: center
   border-color: $white

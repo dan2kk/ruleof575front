@@ -50,7 +50,7 @@ export default {
 
 .r-menu-cart
   align-items: flex-start
-  background-color: #E0E0E0
+  background-color: white
   display: flex
   flex-direction: column
   width: 100%

@@ -32,9 +32,9 @@ export default {
   height: 48px
   position: relative
   width: var(--size)
-  border: 1px solid
-  border-color: $white
   background-color: $bon-jour
+  border: 1px white solid
+  border-radius: 7px
 
 
 .l-menu-text-box-text

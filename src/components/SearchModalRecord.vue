@@ -1,9 +1,9 @@
 <template>
   <div class= "search-modal-record-cart">
-    <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "150"></RMenuTextBox>
-    <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "50"></RMenuTextBox>
+    <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "250"></RMenuTextBox>
+    <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "75"></RMenuTextBox>
     <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100"></RMenuTextBox>
-    <RMenuTextBox :text= this.lecData.이수구분코드명 color = "red" size= "50"></RMenuTextBox>
+    <RMenuTextBox :text= this.lecData.이수구분코드명 color = "red" size= "75"></RMenuTextBox>
     <SearchImageBox src="./addbutton.svg" color ="red" @click="addLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"></SearchImageBox>
     <SearchImageBox src="./checkbutton.svg" color ="red" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="!isInLecList"></SearchImageBox>
   </div>

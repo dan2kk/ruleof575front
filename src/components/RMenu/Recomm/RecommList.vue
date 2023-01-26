@@ -101,7 +101,8 @@ export default {
   overflow-y: scroll
   position: relative
   width: 100%
-
+  border-bottom-right-radius: 15px
+  border-bottom-left-radius: 15px
 .recomm-list::-webkit-scrollbar 
   display: none
 
