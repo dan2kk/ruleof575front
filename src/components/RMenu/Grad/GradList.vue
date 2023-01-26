@@ -42,8 +42,8 @@ export default {
       }
       alert("updated!")
     },
-    loadGradList(){
-
+    loadGrad(){
+      this.$store.dispatch('crawlingGradData')
     }
   }
 };

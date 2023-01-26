@@ -1,10 +1,6 @@
-
 //console.log("ASDSDASD")
 var elements = document.querySelectorAll('#snb > ul > li')
 var loginInfo = document.querySelectorAll('#logo-area> div > div > span')
-var wantedInfo = null
-var sgscInfo = null
-var defaultInfo = null 
 let hashArray = [
     "#!UDMxOTEzMCRAXnN1Z2FuZy8kQF4kQF5NMzE4Njc3JEBe7KG47JeF7IKs7KCV7KGw7ZqMJEBeTTMxODY3NyRAXmZiM2VjOTI1OTE3OGNmMmFmMmQ3ZDQ3Y2IxOTlmZGUyMTViNWU4ZWQ1ZGI2MGI4ZTZjOTk3NTgyZTQ2YzIzOWM=", //졸업사정
     "#!UDMxMDI5OCRAXnN1Z2FuZy8kQF4kQF5NMDA4OTU4JEBe7Z2s66ed7IiY7JeFJEBeTTAwODk1OCRAXjFkOThmNjkxN2Y2YzAzMTg1YTcwYWQ4NzBkYzBiOGYxY2FhNzJkN2MyOWY1ZDVmZjNmZTMxNjY4NTg5MjU3NTY=", //희망수업
@@ -65,11 +61,7 @@ chrome.runtime.onMessage.addListener(
       console.log("content-script event handler")
       if(request.type == "import"){
         if(request.data == "wanted"){
-            wantedInfo = await getItems(1)
-            console.log(wantedInfo)
-            if(wantedInfo.length == 0){
-                wantedInfo = await getItems(1)
-            }
+            let wantedInfo = await getItems(1)
             sendResponse({data: wantedInfo})
         }
         if(request.data =="grad"){
@@ -77,11 +69,7 @@ chrome.runtime.onMessage.addListener(
             sendResponse({data:jolupInfo})
         }
         if(request.data == "sugang"){
-            sgscInfo = wantedInfo = await getItems(2)
-            console.log(sgscInfo)
-            if(sgscInfo.length == 0){
-                sgscInfo = await getItems(2)
-            }
+            let sgscInfo = wantedInfo = await getItems(2)
             sendResponse({data: sgscInfo})
         }
       }
@@ -103,11 +91,13 @@ chrome.runtime.onMessage.addListener(
                 for(let y of x.textContent.split("\n")){
                     temp.push(y.trim())
                 }
-                let recData ={이수명: temp[1], 기준: temp[2], 이수: temp[4], 잔여: temp[7]}
+                let recData ={이수명: temp[1], 기준: temp[2], 이수: temp[4]}
+                console.log(temp[1])
+                console.log(recData)
                 returnData.push(recData)
             }
         }
-        else{
+        else if(idx == 1){ //희망수업 불러오기
             data = document.querySelectorAll('#gdMain > tbody > tr')
             for(let x of data){
                 let temp = []
@@ -115,11 +105,12 @@ chrome.runtime.onMessage.addListener(
                     temp.push(y.trim())
                 }
                 let recData ={과목명: temp[11], 수업번호: temp[9], 대표교강사명: temp[19], 강좌유형: temp[23],
-                    강의시간: temp[25]
+                    강의시간: temp[25], isInTable : 0
                 }
                 returnData.push(recData)
             }
         }
+        console.log(returnData)
         resolve(returnData)
     });
   };
