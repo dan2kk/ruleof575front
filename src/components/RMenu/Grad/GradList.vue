@@ -41,6 +41,10 @@ export default {
         if(this.$store.getters.getGrad[i].잔여 < 0) this.$store.getters.getGrad[i].잔여 = 0
       }
       alert("updated!")
+    },
+    loadGrad(){
+      let data = this.commit("getGradUpdate")
+      console.log(data)
     }
   }
 };

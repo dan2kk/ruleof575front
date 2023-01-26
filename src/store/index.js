@@ -435,12 +435,6 @@ export default createStore({
       }
       else {
         state.isChecked = true;
-        await chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
-              let gradData = response.data
-              console.log("background received gradData")
-              console.log(gradData)
-          });})
       }
     },
     setNextColor(state) {
@@ -525,8 +519,21 @@ export default createStore({
         alert(err)
       }
     },
+    getGradUpdate(state, payload){
+      return payload
+    }
   },
   actions: {
+    getGradUpdate1: function(context){
+      let gradData = null
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
+            gradData = response.data
+            console.log("background received gradData")
+            console.log(gradData)
+      });})
+      return this.commit("getGradUpdate", gradData)
+    }
   },
   modules: {
   }
