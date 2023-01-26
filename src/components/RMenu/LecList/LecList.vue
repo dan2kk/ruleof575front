@@ -67,7 +67,6 @@ export default {
   width: 100%
 .lec-list-upper-menu
   width: 100%
-  height: 10%
 
 .lec-list-lower-menu
   width: 100%

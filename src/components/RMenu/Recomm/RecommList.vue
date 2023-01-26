@@ -95,9 +95,6 @@ export default {
 .recomm-list
   align-items: start
   background-color: $light-green
-  border-style: solid
-  border-width: 1px
-  border-color: $white
   flex-direction: column
   height: 100%
   overflow: hidden

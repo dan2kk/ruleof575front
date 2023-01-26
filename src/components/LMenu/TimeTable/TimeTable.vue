@@ -8,7 +8,9 @@
       <TimeLine :day = 4 />
       <TimeLine :day = 5 />
     </div>
-    <NTLecBlock :lecData="lec" v-for="lec in this.nTLecsList" :key="lec"/>
+    <div class="ntlec-cart">
+      <NTLecBlock :lecData="lec" v-for="lec in this.nTLecsList" :key="lec"/>
+    </div>
   </div>
 </template>
 
@@ -46,24 +48,28 @@ export default {
 .time-table-cart
   align-items: flex-start
   background-color: $white
-  height: 100%
+  height: 90%
   position: relative
   width: 100%
   overflow-x: hidden
   overflow-y: overlay
-
+  border-top: 3px solid white
+  border-bottom: 3px solid white
 .time-table-cart::-webkit-scrollbar 
   width : 2px
 
 .time-table-cart::-webkit-scrollbar-thumb
-    background-color: rgba(0,0,0)
+    background-color: rgba(0,0,0, 0)
     height: 95%
 
 .time-table
   align-items: flex-start
   display: flex
-  height: 100%
-  gap: 8px
+  height: 1200px
+  gap: 2px
+  position: relative
+
+.ntlec-cart
   position: relative
 
 </style>

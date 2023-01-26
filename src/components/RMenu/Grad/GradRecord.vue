@@ -61,13 +61,13 @@ export default {
   border-color: $white
   display: flex
   position: relative
-  width: 400
+  width: 100%
   
 .grad-record-cart
   align-items: center
   display: flex
   height: 40px
-  min-width: 394px
+  min-width: 100%
   position: relative
 
 </style>

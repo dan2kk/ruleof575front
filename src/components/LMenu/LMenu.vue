@@ -35,5 +35,6 @@ export default {
   height: 100%
   position: relative
   width: 50%
+  border: 3px solid white
 
 </style>
