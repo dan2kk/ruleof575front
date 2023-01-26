@@ -106,7 +106,7 @@ export const processLec = (lec, day) => {
     for(let i = 0; i < lec.요일.length; i++) {
         curDay = lec.요일[i]
 
-        if(curDay == '시간미지정강좌' || curDay != day) {
+        if(curDay == '시간미지정강좌' || curDay != day || lec.시작시간[i] == null) {
             continue
         }
 

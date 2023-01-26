@@ -10,7 +10,7 @@ export default createStore({
     userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     gradInfo : null,
     isChanged: false,
-    isChecked: true,
+    isChecked: false,
     curScreen: 0,
 
     lecList:[],
@@ -170,7 +170,8 @@ export default createStore({
       }
     },
 
-    initGradList(state, gradRecList){
+    setGradList(state, gradRecList){
+
       try{
         let gradNames = getGradNames();
         
@@ -179,25 +180,22 @@ export default createStore({
           if(!gradNames.includes(gradRec.이수명)) {
             continue
           }
+          
+          // if(typeof gradRec.기준 != 'string') {
+          //   if(gradRec.기준 != null){
+          //     gradRec.기준= gradRec.기준.slice(0, -3)
+          //   }
 
-          if(gradRec.기준 != null){
-            gradRec.기준= gradRec.기준.slice(0, -3)
+          //   if(gradRec.이수 != null){
+          //     gradRec.이수= gradRec.이수.slice(0, -3)
+          //   }
+
+          // }
+
+          if(gradRec.이수 == null || gradRec.이수 == ''){
+            gradRec.이수= '0'
           }
-          if(gradRec.이수 != null){
-            gradRec.이수= gradRec.이수.slice(0, -3)
-          }
-          else{
-            gradRec.이수 = "0"
-          }
-          if(gradRec.기준 === "1"){
-            gradRec.기준 = "Y"
-            if(gradRec.이수 === "1"){
-              gradRec.이수 = "Y"
-            }
-            else{
-              gradRec.이수 = "N"
-            }
-          }
+
           gradRec.변동 = '0'
           gradRec.합계 = '0'
           gradRec.잔여 = '0'
@@ -503,30 +501,20 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
-    },
-    setGradData(state, payload){
-      for(let x in payload){
-        console.log(state.gradList)
-        let idx = state.gradList.findIndex((y)=> (y.이수명 == x.이수명) && (y.전공구분명 == x.전공구분명))
-        if(idx == -1) {
-          state.gradList.push(x)
-        }
-        else{
-          console.log(state.gradList[idx])
-          state.gradList[idx].기준 = x.기준
-          state.gradList[idx].이수 = x.이수
-        }
-      }
     }
   },
   actions: {
     crawlingGradData(context){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
-            let gradDataTemp = response.data
-            console.log(gradDataTemp)
-            if(gradDataTemp.length == 0) return
-            context.commit("setGradData", gradDataTemp)
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, async function(response) {
+            let gradData = response.data
+            context.commit("setGradList", gradData)
+
+
+            let stuId = context.getters.getStuId
+            let gradList = context.getters.getGradList
+            await axios.post('http://3.37.249.210:1324/grad/update', {list: gradList, stu_id: stuId})
+            await context.dispatch("fetchGradStat")
       });})
     },
     crawlingWantedData(context){
@@ -573,10 +561,11 @@ export default createStore({
     },
     async fetchGradList(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
-      context.commit("initGradList", lecList)
+      let gradList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
+      console.log(gradList)
+      context.commit("setGradList", gradList)
     },
-
+    
     async fetchGradStat(context) {
       let stuId = context.getters.getStuId
       let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: stuId}})).data.list

@@ -1,4 +1,3 @@
-
 //console.log("ASDSDASD")
 var elements = document.querySelectorAll('#snb > ul > li')
 var loginInfo = document.querySelectorAll('#logo-area> div > div > span')

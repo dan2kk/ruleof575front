@@ -45,7 +45,6 @@ export default {
       this.$store.commit("delRecommList", this.recommData);
     },
     addShadowToTT(){
-      console.log(this.recommData)
       this.$store.commit("addShadowLec", this.recommData)
     },
     clearShadowLec() {

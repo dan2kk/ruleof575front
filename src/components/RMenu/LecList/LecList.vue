@@ -23,6 +23,7 @@ import RMenuTextBox from "../Box/RMenuTextBox";
 import LecListRecord from "./LecListRecord";
 import LecListHead from "./LecListHead";
 import SearchImageBox from "../Box/SearchImageBox";
+import axios from "axios";
 
 export default {
   name: "LecList",
