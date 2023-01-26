@@ -8,12 +8,9 @@
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
     <div class = "lec-list-lower-menu">
-      <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"> 
-        {{lec.수업번호}}
-      </LecListRecord>
+      <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"></LecListRecord>
       <div class = "search-box">
         <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
-
       </div> 
     </div>
 

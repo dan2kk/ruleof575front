@@ -1,12 +1,14 @@
 import { createStore } from 'vuex'
 import { fillTL, processLec, fieldOrder } from '@/util'
+import { getGradNames } from '@/util'
 import axios from "axios"
 
 export default createStore({
   state: {
     isLogined: false,
 
-    userInfo: {stuId: "MC0GCCqGSIb3DQIJAyEAw3Dp40VErGHCGs9EEpg0vHCTsO+Q8/tCYa8dNZrXg2k=", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
+    gradInfo : null,
     isChanged: false,
     isChecked: true,
     curScreen: 0,
@@ -110,26 +112,24 @@ export default createStore({
       return state.searchModal
     }
   },
-
-
   mutations: {
-    setIsLogined(state, tf) {
+    beforeLogin(state){
       (async () => {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
         let data = response.data
+        console.log(data)
         state.userInfo.stuId = data.stuNum.trim()
         state.userInfo.userName = data.stuName.trim()
         state.userInfo.grade = data.stuGrad.trim()
         console.log(state.userInfo)
-        state.isLogined = tf
       })();
-      state.isLogined = tf
-
     },
-    addLecList(state, lecToAdd){
-      if(state.lecList.findIndex((x)=> x.수업번호 == lecToAdd.수업번호) == -1){
-        state.lecList.push(lecToAdd)
-      }
+    loginMain(state){
+      this.commit("initList")
+      this.commit("initGrad")
+      this.commit("setCurScreen", 1)
+      if(state.userInfo.stuId != null) state.isLogined = true;
+      else  state.isLogined=false;
     },
     delLecList(state, lecToDel) {
       let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호) 
@@ -163,13 +163,6 @@ export default createStore({
       }
       state.curScreen = screenNum
     },
-
-    addGradList(state, record){
-      if(state.gradList.findIndex((x)=> (x.이수명 == record.이수명) && (x.전공구분명 == record.전공구분명)) == -1) {
-        state.gradList.push(record)
-      }
-    },
-
     async calGradStat(state) {
       let gradData = {
         '졸업학점' : 0,
@@ -249,6 +242,7 @@ export default createStore({
         }
       }
     },
+    
 
     addSelectedTimes(state, res){
       // let temp = state.selectedTimes[res.day].findIndex( (x) => (x.start == res.data.start))
@@ -434,18 +428,19 @@ export default createStore({
         state.shadowList[i].length = 0
       }
     },
-    setIsChecked(state)
+    async setIsChecked(state)
     {
       if (state.isChecked) {
         state.isChecked = false;
       }
       else {
         state.isChecked = true;
-        (async () => {
-          const response = await chrome.runtime.sendMessage({type: "extension", param: "grad"});
-          // do something with response here, not outside the function
-          console.log(response);
-        })();
+        await chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, function(response) {
+              let gradData = response.data
+              console.log("background received gradData")
+              console.log(gradData)
+          });})
       }
     },
     setNextColor(state) {
@@ -461,7 +456,75 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
-    }
+    },
+    async initList(state) {
+      try{
+        let stuId = state.userInfo.stuId
+        let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
+        console.log(lecList);
+
+        for(let lec of lecList) {
+          if(lec.isInTable == 1) {
+            lec['color'] = state.colorList[state.colorIdx]
+            this.commit("setNextColor")
+          }
+          if(state.lecList.findIndex((x)=> x.수업번호 == lec.수업번호) == -1){
+            state.lecList.push(lec)
+          }
+        }
+        this.commit("setUpTimeLines", '월');
+        this.commit("setUpTimeLines", '화');
+        this.commit("setUpTimeLines", '수');
+        this.commit("setUpTimeLines", '목');
+        this.commit("setUpTimeLines", '금');
+      }
+      catch(err){
+        alert(err)
+      }
+    },
+
+    async initGrad(state){
+      try{
+        let stuId = state.userInfo.stuId
+        let gradRecList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
+        let gradNames = getGradNames();
+        
+        for(let gradRec of gradRecList) {
+
+          if(!gradNames.includes(gradRec.이수명)) {
+            continue
+          }
+
+          if(gradRec.기준 != null){
+            gradRec.기준= gradRec.기준.slice(0, -3)
+          }
+          if(gradRec.이수 != null){
+            gradRec.이수= gradRec.이수.slice(0, -3)
+          }
+          else{
+            gradRec.이수 = "0"
+          }
+          if(gradRec.기준 === "1"){
+            gradRec.기준 = "Y"
+            if(gradRec.이수 === "1"){
+              gradRec.이수 = "Y"
+            }
+            else{
+              gradRec.이수 = "N"
+            }
+          }
+          gradRec.변동 = '0'
+          gradRec.합계 = '0'
+          gradRec.잔여 = '0'
+          if(state.gradList.findIndex((x)=> (x.이수명 == gradRec.이수명) && (x.전공구분명 == gradRec.전공구분명)) == -1) {
+            state.gradList.push(gradRec)
+          }
+        }
+      }
+      catch(err){
+        alert(err)
+      }
+    },
   },
   actions: {
   },
