@@ -2,7 +2,7 @@
   <div class="login-screen">
     <div class="login-btn" @click="clickEvent">
       <div class="login-btn-cart">
-        <div class="login-btn-text valign-text-middle notosanskr-normal-white-14px">{{ "Log In"}}</div>
+        <div class="login-btn-text valign-text-middle notosanskr-bold-white-20px">{{ "Log In"}}</div>
       </div>
   </div>
   </div>
@@ -13,7 +13,7 @@ export default {
   name: "LoginScreen",
   methods: {
     async clickEvent(){
-      await this.$store.dispatch("loginReq")
+      //await this.$store.dispatch("loginReq")
       this.$store.commit("loginMain")
       if(this.$store.getters.getIsLogined == false) {
         alert("로그인 실패하셨습니다.")
@@ -43,22 +43,22 @@ export default {
 
 .login-btn
   align-items: center
-  background-color: $nobel
   border-color: $white
   display: flex
   justify-content: center
-  width: 140px
 
 .login-btn-cart
   align-items: flex-start
   align-self: stretch
-  background-color: $silver
+  background-color: $pigeon-post
   border: 4px solid
   border-color: $white
+  border-radius: 100px
   display: flex
   flex: 1
-  height: 40px
-  width: 140px
+  width: 200px
+  height: 50px
+
 
 .login-btn-text
   align-self: stretch

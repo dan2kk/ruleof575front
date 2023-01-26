@@ -27,14 +27,12 @@
   .lec-list-head
     align-items: flex-start
     background-color: $pippin
-    border: 1px solid
-    border-color: $white
     display: flex
     position: relative
     width: 100%
+    height: 100%
   
   .lec-list-head-cart
-    align-items: center
     display: flex
     height: 100%
     width: 100%

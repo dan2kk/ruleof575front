@@ -63,7 +63,7 @@ export default {
   align-items: flex-start
   display: flex
   flex-direction: column
-  height: 150%
+  max-height: 200%
   position: relative
   width: var(--width)
 .shadowbox

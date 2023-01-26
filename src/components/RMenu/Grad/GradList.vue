@@ -88,4 +88,5 @@ export default {
   left: 72%
   color: $lily
   font-weight: 1000
+
 </style>
