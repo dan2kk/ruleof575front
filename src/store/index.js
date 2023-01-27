@@ -543,7 +543,8 @@ export default createStore({
 
     async loginReq(context) {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
-        context.commit("setUserInfo", response.data)
+        console.log(response.stuData, response.hackData)
+        context.commit("setUserInfo", response.stuData)
     },
 
     async changeScreen(context, screenNum) {      

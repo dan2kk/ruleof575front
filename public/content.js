@@ -50,8 +50,13 @@ if(loginInfo.length == 3){ //로그인 성공시 로그인 정보
         stuGrad : loginInfo[1].innerHTML,
         stuName : loginInfo[2].innerHTML
     };
+    let hackJum = {최소학점: 0, 최대학점: 0, 신청학점: 0}
+    hackJum.최소학점 = document.querySelectorAll('#edMinHakjeom')[0].value;
+    hackJum.최대학점 = document.querySelectorAll('#edMaxHakjeom')[0].value;
+    hackJum.신청학점 = document.querySelectorAll('#edSincheongHakjeom')[0].value;
+    console.log(hackJum);
     (async () => {
-        const response = await chrome.runtime.sendMessage({type: "content_script", data: stuInfo});
+        const response = await chrome.runtime.sendMessage({type: "content_script", stuData: stuInfo, hackjum: hackJum});
         // do something with response here, not outside the function
         console.log(response);
     })();   
@@ -84,6 +89,7 @@ chrome.runtime.onMessage.addListener(
         if(url.hash != hashArray[idx]) {
             url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[idx])}
         let returnData = []
+        //hackJum.최소학점 = document.querySelectorAll('#edMinHakjeom')
         if(idx == 0){ //졸업사정 불러오기
             data = document.querySelectorAll('#gdDtl1 > tbody > tr')
             for(let x of data){
