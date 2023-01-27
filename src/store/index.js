@@ -570,7 +570,7 @@ export default createStore({
     },
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
+      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data.list
       context.commit("initLecList", lecList)
     },
     async fetchGradList(context) {
