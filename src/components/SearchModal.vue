@@ -8,7 +8,7 @@
           <RMenuTitleBox color= "red" size="540">과목 직접 담기</RMenuTitleBox>
           <div class="search">
             <input type="text" class="search-box" id="searchbox"  placeholder="원하는 과목 직접 검색"/>
-            <input type="submit" class="button" value="검색" @click="getSearchText()">
+            <input type="submit" class="search-button" value="검색" @click="getSearchText()">
           </div>
           <SearchModalRecord :lecData=lec v-for="lec in this.lecList" :key="lec"></SearchModalRecord>
         </div>
@@ -106,11 +106,16 @@ export default {
   border-color: $geraldine
   font-family: "Noto Sans KR", Helvetica
 
-.button
+.search-button
   width:20%
   font-size: 20px
   border: 2px solid
   border-color: $geraldine
   font-family: "Noto Sans KR", Helvetica
-  
+.search-button:hover
+  transform: scale(1.1)
+  background-color: $silver
+.search-button:active
+  transform: scale(0.95)
+  border: none
 </style>

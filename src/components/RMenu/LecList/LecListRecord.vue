@@ -134,6 +134,7 @@ export default {
 .lec-list-classname:hover
   transform: scale(1.1)
   background-color: $geraldine
+  border: none
 .lec-list-classname:active
   transform: scale(0.95)
   border: none

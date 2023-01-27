@@ -63,11 +63,9 @@ export default {
               else
                 itemPos = `center`
               break;
-            case "50":
-              if (this.text.length > 8)
-                itemPos = `flex-start`
-              else
-                itemPos = `center`
+            case "75":
+              itemPos = `flex-start`
+              break;
           }
         }
       }
@@ -84,11 +82,9 @@ export default {
               else
                 itemPos = `center`
               break;
-            case "50":
-              if (this.text.length > 8)
-                itemPos = `flex-start`
-              else
-                itemPos = `center`
+            case "75":
+              itemPos = `center`
+              break;
           }
         }
       }

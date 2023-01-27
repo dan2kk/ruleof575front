@@ -39,11 +39,11 @@
         작년에 개설되지 않은 강의입니다.
       </div>
       <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900">
-        <RMenuTitleBox color="darkYellow" size="531">작년 {{ index+1 }}학기 인원 정보
-          <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow = !isRegisteredShow" v-show="!this.isRegisteredShow">
-          <img class="show-button" src='showbutton.svg' @click="isRegisteredShow = !isRegisteredShow" v-show="this.isRegisteredShow">
+        <RMenuTitleBox color="darkYellow" size="531">수업{{ index+1 }} 인원 정보
+          <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="!this.isRegisteredShow[index]">
+          <img class="show-button" src='showbutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="this.isRegisteredShow[index]">
         </RMenuTitleBox>
-        <div v-show="isRegisteredShow">
+        <div v-show="isRegisteredShow[index]">
           <div class= "row">
             <RMenuTitleBox color="yellow" size="114">정원</RMenuTitleBox>
             <RMenuTitleBox color="yellow" size="114">수강</RMenuTitleBox>
@@ -60,23 +60,23 @@
           </div>
         </div>
           <div class="row"> 
-          <RMenuTitleBox color="darkYellow" size="570">과별 희망등록인원 (총원: {{ prev.희망수업등록인원 }}명)
-            <img class="hide-button" src='hidebutton.svg' @click="isWantedShow = !isWantedShow" v-show="!this.isWantedShow">
-            <img class="show-button" src='showbutton.svg' @click="isWantedShow = !isWantedShow" v-show="this.isWantedShow">
+          <RMenuTitleBox color="darkYellow" size="540">과별 희망등록인원 (총원: {{ prev.희망수업등록인원 }}명)
+            <img class="hide-button" src='hidebutton.svg' @click="isWantedShow[index] = !isWantedShow[index]" v-show="!this.isWantedShow[index]">
+            <img class="show-button" src='showbutton.svg' @click="isWantedShow[index] = !isWantedShow[index]" v-show="this.isWantedShow[index]">
           </RMenuTitleBox>
         </div>
-        <div class="detail-info-row" v-show="isWantedShow">
+        <div class="detail-info-row" v-show="isWantedShow[index]">
           <div v-for="detailInfo in prev.희망수업세부정보" :key="detailInfo">
-            <RMenuTitleBox color="yellow" size="114" fontsize = "16" style="overflow: hidden" @click="isWantedShow = !isWantedShow">{{detailInfo.희망신청소속}}</RMenuTitleBox>
-            <RMenuTextBox color="yellow" size="114" fontsize = "16" @click="isWantedShow = !isWantedShow" :text=detailInfo.학생수></RMenuTextBox>
+            <RMenuTitleBox color="yellow" size="106.1" fontsize = "16" style="overflow: hidden" @click="isWantedShow[index] = !isWantedShow[index]">{{detailInfo.희망신청소속}}</RMenuTitleBox>
+            <RMenuTextBox color="yellow" size="106.1" fontsize = "16" @click="isWantedShow[index] = !isWantedShow[index]" :text=detailInfo.학생수></RMenuTextBox>
           </div>
         </div>
         <div class= "row">
           <RMenuTitleBox color="darkYellow" size="540">이 수업을 ~순위로 픽한 인원</RMenuTitleBox>
-          <img class="hide-button" src='hidebutton.svg' @click="isRankingShow = !isRankingShow" v-show="!this.isRankingShow">
-          <img class="show-button" src='showbutton.svg' @click="isRankingShow = !isRankingShow" v-show="this.isRankingShow">
+          <img class="hide-button" src='hidebutton.svg' @click="isRankingShow[index] = !isRankingShow[index]" v-show="!this.isRankingShow[index]">
+          <img class="show-button" src='showbutton.svg' @click="isRankingShow[index] = !isRankingShow[index]" v-show="this.isRankingShow[index]">
         </div>
-        <div v-show="isRankingShow">
+        <div v-show="isRankingShow[index]">
           <div class="row">
             <RMenuTitleBox color="yellow" size="95">1순위</RMenuTitleBox>
             <RMenuTitleBox color="yellow" size="95">2순위</RMenuTitleBox>
@@ -121,9 +121,9 @@ export default {
   },
   data() {
     return {
-      isRankingShow : false,
-      isWantedShow : false,
-      isRegisteredShow: false,
+      isRankingShow : [false, false, false, false, false, false, false, false,],
+      isWantedShow : [false, false, false, false, false, false, false, false,],
+      isRegisteredShow: [false, false, false, false, false, false, false, false,],
     }
   },
   mounted(){
