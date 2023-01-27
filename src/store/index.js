@@ -6,8 +6,8 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    //userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
+    //userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     gradInfo : null,
     isChanged: false,
     isChecked: false,
@@ -114,9 +114,9 @@ export default createStore({
   },
   mutations: {
     setUserInfo(state, data) { 
-      // state.userInfo.stuId = data.stuNum.trim()
-      // state.userInfo.userName = data.stuName.trim()
-      // state.userInfo.grade = data.stuGrad.trim()
+      state.userInfo.stuId = data.stuNum.trim()
+      state.userInfo.userName = data.stuName.trim()
+      state.userInfo.grade = data.stuGrad.trim()
     },
 
     loginMain(state){
@@ -509,8 +509,6 @@ export default createStore({
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "grad"}, async function(response) {
             let gradData = response.data
             context.commit("setGradList", gradData)
-
-
             let stuId = context.getters.getStuId
             let gradList = context.getters.getGradList
             await axios.post('http://3.37.249.210:1324/grad/update', {list: gradList, stu_id: stuId})
@@ -518,12 +516,27 @@ export default createStore({
       });})
     },
     crawlingWantedData(context){
-      let wantedData = null
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
-          wantedData = response.data
-          console.log("background received gradData")
-          console.log(wantedData)
+          let wantedData = response.data
+          for(let x of wantedData){
+            let days = x.수업시간.split(')')
+            if(days[days.length -1] == '') days.pop()
+            console.log(days)
+            for(let day of days){
+              if(day.includes('시간미지정강좌')){
+                x['요일'] = ['시간미지정강좌']
+              }
+              else{
+                x.요일.push(day[0])
+                x.시작시간.push(day.slice(2, 7))
+                x.끝시간.push(day.slice(8))
+                console.log(x.요일)
+                console.log(x.시작시간)
+                console.log(x.끝시간)
+              }
+            }
+          }
           context.commit("initLecList", wantedData)
       });})
     },

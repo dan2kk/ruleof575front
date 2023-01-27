@@ -105,7 +105,7 @@ chrome.runtime.onMessage.addListener(
                     temp.push(y.trim())
                 }
                 let recData ={과목명: temp[11], 수업번호: temp[9], 대표교강사명: temp[19], 강좌유형: temp[23],
-                    강의시간: temp[25], isInTable : 0
+                    수업시간: temp[25], isInTable : 0, 요일: [], 시작시간: [], 끝시간: []
                 }
                 returnData.push(recData)
             }
@@ -114,4 +114,3 @@ chrome.runtime.onMessage.addListener(
         resolve(returnData)
     });
   };
-

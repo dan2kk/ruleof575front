@@ -49,7 +49,7 @@ export default {
       this.$store.commit("setSearchModal")
     },
     loadPrefLec(){
-      this.$store.commit()
+      this.$store.dispatch("crawlingWantedData")
     }
   },
 };

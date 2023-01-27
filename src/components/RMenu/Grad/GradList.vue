@@ -3,7 +3,7 @@
     <div class = "grad-list-upper-menu">
       <RMenuTitleBox color="purple">
         졸업사정 변동사항
-        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGradList">
+        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGrad">
       </RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>

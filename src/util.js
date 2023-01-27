@@ -78,11 +78,13 @@ export const timeToNum = (startTime, endTime) => {
     let endNum
     let startHalf
     let endHalf
-
-    startNum = Number(startTime.slice(0, -6))
-    endNum = Number(endTime.slice(0, -6))
-    startHalf = (startTime.slice(-5, -3) != '00')
-    endHalf = (endTime.slice(-5, -3) != '00')
+    console.log(startTime, endTime)
+    startNum = Number(startTime.slice(0, 2))
+    endNum = Number(endTime.slice(0, 2))
+    console.log(startNum, endNum)
+    startHalf = (startTime.slice(3, 5) != '00')
+    endHalf = (endTime.slice(3, 5) != '00')
+    console.log(startHalf, endHalf)
 
     if(startHalf) {
         startNum += 0.5

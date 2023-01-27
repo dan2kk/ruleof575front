@@ -13,7 +13,7 @@ export default {
   name: "LoginScreen",
   methods: {
     async clickEvent(){
-      //await this.$store.dispatch("loginReq")
+      await this.$store.dispatch("loginReq")
       this.$store.commit("loginMain")
       if(this.$store.getters.getIsLogined == false) {
         alert("로그인 실패하셨습니다.")
