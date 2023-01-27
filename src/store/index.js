@@ -20,7 +20,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
-    hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 10},
+    hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
       화:[], 
@@ -147,6 +147,8 @@ export default createStore({
 
         for(let lec of lecList) {
           if(lec.isInTable == 1) {
+            state.hackData.시간표학점 += lec.학점
+            state.hackData.수강과목수 += 1
             lec['color'] = state.colorList[state.colorIdx]
             this.commit("setNextColor")
           }
