@@ -35,7 +35,7 @@ export default {
   }, 
   methods:{
     async showDetails() {
-      await this.$store.dispatch("setLecDetails", this.recommData.수업번호);
+      await this.$store.dispatch("fetchLecDetails", this.recommData.수업번호);
     },
     addToLecList(){
       this.$store.commit("addLecList", this.recommData)
