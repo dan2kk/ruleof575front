@@ -20,6 +20,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
       화:[], 
@@ -110,6 +111,9 @@ export default createStore({
     },
     getSearchModal(state){
       return state.searchModal
+    },
+    getHackData(state){
+      return state.hackData
     }
   },
   mutations: {
@@ -143,6 +147,8 @@ export default createStore({
 
         for(let lec of lecList) {
           if(lec.isInTable == 1) {
+            state.hackData.시간표학점 += lec.학점
+            state.hackData.수강과목수 += 1
             lec['color'] = state.colorList[state.colorIdx]
             this.commit("setNextColor")
           }
@@ -501,6 +507,10 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
+    },
+    setHackInfo(state, hackInfo) {
+      state.hackData.최소학점 = hackInfo.최소학점
+      state.hackData.최대학점 = hackInfo.최대학점
     }
   },
   actions: {
@@ -545,6 +555,7 @@ export default createStore({
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
         console.log(response.stuData, response.hackData)
         context.commit("setUserInfo", response.stuData)
+        context.commit("setHackInfo", response.hackData)
     },
 
     async changeScreen(context, screenNum) {      
@@ -570,7 +581,7 @@ export default createStore({
     },
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data
+      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data.list
       context.commit("initLecList", lecList)
     },
     async fetchGradList(context) {

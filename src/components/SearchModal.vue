@@ -37,7 +37,7 @@ export default {
     async getSearchText(){
       this.input = document.getElementById("searchbox").value
       try{
-        this.lecList = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data
+        this.lecList = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data.list
       }
       catch(error){
         console.log(error)
