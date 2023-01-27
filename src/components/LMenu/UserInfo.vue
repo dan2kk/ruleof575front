@@ -10,15 +10,15 @@
     </div>
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "최소 학점" size="75"/>
-      <LMenuTextBox text= "10" size="75"/>
+      <LMenuTextBox :text= "this.getHackData.최소학점" size="75"/>
     </div>
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "최대 학점" size="75"/>
-      <LMenuTextBox text= "20" size="75"/>
+      <LMenuTextBox :text= "this.getHackData.최대학점" size="75"/>
     </div>    
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "시간표 학점" size="75"/>
-      <LMenuTextBox text= "20" size="75"/>
+      <LMenuTextBox :text= "this.getHackData.시간표학점" size="75"/>
     </div>    
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "수강과목 수" size="75"/>
@@ -37,6 +37,9 @@ export default {
   computed:{
     getUserInfo(){
       return this.$store.getters.getUserInfo
+    },
+    getHackData(){
+      return this.$store.getters.getHackData
     }
   }
 };

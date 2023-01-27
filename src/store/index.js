@@ -20,6 +20,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 10},
     selectedTimes: { 
       월:[], 
       화:[], 
@@ -110,6 +111,9 @@ export default createStore({
     },
     getSearchModal(state){
       return state.searchModal
+    },
+    getHackData(state){
+      return state.hackData
     }
   },
   mutations: {
@@ -501,6 +505,10 @@ export default createStore({
         }
       }      
       state.colorIdx = nextIdx
+    },
+    setHackInfo(state, hackInfo) {
+      state.hackData.최소학점 = hackInfo.최소학점
+      state.hackData.최대학점 = hackInfo.최대학점
     }
   },
   actions: {
@@ -545,6 +553,7 @@ export default createStore({
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
         console.log(response.stuData, response.hackData)
         context.commit("setUserInfo", response.stuData)
+        context.commit("setHackInfo", response.hackData)
     },
 
     async changeScreen(context, screenNum) {      
