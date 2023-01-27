@@ -111,7 +111,7 @@
             }
             this.$store.commit("clearRecommList")
             await this.$store.dispatch("fetchRecommList")
-            this.$store.commit("changeScreen", 2)
+            this.$store.dispatch("changeScreen", 2)
 
             break
 

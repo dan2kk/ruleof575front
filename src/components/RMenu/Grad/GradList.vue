@@ -3,13 +3,14 @@
     <div class = "grad-list-upper-menu">
       <RMenuTitleBox color="purple">
         졸업사정 변동사항
-        <input type="submit" class="load-grad-list" value="내 졸업사정 불러오기" @click="loadGrad">
       </RMenuTitleBox>
       <GradRecord :gradData = "this.gradListHead"/>
     </div>
     <div class = "grad-list-lower-menu">
-      <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec"/>
+      <input type="submit" class="load-grad-list" :value='this.buttonTxt' @click="loadGrad" v-if = "this.gradList.length == 0"/>
+      <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec" v-if = "this.gradList.length != 0"/>
     </div>
+
   </div>
 </template>
 
@@ -24,6 +25,7 @@ export default {
   },
   data() {
     return {
+      buttonTxt: "내 졸업사정 불러오기" + "\n첫 로그인 시 클릭",
       gradListHead : {이수명: "이수명", 기준: "기준", 이수: "이수",변동: "변동", 합계: "합계", 잔여: "잔여"},
     }
   },
@@ -80,14 +82,16 @@ export default {
   border-radius: 100px
 
 .load-grad-list
-  width: 26%
-  height: 70%
+  width: 60%
   border: 3px solid
-  border-color: $tutu
-  border-radius: 10px
+  border-color: $lily
+  border-radius: 100px
   background-color: $white
   position: absolute
-  left: 72%
+  top: 40%
+  left: 20%
   color: $lily
   font-weight: 1000
+  align-items: center
+  font-size: 20px
 </style>

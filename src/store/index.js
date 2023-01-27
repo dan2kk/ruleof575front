@@ -12,7 +12,7 @@ export default createStore({
     isChanged: false,
     isChecked: false,
     curScreen: 0,
-
+    
     lecList:[],
     recommList: [],
     gradList: [],
