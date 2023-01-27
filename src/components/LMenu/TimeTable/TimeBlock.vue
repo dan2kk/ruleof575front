@@ -173,10 +173,11 @@
     border-radius: 5px
     
   .time-block:hover
-    transform: scale(1.0)
-    border: 2px solid
-    border-color: $black
-  
+    transform: scale(1.05)
+    background-color: $green
+  .time-block:active
+    transform: scale(0.9)
+
   .time-block-content
     height: 100%
     line-height: normal

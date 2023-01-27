@@ -6,69 +6,77 @@
     </div>
     <div class= "lec-details-modal-card">
       <div class= "row">
-        <RMenuModifiableTitleBox color="darkYellow" size="470" :text=this.modalData.lec_info.과목명></RMenuModifiableTitleBox>
+        <RMenuModifiableTitleBox color="darkYellow" size="440" :text=this.modalData.lec_info.과목명></RMenuModifiableTitleBox>
         <RMenuModifiableTitleBox color="darkYellow" size="100" :text=this.modalData.lec_info.대표교강사명 ></RMenuModifiableTitleBox>
       </div>
       <div class= "row">
-        <RMenuTitleBox color="yellow" size="250">수업 시간</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="250">강의실</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="70">정원</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="240">수업 시간</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="240">강의실</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="60">정원</RMenuTitleBox>
       </div>
       <div class= "row">
-        <RMenuTextBox color="yellow" size="250" :text=this.modalData.lec_info.수업시간></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="250" :text=this.modalData.lec_info.강의실></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="70" :text='this.modalData.lec_info.정원'></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="240" :text=this.modalData.lec_info.수업시간></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="240" :text=this.modalData.lec_info.강의실></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="60" :text='this.modalData.lec_info.정원'></RMenuTextBox>
       </div>
       <div class= "row">
-        <RMenuTitleBox color="yellow" size="100">학수번호</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="100">수업번호</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="170">특수수업</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="100">이수구분</RMenuTitleBox>
-        <RMenuTitleBox color="yellow" size="100">학점</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="90">학수번호</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="90">수업번호</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="180">특수수업</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="90">이수구분</RMenuTitleBox>
+        <RMenuTitleBox color="yellow" size="90">학점</RMenuTitleBox>
       </div>
       <div class= "row">
-        <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.학수번호></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.수업번호></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="170" :text=this.modalData.lec_info.특수수업구분></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
-        <RMenuTextBox color="yellow" size="100" :text=this.modalData.lec_info.학점></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.학수번호></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.수업번호></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="180" :text=this.modalData.lec_info.특수수업구분></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
+        <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.학점></RMenuTextBox>
       </div>
       <canvas ref="pieChart">
       </canvas>
-      <div class= "row">
-        <RMenuTitleBox color="darkYellow" size="570" style="margin-top: 20px">작년 학기 인원 정보</RMenuTitleBox>
-      </div>
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
-      <div v-for="prev in this.modalData.prev_infos" :key="prev" style="border: solid 2px red; margin-bottom:40px">
-        <div class= "row">
-          <RMenuTitleBox color="yellow" size="114">정원</RMenuTitleBox>
-          <RMenuTitleBox color="yellow" size="114">수강</RMenuTitleBox>
-          <RMenuTitleBox color="yellow" size="114">증원</RMenuTitleBox>
-          <RMenuTitleBox color="yellow" size="114">취소</RMenuTitleBox>
-          <RMenuTitleBox color="yellow" size="114">정정취소</RMenuTitleBox>
+      <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900">
+        <RMenuTitleBox color="darkYellow" size="531">작년 {{ index+1 }}학기 인원 정보
+          <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow = !isRegisteredShow" v-show="!this.isRegisteredShow">
+          <img class="show-button" src='showbutton.svg' @click="isRegisteredShow = !isRegisteredShow" v-show="this.isRegisteredShow">
+        </RMenuTitleBox>
+        <div v-show="isRegisteredShow">
+          <div class= "row">
+            <RMenuTitleBox color="yellow" size="114">정원</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="114">수강</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="114">증원</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="114">취소</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="114">정정취소</RMenuTitleBox>
+          </div>
+          <div class= "row">
+            <RMenuTextBox color="yellow" size="114" :text=prev.제한인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="114" :text=prev.신청인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="114" :text=prev.증원인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="114" :text=prev.전체취소></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="114" :text=prev.정정취소></RMenuTextBox>
+          </div>
         </div>
-        <div class= "row">
-          <RMenuTextBox color="yellow" size="114" :text=prev.제한인원></RMenuTextBox>
-          <RMenuTextBox color="yellow" size="114" :text=prev.신청인원></RMenuTextBox>
-          <RMenuTextBox color="yellow" size="114" :text=prev.증원인원></RMenuTextBox>
-          <RMenuTextBox color="yellow" size="114" :text=prev.전체취소></RMenuTextBox>
-          <RMenuTextBox color="yellow" size="114" :text=prev.정정취소></RMenuTextBox>
+          <div class="row"> 
+          <RMenuTitleBox color="darkYellow" size="570">과별 희망등록인원 (총원: {{ prev.희망수업등록인원 }}명)
+            <img class="hide-button" src='hidebutton.svg' @click="isWantedShow = !isWantedShow" v-show="!this.isWantedShow">
+            <img class="show-button" src='showbutton.svg' @click="isWantedShow = !isWantedShow" v-show="this.isWantedShow">
+          </RMenuTitleBox>
         </div>
-        <div class="row"> 
-          <RMenuTitleBox color="yellow" size="570" @click="isWantedShow = !isWantedShow">희망등록 {{ prev.희망수업등록인원 }}명</RMenuTitleBox>
-        </div>
-        <div class="detail-info-row" v-show="isWantedShow == true">
+        <div class="detail-info-row" v-show="isWantedShow">
           <div v-for="detailInfo in prev.희망수업세부정보" :key="detailInfo">
-            <RMenuTitleBox color="yellow" size="106" fontsize = "16" @click="isWantedShow = !isWantedShow">{{detailInfo.희망신청소속}}</RMenuTitleBox>
-            <RMenuTextBox color="yellow" size="106" fontsize = "16" @click="isWantedShow = !isWantedShow" :text=detailInfo.학생수></RMenuTextBox>
+            <RMenuTitleBox color="yellow" size="114" fontsize = "16" style="overflow: hidden" @click="isWantedShow = !isWantedShow">{{detailInfo.희망신청소속}}</RMenuTitleBox>
+            <RMenuTextBox color="yellow" size="114" fontsize = "16" @click="isWantedShow = !isWantedShow" :text=detailInfo.학생수></RMenuTextBox>
           </div>
         </div>
         <div class= "row">
-          <RMenuTitleBox color="yellow" size="570" @click="isRankingShow = !isRankingShow">신청순위</RMenuTitleBox>
+          <RMenuTitleBox color="darkYellow" size="540">이 수업을 ~순위로 픽한 인원</RMenuTitleBox>
+          <img class="hide-button" src='hidebutton.svg' @click="isRankingShow = !isRankingShow" v-show="!this.isRankingShow">
+          <img class="show-button" src='showbutton.svg' @click="isRankingShow = !isRankingShow" v-show="this.isRankingShow">
         </div>
-        <div v-show="isRankingShow == true">
+        <div v-show="isRankingShow">
           <div class="row">
             <RMenuTitleBox color="yellow" size="95">1순위</RMenuTitleBox>
             <RMenuTitleBox color="yellow" size="95">2순위</RMenuTitleBox>
@@ -86,6 +94,7 @@
             <RMenuTextBox color="yellow" size="95" :text=prev.순위5초과></RMenuTextBox>
           </div>
         </div>
+        <div class = "padding"/>
       </div>
     </div>
   </div>
@@ -99,7 +108,6 @@ import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import {Chart, registerables} from 'chart.js'
 import { assertDeclareModule } from "@babel/types";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
 Chart.register(...registerables)
 
 export default {
@@ -114,8 +122,8 @@ export default {
   data() {
     return {
       isRankingShow : false,
-      isWantedShow : false
-
+      isWantedShow : false,
+      isRegisteredShow: false,
     }
   },
   mounted(){
@@ -271,4 +279,32 @@ const ctx = document.getElementById('myChart');
 .lec-details-modal-card::-webkit-scrollbar-thumb
   background-color: rgba(0,0,0)
   height: 95%
+
+.show-button
+  cursor: pointer
+  height: 30px
+  width: 30px
+  transition: all 0.2s ease
+  position: absolute
+  left: 90%
+.show-button:hover
+  transform: scale(1.1)
+.show-button:active
+  transform: rotate(90deg) scale(0.7)
+.hide-button
+  cursor: pointer
+  height: 30px
+  width: 30px
+  transition: all 0.2s ease
+  position: absolute
+  left: 90%
+.hide-button:hover
+  transform: scale(1.1)
+.hide-button:active
+  transform: rotate(-90deg) scale(0.7)
+
+.padding
+  height: 30px
+  width: 100%
+
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="recomm-list-record">
     <div class="recomm-list-record-cart">
-      <RMenuTextBox :text= this.recommData.과목명 color= "green" size= "325" @click="showDetails"/>
-      <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "75" @click="showDetails"/>
-      <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100" @click="showDetails"/>
+      <RMenuTextBox class="recomm-list-classname" :text= this.recommData.과목명 color= "green" size= "325" @click="showDetails"/>
+      <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "75"/>
+      <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100"/>
       <SearchImageBox src="./addbutton.svg" color ="green" @click="addToLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"/>
       <SearchImageBox src="./checkbutton.svg" color ="green" @click="addToLecList" @mouseleave="clearShadowLec" v-show="!isInLecList"/>
       <SearchImageBox src= "./deletebutton.svg" color="green" @click="delFromRecommList"/>
@@ -58,8 +58,8 @@ export default {
 @import '../../../../variables'
 
 .recomm-list-record
-  background-color: $solitude
-  border-color: $white
+  background-color: $green
+  border-color: $light-green
   height: 40px
   min-width: 100%
 
@@ -69,4 +69,11 @@ export default {
   height: 40px
   min-width: 394px
   position: relative
+
+.recomm-list-classname:hover
+  transform: scale(1.1)
+  background-color: $green
+.recomm-list-classname:active
+  transform: scale(0.95)
+  border: none
 </style>

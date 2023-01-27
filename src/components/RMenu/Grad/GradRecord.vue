@@ -57,8 +57,6 @@ export default {
 .grad-record
   align-items: flex-start
   background-color: $tutu
-  border: 1px solid
-  border-color: $white
   display: flex
   position: relative
   width: 100%

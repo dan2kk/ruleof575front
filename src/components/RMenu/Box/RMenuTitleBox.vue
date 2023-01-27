@@ -70,5 +70,7 @@ export default {
   font-size: var(--fontsize)
   font-style: normal
   font-weight: 700
+  border-left: 1px white solid
+  border-right: 1px white solid
 
 </style>

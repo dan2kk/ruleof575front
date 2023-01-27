@@ -109,5 +109,8 @@ export default {
   left: 72%
   color: $geraldine
   font-weight: 1000
-
+.load-pref-lec:hover
+  transform: scale(1.1)
+.load-pref-lec:active
+  transform: scale(0.9)
 </style>

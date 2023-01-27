@@ -1,8 +1,8 @@
 <template>
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
-      <RMenuTextBox :text= this.lecData.과목명 color= "red" size= "325" @click="showDetails"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "75" @click="showDetails"/>
+      <RMenuTextBox class= "lec-list-classname" :text= this.lecData.과목명 color= "red" size= "325" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "75"/>
       <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100" fontsize="13"/>
       <SearchImageBox src= './addbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
       <SearchImageBox src= './subtractbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
@@ -120,7 +120,6 @@ export default {
 .lec-list-record
   align-items: flex-start
   background-color: $pippin
-  border-color: $white
   display: flex
   position: relative
   width: 100%
@@ -131,4 +130,11 @@ export default {
   height: 40px
   min-width: 394px
   position: relative
+
+.lec-list-classname:hover
+  transform: scale(1.1)
+  background-color: $geraldine
+.lec-list-classname:active
+  transform: scale(0.95)
+  border: none
 </style>

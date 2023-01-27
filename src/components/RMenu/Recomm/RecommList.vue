@@ -10,7 +10,18 @@
               <input checked="recomm-checked" type="checkbox" @click ="setIsChecked">
               <span class="recomm-checkmark"></span>
             </label>
-          </div> 
+          </div>
+      </RMenuTitleBox>
+      <RMenuTitleBox color="green" style="position: relative">
+          <div style="position: absolute text-align: center">
+            시간미지정강좌 숨기기
+          </div>
+          <div class = "recomm-checkbox-cart">    
+            <label class="recomm-container">
+              <input checked="recomm-checked" type="checkbox" @click ="setIsChecked">
+              <span class="recomm-checkmark"></span>
+            </label>
+          </div>
       </RMenuTitleBox>
     </div>
     <div v-for="recomms in recommList" :key="recomms">
@@ -18,13 +29,8 @@
           <div style="position: absolute text-align: center">
             {{recomms.영역코드명}}
           </div>
-          <div class = "recomm-checkbox-cart">    
-            <label class="recomm-container">
-              <input checked="checked" type="checkbox" @click ="setIsRecommShow(recomms.영역코드명)">
-              <span class="recomm-checkmark" v-show="recomms.isRecommShow"></span>
-              <span class="recomm-checkmark2" v-show="!recomms.isRecommShow"></span>
-            </label>
-          </div> 
+          <img class="show-button-recommend" src='showbutton.svg' @click ="setIsRecommShow(recomms.영역코드명)" v-show="recomms.isRecommShow">
+          <img class="hide-button-recommend" src='hidebutton.svg' @click ="setIsRecommShow(recomms.영역코드명)" v-show="!recomms.isRecommShow">
       </RMenuTitleBox>
       <RecommRecord :recommData = "lec" v-for="lec in recomms.수업목록" :key="lec" v-show="recomms.isRecommShow"/>
     </div>
@@ -108,7 +114,7 @@ export default {
 
 .upper-menu
   display: flex
-  flex-direction: row
+  flex-direction: column
 
 .recomm-checkbox-cart
   position: absolute
@@ -170,5 +176,31 @@ export default {
   &:after 
     content: "" 
     position: absolute 
-    display: none 
+    display: none
+
+.show-button-recommend
+  cursor: pointer
+  height: 30px
+  width: 30px
+  transition: all 0.2s ease
+  position: absolute
+  left: 92%
+.show-button-recommend:hover
+  transform: scale(1.1)
+.show-button-recommend:active
+  transform: rotate(90deg) scale(0.7)
+
+  
+.hide-button-recommend
+  cursor: pointer
+  height: 30px
+  width: 30px
+  transition: all 0.2s ease
+  position: absolute
+  left: 92%
+.hide-button-recommend:hover
+  transform: scale(1.1)
+.hide-button-recommend:active
+  transform: rotate(-90deg) scale(0.7)
+
 </style>
