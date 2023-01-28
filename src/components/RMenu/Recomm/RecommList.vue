@@ -7,7 +7,7 @@
           </div>
           <div class = "recomm-checkbox-cart">    
             <label class="recomm-container">
-              <input checked="recomm-checked" type="checkbox" @click ="setIsChecked">
+              <input checked="recomm-checked" type="checkbox" @click ="setIsOnlyInGradShow">
               <span class="recomm-checkmark"></span>
             </label>
           </div>
@@ -18,7 +18,7 @@
           </div>
           <div class = "recomm-checkbox-cart">    
             <label class="recomm-container">
-              <input checked="recomm-checked" type="checkbox" @click ="setIsChecked">
+              <input checked="recomm-checked" type="checkbox" @click ="setIsNonTimeHidden">
               <span class="recomm-checkmark"></span>
             </label>
           </div>
@@ -32,7 +32,7 @@
           <img class="show-button-recommend" src='showbutton.svg' @click ="setIsRecommShow(recomms.영역코드명)" v-show="recomms.isRecommShow">
           <img class="hide-button-recommend" src='hidebutton.svg' @click ="setIsRecommShow(recomms.영역코드명)" v-show="!recomms.isRecommShow">
       </RMenuTitleBox>
-      <RecommRecord :recommData = "lec" v-for="lec in recomms.수업목록" :key="lec" v-show="recomms.isRecommShow"/>
+      <RecommRecord :recommData = "lec" v-for="lec in recomms.수업목록" :key="lec" v-show="recomms.isRecommShow && checkLecTime(lec.수업시간)"/>
     </div>
   </div>
 
@@ -43,7 +43,6 @@ import RMenuTitleBox from "../Box/RMenuTitleBox";
 import RecommRecord from "./RecommRecord";
 import Checkbox from "../Box/Checkbox"
 import { transformGradName, fieldOrder } from "../../../util"
-import { file } from "@babel/types";
 
 export default {
   name: "RecommList",
@@ -54,10 +53,10 @@ export default {
   },
   computed:{
     recommList() {
-      if(this.$store.getters.getIsChecked){
+      let filtered = []
+      if(this.$store.getters.getIsOnlyInGradShow){
         let gradList = this.$store.getters.getGradList
         let recomms = this.$store.getters.getRecommList
-        let ret = []
         
         for(let gradRec of gradList) {
           if(gradRec.기준 > gradRec.이수){
@@ -65,31 +64,69 @@ export default {
 
             for(let rc of recomms){
               if(transformedName.includes(rc.영역코드명)) {
-                ret.push(rc)
+                filtered.push(rc)
                 break;
               }
             }
           }
         }
-        ret = ret.sort((a, b) => fieldOrder.indexOf(a.영역코드명) - fieldOrder.indexOf(b.영역코드명));
-        return ret;
       }
       else {
-        let ret = []
         for(let rc of this.$store.getters.getRecommList) {
-          ret.push(rc)
+          filtered.push(rc)
         }
+      } 
+      filtered = filtered.sort((a, b) => fieldOrder.indexOf(a.영역코드명) - fieldOrder.indexOf(b.영역코드명));
 
-        return ret
+      if(this.$store.getters.getIsNonTimeHidden) {
+        let filtered_twice = []
+        let ntRegex = /시간미지정강좌/
+
+        for(let rc of filtered) {
+          for(let lec of rc.수업목록) {
+            if(ntRegex.test(lec.수업시간)) {
+              continue
+            }
+            else {
+              filtered_twice.push(rc)
+              break
+            }
+          }
+        }
+        console.log(filtered_twice)
+        return filtered_twice
       }
+      else {
+        return filtered
+      }
+
+
     }
   },
   methods: {
-    setIsChecked() {
-      this.$store.commit("setIsChecked");
+    setIsOnlyInGradShow() {
+      this.$store.commit("setIsOnlyInGradShow");
+    },
+    setIsNonTimeHidden() {
+      this.$store.commit("setIsNonTimeHidden")
     },
     setIsRecommShow(fieldName) {
       this.$store.commit("setIsRecommShow", fieldName)
+    },
+    checkLecTime(lecTime) {
+      if(this.$store.getters.getIsNonTimeHidden) {
+        let ntRegex = /시간미지정강좌/
+        console.log(lecTime)
+        if(ntRegex.test(lecTime)) {
+          return false
+        }
+        else {
+          return true
+        }
+      }
+      else {
+        return true
+      }
     }
   }
 };

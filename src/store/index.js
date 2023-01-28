@@ -10,7 +10,8 @@ export default createStore({
     //userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     gradInfo : null,
     isChanged: false,
-    isChecked: false,
+    isOnlyInGradShow: true,
+    isNonTimeHidden : true,
     curScreen: 0,
     
     lecList:[],
@@ -76,8 +77,11 @@ export default createStore({
     getIsChanged(state){
       return state.isChanged
     },
-    getIsChecked(state) {
-      return state.isChecked
+    getIsOnlyInGradShow(state) {
+      return state.isOnlyInGradShow
+    },
+    getIsNonTimeHidden(state) {
+      return state.isNonTimeHidden
     },
     getLecList(state) {
       return state.lecList
@@ -312,15 +316,24 @@ export default createStore({
     },
 
 
-    setIsChecked(state)
-    {
-      if (state.isChecked) {
-        state.isChecked = false;
+    setIsOnlyInGradShow(state) {
+      if (state.isOnlyInGradShow) {
+        state.isOnlyInGradShow = false;
       }
       else {
-        state.isChecked = true;
+        state.isOnlyInGradShow = true;
       }
     },
+
+    setIsNonTimeHidden(state) {
+      if(state.isNonTimeHidden) {
+        state.isNonTimeHidden = false
+      }
+      else {
+        state.isNonTimeHidden = true
+      }
+    },
+
     addRecommList(state, lecs) {
       state.recommList.push(lecs)
     },

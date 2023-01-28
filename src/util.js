@@ -78,13 +78,10 @@ export const timeToNum = (startTime, endTime) => {
     let endNum
     let startHalf
     let endHalf
-    console.log(startTime, endTime)
     startNum = Number(startTime.slice(0, 2))
     endNum = Number(endTime.slice(0, 2))
-    console.log(startNum, endNum)
     startHalf = (startTime.slice(3, 5) != '00')
     endHalf = (endTime.slice(3, 5) != '00')
-    console.log(startHalf, endHalf)
 
     if(startHalf) {
         startNum += 0.5
@@ -108,7 +105,7 @@ export const processLec = (lec, day) => {
     for(let i = 0; i < lec.요일.length; i++) {
         curDay = lec.요일[i]
 
-        if(curDay == '시간미지정강좌' || curDay != day || lec.시작시간[i] == null) {
+        if(curDay == '시간미지정강좌' || curDay != day || lec.시작시간[i] == null || lec.시작시간[i] == undefined) {
             continue
         }
 

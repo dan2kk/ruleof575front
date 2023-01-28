@@ -38,8 +38,8 @@
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
-      <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900">
-        <RMenuTitleBox color="darkYellow" size="531">수업{{ index+1 }} 인원 정보
+      <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900" :key="prev">
+        <RMenuTitleBox color="darkYellow" size="531">{{ prev.수업년도 }}년 {{ prev.수업학기 / 10 }}학기 인원 정보 / {{ prev.대표교강사명 }}
           <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="!this.isRegisteredShow[index]">
           <img class="show-button" src='showbutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="this.isRegisteredShow[index]">
         </RMenuTitleBox>
