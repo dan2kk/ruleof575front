@@ -1,5 +1,5 @@
 <template>
-  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``, fontsize || ``, fontweight || ``]">
+  <div :style = "setStyle" :class="[`r-menu-text-box`, color, size || ``, fontsize || ``, fontweight || ``, height || ``]">
     <div class="r-menu-text-box-cart">
       <div class="r-menu-text-box-text" v-html="text"></div>
     </div>
@@ -9,16 +9,19 @@
 <script>
 export default {
   name: "RMenuTextBox",
-  props: ["text", "color", "size", "fontsize", "fontweight"],
+  props: ["text", "color", "size", "fontsize", "fontweight", "height"],
   computed:{
     setStyle(){
       let color
       let fontsize
       let fontweight
+      let height
       if (this.fontsize == undefined) fontsize = "16"
       else fontsize = this.fontsize      
       if (this.fontweight == undefined) fontweight = "400"
       else fontweight = this.fontweight
+      if (this.height == undefined) height = "40"
+      else height = this.height
       switch(this.color)
       {
         case "red":
@@ -94,7 +97,8 @@ export default {
           '--color' : color,
           '--itemPos' : itemPos,
           '--fontsize' : `${fontsize}px`,
-          '--fontweight' : `${fontweight}`
+          '--fontweight' : `${fontweight}`,
+          '--height' : `${height}px`
         }
       }
       else return{
@@ -102,7 +106,8 @@ export default {
         '--color' : color,
         '--itemPos' : itemPos,
         '--fontsize' : `${fontsize}px`,
-        '--fontweight' : `${fontweight}`
+        '--fontweight' : `${fontweight}`,
+        '--height' : `${height}px`
       }
     }
   }
@@ -118,7 +123,7 @@ export default {
   border-color: $white
   display: flex
   width: var(--width)
-  height: 40px
+  height: var(--height)
   overflow: hidden
 
 .r-menu-text-box-cart
