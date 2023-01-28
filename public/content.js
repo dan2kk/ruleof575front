@@ -54,6 +54,8 @@ if(loginInfo.length == 3){ //로그인 성공시 로그인 정보
     hackJum.최소학점 = document.querySelectorAll('#edMinHakjeom')[0].value;
     hackJum.최대학점 = document.querySelectorAll('#edMaxHakjeom')[0].value;
     hackJum.신청학점 = document.querySelectorAll('#edSincheongHakjeom')[0].value;
+    stuInfo.stuGrad = stuInfo.stuGrad.slice(1,2)
+    console.log(stuInfo)
     console.log(hackJum);
     (async () => {
         const response = await chrome.runtime.sendMessage({type: "content_script", stuData: stuInfo, hackjum: hackJum});
