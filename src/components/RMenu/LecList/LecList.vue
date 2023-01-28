@@ -9,7 +9,7 @@
     </div>
     <div class = "lec-list-lower-menu">
       <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"></LecListRecord>
-      <div class = "search-box">
+      <div class = "search-cart">
         <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
       </div> 
     </div>
@@ -23,7 +23,6 @@ import RMenuTextBox from "../Box/RMenuTextBox";
 import LecListRecord from "./LecListRecord";
 import LecListHead from "./LecListHead";
 import SearchImageBox from "../Box/SearchImageBox";
-import axios from "axios";
 
 export default {
   name: "LecList",
@@ -49,7 +48,7 @@ export default {
       this.$store.commit("setSearchModal")
     },
     loadPrefLec(){
-      this.$store.dispatch("crawlingWantedData")
+
     }
   },
 };
@@ -66,9 +65,6 @@ export default {
   height: 95%
   position: relative
   width: 100%
-  border-bottom-right-radius: 15px
-  border-bottom-left-radius: 15px
-  
 .lec-list-upper-menu
   width: 100%
 
@@ -84,8 +80,9 @@ export default {
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
 
-.search-box
-  width: 100%
+.search-cart
+  width: 90%
+  height: 50%
 
 .open-button
   width: 20%
@@ -109,8 +106,5 @@ export default {
   left: 72%
   color: $geraldine
   font-weight: 1000
-.load-pref-lec:hover
-  transform: scale(1.1)
-.load-pref-lec:active
-  transform: scale(0.9)
+
 </style>

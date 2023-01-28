@@ -4,7 +4,7 @@
       <RMenuTitleBox color="purple">
         졸업사정 변동사항
       </RMenuTitleBox>
-      <GradRecord :gradData = "this.gradListHead"/>
+      <GradListHead :gradHeadData = "this.gradListHead"/>
     </div>
     <div class = "grad-list-lower-menu">
       <input type="submit" class="load-grad-list" :value='this.buttonTxt' @click="loadGrad" v-if = "this.gradList.length == 0"/>
@@ -17,11 +17,13 @@
 <script>
 import RMenuTitleBox from "../Box/RMenuTitleBox";
 import GradRecord from "./GradRecord";
+import GradListHead from "./GradListHead";
 export default {
   name: "GradList",
   components: {
     RMenuTitleBox, 
-    GradRecord
+    GradRecord,
+    GradListHead,
   },
   data() {
     return {
@@ -94,4 +96,5 @@ export default {
   font-weight: 1000
   align-items: center
   font-size: 20px
+
 </style>

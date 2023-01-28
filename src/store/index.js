@@ -7,7 +7,8 @@ export default createStore({
   state: {
     isLogined: false,
     userInfo: {stuId: null, userName: null, major: null, grade: null},
-    //userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    //userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+
     gradInfo : null,
     isChanged: false,
     isOnlyInGradShow: true,

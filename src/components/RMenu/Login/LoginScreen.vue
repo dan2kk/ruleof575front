@@ -51,7 +51,7 @@ export default {
 .login-btn-cart
   align-items: flex-start
   align-self: stretch
-  background-color: $pigeon-post
+  background-color: #437eb4
   border: 4px solid
   border-color: $white
   border-radius: 100px

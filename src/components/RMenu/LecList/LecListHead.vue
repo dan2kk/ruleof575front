@@ -37,5 +37,7 @@
     height: 100%
     width: 100%
     position: relative
+    border-top: 2px white solid
+
   </style>
   

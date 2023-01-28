@@ -1,6 +1,6 @@
 <template>
-  <div :style= "setStyle" :class= "[`l-menu-text-box`, size || ``]">
-    <div class="l-menu-text-box-text valign-text-middle notosanskr-normal-black-14px">
+  <div :style= "setStyle" :class= "[`l-menu-text-box`, size || ``, color || ``]">
+    <div class="l-menu-text-box-text valign-text-middle">
       {{ text }}
     </div>
   </div>
@@ -9,14 +9,19 @@
 <script>
 export default {
   name: "UserInfoTextBox",
-  props: ["text", "size"],
+  props: ["text", "size", "color"],
   computed:{
     setStyle(){
       let size
-      if (this.size == undefined) size = "150"
-      else size = this.size
+      let color
+      if (this.size == undefined) size = "150px"
+        else size = this.size
+
+      if (this.color == undefined) color = "black"
+      else color = this.color
       return {
         '--size' : `${size}px`,
+        '--color' : `${color}`
       }
     }
   }
@@ -43,4 +48,9 @@ export default {
   letter-spacing: 0
   line-height: normal
   text-align: center
+  color: var(--color)
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 14px
+  font-style: normal
+  font-weight: 400
 </style>
