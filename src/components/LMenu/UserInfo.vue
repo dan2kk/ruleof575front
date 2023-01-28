@@ -1,7 +1,7 @@
 <template>
   <div class="user-info">
     <div class="column-userinfo">
-      <LMenuTextBox class="round-top" :text= 'this.getUserInfo.stuId'/>
+      <LMenuTextBox class="round-top" :text= 'this.getUserInfo.stuId' color="white"/>
       <LMenuTextBox :text= 'this.getUserInfo.userName'/>
     </div>
     <div class="column-userinfo">
@@ -13,19 +13,19 @@
       <LMenuTextBox :text= 'this.getUserInfo.grade'/> 
     </div>
     <div class="column2-userinfo">
-      <LMenuTextBox class="round-top" text= "최소 학점" size="75"/>
+      <LMenuTextBox class="round-top" text= "최소 학점" size="75" color="white"/>
       <LMenuTextBox :text= "this.getHackData.최소학점" size="75"/>
     </div>
     <div class="column2-userinfo">
-      <LMenuTextBox class="round-top" text= "최대 학점" size="75"/>
+      <LMenuTextBox class="round-top" text= "최대 학점" size="75" color="white"/>
       <LMenuTextBox :text= "this.getHackData.최대학점" size="75"/>
     </div>    
     <div class="column2-userinfo">
-      <LMenuTextBox class="round-top" text= "시간표 학점" size="75"/>
+      <LMenuTextBox class="round-top" text= "시간표 학점" size="75" color="white"/>
       <LMenuTextBox :text= "this.getHackData.시간표학점" size="75"/>
     </div>    
     <div class="column2-userinfo">
-      <LMenuTextBox class="round-top" text= "수강과목 수" size="75"/>
+      <LMenuTextBox class="round-top" text= "수강과목 수" size="75" color="white"/>
       <LMenuTextBox :text= "this.getHackData.수강과목수" size="75"/>
     </div>
   </div>
@@ -85,10 +85,10 @@ export default {
   width: 12.5%
   border-top-right-radius: 15px
   border-top-left-radius: 15px
+
 .round-top
   background-color: #437eb4
-  border-top-right-radius: 15px
-  border-top-left-radius: 15px
+
 .select-major
   width: 95%
   height: 80%
@@ -98,14 +98,14 @@ export default {
   background-color: #437eb4
   font-family: "Noto Sans KR", Helvetica
   font-size: 14px
-
+  border-color: #437eb4
+  color: white
 .select-major-box
   width: 100%
   height: 50%
   position: relative
   display: flex
   background-color: #437eb4
-  border-top-right-radius: 15px
-  border-top-left-radius: 15px
+  border-radius: 7px
 
 </style>
