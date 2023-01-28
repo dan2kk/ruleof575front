@@ -6,7 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    userInfo: {stuId: null, userName: null, major: null, grade: 1},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
     //userInfo: {stuId: "2018009234", userName: "한관희", major: "컴퓨터소프트웨어학부", grade: "3학년"},
     gradInfo : null,
     isChanged: false,
@@ -80,6 +80,9 @@ export default createStore({
     },
     getStuId(state) {
       return state.userInfo.stuId
+    },
+    getGrade(state) {
+      return state.userInfo.grade
     },
     getCurScreen(state) {
       return state.curScreen
