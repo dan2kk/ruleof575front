@@ -10,7 +10,11 @@
           <option v-for="item in this.getMajorData" :value="item">{{ item }}</option>
         </select>
       </div>
-      <LMenuTextBox :text= 'this.getUserInfo.grade'/> 
+      <div class="select-major-box">
+        <select class= "select-major" v-model="this.getUserInfo.grade">
+          <option v-for="item in this.gradeList" :value="item">{{ item }}</option>
+        </select>
+      </div>
     </div>
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "최소 학점" size="75" color="white"/>
@@ -33,7 +37,6 @@
 
 <script>
 import LMenuTextBox from "./Box/LMenuTextBox";
-import Suggest from 'v-suggest'
 export default {
   name: "UserInfo",
   components : {
@@ -52,13 +55,14 @@ export default {
   },
   data(){
     return{
-      majorType : "전공"
+      majorType : "전공",
+      gradeList: [1, 2, 3, 4]
     }
   },
   methods:{
     changeMajorType(){
       this.$store.commit('setUserMajor', this.majorType)
-    }
+    },
   }
 }
 </script>

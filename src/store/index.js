@@ -8,6 +8,7 @@ export default createStore({
     isLogined: false,
     userInfo: {stuId: null, userName: null, major: null, grade: null},
     //userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+
     gradInfo : null,
     isChanged: false,
     isOnlyInGradShow: true,
@@ -141,6 +142,10 @@ export default createStore({
     },
     setUserMajor(state, major) {
       state.userInfo.major = major
+      console.log(state.userInfo)
+    },
+    setUserGrade(state, grade) {
+      state.userInfo.grade = grade
       console.log(state.userInfo)
     },
 
