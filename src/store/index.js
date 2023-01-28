@@ -151,6 +151,9 @@ export default createStore({
       state.userInfo.grade = grade
       console.log(state.userInfo)
     },
+    seTimetableHackjum(state, hackjum) {
+      state.hackData.시간표학점 += hackjum
+    },
 
     loginMain(state){
       if(state.userInfo.stuId != null) {
