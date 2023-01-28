@@ -33,8 +33,7 @@
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.학점></RMenuTextBox>
       </div>
-      <canvas ref="pieChart">
-      </canvas>
+      <div><canvas ref="pieChart"/></div>
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
