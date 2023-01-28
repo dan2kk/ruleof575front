@@ -82,6 +82,9 @@ export default createStore({
     getStuId(state) {
       return state.userInfo.stuId
     },
+    getGrade(state) {
+      return state.userInfo.grade
+    },
     getCurScreen(state) {
       return state.curScreen
     },

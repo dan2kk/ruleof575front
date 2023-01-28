@@ -7,7 +7,7 @@
     <div class="column-userinfo">
       <div class="select-major-box">
         <select class= "select-major" v-model="majorType" @change="changeMajorType">
-          <option v-for="item in this.getMajorData" :value="item">{{ item }}</option>
+          <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
         </select>
       </div>
       <div class="select-grade-box">
@@ -52,6 +52,14 @@ export default {
     },
     getMajorData(){
       return this.$store.getters.getMajorData
+    },
+    grade() {
+      if(this.$store.getters.getIsLogined == false) {
+        return 1
+      }
+      else {
+        return this.$store.getters.getGrade
+      }
     }
   },
   data(){
