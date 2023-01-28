@@ -96,8 +96,8 @@
             <RMenuTextBox color="yellow" size="95" :text=prev.순위5초과></RMenuTextBox>
           </div>
         </div>
-        <div class = "padding"></div>
       </div>
+      <div class = "padding"></div>
     </div>
   </div>
 </template>
@@ -147,7 +147,7 @@ export default {
       }]
     }
       //PF과목
-      if (this.modalData.lec_info.Pass != 0)
+      if (this.modalData.lec_info['A+'] + this.modalData.lec_info['A0'] + this.modalData.lec_info['B+'] + this.modalData.lec_info['B0'] + this.modalData.lec_info['C+'] + this.modalData.lec_info['C0'] + this.modalData.lec_info['D+'] + this.modalData.lec_info['D0'] == 0)
       {
         data.labels = ['P', 'F']
         data.datasets[0].data.push(this.modalData.lec_info.Pass)
