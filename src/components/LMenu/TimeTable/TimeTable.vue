@@ -30,7 +30,7 @@ export default {
 
       for(let lec of lecList) {
         if(lec.isInTable == 1) {
-          if(lec.요일.includes('시간미지정강좌')) {
+          if(lec.요일.includes('시간미지정강좌') || lec.요일.includes('집중수업')) {
             ret.push(lec);
           }
 

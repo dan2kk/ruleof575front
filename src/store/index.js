@@ -410,7 +410,7 @@ export default createStore({
 
     setUpTimeLines(state, day) {
 
-      if(day == '시간미지정강좌') {
+      if(day == '시간미지정강좌' || day == '집중수업') {
         return
       }
 
@@ -509,7 +509,7 @@ export default createStore({
       for(let j=0 ; j< lecData.요일.length; j++){    
         curDay =lecData.요일[j]
         
-        if(curDay == '시간미지정강좌') {
+        if(curDay == '시간미지정강좌' || curDay == '집중수업') {
           continue;
         }
 

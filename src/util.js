@@ -152,7 +152,7 @@ export const processLec = (lec, day) => {
     for(let i = 0; i < lec.요일.length; i++) {
         curDay = lec.요일[i]
 
-        if(curDay == '시간미지정강좌' || curDay != day || lec.시작시간[i] == null || lec.시작시간[i] == undefined) {
+        if(curDay == '시간미지정강좌' || curDay == '집중수업'|| curDay != day || lec.시작시간[i] == null || lec.시작시간[i] == undefined) {
             continue
         }
 
@@ -213,5 +213,6 @@ export const dayOrder = [
     "수",
     "목",
     "금",
-    "시간미지정강좌"
+    "시간미지정강좌",
+    "집중수업"
 ]
