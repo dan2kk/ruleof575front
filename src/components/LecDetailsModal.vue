@@ -33,7 +33,12 @@
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.학점></RMenuTextBox>
       </div>
+<<<<<<< HEAD
       <div><canvas ref="pieChart"/></div>
+=======
+      <canvas id = "myChart" ref="pieChart">
+      </canvas>
+>>>>>>> 7aeaaf6bdc9a1686db3940e11244aa26dda9d0cc
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
@@ -95,8 +100,8 @@
             <RMenuTextBox color="yellow" size="95" :text=prev.순위5초과></RMenuTextBox>
           </div>
         </div>
+        <div class = "padding"></div>
       </div>
-      <div class = "padding"></div>
     </div>
   </div>
 </template>
@@ -107,7 +112,6 @@ import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox";
 import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import {Chart, registerables} from 'chart.js'
-import { assertDeclareModule } from "@babel/types";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(...registerables)
 
@@ -213,19 +217,18 @@ export default {
       return options
     },
     setChart(){
-      new Chart(this.$refs.pieChart, {
+      var ctx = document.getElementById('myChart').getContext('2d')
+      var myChart = new Chart(ctx, {
         plugins:[ChartDataLabels],
         type:'pie',
         data:this.setData(),
         options:this.setOptions(),
       })
-
     }
   }
 
 };
 
-const ctx = document.getElementById('myChart');
 
 
 </script>
