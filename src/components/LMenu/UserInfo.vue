@@ -5,11 +5,11 @@
       <LMenuTextBox :text= 'this.getUserInfo.userName'/>
     </div>
     <div class="column-userinfo">
-      <LMenuTextBox class="round-top">
-        <select v-model="majorType" @change="changeMajorType">
+      <div class="select-major-box">
+        <select class= "select-major" v-model="majorType" @change="changeMajorType">
           <option v-for="item in this.getMajorData" :value="item">{{ item }}</option>
         </select>
-      </LMenuTextBox>
+      </div>
       <LMenuTextBox :text= 'this.getUserInfo.grade'/> 
     </div>
     <div class="column2-userinfo">
@@ -89,7 +89,23 @@ export default {
   background-color: #437eb4
   border-top-right-radius: 15px
   border-top-left-radius: 15px
-.select
-  z-index: 10
+.select-major
+  width: 95%
+  height: 80%
+  position: relative
+  top: 10%
+  left: 3%
+  background-color: #437eb4
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 14px
+
+.select-major-box
+  width: 100%
+  height: 50%
+  position: relative
+  display: flex
+  background-color: #437eb4
+  border-top-right-radius: 15px
+  border-top-left-radius: 15px
 
 </style>
