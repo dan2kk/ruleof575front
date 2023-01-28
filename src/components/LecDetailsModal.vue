@@ -67,8 +67,8 @@
         </div>
         <div class="detail-info-row" v-show="isWantedShow[index]">
           <div v-for="detailInfo in prev.희망수업세부정보" :key="detailInfo">
-            <RMenuTitleBox color="yellow" size="106.1" fontsize = "16" style="overflow: hidden" @click="isWantedShow[index] = !isWantedShow[index]">{{detailInfo.희망신청소속}}</RMenuTitleBox>
-            <RMenuTextBox color="yellow" size="106.1" fontsize = "16" @click="isWantedShow[index] = !isWantedShow[index]" :text=detailInfo.학생수></RMenuTextBox>
+            <RMenuTitleBox color="yellow" size="106" fontsize = "16" style="overflow: hidden" @click="isWantedShow[index] = !isWantedShow[index]">{{detailInfo.희망신청소속}}</RMenuTitleBox>
+            <RMenuTextBox color="yellow" size="106" fontsize = "16" @click="isWantedShow[index] = !isWantedShow[index]" :text=detailInfo.학생수></RMenuTextBox>
           </div>
         </div>
         <div class= "row">
@@ -94,7 +94,7 @@
             <RMenuTextBox color="yellow" size="95" :text=prev.순위5초과></RMenuTextBox>
           </div>
         </div>
-        <div class = "padding"/>
+        <div class = "padding"></div>
       </div>
     </div>
   </div>

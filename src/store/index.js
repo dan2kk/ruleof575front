@@ -611,6 +611,9 @@ export default createStore({
     },
     async fetchLecDetails(context, lecNum) {
       let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
+      details.prev_infos.forEach( prev_info => {
+        prev_info.희망수업세부정보.sort((a,b) => { return b.학생수 - a.학생수} )
+      })
       context.commit("setLecDetails", details)
     },
     async fetchRecommList(context) {
