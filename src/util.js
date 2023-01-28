@@ -73,6 +73,53 @@ export const fillTL = (lecs) => {
     return ret
 }
 
+export const parseLectime = (lecTime) => {
+    let ret = {
+        수업시간: "",
+        요일 : [],
+        시작시간: [], 
+        끝시간: []
+    }
+
+    let parsedLT = lecTime.split(/[')', '좌', '업']/)
+    let cnt = 0;
+
+    for(let lt of parsedLT) {
+        if(lt == '시간미지정강') {
+            lt += '좌'
+            ret.수업시간 += lt
+            ret.요일.push(lt)
+            ret.시작시간.push(null)
+            ret.끝시간.push(null)
+        }
+        else if(lt == '집중수') {
+            lt += '업'
+            ret.수업시간 += lt
+            ret.요일.push(lt)
+            ret.시작시간.push(null)
+            ret.끝시간.push(null)
+        }
+        else if (lt != ''){
+            lt += ')'
+            ret.수업시간 += lt
+
+            let parsedInterval = lt.split('(');
+
+            ret.요일.push(parsedInterval[0])
+            ret.시작시간.push(parsedInterval[1].substr(0,5))
+            ret.끝시간.push(parsedInterval[1].substr(6,5))
+        }
+
+        if(cnt <= parsedLT.length-3) {
+            ret.수업시간 += '<br />'
+        }
+        cnt++
+    }
+
+    return ret
+}
+
+
 export const timeToNum = (startTime, endTime) => {
     let startNum
     let endNum

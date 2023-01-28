@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { fillTL, processLec, fieldOrder } from '@/util'
+import { fillTL, parseLectime, processLec, fieldOrder } from '@/util'
 import { getGradNames, dayOrder } from '@/util'
 import axios from "axios"
 
@@ -170,11 +170,19 @@ export default createStore({
     },
 
 
-    initLecList(state, lecList) {
+    setUpLecList(state, lecList) {
       try{
         console.log(state.userInfo);
 
+        let parsedLT
+
         for(let lec of lecList) {
+          parsedLT = parseLectime(lec.수업시간);
+          lec.수업시간 = parsedLT.수업시간
+          lec.요일 = parsedLT.요일
+          lec.시작시간 = parsedLT.시작시간
+          lec.끝시간 = parsedLT.끝시간
+
           if(lec.isInTable == 1) {
             state.hackData.시간표학점 += lec.학점
             state.hackData.수강과목수 += 1
@@ -567,25 +575,7 @@ export default createStore({
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
           let wantedData = response.data
-          for(let x of wantedData){
-            let days = x.수업시간.split(')')
-            if(days[days.length -1] == '') days.pop()
-            console.log(days)
-            for(let day of days){
-              if(day.includes('시간미지정강좌')){
-                x['요일'] = ['시간미지정강좌']
-              }
-              else{
-                x.요일.push(day[0])
-                x.시작시간.push(day.slice(2, 7))
-                x.끝시간.push(day.slice(8))
-                console.log(x.요일)
-                console.log(x.시작시간)
-                console.log(x.끝시간)
-              }
-            }
-          }
-          context.commit("initLecList", wantedData)
+          context.commit("setUpLecList", wantedData)
       });})
     },
 
@@ -620,7 +610,7 @@ export default createStore({
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
       let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data.list
-      context.commit("initLecList", lecList)
+      context.commit("setUpLecList", lecList)
     },
     async fetchGradList(context) {
       let stuId = context.getters.getStuId
@@ -649,9 +639,20 @@ export default createStore({
       let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
       for(let recomms of recommList) {
         recomms['isRecommShow'] = true
+
+        let parsedLT
+        recomms.수업목록.forEach(lec => {
+          parsedLT = parseLectime(lec.수업시간);
+          lec.수업시간 = parsedLT.수업시간
+          lec.요일 = parsedLT.요일
+          lec.시작시간 = parsedLT.시작시간
+          lec.끝시간 = parsedLT.끝시간
+        })
+
         recomms.수업목록 = recomms.수업목록.sort((a, b) => {
             return dayOrder.indexOf(a.요일[0]) - dayOrder.indexOf(b.요일[0]) 
         });
+
         context.commit("addRecommList", recomms)
       }
       context.commit("sortRecommList")

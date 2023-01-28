@@ -19,6 +19,7 @@
 <script>
 import SearchModalRecord from "./SearchModalRecord";
 import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox"
+import { parseLectime } from "../util";
 import axios from "axios"
 
 export default {
@@ -38,6 +39,13 @@ export default {
       this.input = document.getElementById("searchbox").value
       try{
         this.lecList = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data.list
+        for(let lec of this.lecList) {
+          let parsedLT = parseLectime(lec.수업시간);
+          lec.수업시간 = parsedLT.수업시간
+          lec.요일 = parsedLT.요일
+          lec.시작시간 = parsedLT.시작시간
+          lec.끝시간 = parsedLT.끝시간
+        }
       }
       catch(error){
         console.log(error)
