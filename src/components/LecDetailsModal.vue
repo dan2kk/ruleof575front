@@ -33,7 +33,7 @@
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.이수구분코드명></RMenuTextBox>
         <RMenuTextBox color="yellow" size="90" :text=this.modalData.lec_info.학점></RMenuTextBox>
       </div>
-      <canvas ref="pieChart">
+      <canvas id = "myChart" ref="pieChart">
       </canvas>
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
@@ -108,7 +108,6 @@ import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox";
 import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import {Chart, registerables} from 'chart.js'
-import { assertDeclareModule } from "@babel/types";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(...registerables)
 
@@ -147,7 +146,7 @@ export default {
       }]
     }
       //PF과목
-      if (this.modalData.lec_info.Pass != 0)
+      if (this.modalData.lec_info['A+'] + this.modalData.lec_info['A0'] + this.modalData.lec_info['B+'] + this.modalData.lec_info['B0'] + this.modalData.lec_info['C+'] + this.modalData.lec_info['C0'] + this.modalData.lec_info['D+'] + this.modalData.lec_info['D0'] == 0)
       {
         data.labels = ['P', 'F']
         data.datasets[0].data.push(this.modalData.lec_info.Pass)
@@ -214,19 +213,18 @@ export default {
       return options
     },
     setChart(){
-      new Chart(this.$refs.pieChart, {
+      var ctx = document.getElementById('myChart').getContext('2d')
+      var myChart = new Chart(ctx, {
         plugins:[ChartDataLabels],
         type:'pie',
         data:this.setData(),
         options:this.setOptions(),
       })
-
     }
   }
 
 };
 
-const ctx = document.getElementById('myChart');
 
 
 </script>
