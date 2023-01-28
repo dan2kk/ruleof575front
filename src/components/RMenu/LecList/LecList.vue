@@ -48,7 +48,7 @@ export default {
       this.$store.commit("setSearchModal")
     },
     loadPrefLec(){
-      this.$store.dispatch("loadPrefLec")
+      this.$store.dispatch("crawlingWantedData")
     }
   },
 };
