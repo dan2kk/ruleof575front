@@ -54,7 +54,7 @@ export default {
       for(let i = 0; i < this.lecData.요일.length; i++) {
         curDay = this.lecData.요일[i]
 
-        if(curDay == '시간미지정강좌') {
+        if(curDay == '시간미지정강좌' || curDay == '집중수업') {
           continue
         }
 
