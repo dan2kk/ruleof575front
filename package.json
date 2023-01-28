@@ -14,6 +14,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.8.3",
     "sass-loader": "^13.2.0",
+    "v-suggest": "^2.2.0",
     "vue": "^3.2.13",
     "vue-chartjs": "^5.2.0",
     "vue-router": "^4.0.3",

@@ -57,7 +57,17 @@ export default createStore({
       `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#20566e`, `#183641`, `#cde4d2`, 
       `#d2e1a8`, `#d8de7e`, `#deda52`, `#aacd67`, `#b9c8e7`, `#8fbae5`, `#6e91e3`, 
       `#7978c6`, `#8b55a9`, `#f1a8bc`, `#eee58a`, `#c4ecb0`
-    ]
+    ],
+    majorData: ["간호학과", "간호학과(야)","건설환경공학과","건축공학부","건축학부","경영학부","경제금융학부",
+    "관광학부","관현악과","교육공학과","교육학과","국악과","국어교육과","국어국문학과","국제학부","기계공학부",
+    "데이터사이언스전공","데이터사이언스학과","데이터사이언스학부","도시공학과","독어독문학과","무용학과",
+    "물리학과","미디어커뮤니케이션학과","미래자동차공학과","바이오메디컬공학전공","사학과","사회학과","산업공학과",
+    "산업융합학부","생명공학과","생명과학과","생체공학전공","성악과","수학과","수학교육과","스포츠매니지먼트전공",
+    "스포츠사이언스전공","스포츠산업학과","식품영양학과","신소재공학부","실내건축디자인학과","심리뇌과학과","심리뇌과학전공",
+    "에너지공학과","연극영화학과","영어교육과","영어영문학과","원자력공학과","유기나노공학과","융합전자공학부","응용미술교육과",
+    "응용시스템전공","의류학과","의예과","의학과","자원환경공학과","작곡과","전기공학전공","정보시스템학과","정보융합전공",
+    "정책학과","정치외교학과","중어중문학과","철학과","체육학과","컴퓨터소프트웨어학부","파이낸스경영학과",
+    "피아노과","행정학과","화학공학과","화학과"]
   },
   
   getters: {
@@ -114,13 +124,20 @@ export default createStore({
     },
     getHackData(state){
       return state.hackData
-    }
+    },
+    getMajorData(state){
+      return state.majorData
+    },
   },
   mutations: {
     setUserInfo(state, data) { 
       state.userInfo.stuId = data.stuNum.trim()
       state.userInfo.userName = data.stuName.trim()
       state.userInfo.grade = data.stuGrad.trim()
+    },
+    setUserMajor(state, major) {
+      state.userInfo.major = major
+      console.log(state.userInfo)
     },
 
     loginMain(state){

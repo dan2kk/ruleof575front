@@ -5,8 +5,12 @@
       <LMenuTextBox :text= 'this.getUserInfo.userName'/>
     </div>
     <div class="column-userinfo">
-      <LMenuTextBox class="round-top" :text= 'this.getUserInfo.major'/>
-      <LMenuTextBox :text= 'this.getUserInfo.grade'/>
+      <LMenuTextBox class="round-top">
+        <select v-model="majorType" @change="changeMajorType">
+          <option v-for="item in this.getMajorData" :value="item">{{ item }}</option>
+        </select>
+      </LMenuTextBox>
+      <LMenuTextBox :text= 'this.getUserInfo.grade'/> 
     </div>
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "최소 학점" size="75"/>
@@ -22,13 +26,14 @@
     </div>    
     <div class="column2-userinfo">
       <LMenuTextBox class="round-top" text= "수강과목 수" size="75"/>
-      <LMenuTextBox text= "5" size="75"/>
+      <LMenuTextBox :text= "this.getHackData.수강과목수" size="75"/>
     </div>
   </div>
 </template>
 
 <script>
 import LMenuTextBox from "./Box/LMenuTextBox";
+import Suggest from 'v-suggest'
 export default {
   name: "UserInfo",
   components : {
@@ -40,9 +45,22 @@ export default {
     },
     getHackData(){
       return this.$store.getters.getHackData
+    },
+    getMajorData(){
+      return this.$store.getters.getMajorData
+    }
+  },
+  data(){
+    return{
+      majorType : "전공"
+    }
+  },
+  methods:{
+    changeMajorType(){
+      this.$store.commit('setUserMajor', this.majorType)
     }
   }
-};
+}
 </script>
 
 <style lang="sass">
@@ -71,5 +89,7 @@ export default {
   background-color: #437eb4
   border-top-right-radius: 15px
   border-top-left-radius: 15px
+.select
+  z-index: 10
 
 </style>
