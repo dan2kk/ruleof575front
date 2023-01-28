@@ -39,10 +39,12 @@
         작년에 개설되지 않은 강의입니다.
       </div>
       <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900" :key="prev">
-        <RMenuTitleBox color="darkYellow" size="531">{{ prev.수업년도 }}년 {{ prev.수업학기 / 10 }}학기 인원 정보 / {{ prev.대표교강사명 }}
-          <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="!this.isRegisteredShow[index]">
-          <img class="show-button" src='showbutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="this.isRegisteredShow[index]">
-        </RMenuTitleBox>
+        <div class = "row">
+          <RMenuTitleBox color="darkYellow" size="540">{{ prev.수업년도 }}년 {{ prev.수업학기 / 10 }}학기 인원 정보 {{ prev.대표교강사명 }}
+            <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="!this.isRegisteredShow[index]">
+            <img class="show-button" src='showbutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="this.isRegisteredShow[index]">
+          </RMenuTitleBox>
+        </div>
         <div v-show="isRegisteredShow[index]">
           <div class= "row">
             <RMenuTitleBox color="yellow" size="114">정원</RMenuTitleBox>
@@ -59,7 +61,7 @@
             <RMenuTextBox color="yellow" size="114" :text=prev.정정취소></RMenuTextBox>
           </div>
         </div>
-          <div class="row"> 
+        <div class="row"> 
           <RMenuTitleBox color="darkYellow" size="540">과별 희망등록인원 (총원: {{ prev.희망수업등록인원 }}명)
             <img class="hide-button" src='hidebutton.svg' @click="isWantedShow[index] = !isWantedShow[index]" v-show="!this.isWantedShow[index]">
             <img class="show-button" src='showbutton.svg' @click="isWantedShow[index] = !isWantedShow[index]" v-show="this.isWantedShow[index]">
@@ -72,7 +74,7 @@
           </div>
         </div>
         <div class= "row">
-          <RMenuTitleBox color="darkYellow" size="540">이 수업을 ~순위로 픽한 인원</RMenuTitleBox>
+          <RMenuTitleBox color="darkYellow" size="540">이 수업을 ~순위로 선택했던 인원</RMenuTitleBox>
           <img class="hide-button" src='hidebutton.svg' @click="isRankingShow[index] = !isRankingShow[index]" v-show="!this.isRankingShow[index]">
           <img class="show-button" src='showbutton.svg' @click="isRankingShow[index] = !isRankingShow[index]" v-show="this.isRankingShow[index]">
         </div>

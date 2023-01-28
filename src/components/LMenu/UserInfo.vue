@@ -10,10 +10,11 @@
           <option v-for="item in this.getMajorData" :value="item">{{ item }}</option>
         </select>
       </div>
-      <div class="select-major-box">
-        <select class= "select-major" v-model="this.getUserInfo.grade">
-          <option v-for="item in this.gradeList" :value="item">{{ item }}</option>
+      <div class="select-grade-box">
+        <select class= "select-grade" v-model="this.getUserInfo.grade">
+          <option v-for="item in this.gradeList" :value="item">{{ item + "학년"}}</option>
         </select>
+
       </div>
     </div>
     <div class="column2-userinfo">
@@ -104,12 +105,32 @@ export default {
   font-size: 14px
   border-color: #437eb4
   color: white
+
 .select-major-box
   width: 100%
   height: 50%
   position: relative
   display: flex
   background-color: #437eb4
+  border-radius: 7px
+
+.select-grade
+  width: 95%
+  height: 80%
+  position: relative
+  top: 10%
+  left: 3%
+  background-color: $bon-jour
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 14px
+  border-color: $bon-jour
+  color: black
+
+.select-grade-box
+  width: 100%
+  height: 50%
+  position: relative
+  background-color: $bon-jour
   border-radius: 7px
 
 </style>

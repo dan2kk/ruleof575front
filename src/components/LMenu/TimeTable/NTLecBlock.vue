@@ -1,6 +1,6 @@
 <template>
   <div class: non-time-lec-block>
-    <RMenuTextBox :text = this.lecData.과목명 color="yellow" size= "600" @click="showDetails"/>
+    <RMenuTextBox :text = this.lecData.과목명 :color='this.lecData.color' size= "600" @click="showDetails"/>
   </div>
 </template>
 
