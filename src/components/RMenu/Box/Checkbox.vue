@@ -1,7 +1,7 @@
 <template>
   <div class = "checkbox-cart">
     <label class="container">
-      <input checked="checked" type="checkbox" @click = "setIsChecked">
+      <input checked="checked" type="checkbox" @click = "setIsOnlyInGradShow">
       <span class="checkmark"></span>
     </label>
   </div>
@@ -12,8 +12,8 @@ export default {
   name: "Checkbox",
   props: [],
   methods : {
-    setIsChecked(){
-      this.$store.commit("setIsChecked");
+    setIsOnlyInGradShow(){
+      this.$store.commit("setIsOnlyInGradShow");
     }
   }
 };

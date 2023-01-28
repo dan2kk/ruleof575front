@@ -38,8 +38,8 @@
       <div v-if="this.modalData.prev_infos.length==0">
         작년에 개설되지 않은 강의입니다.
       </div>
-      <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900">
-        <RMenuTitleBox color="darkYellow" size="531">수업{{ index+1 }} 인원 정보
+      <div v-for="(prev, index) in this.modalData.prev_infos" style="border: solid 2px #eea900" :key="prev">
+        <RMenuTitleBox color="darkYellow" size="531">{{ prev.수업년도 }}년 {{ prev.수업학기 / 10 }}학기 인원 정보 / {{ prev.대표교강사명 }}
           <img class="hide-button" src='hidebutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="!this.isRegisteredShow[index]">
           <img class="show-button" src='showbutton.svg' @click="isRegisteredShow[index] = !isRegisteredShow[index]" v-show="this.isRegisteredShow[index]">
         </RMenuTitleBox>
@@ -67,8 +67,8 @@
         </div>
         <div class="detail-info-row" v-show="isWantedShow[index]">
           <div v-for="detailInfo in prev.희망수업세부정보" :key="detailInfo">
-            <RMenuTitleBox color="yellow" size="106.1" fontsize = "16" style="overflow: hidden" @click="isWantedShow[index] = !isWantedShow[index]">{{detailInfo.희망신청소속}}</RMenuTitleBox>
-            <RMenuTextBox color="yellow" size="106.1" fontsize = "16" @click="isWantedShow[index] = !isWantedShow[index]" :text=detailInfo.학생수></RMenuTextBox>
+            <RMenuTitleBox color="yellow" size="106" fontsize = "16" style="overflow: hidden" @click="isWantedShow[index] = !isWantedShow[index]">{{detailInfo.희망신청소속}}</RMenuTitleBox>
+            <RMenuTextBox color="yellow" size="106" fontsize = "16" @click="isWantedShow[index] = !isWantedShow[index]" :text=detailInfo.학생수></RMenuTextBox>
           </div>
         </div>
         <div class= "row">
@@ -94,7 +94,7 @@
             <RMenuTextBox color="yellow" size="95" :text=prev.순위5초과></RMenuTextBox>
           </div>
         </div>
-        <div class = "padding"/>
+        <div class = "padding"></div>
       </div>
     </div>
   </div>
