@@ -17,8 +17,8 @@ export default createStore({
     lecList:[],
     wantedList:[],
     recommList: [],
-    customGEList: [],
-    customMajorList: [],
+    customGE: {},
+    customMajor: {},
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
@@ -146,11 +146,11 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
-    getCustomGEList(state) {
-      return state.customGEList
+    getCustomGE(state) {
+      return state.customGE
     },
-    getCustomMajorList(state) {
-      return state.customMajorList
+    getCustomMajor(state) {
+      return state.customMajor
     }
 
   },
@@ -599,11 +599,11 @@ export default createStore({
       }
     },
 
-    setUpCustomGEList(state, customList) {
-      state.customGEList = customList
+    setUpCustomGE(state, custom) {
+      state.customGE = customList
     },
-    setUpCustomMajorList(state, customList) {
-      state.customMajorList = customList
+    setUpCustomMajor(state, custom) {
+      state.customMajor = customList
     }
 
   },
