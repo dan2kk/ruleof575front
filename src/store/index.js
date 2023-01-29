@@ -15,7 +15,7 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
-    wantedList:[10001, 10002, 10003],
+    wantedList:[],
     recommList: [],
     customGE: {},
     customMajor: {},
@@ -604,6 +604,9 @@ export default createStore({
     },
     setUpCustomMajor(state, custom) {
       state.customMajor = custom
+    },
+    setUpCourseModal(state, courseData){
+      state.wantedList = courseData
     }
 
   },

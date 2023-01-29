@@ -12,7 +12,7 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "100" color = "blue" style= "border: none">          
-          <select class= "select-grade-custom" v-model="this.getUserInfo.grade">
+          <select class= "select-grade-custom" v-model="this.getUserInfo.grade" @change="changeMajorType">
             <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
           </select>
         </RMenuTitleBox>
@@ -27,7 +27,7 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
-        <CustomCart class = "custom-cart-major" :customList = "this.getCustomGE"/>
+        <CustomCart class = "custom-cart-major" :customList = "this.getCustomGE" />
       </div>
     </div>
     <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
@@ -48,7 +48,7 @@ export default {
   data(){
     return{
       majorType : "전공",
-      gyoyangType : "일반영역",
+      gyoyangType : "가상대학영역",
       gradeList: [1, 2, 3, 4],
       fieldOrder : [
       "가상대학영역",
@@ -114,10 +114,13 @@ export default {
       this.$store.getters.getCustomModal.state = false
     },
     changeMajorType(){
-      this.$store.commit('fetchCustomMajorList')
+      this.$store.dispatch('fetchCustomMajorList')
     },
     changeGyoyangType(){
-      this.$store.commit('fetchCustomGEList', this.gyoyangType)
+      this.$store.dispatch('fetchCustomGEList', this.gyoyangType)
+    },
+    changeGradeType(){
+      
     }
     
   }

@@ -4,7 +4,7 @@
             <div class = "row-custom" >
                 <RMenuTitleBox color="blue" size="150" >알파메일 과목</RMenuTitleBox>
                 <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" :text= "this.customList.hot" size = "300" height = "50"/>
+                <RMenuTextBox color="blue" :text= "this.customList.hot" size = "300" height = "50" @click="this.setUpCourse(this.customList.hot[0].개설예정수업목록)"/>
                 <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
             </div>
             <div class = "row-custom" >
@@ -64,6 +64,9 @@ export default {
     methods:{
         setIsContextShown(){
             this.isContextShown = !this.isContextShown
+        },
+        setUpCourse(list){
+            this.$store.commit("setUpCourseModal", list)
         }
     }
 };
