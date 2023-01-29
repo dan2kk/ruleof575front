@@ -6,8 +6,8 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    userInfo: {stuId: null, userName: null, major: null, grade: null},
-    // userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    //userInfo: {stuId: null, userName: null, major: null, grade: null},
+    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
 
     gradInfo : null,
     isChanged: false,
@@ -139,9 +139,9 @@ export default createStore({
   },
   mutations: {
     setUserInfo(state, data) { 
-      state.userInfo.stuId = data.stuNum.trim()
-      state.userInfo.userName = data.stuName.trim()
-      state.userInfo.grade = data.stuGrad.trim()
+      // state.userInfo.stuId = data.stuNum.trim()
+      // state.userInfo.userName = data.stuName.trim()
+      // state.userInfo.grade = data.stuGrad.trim()
     },
     setUserMajor(state, major) {
       state.userInfo.major = major
