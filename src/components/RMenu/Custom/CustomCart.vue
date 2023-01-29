@@ -1,47 +1,37 @@
 <template>
     <div class = "custom-cart">
         <div class = "context" v-show="!isContextShown">
-            <div class = "row-custom" >
-                <RMenuTitleBox color="blue" size="150" >알파메일 과목</RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" :text= "this.customList.hot" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
+            <div v-for = "(custom, idx) in this.customList.hot" :key = custom>
+                <div class = "row-custom" >
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >알파메일 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
+                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                </div>
             </div>
-            <div class = "row-custom" >
-                <RMenuTitleBox color="blue" size="150" ></RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
+            <div v-for = "(custom, idx) in this.customList.hot" :key = custom>
+                <div class = "row-custom" >
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >슈퍼겁쟁이 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
+                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                </div>
             </div>
-            <div class = "row-custom" >
-                <RMenuTitleBox color="blue" size="150" ></RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
-            </div>
-            <div class = "row-custom" >
-                <RMenuTitleBox color="blue" size="150" ></RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
-            </div>
-            <div class = "row-custom" >
-                <RMenuTitleBox color="blue" size="150" ></RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
+            <div v-for = "(custom, idx) in this.customList.score" :key = custom>
+                <div class = "row-custom" >
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >학점느님 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
+                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="blue" :text= custom.설강기준평점 size = "75" height = "50"/>
+                </div>
             </div>
 
-            <div class = "row-custom">
-                <RMenuTitleBox color="blue" size="150">학점느님 과목</RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "평균 학점: 3.75" size = "150" height = "50"/>
-            </div>
-            <div class = "row-custom">
-                <RMenuTitleBox color="blue" size="150">슈퍼겁쟁이 과목</RMenuTitleBox>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
-                <RMenuTextBox color="blue" text= "인기도: 1.74/5" size = "150" height = "50"/>
-            </div>
         </div>
     </div>
 </template>

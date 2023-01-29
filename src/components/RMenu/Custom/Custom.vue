@@ -2,7 +2,7 @@
   <div class="custom">
     <div class = "custom-upper-menu">
       <RMenuTitleBox color="blue" fontsize = "22">Top 5</RMenuTitleBox>
-      <RMenuTextBox color="blue" text = "내 시간표에 맞는 강의 중 분야별 Top 5를 소개합니다. "></RMenuTextBox>
+      <RMenuTextBox color="blue" text = "내 시간표에 맞는 강의 중 분야별 Top 5를 소개합니다."></RMenuTextBox>
     </div>
     <div class = "custom-lower-menu">
       <div class = "major-title">
@@ -11,15 +11,14 @@
             <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
           </select>
         </RMenuTitleBox>
-        <RMenuTitleBox size = "100" color = "blue" style= "border: none">          
-          <select class= "select-grade-custom" v-model="this.getUserInfo.grade">
+        <RMenuTitleBox size = "100" color = "blue" style= "border: none" >          
+          <select class= "select-grade-custom" v-model="this.getUserInfo.grade" @change="changeMajorType">
             <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">전공 중 Top 5</RMenuTitleBox>
-        <CustomCart class = "custom-cart-major" :customList = "this.getCustomMajor"/>
       </div>
-
+      <CustomCart :customList = "this.getCustomMajor" v-if="this.getCustomMajor.hot != undefined"/>
       <div class = "gyoyang-title">
         <RMenuTitleBox size = "400" color = "blue" style= "border: none">          
           <select class= "select-ge-custom" v-model="gyoyangType" @change="changeGyoyangType">
@@ -27,10 +26,11 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
-        <CustomCart class = "custom-cart-major" :customList = "this.getCustomGE"/>
       </div>
+      <CustomCart :customList = "this.getCustomGE" v-if="this.getCustomGE.hot != undefined"/>
+
+      <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
     </div>
-    <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
   </div>
 </template>
 
@@ -114,10 +114,10 @@ export default {
       this.$store.getters.getCustomModal.state = false
     },
     changeMajorType(){
-      this.$store.commit('fetchCustomMajorList')
+      this.$store.dispatch('fetchCustomMajor')
     },
     changeGyoyangType(){
-      this.$store.commit('fetchCustomGEList', this.gyoyangType)
+      this.$store.dispatch('fetchCustomGE', this.gyoyangType)
     }
     
   }

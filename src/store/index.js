@@ -683,6 +683,10 @@ export default createStore({
             console.log(err)
         }
       }
+      if(screenNum==3){
+        await context.dispatch("fetchCustomGE", "가상대학영역")
+        await context.dispatch("fetchCustomMajor")
+      }
       if(screenNum == 4){
         await context.dispatch("fetchGradStat")
       }
@@ -748,14 +752,14 @@ export default createStore({
       context.commit("sortRecommList")
     },
 
-    async fetchCustomGEList(context, selectedField) {
+    async fetchCustomGE(context, selectedField) {
       let userGrade = context.getters.getUserInfo.grade
 
       let custom = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
 
-      context.commit("setUpCustomGEList", custom)
+      context.commit("setUpCustomGE", custom)
     },
-    async fetchCustomMajorList(context) {
+    async fetchCustomMajor(context) {
       let userInfo = context.getters.getUserInfo
       let userMajor = userInfo.major
       let userGrade = userInfo.grade
@@ -771,7 +775,7 @@ export default createStore({
       let custom = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
 
       console.log(custom)
-      context.commit("setUpCustomMajorList", custom)
+      context.commit("setUpCustomMajor", custom)
     }
 
 
