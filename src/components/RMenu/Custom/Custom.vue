@@ -170,14 +170,6 @@ export default {
   color: white
   font-weight: 700
 
-.major-title
-  display: flex
-  flex-direction: row
-
-.gyoyang-title
-  display: flex
-  flex-direction: row
-
 .select-ge-custom
   width: 60%
   height: 80%
@@ -190,4 +182,18 @@ export default {
   border: none
   color: white
   font-weight: 700
+
+.select-major-custom:hover,
+.select-ge-custom:hover,
+.select-grade-custom:hover
+  transform: scale(1.1)
+  opacity: 0.6
+
+.major-title
+  display: flex
+  flex-direction: row
+
+.gyoyang-title
+  display: flex
+  flex-direction: row
 </style>

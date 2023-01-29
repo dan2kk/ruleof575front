@@ -25,7 +25,7 @@
       </RMenuTitleBox>
     </div>
     <div v-for="recomms in recommList" :key="recomms">
-        <RMenuTitleBox class = "recomm-list-record" color="green" style="position: relative">
+        <RMenuTitleBox class = "recomm-list-title" color="green" style="position: relative">
           <div style="position: absolute text-align: center">
             {{recomms.영역코드명}}
           </div>
@@ -237,10 +237,5 @@ export default {
   transform: scale(1.1)
 .hide-button-recommend:active
   transform: rotate(-90deg) scale(0.7)
-.recomm-list-record:hover
-  transform: scale(1.05)
-  background-color: $green
-.recomm-list-record:active
-  transform: scale(0.95)
-  border: none
+
 </style>

@@ -62,7 +62,13 @@ export default {
   border-color: $light-green
   height: 40px
   min-width: 100%
-
+.recomm-list-record:hover
+  transform: scale(1.05)
+  background-color: $green
+.recomm-list-record:active
+  transform: scale(0.95)
+  border: none
+  
 .recomm-list-record-cart
   align-items: center
   display: flex
