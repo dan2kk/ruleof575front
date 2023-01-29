@@ -607,6 +607,7 @@ export default createStore({
           context.commit("setUpLecList", wantedData)
       });})
     },
+    // 희망 수업을 불러와서 HTTP 통신 보낼 준비
     crawlingWantedData1(context){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
@@ -614,7 +615,10 @@ export default createStore({
           context.commit("setUpLecList1", wantedData)
       });})
     },
-    exportPrefLec(context){
+    //HTTP 통신 보내는 부분 비동기 -> 어떤 리스트에 결과를 담아놔
+
+    // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
+    applyWantedIndex(context){
       console.log(context.getters.getArrayIndex)
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "wanted", array: context.getters.getArrayIndex}, function(response) {
