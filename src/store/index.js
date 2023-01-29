@@ -6,13 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-<<<<<<< HEAD
-    userInfo: {stuId: null, userName: null, major: null, grade: null},
     userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
-=======
-    // userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
->>>>>>> 8134e29c1b5319a6b2c7424e967830bd772554c8
 
     gradInfo : null,
     isChanged: false,
