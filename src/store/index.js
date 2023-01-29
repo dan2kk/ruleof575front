@@ -6,8 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    // userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
 
     gradInfo : null,
     isChanged: false,
@@ -16,9 +15,10 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
-    wantedList:[],
+    wantedList:[10001, 10002, 10003],
     recommList: [],
-    customList: [],
+    customGEList: [],
+    customMajorList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
@@ -60,7 +60,7 @@ export default createStore({
     colorList: [
       `#ffb3b7`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
-      `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#20566e`, `#183641`, `#cde4d2`, 
+      `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#cde4d2`, 
       `#d2e1a8`, `#d8de7e`, `#deda52`, `#aacd67`, `#b9c8e7`, `#8fbae5`, `#6e91e3`, 
       `#7978c6`, `#8b55a9`, `#f1a8bc`, `#eee58a`, `#c4ecb0`
     ],
@@ -146,6 +146,13 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
+    getCustomGEList(state) {
+      return state.customGEList
+    },
+    getCustomMajorList(state) {
+      return state.customMajorList
+    }
+
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -591,7 +598,17 @@ export default createStore({
         state.lecList[idx+1] = tmp
       }
     },
+
+    setUpCustomGEList(state, customList) {
+      state.customGEList = customList
+    },
+    setUpCustomMajorList(state, customList) {
+      state.customMajorList = customList
+    }
+
   },
+
+
   actions: {
     crawlingGradData(context){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -620,6 +637,16 @@ export default createStore({
       });})
     },
     //HTTP 통신 보내는 부분 비동기 -> 어떤 리스트에 결과를 담아놔
+    async preferReq(context){
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "pref"}, function(response) {
+          let wantedData = response.data
+          console.log(wantedData)
+          context.commit("setUpLecList1", wantedData)
+      });})
+      
+      
+    },
 
     // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
     applyWantedIndex(context){
@@ -719,7 +746,37 @@ export default createStore({
         context.commit("addRecommList", recomms)
       }
       context.commit("sortRecommList")
+    },
+
+    async fetchCustomGEList(context, selectedField) {
+      let userGrade = context.getters.getUserInfo.grade
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
+
+      context.commit("setUpCustomGEList", customList)
+    },
+    async fetchCustomMajorList(context) {
+      let userInfo = context.getters.getUserInfo
+      let userMajor = userInfo.major
+      let userGrade = userInfo.grade
+
+      console.log(userMajor)
+      console.log(userGrade)
+
+      if(userMajor == null) {
+        alert("전공을 선택해주세요")
+        return
+      }
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
+
+      console.log(customList)
+      context.commit("setUpCustomMajorList", customList)
     }
+
+
+
+
   },
   modules: {
   }

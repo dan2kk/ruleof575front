@@ -1,7 +1,9 @@
 //console.log("ASDSDASD")
 var elements = document.querySelectorAll('#snb > ul > li')
 var loginInfo = document.querySelectorAll('#logo-area> div > div > span')
+var stuNum = 0
 var arrayIndex = []
+var lecArray = []
 let hashArray = [
     "#!UDMxOTEzMCRAXnN1Z2FuZy8kQF4kQF5NMzE4Njc3JEBe7KG47JeF7IKs7KCV7KGw7ZqMJEBeTTMxODY3NyRAXmZiM2VjOTI1OTE3OGNmMmFmMmQ3ZDQ3Y2IxOTlmZGUyMTViNWU4ZWQ1ZGI2MGI4ZTZjOTk3NTgyZTQ2YzIzOWM=", //졸업사정
     "#!UDMxMDI5OCRAXnN1Z2FuZy8kQF4kQF5NMDA4OTU4JEBe7Z2s66ed7IiY7JeFJEBeTTAwODk1OCRAXjFkOThmNjkxN2Y2YzAzMTg1YTcwYWQ4NzBkYzBiOGYxY2FhNzJkN2MyOWY1ZDVmZjNmZTMxNjY4NTg5MjU3NTY=", //희망수업
@@ -51,6 +53,7 @@ if(loginInfo.length == 3){ //로그인 성공시 로그인 정보
         stuGrad : loginInfo[1].innerHTML,
         stuName : loginInfo[2].innerHTML
     };
+    stuNum = stuInfo.stuNum
     let hackJum = {최소학점: 0, 최대학점: 0, 신청학점: 0}
     hackJum.최소학점 = document.querySelectorAll('#edMinHakjeom')[0].value;
     hackJum.최대학점 = document.querySelectorAll('#edMaxHakjeom')[0].value;
@@ -85,6 +88,11 @@ chrome.runtime.onMessage.addListener(
         if(request.data == "wanted"){
             arrayIndex = request.array
             let exportData = await putItems(1)
+            sendResponse(exportData)
+        }
+        else if(request.data == "pref"){
+            lecArray = request.array
+            let exportData = await putItems(2)
             sendResponse(exportData)
         }
     }
@@ -132,14 +140,14 @@ chrome.runtime.onMessage.addListener(
     });
   };
   function putItems(idx) {
-    return new Promise(function(resolve, reject) {
-        let url = window.location
-        if(url.hash != hashArray[idx]) {
-            url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[idx])}
+    return new Promise(async function(resolve, reject) {
+        //let url = window.location
+        //if(url.hash != hashArray[idx]) {
+        //    url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[idx])}
         let returnData = []
         if(idx == 0){ //졸업사정 불러오기
             data = document.querySelectorAll('#gdDtl1 > tbody > tr')
-            
+            resolve(returnData)
         }
         else if(idx == 1){ //희망수업 내보내기
             var wantedData = document.querySelectorAll('#gdMain > tbody > tr')
@@ -158,8 +166,29 @@ chrome.runtime.onMessage.addListener(
                 console.log(j)
             }
             console.log(wantedTable)
+            resolve(returnData)
         }
-        //console.log(returnData)
-        resolve(returnData)
+        else if(idx ==2){ // https request prefer
+            let time = Date.now();
+            let baseUrl = 'https://nf.hanyang.ac.kr/ts.wseq?opcode=5101&nfid=0&prefix=NetFunnel.gRtype=5101;&sid=service_1&aid=act_2&js=yes&user_data='
+            let stuNumString = stuNum + ''
+            baseUrl = baseUrl.concat(stuNumString,'&',time)
+            baseUrl = baseUrl.trim()
+            console.log(baseUrl);
+            const response = await window.fetch(
+                baseUrl,
+                {   
+                    method: 'GET', 
+                    // mode: 'no-cors',
+                    headers: {
+                        "Accept":"*/*",
+                    },
+                }
+            )
+            // let data = await response.json()
+            console.log(response)
+            resolve(response)
+        }
+        
     });
   };
