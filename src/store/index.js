@@ -689,6 +689,11 @@ export default createStore({
       if(screenNum==3){
         await context.dispatch("fetchCustomGE", "가상대학영역")
         await context.dispatch("fetchCustomMajor")
+        if(context.getters.getUserInfo.major == null) {
+          alert("전공을 선택해주세요")
+          return
+        }
+  
       }
       if(screenNum == 4){
         await context.dispatch("fetchGradStat")
@@ -771,7 +776,6 @@ export default createStore({
       console.log(userGrade)
 
       if(userMajor == null) {
-        alert("전공을 선택해주세요")
         return
       }
 
