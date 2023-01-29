@@ -1,34 +1,43 @@
 <template>
     <div class = "custom-cart">
-        <div class = "context" v-show="!isContextShown">
-            <div v-for = "(custom, idx) in this.customList.hot" :key = custom>
+        <div class = "context">
+            <RMenuTitleBox color="red" size = "600" v-show = "!isContextShown[0]" @click = "isContextShown[0] = !isContextShown[0]">
+                알파메일 과목
+            </RMenuTitleBox>
+            <div v-for = "(custom, idx) in this.customList.hot.slice(0, 5)" v-show = "isContextShown[0]" :key = custom >
                 <div class = "row-custom" >
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >알파메일 과목</RMenuTitleBox>
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
-                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
-                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTitleBox color="red" size="150" v-if = "idx == 0" @click = "isContextShown[0] = !isContextShown[0]">알파메일 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="red" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="red" :text= idx+1 size = "25" height = "50"/>
+                    <RMenuTextBox color="red" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
                 </div>
             </div>
-            <div v-for = "(custom, idx) in this.customList.hot" :key = custom>
+            <RMenuTitleBox color="green" size = "600" v-show = "!isContextShown[1]" @click = "isContextShown[1] = !isContextShown[1]">
+                슈퍼겁쟁이 과목
+            </RMenuTitleBox>
+            <div v-for = "(custom, idx) in this.customList.cold.slice(0, 5)" v-show = "isContextShown[1]" :key = custom>
                 <div class = "row-custom" >
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >슈퍼겁쟁이 과목</RMenuTitleBox>
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
-                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
-                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTitleBox color="green" size="150" v-if = "idx == 0" @click = "isContextShown[1] = !isContextShown[1]">슈퍼겁쟁이 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="green" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="green" :text= idx+1 size = "25" height = "50"/>
+                    <RMenuTextBox color="green" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="green" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="green" :text= custom.설강기준평점 size = "75" height = "50"/>
                 </div>
             </div>
-            <div v-for = "(custom, idx) in this.customList.score" :key = custom>
+            <RMenuTitleBox color="yellow" size = "600" v-show = "!isContextShown[2]" @click = "isContextShown[2] = !isContextShown[2]">
+                학점느님 과목
+            </RMenuTitleBox>
+            <div v-for = "(custom, idx) in this.customList.score.slice(0, 5)" v-show = "isContextShown[2]" :key = custom>
                 <div class = "row-custom" >
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx == 0" >학점느님 과목</RMenuTitleBox>
-                    <RMenuTitleBox color="blue" size="150" v-if = "idx != 0" ></RMenuTitleBox>
-                    <RMenuTextBox color="blue" :text= idx size = "25" height = "50"/>
-                    <RMenuTextBox color="blue" :text = custom.과목명 size = "275" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="blue" :text= custom.설강기준평점 size = "75" height = "50"/>
+                    <RMenuTitleBox color="yellow" size="150" v-if = "idx == 0" @click = "isContextShown[2] = !isContextShown[2]">학점느님 과목</RMenuTitleBox>
+                    <RMenuTitleBox color="yellow" size="150" v-if = "idx != 0" ></RMenuTitleBox>
+                    <RMenuTextBox color="yellow" :text= idx+1 size = "25" height = "50"/>
+                    <RMenuTextBox color="yellow" :text = custom.과목명 size = "275" height = "50"/>
+                    <RMenuTextBox color="yellow" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="yellow" :text= custom.설강기준평점 size = "75" height = "50"/>
                 </div>
             </div>
 
@@ -48,7 +57,7 @@ export default {
     props:["customList"],
     data(){
         return{
-            isContextShown: false
+            isContextShown: [false, false, false,]
         }
     },
     methods:{
@@ -71,7 +80,7 @@ export default {
     border-bottom: 3px solid white
     display: flex
     flex-direction: column
-    background-color: #b2c3e1
+    background-color: #white
 .row-custom
     position: relative
     width: 100%

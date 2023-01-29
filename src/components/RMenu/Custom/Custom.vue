@@ -139,16 +139,11 @@ export default {
   display: flex
 
 .custom-lower-menu
-  width: 100%
   overflow-y: overlay
   overflow-x: hidden
 
 .custom-lower-menu::-webkit-scrollbar 
   display: none
-
-.custom-lower-menu::-webkit-scrollbar-thumb
-  background-color: hsla(0, 0%, 42%, 0.49)
-  border-radius: 100px
 
 .select-major-custom
   width: 85%
