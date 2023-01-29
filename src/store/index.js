@@ -142,15 +142,6 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
-<<<<<<< HEAD
-    getSelectIndexModal(state){
-      return state.selectIndexModal
-    },
-    getWantedList(state){
-      return state.wantedList
-    }
-=======
->>>>>>> 7c1f0a4707bb517a0a057374bf219b84b68b9731
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -779,6 +770,9 @@ export default createStore({
         context.commit("addRecommList", recomms)
       }
       context.commit("sortRecommList")
+    },
+    async fetchCustomList(context){
+      let geList = (await axios.get('https://ruleof.datasesang.store/custom/ge', {params: {field: }})).data
     }
   },
   modules: {
