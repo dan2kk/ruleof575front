@@ -7,7 +7,7 @@ export default createStore({
   state: {
     isLogined: false,
     userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
 
     gradInfo : null,
     isChanged: false,
@@ -18,7 +18,8 @@ export default createStore({
     lecList:[],
     wantedList:[],
     recommList: [],
-    customList: [],
+    customGEList: [],
+    customMajorList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
@@ -142,6 +143,13 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
+    getCustomGEList(state) {
+      return state.customGEList
+    },
+    getCustomMajorList(state) {
+      return state.customMajorList
+    }
+
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -586,7 +594,17 @@ export default createStore({
         state.lecList[idx+1] = tmp
       }
     },
+
+    setUpCustomGEList(state, customList) {
+      state.customGEList = customList
+    },
+    setUpCustomMajorList(state, customList) {
+      state.customMajorList = customList
+    }
+
   },
+
+
   actions: {
     crawlingGradData(context){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -714,7 +732,37 @@ export default createStore({
         context.commit("addRecommList", recomms)
       }
       context.commit("sortRecommList")
+    },
+
+    async fetchCustomGEList(context, selectedField) {
+      let userGrade = context.getters.getUserInfo.grade
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
+
+      context.commit("setUpCustomGEList", customList)
+    },
+    async fetchCustomMajorList(context) {
+      let userInfo = context.getters.getUserInfo
+      let userMajor = userInfo.major
+      let userGrade = userInfo.grade
+
+      console.log(userMajor)
+      console.log(userGrade)
+
+      if(userMajor == null) {
+        alert("전공을 선택해주세요")
+        return
+      }
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
+
+      console.log(customList)
+      context.commit("setUpCustomMajorList", customList)
     }
+
+
+
+
   },
   modules: {
   }
