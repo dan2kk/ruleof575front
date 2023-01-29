@@ -5,7 +5,6 @@
       <RMenuTextBox color="blue" text = "내 시간표에 맞는 강의 중 분야별 Top 5를 소개합니다. "></RMenuTextBox>
     </div>
     <div class = "custom-lower-menu">
-      <CustomCart class="cart-1"/>
       <div class = "major-title">
         <RMenuTitleBox size = "300" color = "blue" style= "border: none">          
           <select class= "select-major-custom" v-model="majorType" @change="changeMajorType">
@@ -18,10 +17,12 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">전공 중 Top 5</RMenuTitleBox>
+        <CustomCart class = "custom-cart-major" :customList = "getCustomMajorList"/>
       </div>
+
       <div class = "gyoyang-title">
         <RMenuTitleBox size = "400" color = "blue" style= "border: none">          
-          <select class= "select-major-custom" v-model="gyoyangType" @change="changeGyoyangType">
+          <select class= "select-ge-custom" v-model="gyoyangType" @change="changeGyoyangType">
             <option v-for="item in this.fieldOrder" :value="item" :key="item">{{ item }}</option>
           </select>
         </RMenuTitleBox>
@@ -150,6 +151,7 @@ export default {
 .custom-lower-menu::-webkit-scrollbar-thumb
   background-color: hsla(0, 0%, 42%, 0.49)
   border-radius: 100px
+
 .select-major-custom
   width: 85%
   height: 80%
@@ -182,4 +184,17 @@ export default {
 .gyoyang-title
   display: flex
   flex-direction: row
+
+.select-ge-custom
+  width: 60%
+  height: 80%
+  position: absolute
+  top: 10%
+  left: 39%
+  background-color: #b2c3e1
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 22px
+  border: none
+  color: white
+  font-weight: 700
 </style>
