@@ -59,7 +59,7 @@ export default {
         let recomms = this.$store.getters.getRecommList
         
         for(let gradRec of gradList) {
-          if(gradRec.기준 > gradRec.이수){
+          if(gradRec.이수여부 == 'N'){
             let transformedName = transformGradName(gradRec.이수명)
 
             for(let rc of recomms){

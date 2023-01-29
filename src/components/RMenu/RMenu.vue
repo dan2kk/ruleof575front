@@ -5,7 +5,7 @@
       <LoginScreen v-if="!isLogined"> </LoginScreen>
       <LecList v-show="isLogined && curScreen == 1"></LecList>
       <RecommList v-show="isLogined && curScreen == 2"></RecommList>
-      <Known v-show="isLogined && curScreen == 3"></Known>
+      <Custom v-show="isLogined && curScreen == 3"></Custom>
       <GradList v-show="isLogined && curScreen == 4"></GradList>
     </div>
   </div>
@@ -16,7 +16,7 @@ import RMenuTabs from "./RMenuTabs";
 import LoginScreen from "./Login/LoginScreen";
 import LecList from "./LecList/LecList";
 import RecommList from "./Recomm/RecommList";
-import Known from "./Known/Known";
+import Custom from "./Custom/Custom";
 import GradList from "./Grad/GradList";
 
 export default {
@@ -26,7 +26,7 @@ export default {
     LoginScreen,
     LecList,
     RecommList,
-    Known,
+    Custom,
     GradList
   },
   computed : {
