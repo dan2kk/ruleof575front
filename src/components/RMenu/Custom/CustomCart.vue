@@ -66,6 +66,7 @@ export default {
     width: 100%
     display: flex
     flex-direction: row
+    border: 0px solid white
 
 .show-button-custom
     cursor: pointer
