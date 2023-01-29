@@ -1,5 +1,9 @@
 <template>
     <div class = "custom-cart">
+        <RMenuModifiableTitleBox class = "custom-cart-title" color="blue" size="600" :text = 'this.title' fontsize="22">
+            <img class="show-button-custom" src='showbutton.svg' @click ="this.setIsContextShown()" v-show=!isContextShown>
+            <img class="hide-button-custom" src='hidebutton-r.svg' @click ="this.setIsContextShown()" v-show="isContextShown">
+        </RMenuModifiableTitleBox>
         <div class = "context" v-show="!isContextShown">
             <div class = "row-custom" >
                 <RMenuTitleBox color="blue" size="150" >알파메일 과목</RMenuTitleBox>
@@ -55,7 +59,7 @@ export default {
     components: {
         RMenuTitleBox, RMenuTextBox, RMenuModifiableTitleBox
     },
-    props:[],
+    props:["title", "info"],
     data(){
         return{
             isContextShown: false

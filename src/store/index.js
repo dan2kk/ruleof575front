@@ -15,7 +15,7 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
-    wantedList:[],
+    wantedList:[10001, 10002, 10003],
     recommList: [],
     customGE: {},
     customMajor: {},
@@ -60,7 +60,7 @@ export default createStore({
     colorList: [
       `#ffb3b7`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
-      `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#20566e`, `#183641`, `#cde4d2`, 
+      `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#cde4d2`, 
       `#d2e1a8`, `#d8de7e`, `#deda52`, `#aacd67`, `#b9c8e7`, `#8fbae5`, `#6e91e3`, 
       `#7978c6`, `#8b55a9`, `#f1a8bc`, `#eee58a`, `#c4ecb0`
     ],
@@ -637,6 +637,16 @@ export default createStore({
       });})
     },
     //HTTP 통신 보내는 부분 비동기 -> 어떤 리스트에 결과를 담아놔
+    async preferReq(context){
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "pref"}, function(response) {
+          let wantedData = response.data
+          console.log(wantedData)
+          context.commit("setUpLecList1", wantedData)
+      });})
+      
+      
+    },
 
     // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
     applyWantedIndex(context){

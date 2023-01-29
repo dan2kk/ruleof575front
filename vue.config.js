@@ -7,6 +7,13 @@ module.exports = {
       "changeOrigin":true,
       "secure":false,
       "ws": false
+      },
+      '/api':{
+        "target":'https://nf.hanyang.ac.kr/',
+        "pathRewrite":{'^/api':''},
+        "changeOrigin":true,
+        "secure":false,
+        "ws": false
       }
     }
   }
