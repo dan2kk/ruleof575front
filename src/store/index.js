@@ -17,8 +17,8 @@ export default createStore({
     lecList:[],
     wantedList:[10001, 10002, 10003],
     recommList: [],
-    customGEList: [],
-    customMajorList: [],
+    customGE: {},
+    customMajor: {},
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
@@ -146,11 +146,11 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
-    getCustomGEList(state) {
-      return state.customGEList
+    getCustomGE(state) {
+      return state.customGE
     },
-    getCustomMajorList(state) {
-      return state.customMajorList
+    getCustomMajor(state) {
+      return state.customMajor
     }
 
   },
@@ -599,11 +599,11 @@ export default createStore({
       }
     },
 
-    setUpCustomGEList(state, customList) {
-      state.customGEList = customList
+    setUpCustomGE(state, custom) {
+      state.customGE = custom
     },
-    setUpCustomMajorList(state, customList) {
-      state.customMajorList = customList
+    setUpCustomMajor(state, custom) {
+      state.customMajor = custom
     }
 
   },
@@ -751,9 +751,9 @@ export default createStore({
     async fetchCustomGEList(context, selectedField) {
       let userGrade = context.getters.getUserInfo.grade
 
-      let customList = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
+      let custom = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
 
-      context.commit("setUpCustomGEList", customList)
+      context.commit("setUpCustomGEList", custom)
     },
     async fetchCustomMajorList(context) {
       let userInfo = context.getters.getUserInfo
@@ -768,10 +768,10 @@ export default createStore({
         return
       }
 
-      let customList = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
+      let custom = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
 
-      console.log(customList)
-      context.commit("setUpCustomMajorList", customList)
+      console.log(custom)
+      context.commit("setUpCustomMajorList", custom)
     }
 
 
