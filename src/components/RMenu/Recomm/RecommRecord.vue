@@ -3,7 +3,7 @@
     <div class="recomm-list-record-cart">
       <RMenuTextBox class="recomm-list-classname" :text= this.recommData.과목명 color= "green" size= "325" @click="showDetails"/>
       <RMenuTextBox :text= this.recommData.대표교강사명 color= "green" size= "75"/>
-      <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100"/>
+      <RMenuTextBox :text= this.recommData.수업시간 color= "green" size= "100" fontsize="13"/>
       <SearchImageBox src="./addbutton.svg" color ="green" @click="addToLecList" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="isInLecList"/>
       <SearchImageBox src="./checkbutton.svg" color ="green" @click="addToLecList" @mouseleave="clearShadowLec" v-show="!isInLecList"/>
       <SearchImageBox src= "./deletebutton.svg" color="green" @click="delFromRecommList"/>

@@ -7,7 +7,7 @@ export default createStore({
   state: {
     isLogined: false,
     userInfo: {stuId: null, userName: null, major: null, grade: null},
-    // userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
 
     gradInfo : null,
     isChanged: false,
@@ -18,13 +18,13 @@ export default createStore({
     lecList:[],
     wantedList:[10001, 10002, 10003],
     recommList: [],
+    customList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
-    selectIndexModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -142,12 +142,15 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
+<<<<<<< HEAD
     getSelectIndexModal(state){
       return state.selectIndexModal
     },
     getWantedList(state){
       return state.wantedList
     }
+=======
+>>>>>>> 7c1f0a4707bb517a0a057374bf219b84b68b9731
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -573,23 +576,25 @@ export default createStore({
       state.hackData.최소학점 = hackInfo.최소학점
       state.hackData.최대학점 = hackInfo.최대학점
     },
-    setSelectIndexModal(state)
-    {
-      try{
-        if(!state.selectIndexModal["state"]){
-          state.selectIndexModal["state"] = true
-        }
-        else{
-          state.selectIndexModal["state"] = false
-        }
-      }
-      catch(err){
-        console.log(err)
-      }
-    },
     setUpLecList1(state, lecList) {
       state.wantedList = lecList
-    }
+    },
+    lecListMoveUp(state, classID){
+      let idx = state.lecList.findIndex(lec => lec.수업번호 == classID)
+      if(idx > 0) {
+        let tmp = state.lecList[idx]
+        state.lecList[idx] = state.lecList[idx-1]
+        state.lecList[idx-1] = tmp
+      }
+    },
+    lecListMoveDown(state, classID){
+      let idx = state.lecList.findIndex(lec => lec.수업번호 == classID)
+      if(idx < state.lecList.length-1) {
+        let tmp = state.lecList[idx]
+        state.lecList[idx] = state.lecList[idx+1]
+        state.lecList[idx+1] = tmp
+      }
+    },
   },
   actions: {
     crawlingGradData(context){
@@ -699,8 +704,10 @@ export default createStore({
           let data = []
           let lecList = context.getters.getLecList
           let stuId = context.getters.getStuId
+          var i = 0
           for(let lec of lecList){
-            data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
+            data.push({수업번호: lec.수업번호, isInTable : lec.isInTable, order: i})
+            i++
           }
           await axios.post('https://ruleof.datasesang.store/list/update', {list: data, stu_id: stuId})
           context.commit('setIsChanged', false)
@@ -717,7 +724,16 @@ export default createStore({
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
       let lecList = (await axios.get('https://ruleof.datasesang.store/list/init', {params: {stu_id: stuId}})).data.list
-      context.commit("setUpLecList", lecList)
+      //sorting 필요
+      let tempLecList = []
+      for (var i = 0; i < lecList.length; i++) {
+        for (let lec of lecList) {
+          if(lec.order == i) {
+            tempLecList.push(lec)
+          }
+        }
+      }
+      context.commit("setUpLecList", tempLecList)
     },
     async fetchGradList(context) {
       let stuId = context.getters.getStuId

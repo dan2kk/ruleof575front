@@ -14,7 +14,6 @@
         <select class= "select-grade" v-model="this.getUserInfo.grade">
           <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
         </select>
-
       </div>
     </div>
     <div class="column2-userinfo">
