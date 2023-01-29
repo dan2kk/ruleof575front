@@ -4,7 +4,7 @@
             <div class = "row-custom" >
                 <RMenuTitleBox color="blue" size="150" >알파메일 과목</RMenuTitleBox>
                 <RMenuTextBox color="blue" text= "1. " size = "50" height = "50"/>
-                <RMenuTextBox color="blue" text= "히어로즈오브더스톰의이해" size = "300" height = "50"/>
+                <RMenuTextBox color="blue" :text= "this.customList.hot" size = "300" height = "50"/>
                 <RMenuTextBox color="blue" text= "인기도: 4.85/5" size = "100" height = "50"/>
             </div>
             <div class = "row-custom" >
@@ -53,9 +53,9 @@ import RMenuTextBox from "../Box/RMenuTextBox";
 export default {
     name: "CustomCart",
     components: {
-        RMenuTitleBox, RMenuTextBox, RMenuModifiableTitleBox
+        RMenuTitleBox, RMenuTextBox, RMenuModifiableTitleBox,
     },
-    props:[],
+    props:["customList"],
     data(){
         return{
             isContextShown: false

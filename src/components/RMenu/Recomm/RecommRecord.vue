@@ -70,10 +70,5 @@ export default {
   min-width: 394px
   position: relative
 
-.recomm-list-classname:hover
-  transform: scale(1.1)
-  background-color: $green
-.recomm-list-classname:active
-  transform: scale(0.95)
-  border: none
+
 </style>

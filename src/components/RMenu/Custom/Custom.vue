@@ -17,7 +17,7 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">전공 중 Top 5</RMenuTitleBox>
-        <CustomCart class = "custom-cart-major" :customList = "getCustomMajorList"/>
+        <CustomCart class = "custom-cart-major" :customList = "this.getCustomMajor"/>
       </div>
 
       <div class = "gyoyang-title">
@@ -27,10 +27,8 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
+        <CustomCart class = "custom-cart-major" :customList = "this.getCustomGE"/>
       </div>
-      <!-- <div v-for="customs in customList" :key="customs">
-        <CustomCart class="cart-1" :title= "customs.영역코드명" info="내 졸업사정 상 필요한 교양 과목 중 <br>가장 인기있는/학점을 잘 주는/경쟁이 적은 교양 과목을 추천해줍니다"/>
-      </div> -->
     </div>
     <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
   </div>
@@ -90,11 +88,11 @@ export default {
     getMajorData(){
       return this.$store.getters.getMajorData
     },
-    getCustomGEList(){
-      return this.$store.getters.getCustomGEList
+    getCustomGE(){
+      return this.$store.getters.getCustomGE
     },
-    getCustomMajorList(){
-      return this.$store.getters.getCustomMajorList
+    getCustomMajor(){
+      return this.$store.getters.getCustomMajor
     },
     grade() {
       if(this.$store.getters.getIsLogined == false) {
