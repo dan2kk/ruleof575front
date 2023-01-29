@@ -6,8 +6,8 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    //userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
+    // userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
 
     gradInfo : null,
     isChanged: false,
@@ -139,9 +139,9 @@ export default createStore({
   },
   mutations: {
     setUserInfo(state, data) { 
-      // state.userInfo.stuId = data.stuNum.trim()
-      // state.userInfo.userName = data.stuName.trim()
-      // state.userInfo.grade = data.stuGrad.trim()
+      state.userInfo.stuId = data.stuNum.trim()
+      state.userInfo.userName = data.stuName.trim()
+      state.userInfo.grade = data.stuGrad.trim()
     },
     setUserMajor(state, major) {
       state.userInfo.major = major
@@ -570,7 +570,7 @@ export default createStore({
             context.commit("setGradList", gradData)
             let stuId = context.getters.getStuId
             let gradList = context.getters.getGradList
-            await axios.post('http://3.37.249.210:1324/grad/update', {list: gradList, stu_id: stuId})
+            await axios.post('https://ruleof.datasesang.store/grad/update', {list: gradList, stu_id: stuId})
             await context.dispatch("fetchGradStat")
       });})
     },
@@ -598,7 +598,7 @@ export default createStore({
           for(let lec of lecList){
             data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
           }
-          await axios.post('http://3.37.249.210:1324/list/update', {list: data, stu_id: stuId})
+          await axios.post('https://ruleof.datasesang.store/list/update', {list: data, stu_id: stuId})
           context.commit('setIsChanged', false)
         }
         catch(err) {
@@ -612,23 +612,23 @@ export default createStore({
     },
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data.list
+      let lecList = (await axios.get('https://ruleof.datasesang.store/list/init', {params: {stu_id: stuId}})).data.list
       context.commit("setUpLecList", lecList)
     },
     async fetchGradList(context) {
       let stuId = context.getters.getStuId
-      let gradList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
+      let gradList = (await axios.get('https://ruleof.datasesang.store/grad/init', {params: {stu_id: stuId}})).data.grads
       console.log(gradList)
       context.commit("setGradList", gradList)
     },
     
     async fetchGradStat(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: stuId}})).data.list
+      let lecList = (await axios.get('https://ruleof.datasesang.store/grad/view', {params: {stu_id: stuId}})).data.list
       context.commit("calGradStat", lecList)
     },
     async fetchLecDetails(context, lecNum) {
-      let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
+      let details = (await axios.get('https://ruleof.datasesang.store/details', {params: {lec_num: lecNum}})).data
       details.prev_infos.forEach( prev_info => {
         prev_info.희망수업세부정보.sort((a,b) => { return b.학생수 - a.학생수} )
       })
@@ -639,7 +639,7 @@ export default createStore({
       for(let day in selectedTimes) {
           selectedTimes[day].sort((a, b) => { return a.start - b.start});
       }
-      let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
+      let recommList = (await axios.post('https://ruleof.datasesang.store/recommend', {time_blocks: selectedTimes})).data
       for(let recomms of recommList) {
         recomms['isRecommShow'] = true
 
