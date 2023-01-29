@@ -16,12 +16,15 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
+    wantedList:[],
     recommList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
+    wantedIndex: [1, 3, 5, 7, 2, 4, 6],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    selectIndexModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -136,6 +139,12 @@ export default createStore({
     getMajorData(state){
       return state.majorData
     },
+    getArrayIndex(state){
+      return state.wantedIndex
+    },
+    getSelectIndexModal(state){
+      return state.selectIndexModal
+    }
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -145,11 +154,14 @@ export default createStore({
     },
     setUserMajor(state, major) {
       state.userInfo.major = major
-      console.log(state.userInfo)
+      //console.log(state.userInfo)
     },
     setUserGrade(state, grade) {
       state.userInfo.grade = grade
-      console.log(state.userInfo)
+      //console.log(state.userInfo)
+    },
+    seTimetableHackjum(state, hackjum) {
+      state.hackData.시간표학점 += hackjum
     },
 
     loginMain(state){
@@ -172,7 +184,7 @@ export default createStore({
 
     setUpLecList(state, lecList) {
       try{
-        console.log(state.userInfo);
+        //console.log(state.userInfo);
 
         let parsedLT
 
@@ -310,14 +322,14 @@ export default createStore({
                 }
               break;
             default:
-              console.log("교양 X")
+              //console.log("교양 X")
               break;
           }
           if(lec.영어전용){
             gradData['영어전용강좌수'] += 1
           }
         }
-        console.log(gradData);
+        //console.log(gradData);
       }
       catch(err){
         alert(err)
@@ -478,7 +490,7 @@ export default createStore({
       }
     },
 
-    async setSearchModal(state)
+    setSearchModal(state)
     {
       try{
         if(!state.searchModal["state"]){
@@ -557,6 +569,23 @@ export default createStore({
     setHackInfo(state, hackInfo) {
       state.hackData.최소학점 = hackInfo.최소학점
       state.hackData.최대학점 = hackInfo.최대학점
+    },
+    setSelectIndexModal(state)
+    {
+      try{
+        if(!state.selectIndexModal["state"]){
+          state.selectIndexModal["state"] = true
+        }
+        else{
+          state.selectIndexModal["state"] = false
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+    },
+    setUpLecList1(state, lecList) {
+      state.wantedList = lecList
     }
   },
   actions: {
@@ -567,7 +596,7 @@ export default createStore({
             context.commit("setGradList", gradData)
             let stuId = context.getters.getStuId
             let gradList = context.getters.getGradList
-            await axios.post('http://3.37.249.210:1324/grad/update', {list: gradList, stu_id: stuId})
+            await axios.post('https://ruleof.datasesang.store/grad/update', {list: gradList, stu_id: stuId})
             await context.dispatch("fetchGradStat")
       });})
     },
@@ -578,10 +607,29 @@ export default createStore({
           context.commit("setUpLecList", wantedData)
       });})
     },
+    // 희망 수업을 불러와서 HTTP 통신 보낼 준비
+    crawlingWantedData1(context){
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
+          let wantedData = response.data
+          context.commit("setUpLecList1", wantedData)
+      });})
+    },
+    //HTTP 통신 보내는 부분 비동기 -> 어떤 리스트에 결과를 담아놔
+
+    // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
+    applyWantedIndex(context){
+      console.log(context.getters.getArrayIndex)
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "wanted", array: context.getters.getArrayIndex}, function(response) {
+          let exportData = response
+          //console.log(exportData)
+      });})
+    },
 
     async loginReq(context) {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
-        console.log(response.stuData, response.hackData)
+        //console.log(response.stuData, response.hackData)
         context.commit("setUserInfo", response.stuData)
         context.commit("setHackInfo", response.hackData)
     },
@@ -595,7 +643,7 @@ export default createStore({
           for(let lec of lecList){
             data.push({수업번호: lec.수업번호, isInTable : lec.isInTable})
           }
-          await axios.post('http://3.37.249.210:1324/list/update', {list: data, stu_id: stuId})
+          await axios.post('https://ruleof.datasesang.store/list/update', {list: data, stu_id: stuId})
           context.commit('setIsChanged', false)
         }
         catch(err) {
@@ -609,23 +657,23 @@ export default createStore({
     },
     async fetchLecList(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/list/init', {params: {stu_id: stuId}})).data.list
+      let lecList = (await axios.get('https://ruleof.datasesang.store/list/init', {params: {stu_id: stuId}})).data.list
       context.commit("setUpLecList", lecList)
     },
     async fetchGradList(context) {
       let stuId = context.getters.getStuId
-      let gradList = (await axios.get('http://3.37.249.210:1324/grad/init', {params: {stu_id: stuId}})).data.grads
-      console.log(gradList)
+      let gradList = (await axios.get('https://ruleof.datasesang.store/grad/init', {params: {stu_id: stuId}})).data.grads
+      //console.log(gradList)
       context.commit("setGradList", gradList)
     },
     
     async fetchGradStat(context) {
       let stuId = context.getters.getStuId
-      let lecList = (await axios.get('http://3.37.249.210:1324/grad/view', {params: {stu_id: stuId}})).data.list
+      let lecList = (await axios.get('https://ruleof.datasesang.store/grad/view', {params: {stu_id: stuId}})).data.list
       context.commit("calGradStat", lecList)
     },
     async fetchLecDetails(context, lecNum) {
-      let details = (await axios.get('http://3.37.249.210:1324/details', {params: {lec_num: lecNum}})).data
+      let details = (await axios.get('https://ruleof.datasesang.store/details', {params: {lec_num: lecNum}})).data
       details.prev_infos.forEach( prev_info => {
         prev_info.희망수업세부정보.sort((a,b) => { return b.학생수 - a.학생수} )
       })
@@ -636,7 +684,7 @@ export default createStore({
       for(let day in selectedTimes) {
           selectedTimes[day].sort((a, b) => { return a.start - b.start});
       }
-      let recommList = (await axios.post('http://3.37.249.210:1324/recommend', {time_blocks: selectedTimes})).data
+      let recommList = (await axios.post('https://ruleof.datasesang.store/recommend', {time_blocks: selectedTimes})).data
       for(let recomms of recommList) {
         recomms['isRecommShow'] = true
 

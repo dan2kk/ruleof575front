@@ -2,8 +2,9 @@
   <div class="lec-list">
     <div class = "lec-list-upper-menu">
       <RMenuTitleBox color="red">
+        <input type="submit" class="export-pref-lec" value="내 희망수업 내보내기" @click="exportPrefLec"/>
         내 수업목록
-        <input type="submit" class="load-pref-lec" value="내 희망수업 불러오기" @click="loadPrefLec">
+        <input type="submit" class="load-pref-lec" value="내 희망수업 불러오기" @click="loadPrefLec"/> 
       </RMenuTitleBox>
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
@@ -13,7 +14,6 @@
         <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
       </div> 
     </div>
-
   </div>
 </template>
 
@@ -23,6 +23,7 @@ import RMenuTextBox from "../Box/RMenuTextBox";
 import LecListRecord from "./LecListRecord";
 import LecListHead from "./LecListHead";
 import SearchImageBox from "../Box/SearchImageBox";
+
 
 export default {
   name: "LecList",
@@ -49,7 +50,18 @@ export default {
     },
     loadPrefLec(){
       this.$store.dispatch("crawlingWantedData")
-    }
+    },
+    exportPrefLec(){
+      //크롤링해와
+      //await HTTP 통신보내
+      //결과가 남아
+      this.$store.commit("setSelectIndexModal")
+  
+
+
+      //this.$store.dispatch("exportPrefLec")
+      //this.$store.dispatch("exportPrefLec")
+    },
   },
 };
 </script>
@@ -104,6 +116,17 @@ export default {
   background-color: $white
   position: absolute
   left: 72%
+  color: $geraldine
+  font-weight: 1000
+.export-pref-lec
+  width: 26%
+  height: 70%
+  border: 3px solid
+  border-color: $pippin
+  border-radius: 10px
+  background-color: $white
+  position: absolute
+  left: 2%
   color: $geraldine
   font-weight: 1000
 

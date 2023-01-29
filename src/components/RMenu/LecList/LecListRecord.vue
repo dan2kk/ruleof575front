@@ -58,7 +58,6 @@ export default {
           continue
         }
 
-        
         timeLine = timeLines[curDay]
         startToEnd = timeToNum(this.lecData.시작시간[i], this.lecData.끝시간[i])
 
@@ -85,6 +84,7 @@ export default {
 
       if(!isOverlapped) {
         this.lecData.isInTable = 1;
+        this.$store.commit("seTimetableHackjum", this.lecData.학점)
         this.lecData['color'] = this.$store.getters.getColor
         this.$store.commit("setNextColor")
         for(let i = 0; i < this.lecData.요일.length; i++) {
@@ -99,6 +99,7 @@ export default {
     delFromTimeTable() {
       let curDay
       this.lecData.isInTable = 0;
+      this.$store.commit("seTimetableHackjum", -(this.lecData.학점))
       for(let i = 0; i < this.lecData.요일.length; i++) {
         curDay = this.lecData.요일[i]
         this.$store.commit("setUpTimeLines", curDay);

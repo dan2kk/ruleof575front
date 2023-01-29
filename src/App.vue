@@ -5,6 +5,7 @@
     <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose"/>
     <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose"/>
     <SearchModal class="search-modal" v-if ="onSearchModal" v-on:modal-close="searchModalClose"></SearchModal>
+    <SelectIndexModal class="select-modal" v-if="onSelectIndexModal" v-on:modal-close="selectIndexModalClose"/>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import RMenu from "./components/RMenu/RMenu";
 import LecDetailsModal from "./components/LecDetailsModal";
 import { h } from 'vue'
 import SearchModal from "./components/SearchModal";
+import SelectIndexModal from "./components/SelectIndexModal";
 
 export default {
   name: "Start",
@@ -23,6 +25,7 @@ export default {
     RMenu,
     LecDetailsModal,
     SearchModal,
+    SelectIndexModal,
   },
   computed:{
     onLeftModal(){
@@ -33,6 +36,9 @@ export default {
     },
     onSearchModal(){
       return this.$store.getters.getSearchModal.state
+    },
+    onSelectIndexModal(){
+      return this.$store.getters.getSelectIndexModal.state
     }
   },
   methods:{
@@ -44,6 +50,9 @@ export default {
     },
     searchModalClose(){
       this.$store.getters.getSearchModal.state = false
+    },
+    selectIndexModalClose(){
+      this.$store.getters.getSelectIndexModal.state = false
     }
   }
 };

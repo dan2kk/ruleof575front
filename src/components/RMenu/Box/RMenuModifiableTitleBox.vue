@@ -1,7 +1,6 @@
 <template>
   <div :style="setStyle" v-html="text" :class="[`r-menu-title-box-m valign-text-middle` , color, size || ``, fontsize || ``,]" >
   </div>
-
 </template>
 
 <script>
@@ -60,12 +59,12 @@ export default {
   width: var(--width)
   position: relative
   background-color: var(--color)
+  align-items: center
   color: $white
   font-family: "Noto Sans KR", Helvetica
   font-size: var(--fontsize)
   font-style: normal
   font-weight: 700
-  align-items: center
 
 
 </style>
