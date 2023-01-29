@@ -2,15 +2,15 @@
   <div class="lec-list-record">
     <div class="lec-list-record-cart">
       <div class = "updown-cart">
-        <img class="up-button" src='upbutton.svg' @click = "moveUp">
-        <img class="down-button" src='downbutton.svg' @click = "moveDown">
+        <img :style = "setStyle" class="up-button" src='upbutton.svg' @click = "moveUp">
+        <img :style = "setStyle" class="down-button" src='downbutton.svg' @click = "moveDown">
       </div>
-      <RMenuTextBox class= "lec-list-classname" :text= this.lecData.과목명 color= "red" size= "305" @click="showDetails"/>
-      <RMenuTextBox :text= this.lecData.대표교강사명 color= "red" size= "75"/>
-      <RMenuTextBox :text= this.lecData.수업시간 color = "red" size= "100" fontsize="13"/>
-      <SearchImageBox src= './addbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
-      <SearchImageBox src= './subtractbutton.svg' color ="red" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
-      <SearchImageBox src= './deletebutton.svg' color ="red" @click="clickDelBtn"/>
+      <RMenuTextBox class= "lec-list-classname" :text= this.lecData.과목명 :color = "this.lecData.color" size= "305" @click="showDetails"/>
+      <RMenuTextBox :text= this.lecData.대표교강사명 :color = "this.lecData.color" size= "75"/>
+      <RMenuTextBox :text= this.lecData.수업시간 :color = "this.lecData.color" size= "100" fontsize="13"/>
+      <SearchImageBox src= './addbutton.svg' :color = "this.lecData.color" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 0"/>
+      <SearchImageBox src= './subtractbutton.svg' :color = "this.lecData.color" @click="clickAddBtn" @mouseover="addShadowToTT" @mouseleave="clearShadowLec" v-show="this.lecData.isInTable == 1"/>
+      <SearchImageBox src= './deletebutton.svg' :color = "this.lecData.color" @click="clickDelBtn"/>
     </div>
   </div>
 </template>
@@ -26,6 +26,13 @@ export default {
     SearchImageBox
   },
   props: ["lecData"],
+  computed:{
+    setStyle(){
+      return {
+        "--color" : `${this.lecData.color}`
+      }
+    }
+  },
   methods : {
     async showDetails() {
       await this.$store.dispatch("fetchLecDetails", this.lecData.수업번호);
@@ -88,7 +95,7 @@ export default {
 
       if(!isOverlapped) {
         this.lecData.isInTable = 1;
-        this.$store.commit("seTimetableHackjum", this.lecData.학점)
+        this.$store.commit("setTimetableHackjum", this.lecData.학점)
         this.lecData['color'] = this.$store.getters.getColor
         this.$store.commit("setNextColor")
         for(let i = 0; i < this.lecData.요일.length; i++) {
@@ -103,7 +110,8 @@ export default {
     delFromTimeTable() {
       let curDay
       this.lecData.isInTable = 0;
-      this.$store.commit("seTimetableHackjum", -(this.lecData.학점))
+      this.lecData.color = null;
+      this.$store.commit("setTimetableHackjum", -(this.lecData.학점))
       for(let i = 0; i < this.lecData.요일.length; i++) {
         curDay = this.lecData.요일[i]
         this.$store.commit("setUpTimeLines", curDay);
@@ -142,10 +150,6 @@ export default {
   min-width: 394px
   position: relative
 
-.lec-list-classname:hover
-  transform: scale(1.1)
-  background-color: $geraldine
-  border: none
 .lec-list-classname:active
   transform: scale(0.95)
   border: none
@@ -157,10 +161,13 @@ export default {
   width: 20px
   border-top: 1px white solid
   border-bottom: 1px white solid
+  border-top-left-radius : 10px
+  background-color: var(--color)
 .down-button
   height: 20px
   width: 20px
-  
+  background-color: var(--color)
+  border-bottom-left-radius : 10px
 .up-button:hover,
 .down-button:hover
   transform: scale(1.3)
