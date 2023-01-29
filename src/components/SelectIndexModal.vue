@@ -6,9 +6,9 @@
         </div>
         <div class= "select-index-modal-card">
         <div class= "row" v-for="lec in this.lecList" :key="lec">
-            <RMenuTextBox color="yellow" size="90" :text= lec.lecData.과목명></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="90" :text= lec.lecData.대표교강사명></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="180" :text= lec.lecData.수업시간></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="90" :text= lec과목명></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="90" :text= lec.대표교강사명></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="180" :text= lec.수업시간></RMenuTextBox>
         </div>
         </div>
     </div>

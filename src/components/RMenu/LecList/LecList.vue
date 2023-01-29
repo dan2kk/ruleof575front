@@ -45,11 +45,20 @@ export default {
     }
   },
   methods:{
+    openSearchModal() {
+      this.$store.commit("setSearchModal")
+    },
     loadPrefLec(){
       this.$store.dispatch("crawlingWantedData")
     },
     exportPrefLec(){
-      this.$store.commit("setSearchModal")
+      //크롤링해와
+      //await HTTP 통신보내
+      //결과가 남아
+      this.$store.commit("setSelectIndexModal")
+  
+
+
       //this.$store.dispatch("exportPrefLec")
       //this.$store.dispatch("exportPrefLec")
     },
