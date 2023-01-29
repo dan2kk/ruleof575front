@@ -6,7 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    userInfo: {stuId: null, userName: null, major: null, grade: null},
+    // userInfo: {stuId: null, userName: null, major: null, grade: null},
     userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
 
     gradInfo : null,
@@ -25,6 +25,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    customModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -57,7 +58,7 @@ export default createStore({
     },
     colorIdx : 0,//Math.floor(Math.random() * 32),
     colorList: [
-      `#ffb3b7`, `#fedcdd`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
+      `#ffb3b7`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
       `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#20566e`, `#183641`, `#cde4d2`, 
       `#d2e1a8`, `#d8de7e`, `#deda52`, `#aacd67`, `#b9c8e7`, `#8fbae5`, `#6e91e3`, 
@@ -133,6 +134,9 @@ export default createStore({
     getSearchModal(state){
       return state.searchModal
     },
+    getCustomModal(state){
+      return state.customModal
+    },
     getHackData(state){
       return state.hackData
     },
@@ -157,7 +161,7 @@ export default createStore({
       state.userInfo.grade = grade
       //console.log(state.userInfo)
     },
-    seTimetableHackjum(state, hackjum) {
+    setTimetableHackjum(state, hackjum) {
       state.hackData.시간표학점 += hackjum
     },
 
@@ -216,7 +220,8 @@ export default createStore({
       }
     },
     delLecList(state, lecToDel) {
-      let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호) 
+      let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호)
+      state.leclist[lecIdx].color =  null
       if(lecIdx != -1) {
         state.lecList.splice(lecIdx, 1);
       }
