@@ -52,11 +52,10 @@ export default {
       this.$store.dispatch("crawlingWantedData")
     },
     exportPrefLec(){
-      //크롤링해와
-      //await HTTP 통신보내
-      //결과가 남아
-      this.$store.commit("setSelectIndexModal")
-  
+      this.$store.dispatch("preferReq")
+      //this.$store.dispatch("crawlingWantedData1")
+      //this.$store.commit("setSelectIndexModal")
+      
 
 
       //this.$store.dispatch("exportPrefLec")

@@ -16,7 +16,7 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
-    wantedList:[],
+    wantedList:[10001, 10002, 10003],
     recommList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
@@ -144,6 +144,9 @@ export default createStore({
     },
     getSelectIndexModal(state){
       return state.selectIndexModal
+    },
+    getWantedList(state){
+      return state.wantedList
     }
   },
   mutations: {
@@ -616,6 +619,62 @@ export default createStore({
       });})
     },
     //HTTP 통신 보내는 부분 비동기 -> 어떤 리스트에 결과를 담아놔
+    async preferReq(context){
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "pref"}, function(response) {
+          let wantedData = response.data
+          console.log(wantedData)
+          context.commit("setUpLecList1", wantedData)
+      });})
+      
+      // let time = Date.now();
+      // let token = null;
+      // let response = await fetch('https://nf.hanyang.ac.kr/ts.wseq?opcode=5101&nfid=0&prefix=NetFunnel.gRtype=5101;&sid=service_1&aid=act_2&js=yes&user_data=2018009098&'+time,
+      // {   
+      //   method: 'GET', 
+      //   mode: 'no-cors',
+      //   type: 'text/plain',
+      //   headers: {
+      //       "Accept":"*/*", 
+      //   },
+      // });
+      // token = await response.text();
+      // console.log(token)
+      // console.log(response)
+  //     let temp = {
+  //         IN_A_JAESUGANG_GB: "",
+  //         IN_JAESUGANG_HAKSU_NO
+  //         : "",
+  //         IN_JAESUGANG_SUUP_NO
+  //         : "",
+  //         IN_JAESUGANG_TERM
+  //         : "",
+  //         IN_JAESUGANG_YEAR
+  //         : "",
+  //         IN_JAESUGANG_YN
+  //         : "N",
+  //         IN_JOJIK_GB_CD
+  //         : "H0002256",
+  //         IN_NETFUNNEL_KEY
+  //         : "hSugang",
+  //         IN_SGSC_GB
+  //         : "0",
+  //         IN_SINCHEONG_FLAG
+  //         : "2",
+  //         IN_SUNSU_FLAG
+  //         : "",
+  //         IN_SUUP_NO
+  //         : "10008",
+  //     };
+  //   axios.post('https://portal.hanyang.ac.kr/sugang/SgscAct/saveSugangSincheong2.do?pgmId=P315365&menuId=M006632&tk=f670ae55b9a93fbd317a2db1fa5796e52d9e3094bd502f2a9f879845cd66fdb3', JSON.stringify(temp), {
+  //   headers: {
+  //     "Accept": "application/json, text/javascript, */*; q=0.01",
+  //     "Content-Type": `application/json+sua; charset=UTF-8`,
+  //     "Origin" : "https://portal.hanyang.ac.kr",
+  //     "Referer": "https://portal.hanyang.ac.kr/sugang/sulg.do",
+  //     "X-Requested-With": "XMLHttpRequest"
+  //  }} )
+    },
 
     // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
     applyWantedIndex(context){

@@ -6,7 +6,7 @@
         </div>
         <div class= "select-index-modal-card">
         <div class= "row" v-for="lec in this.lecList" :key="lec">
-            <RMenuTextBox color="yellow" size="90" :text= lec과목명></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="90" :text= lec.과목명></RMenuTextBox>
             <RMenuTextBox color="yellow" size="90" :text= lec.대표교강사명></RMenuTextBox>
             <RMenuTextBox color="yellow" size="180" :text= lec.수업시간></RMenuTextBox>
         </div>
@@ -26,7 +26,7 @@ export default {
     },
     computed:{
         lecList() {
-            return this.$store.getters.getLecList;
+            return this.$store.getters.getWantedList;
         }
     },
     methods:{
