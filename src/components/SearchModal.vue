@@ -38,7 +38,7 @@ export default {
     async getSearchText(){
       this.input = document.getElementById("searchbox").value
       try{
-        this.lecList = (await axios.get('http://3.37.249.210:1324/list/search', {params: {keyword: this.input}})).data.list
+        this.lecList = (await axios.get('https://ruleof.datasesang.store/list/search', {params: {keyword: this.input}})).data.list
         for(let lec of this.lecList) {
           let parsedLT = parseLectime(lec.수업시간);
           lec.수업시간 = parsedLT.수업시간
