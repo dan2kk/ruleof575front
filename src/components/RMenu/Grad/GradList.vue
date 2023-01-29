@@ -7,8 +7,8 @@
       <GradListHead :gradHeadData = "this.gradListHead"/>
     </div>
     <div class = "grad-list-lower-menu">
-      <input type="submit" class="load-grad-list" :value='this.buttonTxt' @click="loadGrad" v-if = "this.gradList.length == 0"/>
-      <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec" v-if = "this.gradList.length != 0"/>
+      <input type="submit" class="load-grad-list" :value='this.buttonTxt' @click="loadGrad" v-if="this.gradList.length == 0"/>
+      <GradRecord :gradData="gradRec" v-for="gradRec in this.gradList" :key="gradRec" v-if="this.gradList.length != 0"/>
     </div>
 
   </div>

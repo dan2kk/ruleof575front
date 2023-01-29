@@ -80,6 +80,17 @@ chrome.runtime.onMessage.addListener(
             sendResponse({data: sgscInfo})
         }
       }
+      else if(request.type == "export"){
+        if(request.data == "wanted"){
+            let url = window.location
+            if(url.hash != hashArray[1]) {
+                url.replace("https://portal.hanyang.ac.kr/sugang/sulg.do"+hashArray[1])}
+            let wantedData = document.querySelectorAll('#gdDtl2 > tbody > tr')
+            for(let i =0; i< wantedData.length; i++){
+                
+            }
+        }
+    }
       else{
         sendResponse("error")
       }
@@ -99,7 +110,7 @@ chrome.runtime.onMessage.addListener(
                 for(let y of x.textContent.split("\n")){
                     temp.push(y.trim())
                 }
-                let recData ={이수명: temp[1], 기준: temp[2], 이수: temp[4]}
+                let recData ={이수명: temp[1], 기준: temp[2], 이수: temp[4], 이수여부: temp[5]}
                 console.log(temp[1])
                 console.log(recData)
                 returnData.push(recData)
