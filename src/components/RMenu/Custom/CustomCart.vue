@@ -54,6 +54,9 @@ export default {
     methods:{
         setIsContextShown(){
             this.isContextShown = !this.isContextShown
+        },
+        setUpCourse(list){
+            this.$store.commit("setUpCourseModal", list)
         }
     }
 };

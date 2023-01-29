@@ -11,7 +11,7 @@
             <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
           </select>
         </RMenuTitleBox>
-        <RMenuTitleBox size = "100" color = "blue" style= "border: none" >          
+        <RMenuTitleBox size = "100" color = "blue" style= "border: none">          
           <select class= "select-grade-custom" v-model="this.getUserInfo.grade" @change="changeMajorType">
             <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
           </select>
@@ -48,7 +48,7 @@ export default {
   data(){
     return{
       majorType : "전공",
-      gyoyangType : "일반영역",
+      gyoyangType : "가상대학영역",
       gradeList: [1, 2, 3, 4],
       fieldOrder : [
       "가상대학영역",
