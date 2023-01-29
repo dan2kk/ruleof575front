@@ -5,7 +5,7 @@
     <LecDetailsModal class="left-modal" :modalData = 'this.$store.getters.getLecDetailsLeft' v-if="onLeftModal" v-on:modal-close="leftModalClose"/>
     <LecDetailsModal class="right-modal" :modalData = 'this.$store.getters.getLecDetailsRight' v-if="onRightModal" v-on:modal-close="rightModalClose"/>
     <SearchModal class="search-modal" v-if ="onSearchModal" v-on:modal-close="searchModalClose"></SearchModal>
-    <SelectIndexModal class="select-modal" v-if="onSelectModal" v-on:modal-close="selectModalClose"/>
+    <SelectIndexModal class="select-modal" v-if="onSelectIndexModal" v-on:modal-close="selectIndexModalClose"/>
   </div>
 </template>
 
@@ -37,8 +37,8 @@ export default {
     onSearchModal(){
       return this.$store.getters.getSearchModal.state
     },
-    onSelectModal(){
-      return this.$store.getters.getSelectModal.state
+    onSelectIndexModal(){
+      return this.$store.getters.getSelectIndexModal.state
     }
   },
   methods:{
@@ -51,8 +51,8 @@ export default {
     searchModalClose(){
       this.$store.getters.getSearchModal.state = false
     },
-    selectModalClose(){
-      this.$store.getters.getSearchModal.state = false
+    selectIndexModalClose(){
+      this.$store.getters.getSelectIndexModal.state = false
     }
   }
 };

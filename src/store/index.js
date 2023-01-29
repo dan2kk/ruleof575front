@@ -24,7 +24,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
-    selectModal: {state: false},
+    selectIndexModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -142,8 +142,8 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
-    getSelectModal(state){
-      return state.selectModal
+    getSelectIndexModal(state){
+      return state.selectIndexModal
     }
   },
   mutations: {
@@ -490,7 +490,7 @@ export default createStore({
       }
     },
 
-    async setSearchModal(state)
+    setSearchModal(state)
     {
       try{
         if(!state.searchModal["state"]){
@@ -570,8 +570,19 @@ export default createStore({
       state.hackData.최소학점 = hackInfo.최소학점
       state.hackData.최대학점 = hackInfo.최대학점
     },
-    setSearchModal(state){
-      state.selectModal.state = true
+    setSelectIndexModal(state)
+    {
+      try{
+        if(!state.selectIndexModal["state"]){
+          state.selectIndexModal["state"] = true
+        }
+        else{
+          state.selectIndexModal["state"] = false
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
     },
     setUpLecList1(state, lecList) {
       state.wantedList = lecList

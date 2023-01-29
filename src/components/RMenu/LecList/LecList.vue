@@ -45,13 +45,15 @@ export default {
     }
   },
   methods:{
+    openSearchModal() {
+      this.$store.commit("setSearchModal")
+    },
     loadPrefLec(){
       this.$store.dispatch("crawlingWantedData")
     },
     exportPrefLec(){
-      this.$store.commit("setSearchModal")
+      this.$store.commit("setSelectIndexModal")
       //this.$store.dispatch("exportPrefLec")
-      this.showModal = true
       //this.$store.dispatch("exportPrefLec")
     },
   },
