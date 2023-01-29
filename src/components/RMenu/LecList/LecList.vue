@@ -51,7 +51,6 @@ export default {
     exportPrefLec(){
       this.$store.commit("setSearchModal")
       //this.$store.dispatch("exportPrefLec")
-      this.showModal = true
       //this.$store.dispatch("exportPrefLec")
     },
   },
