@@ -19,6 +19,7 @@ export default createStore({
     recommList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
+    wantedIndex: [1, 3, 5, 7, 2, 4, 6],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
@@ -136,6 +137,9 @@ export default createStore({
     getMajorData(state){
       return state.majorData
     },
+    getArrayIndex(state){
+      return state.wantedIndex
+    }
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -145,11 +149,11 @@ export default createStore({
     },
     setUserMajor(state, major) {
       state.userInfo.major = major
-      console.log(state.userInfo)
+      //console.log(state.userInfo)
     },
     setUserGrade(state, grade) {
       state.userInfo.grade = grade
-      console.log(state.userInfo)
+      //console.log(state.userInfo)
     },
     seTimetableHackjum(state, hackjum) {
       state.hackData.시간표학점 += hackjum
@@ -175,7 +179,7 @@ export default createStore({
 
     setUpLecList(state, lecList) {
       try{
-        console.log(state.userInfo);
+        //console.log(state.userInfo);
 
         let parsedLT
 
@@ -313,14 +317,14 @@ export default createStore({
                 }
               break;
             default:
-              console.log("교양 X")
+              //console.log("교양 X")
               break;
           }
           if(lec.영어전용){
             gradData['영어전용강좌수'] += 1
           }
         }
-        console.log(gradData);
+        //console.log(gradData);
       }
       catch(err){
         alert(err)
@@ -581,10 +585,18 @@ export default createStore({
           context.commit("setUpLecList", wantedData)
       });})
     },
+    exportPrefLec(context){
+      console.log(context.getters.getArrayIndex)
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "export", data: "wanted", array: context.getters.getArrayIndex}, function(response) {
+          let exportData = response
+          //console.log(exportData)
+      });})
+    },
 
     async loginReq(context) {
         const response = await chrome.runtime.sendMessage({type: "extension", param: "login_info"});
-        console.log(response.stuData, response.hackData)
+        //console.log(response.stuData, response.hackData)
         context.commit("setUserInfo", response.stuData)
         context.commit("setHackInfo", response.hackData)
     },
@@ -618,7 +630,7 @@ export default createStore({
     async fetchGradList(context) {
       let stuId = context.getters.getStuId
       let gradList = (await axios.get('https://ruleof.datasesang.store/grad/init', {params: {stu_id: stuId}})).data.grads
-      console.log(gradList)
+      //console.log(gradList)
       context.commit("setGradList", gradList)
     },
     

@@ -65,14 +65,14 @@
         switch(this.timeBlockData.blockKind) {
           case "block":
             this.timeBlockData.isSelected = !this.timeBlockData.isSelected
-            console.log(this.timeBlockData.isSelected)
+            //console.log(this.timeBlockData.isSelected)
             break
           case "lecBlock":
-            console.log(this.timeBlockData.lecNum)
+            //console.log(this.timeBlockData.lecNum)
             await this.$store.dispatch("fetchLecDetails", this.timeBlockData.lecNum)
             break
           case "dayBlock":
-            console.log(this.timeBlockData.content)
+            //console.log(this.timeBlockData.content)
             this.timeBlockData.isSelected = !this.timeBlockData.isSelected
             timeLines = this.$store.getters.getTimeLines
             timeLine = timeLines[this.timeBlockData.content] 
@@ -93,7 +93,7 @@
                 if(Math.floor(y.start) == this.timeBlockData.start && y.blockKind == "block"
                   && this.timeBlockData.isSelected != y.isSelected) {
                   y.isSelected = this.timeBlockData.isSelected
-                  console.log(y.isSelected)
+                  //console.log(y.isSelected)
                 }
               })
             }

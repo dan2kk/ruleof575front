@@ -93,7 +93,7 @@ export default {
             }
           }
         }
-        console.log(filtered_twice)
+        //console.log(filtered_twice)
         return filtered_twice
       }
       else {
@@ -116,7 +116,7 @@ export default {
     checkLecTime(lecTime) {
       if(this.$store.getters.getIsNonTimeHidden) {
         let ntRegex = /시간미지정강좌/
-        console.log(lecTime)
+        //console.log(lecTime)
         if(ntRegex.test(lecTime)) {
           return false
         }
