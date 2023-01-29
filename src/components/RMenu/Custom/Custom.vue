@@ -1,22 +1,57 @@
 <template>
   <div class="custom">
-    <CustomCart class="cart-1" title= "나를 위한 전공" info="자신의 학과의 전공 과목 중 <br>가장 인기있는/학점을 잘 주는/경쟁이 적은 전공 과목을 추천해줍니다"/>
-    <!-- <div v-for="customs in customList" :key="customs">
-      <CustomCart class="cart-1" :title= "customs.영역코드명" info="내 졸업사정 상 필요한 교양 과목 중 <br>가장 인기있는/학점을 잘 주는/경쟁이 적은 교양 과목을 추천해줍니다"/>
-    </div> -->
+    <div class = "custom-upper-menu">
+      <RMenuTitleBox color="blue" fontsize = "22">Top 5</RMenuTitleBox>
+      <RMenuTextBox color="blue" text = "내 시간표에 맞는 강의 중 분야별 Top 5를 소개합니다. "></RMenuTextBox>
+    </div>
+    <div class = "custom-lower-menu">
+      <CustomCart class="cart-1"/>
+      <div class = "major-title">
+        <RMenuTitleBox size = "300" color = "blue" style= "border: none">          
+          <select class= "select-major-custom" v-model="majorType" @change="changeMajorType">
+            <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
+          </select>
+        </RMenuTitleBox>
+        <RMenuTitleBox size = "100" color = "blue" style= "border: none">          
+          <select class= "select-grade-custom" v-model="this.getUserInfo.grade">
+            <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
+          </select>
+        </RMenuTitleBox>
+        <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">전공 중 Top 5</RMenuTitleBox>
+      </div>
+      <div class = "gyoyang-title">
+        <RMenuTitleBox size = "400" color = "blue" style= "border: none">          
+          <select class= "select-major-custom" v-model="majorType" @change="changeMajorType">
+            <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
+          </select>
+        </RMenuTitleBox>
+        <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
+      </div>
+      <!-- <div v-for="customs in customList" :key="customs">
+        <CustomCart class="cart-1" :title= "customs.영역코드명" info="내 졸업사정 상 필요한 교양 과목 중 <br>가장 인기있는/학점을 잘 주는/경쟁이 적은 교양 과목을 추천해줍니다"/>
+      </div> -->
+    </div>
     <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
   </div>
 </template>
 
 <script>
 import RMenuTitleBox from "../Box/RMenuTitleBox";
+import RMenuModifiableTitleBox from "../Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "../Box/RMenuTextBox";
 import CustomCart from "./CustomCart"
 import CustomModal from "./CustomModal"
 export default {
   name: "Custom",
   components: {
-    RMenuTitleBox, RMenuTextBox, CustomCart, CustomModal,
+    RMenuTitleBox, RMenuTextBox, CustomCart, CustomModal, RMenuModifiableTitleBox
+  },
+  data(){
+    return{
+      majorType : "전공",
+      gradeList: [1, 2, 3, 4]
+
+    }
   },
   computed:{
     customList(){
@@ -41,6 +76,20 @@ export default {
     onCustomModal(){
       return this.$store.getters.getCustomModal.state
     },
+    getMajorData(){
+      return this.$store.getters.getMajorData
+    },
+    grade() {
+      if(this.$store.getters.getIsLogined == false) {
+        return 1
+      }
+      else {
+        return this.$store.getters.getGrade
+      }
+    },
+    getUserInfo(){
+      return this.$store.getters.getUserInfo
+    },
   },
   methods: {
     setIsShow(fieldName) {
@@ -49,6 +98,10 @@ export default {
     customModalClose(){
       this.$store.getters.getCustomModal.state = false
     },
+    changeMajorType(){
+      this.$store.commit('setUserMajor', this.majorType)
+    },
+    
   }
 };
 </script>
@@ -66,4 +119,48 @@ export default {
 .row
   align-items: center
   display: flex
+
+.custom-lower-menu
+  width: 100%
+  overflow-y: overlay
+  overflow-x: hidden
+
+.custom-lower-menu::-webkit-scrollbar 
+  display: none
+
+.custom-lower-menu::-webkit-scrollbar-thumb
+  background-color: hsla(0, 0%, 42%, 0.49)
+  border-radius: 100px
+.select-major-custom
+  width: 85%
+  height: 80%
+  position: absolute
+  top: 10%
+  left: 13%
+  background-color: #b2c3e1
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 22px
+  border: none
+  color: white
+  font-weight: 700
+
+.select-grade-custom
+  width: 95%
+  height: 80%
+  top: 10%
+  left: 3%
+  background-color: #b2c3e1
+  font-family: "Noto Sans KR", Helvetica
+  font-size: 22px
+  border: none
+  color: white
+  font-weight: 700
+
+.major-title
+  display: flex
+  flex-direction: row
+
+.gyoyang-title
+  display: flex
+  flex-direction: row
 </style>
