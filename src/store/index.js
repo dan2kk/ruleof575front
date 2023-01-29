@@ -16,6 +16,7 @@ export default createStore({
     curScreen: 0,
     
     lecList:[],
+    wantedList:[],
     recommList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
@@ -23,6 +24,7 @@ export default createStore({
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    selectModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -139,6 +141,9 @@ export default createStore({
     },
     getArrayIndex(state){
       return state.wantedIndex
+    },
+    getSelectModal(state){
+      return state.selectModal
     }
   },
   mutations: {
@@ -564,6 +569,12 @@ export default createStore({
     setHackInfo(state, hackInfo) {
       state.hackData.최소학점 = hackInfo.최소학점
       state.hackData.최대학점 = hackInfo.최대학점
+    },
+    setSearchModal(state){
+      state.selectModal.state = true
+    },
+    setUpLecList1(state, lecList) {
+      state.wantedList = lecList
     }
   },
   actions: {
@@ -583,6 +594,13 @@ export default createStore({
         chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
           let wantedData = response.data
           context.commit("setUpLecList", wantedData)
+      });})
+    },
+    crawlingWantedData1(context){
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {type: "import", data: "wanted"}, function(response) {
+          let wantedData = response.data
+          context.commit("setUpLecList1", wantedData)
       });})
     },
     exportPrefLec(context){

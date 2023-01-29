@@ -14,7 +14,6 @@
         <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
       </div> 
     </div>
-
   </div>
 </template>
 
@@ -24,6 +23,7 @@ import RMenuTextBox from "../Box/RMenuTextBox";
 import LecListRecord from "./LecListRecord";
 import LecListHead from "./LecListHead";
 import SearchImageBox from "../Box/SearchImageBox";
+
 
 export default {
   name: "LecList",
@@ -45,15 +45,15 @@ export default {
     }
   },
   methods:{
-    openSearchModal() {
-      this.$store.commit("setSearchModal")
-    },
     loadPrefLec(){
       this.$store.dispatch("crawlingWantedData")
     },
     exportPrefLec(){
-      this.$store.dispatch("exportPrefLec")
-    }
+      this.$store.commit("setSearchModal")
+      //this.$store.dispatch("exportPrefLec")
+      this.showModal = true
+      //this.$store.dispatch("exportPrefLec")
+    },
   },
 };
 </script>
