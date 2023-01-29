@@ -1,5 +1,5 @@
 <template>
-  <div class="time-block" :style="blcokStyle" @click="clickEvent" v-show='this.timeBlockData.blockKind != "sendBtn"'>
+  <div class="time-block" :style="blockstyle" @click="clickEvent" v-show='this.timeBlockData.blockKind != "sendBtn"'>
     <div class="time-block-content notosanskr-normal-black-14px"> 
       {{ this.timeBlockData.content }}
     </div>
@@ -13,7 +13,7 @@
         </svg>
       </div>
     </div>
-    <span class="span">Send</span>
+    <span class="span">찾기</span>
   </button> 
 </template>
   
@@ -22,7 +22,7 @@
     name: "TimeBlock",
     props: ["timeBlockData"],
     computed: {
-      blcokStyle() {
+      blockstyle() {
         let color
         switch (this.timeBlockData.blockKind) {
           case "block":

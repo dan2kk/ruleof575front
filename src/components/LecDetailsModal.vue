@@ -203,7 +203,7 @@ export default {
                 size: 25,
             },
             formatter: function(value, ctx) {
-                return this.$refs.pieChart.chart.data.labels[this.$refs.pieChart.dataIndex] + '\n' + value;
+                return ctx.chart.data.labels[ctx.dataIndex] + '\n' + value;
             }
           }
         },
@@ -219,10 +219,8 @@ export default {
         data:this.setData(),
         options:this.setOptions(),
       })
-
     }
   }
-
 };
 
 

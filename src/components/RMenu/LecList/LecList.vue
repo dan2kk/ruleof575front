@@ -2,7 +2,7 @@
   <div class="lec-list">
     <div class = "lec-list-upper-menu">
       <RMenuTitleBox color="red">
-        <input type="submit" class="export-pref-lec" value="내 희망수업 내보내기" @click="exportPrefLec"/>
+        <input type="submit" class="export-pref-lec" value="저장 및 희망수업 내보내기" @click="exportPrefLec"/>
         내 수업목록
         <input type="submit" class="load-pref-lec" value="내 희망수업 불러오기" @click="loadPrefLec"/> 
       </RMenuTitleBox>
@@ -55,13 +55,13 @@ export default {
       //크롤링해와
       //await HTTP 통신보내
       //결과가 남아
-      this.$store.commit("setSelectIndexModal")
-  
+      this.$store.dispatch("changeScreen", "1")
 
 
       //this.$store.dispatch("exportPrefLec")
       //this.$store.dispatch("exportPrefLec")
     },
+    
   },
 };
 </script>
@@ -108,19 +108,19 @@ export default {
   color: $white
   
 .load-pref-lec
-  width: 26%
-  height: 70%
+  width: 25%
+  height: 60%
   border: 3px solid
   border-color: $pippin
   border-radius: 10px
   background-color: $white
   position: absolute
-  left: 72%
+  left: 73%
   color: $geraldine
   font-weight: 1000
 .export-pref-lec
-  width: 26%
-  height: 70%
+  width: 30%
+  height: 60%
   border: 3px solid
   border-color: $pippin
   border-radius: 10px

@@ -99,8 +99,6 @@ export default {
       else {
         return filtered
       }
-
-
     }
   },
   methods: {
