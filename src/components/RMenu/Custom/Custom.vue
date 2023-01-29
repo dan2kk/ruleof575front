@@ -21,8 +21,8 @@
       </div>
       <div class = "gyoyang-title">
         <RMenuTitleBox size = "400" color = "blue" style= "border: none">          
-          <select class= "select-major-custom" v-model="majorType" @change="changeMajorType">
-            <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
+          <select class= "select-major-custom" v-model="gyoyangType" @change="changeGyoyangType">
+            <option v-for="item in this.fieldOrder" :value="item" :key="item">{{ item }}</option>
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
@@ -49,8 +49,18 @@ export default {
   data(){
     return{
       majorType : "전공",
-      gradeList: [1, 2, 3, 4]
-
+      gyoyangType : "일반영역",
+      gradeList: [1, 2, 3, 4],
+      fieldOrder : [
+      "가상대학영역",
+      "고전읽기영역",
+      "과학과기술영역",
+      "글로벌언어와문화영역",
+      "미래산업과창업영역",
+      "사회와세계영역",
+      "소프트웨어영역",
+      "인문과예술영역",
+      ],
     }
   },
   computed:{
@@ -79,6 +89,12 @@ export default {
     getMajorData(){
       return this.$store.getters.getMajorData
     },
+    getCustomGEList(){
+      return this.$store.getters.getCustomGEList
+    },
+    getCustomMajorList(){
+      return this.$store.getters.getCustomMajorList
+    },
     grade() {
       if(this.$store.getters.getIsLogined == false) {
         return 1
@@ -99,8 +115,11 @@ export default {
       this.$store.getters.getCustomModal.state = false
     },
     changeMajorType(){
-      this.$store.commit('setUserMajor', this.majorType)
+      this.$store.commit('fetchCustomMajorList')
     },
+    changeGyoyangType(){
+      this.$store.commit('fetchCustomGEList', this.gyoyangType)
+    }
     
   }
 };
