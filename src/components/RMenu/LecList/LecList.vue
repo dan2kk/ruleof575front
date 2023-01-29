@@ -9,7 +9,7 @@
       <LecListHead :lecHeadData="lecListHead"/>
     </div>
     <div class = "lec-list-lower-menu">
-      <LecListRecord :lecData="lec" v-for="lec in this.lecList" :key="lec"></LecListRecord>
+      <LecListRecord class = "llr" :lecData="lec" v-for="lec in this.lecList" :key="lec"></LecListRecord>
       <div class = "search-cart">
         <input type="submit" class="open-button" value="과목 직접 검색" @click="openSearchModal">
       </div> 
@@ -129,5 +129,6 @@ export default {
   left: 2%
   color: $geraldine
   font-weight: 1000
-
+.llr:hover
+  transform: scale(1.03)
 </style>

@@ -6,8 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-    userInfo: {stuId: null, userName: null, major: null, grade: null},
-    userInfo: {stuId: "2018007947", userName: "김병주", major: "컴퓨터소프트웨어학부", grade: "3학년"},
+    userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
 
     gradInfo : null,
     isChanged: false,
@@ -18,13 +17,15 @@ export default createStore({
     lecList:[],
     wantedList:[10001, 10002, 10003],
     recommList: [],
-    customList: [],
+    customGEList: [],
+    customMajorList: [],
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
+    customModal: {state: false},
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -57,7 +58,7 @@ export default createStore({
     },
     colorIdx : 0,//Math.floor(Math.random() * 32),
     colorList: [
-      `#ffb3b7`, `#fedcdd`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
+      `#ffb3b7`, `#dbe5f1`, `#a5bcde`, `#7d9dcd`, `#ffa970`, `#ffd77f`, 
       `#edf3c3`, `#acd8d9`, `#7fbcff`, `#a9e5cc`, `#dcedc1`, `#fed2b5`, `#ffaba7`, 
       `#ff8b94`, `#94cfc9`, `#6db3bf`, `#4699b7`, `#20566e`, `#183641`, `#cde4d2`, 
       `#d2e1a8`, `#d8de7e`, `#deda52`, `#aacd67`, `#b9c8e7`, `#8fbae5`, `#6e91e3`, 
@@ -133,6 +134,9 @@ export default createStore({
     getSearchModal(state){
       return state.searchModal
     },
+    getCustomModal(state){
+      return state.customModal
+    },
     getHackData(state){
       return state.hackData
     },
@@ -142,6 +146,13 @@ export default createStore({
     getArrayIndex(state){
       return state.wantedIndex
     },
+    getCustomGEList(state) {
+      return state.customGEList
+    },
+    getCustomMajorList(state) {
+      return state.customMajorList
+    }
+
   },
   mutations: {
     setUserInfo(state, data) { 
@@ -157,7 +168,7 @@ export default createStore({
       state.userInfo.grade = grade
       //console.log(state.userInfo)
     },
-    seTimetableHackjum(state, hackjum) {
+    setTimetableHackjum(state, hackjum) {
       state.hackData.시간표학점 += hackjum
     },
 
@@ -216,7 +227,8 @@ export default createStore({
       }
     },
     delLecList(state, lecToDel) {
-      let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호) 
+      let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호)
+      state.leclist[lecIdx].color =  null
       if(lecIdx != -1) {
         state.lecList.splice(lecIdx, 1);
       }
@@ -586,7 +598,17 @@ export default createStore({
         state.lecList[idx+1] = tmp
       }
     },
+
+    setUpCustomGEList(state, customList) {
+      state.customGEList = customList
+    },
+    setUpCustomMajorList(state, customList) {
+      state.customMajorList = customList
+    }
+
   },
+
+
   actions: {
     crawlingGradData(context){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -623,53 +645,7 @@ export default createStore({
           context.commit("setUpLecList1", wantedData)
       });})
       
-      // let time = Date.now();
-      // let token = null;
-      // let response = await fetch('https://nf.hanyang.ac.kr/ts.wseq?opcode=5101&nfid=0&prefix=NetFunnel.gRtype=5101;&sid=service_1&aid=act_2&js=yes&user_data=2018009098&'+time,
-      // {   
-      //   method: 'GET', 
-      //   mode: 'no-cors',
-      //   type: 'text/plain',
-      //   headers: {
-      //       "Accept":"*/*", 
-      //   },
-      // });
-      // token = await response.text();
-      // console.log(token)
-      // console.log(response)
-  //     let temp = {
-  //         IN_A_JAESUGANG_GB: "",
-  //         IN_JAESUGANG_HAKSU_NO
-  //         : "",
-  //         IN_JAESUGANG_SUUP_NO
-  //         : "",
-  //         IN_JAESUGANG_TERM
-  //         : "",
-  //         IN_JAESUGANG_YEAR
-  //         : "",
-  //         IN_JAESUGANG_YN
-  //         : "N",
-  //         IN_JOJIK_GB_CD
-  //         : "H0002256",
-  //         IN_NETFUNNEL_KEY
-  //         : "hSugang",
-  //         IN_SGSC_GB
-  //         : "0",
-  //         IN_SINCHEONG_FLAG
-  //         : "2",
-  //         IN_SUNSU_FLAG
-  //         : "",
-  //         IN_SUUP_NO
-  //         : "10008",
-  //     };
-  //   axios.post('https://portal.hanyang.ac.kr/sugang/SgscAct/saveSugangSincheong2.do?pgmId=P315365&menuId=M006632&tk=f670ae55b9a93fbd317a2db1fa5796e52d9e3094bd502f2a9f879845cd66fdb3', JSON.stringify(temp), {
-  //   headers: {
-  //     "Accept": "application/json, text/javascript, */*; q=0.01",
-  //     "Content-Type": `application/json+sua; charset=UTF-8`,
-  //     "Origin" : "https://portal.hanyang.ac.kr",
-  //     "Referer": "https://portal.hanyang.ac.kr/sugang/sulg.do",
-  //     "X-Requested-With": "XMLHttpRequest"
-  //  }} )
+      
     },
 
     // 사용자가 순서를 선택하고 OK를 누르면 크롤링해서 index 반영
@@ -771,9 +747,36 @@ export default createStore({
       }
       context.commit("sortRecommList")
     },
-    async fetchCustomList(context){
-      let geList = (await axios.get('https://ruleof.datasesang.store/custom/ge', {params: {field: }})).data
+
+    async fetchCustomGEList(context, selectedField) {
+      let userGrade = context.getters.getUserInfo.grade
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
+
+      context.commit("setUpCustomGEList", customList)
+    },
+    async fetchCustomMajorList(context) {
+      let userInfo = context.getters.getUserInfo
+      let userMajor = userInfo.major
+      let userGrade = userInfo.grade
+
+      console.log(userMajor)
+      console.log(userGrade)
+
+      if(userMajor == null) {
+        alert("전공을 선택해주세요")
+        return
+      }
+
+      let customList = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
+
+      console.log(customList)
+      context.commit("setUpCustomMajorList", customList)
     }
+
+
+
+
   },
   modules: {
   }

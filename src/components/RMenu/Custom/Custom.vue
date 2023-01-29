@@ -4,6 +4,7 @@
     <!-- <div v-for="customs in customList" :key="customs">
       <CustomCart class="cart-1" :title= "customs.영역코드명" info="내 졸업사정 상 필요한 교양 과목 중 <br>가장 인기있는/학점을 잘 주는/경쟁이 적은 교양 과목을 추천해줍니다"/>
     </div> -->
+    <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
   </div>
 </template>
 
@@ -11,10 +12,11 @@
 import RMenuTitleBox from "../Box/RMenuTitleBox";
 import RMenuTextBox from "../Box/RMenuTextBox";
 import CustomCart from "./CustomCart"
+import CustomModal from "./CustomModal"
 export default {
   name: "Custom",
   components: {
-    RMenuTitleBox, RMenuTextBox, CustomCart
+    RMenuTitleBox, RMenuTextBox, CustomCart, CustomModal,
   },
   computed:{
     customList(){
@@ -35,11 +37,17 @@ export default {
         }
       }
       filtered = filtered.sort((a, b) => fieldOrder.indexOf(a.영역코드명) - fieldOrder.indexOf(b.영역코드명));
-    }
+    },
+    onCustomModal(){
+      return this.$store.getters.getCustomModal.state
+    },
   },
   methods: {
     setIsShow(fieldName) {
       this.$store.commit("setIsCustomShow", fieldName)
+    },
+    customModalClose(){
+      this.$store.getters.getCustomModal.state = false
     },
   }
 };

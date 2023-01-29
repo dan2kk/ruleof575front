@@ -47,18 +47,20 @@
         </div>
         <div v-show="isRegisteredShow[index]">
           <div class= "row">
-            <RMenuTitleBox color="yellow" size="114">정원</RMenuTitleBox>
-            <RMenuTitleBox color="yellow" size="114">수강</RMenuTitleBox>
-            <RMenuTitleBox color="yellow" size="114">증원</RMenuTitleBox>
-            <RMenuTitleBox color="yellow" size="114">취소</RMenuTitleBox>
-            <RMenuTitleBox color="yellow" size="114">정정취소</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">정원</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">수강</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">증원</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">취소</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">정정취소</RMenuTitleBox>
+            <RMenuTitleBox color="yellow" size="95">재수강</RMenuTitleBox>
           </div>
           <div class= "row">
-            <RMenuTextBox color="yellow" size="114" :text=prev.제한인원></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="114" :text=prev.신청인원></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="114" :text=prev.증원인원></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="114" :text=prev.전체취소></RMenuTextBox>
-            <RMenuTextBox color="yellow" size="114" :text=prev.정정취소></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.제한인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.신청인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.증원인원></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.전체취소></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.정정취소></RMenuTextBox>
+            <RMenuTextBox color="yellow" size="95" :text=prev.재수강인원></RMenuTextBox>
           </div>
         </div>
         <div class="row"> 
