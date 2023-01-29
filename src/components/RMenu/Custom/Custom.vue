@@ -7,7 +7,7 @@
     <div class = "custom-lower-menu">
       <div class = "major-title">
         <RMenuTitleBox size = "300" color = "blue" style= "border: none">          
-          <select class= "select-major-custom" v-model="majorType" @change="changeMajorType">
+          <select class= "select-major-custom" v-model="this.getUserInfo.major" @change="changeMajorType">
             <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
           </select>
         </RMenuTitleBox>
@@ -104,7 +104,7 @@ export default {
     },
     getUserInfo(){
       return this.$store.getters.getUserInfo
-    },
+    }
   },
   methods: {
     setIsShow(fieldName) {

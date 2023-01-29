@@ -6,7 +6,7 @@
     </div>
     <div class="column-userinfo">
       <div class="select-major-box">
-        <select class= "select-major" v-model="majorType" @change="changeMajorType">
+        <select class= "select-major" v-model="this.getUserInfo.major">
           <option v-for="item in this.getMajorData" :value="item" :key="item">{{ item }}</option>
         </select>
       </div>
@@ -42,6 +42,12 @@ export default {
   components : {
     LMenuTextBox
   },
+  data(){
+    return{
+      majorType : "전공",
+      gradeList: [1, 2, 3, 4]
+    }
+  },
   computed:{
     getUserInfo(){
       return this.$store.getters.getUserInfo
@@ -61,15 +67,9 @@ export default {
       }
     }
   },
-  data(){
-    return{
-      majorType : "전공",
-      gradeList: [1, 2, 3, 4]
-    }
-  },
   methods:{
     changeMajorType(){
-      this.$store.commit('setUserMajor', this.majorType)
+      this.$store.commit('setUserMajor', event.target.value)
     },
   }
 }
