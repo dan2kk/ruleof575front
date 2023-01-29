@@ -600,10 +600,10 @@ export default createStore({
     },
 
     setUpCustomGE(state, custom) {
-      state.customGE = customList
+      state.customGE = custom
     },
     setUpCustomMajor(state, custom) {
-      state.customMajor = customList
+      state.customMajor = custom
     }
 
   },
@@ -751,9 +751,9 @@ export default createStore({
     async fetchCustomGEList(context, selectedField) {
       let userGrade = context.getters.getUserInfo.grade
 
-      let customList = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
+      let custom = (await axios.get("https://ruleof.datasesang.store/custom/ge", {params: {field : selectedField, grade : userGrade}})).data
 
-      context.commit("setUpCustomGEList", customList)
+      context.commit("setUpCustomGEList", custom)
     },
     async fetchCustomMajorList(context) {
       let userInfo = context.getters.getUserInfo
@@ -768,10 +768,10 @@ export default createStore({
         return
       }
 
-      let customList = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
+      let custom = (await axios.get("https://ruleof.datasesang.store/custom/major", {params: {major : userMajor, grade : userGrade}})).data
 
-      console.log(customList)
-      context.commit("setUpCustomMajorList", customList)
+      console.log(custom)
+      context.commit("setUpCustomMajorList", custom)
     }
 
 
