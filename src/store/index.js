@@ -6,13 +6,12 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-   userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
-    //userInfo: {stuId: null, userName: null, major: null, grade: null},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
 
     gradInfo : null,
     isChanged: false,
-    isOnlyInGradShow: false,
-    isNonTimeHidden : false,
+    isOnlyInGradShow: true,
+    isNonTimeHidden : true,
     curScreen: 0,
     
     lecList:[],
@@ -233,7 +232,7 @@ export default createStore({
     },
     delLecList(state, lecToDel) {
       let lecIdx = state.lecList.findIndex((x) => x.수업번호 == lecToDel.수업번호)
-      state.leclist[lecIdx].color =  null
+      state.lecList[lecIdx].color =  null
       if(lecIdx != -1) {
         state.lecList.splice(lecIdx, 1);
       }
