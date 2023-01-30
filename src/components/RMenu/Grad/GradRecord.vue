@@ -27,7 +27,7 @@ export default {
       {
         if (this.gradData.변동 > 0)
         {
-          if (parseInt(this.gradData.합계) > parseInt(this.gradData.기준))
+          if (this.gradData.이수여부 == "N")
           {
             color = "#FFCCCC"
           }
@@ -36,7 +36,7 @@ export default {
         }
         else
         {
-          if (parseInt(this.gradData.이수) >= parseInt(this.gradData.기준))
+          if (this.gradData.이수여부 == "N")
             color = "#E0E0E0"
           else
             color = "#purple"
