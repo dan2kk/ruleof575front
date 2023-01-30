@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "한양대학교 수강신청 2.0",
+    "name": "한양대학교 삼다수",
     "description": "한양대학교 수강신청시스템을 보조하는 크롬 확장프로그램입니다.",
     "version": "0.0.1",
     "action": {

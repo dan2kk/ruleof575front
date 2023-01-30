@@ -168,27 +168,5 @@ chrome.runtime.onMessage.addListener(
             console.log(wantedTable)
             resolve(returnData)
         }
-        else if(idx ==2){ // https request prefer
-            let time = Date.now();
-            let baseUrl = 'https://nf.hanyang.ac.kr/ts.wseq?opcode=5101&nfid=0&prefix=NetFunnel.gRtype=5101;&sid=service_1&aid=act_2&js=yes&user_data='
-            let stuNumString = stuNum + ''
-            baseUrl = baseUrl.concat(stuNumString,'&',time)
-            baseUrl = baseUrl.trim()
-            console.log(baseUrl);
-            const response = await window.fetch(
-                baseUrl,
-                {   
-                    method: 'GET', 
-                    // mode: 'no-cors',
-                    headers: {
-                        "Accept":"*/*",
-                    },
-                }
-            )
-            // let data = await response.json()
-            console.log(response)
-            resolve(response)
-        }
-        
     });
   };
