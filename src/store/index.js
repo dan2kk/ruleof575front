@@ -614,12 +614,13 @@ export default createStore({
 
           let parsedLT
           for(let lec of list) {
-            console.log(lec.수업시간)
-            parsedLT = parseLectime(lec.수업시간);
-            lec.수업시간 = parsedLT.수업시간
-            lec.요일 = parsedLT.요일
-            lec.시작시간 = parsedLT.시작시간
-            lec.끝시간 = parsedLT.끝시간
+            if(lec.요일== undefined) {
+              parsedLT = parseLectime(lec.수업시간);
+              lec.수업시간 = parsedLT.수업시간
+              lec.요일 = parsedLT.요일
+              lec.시작시간 = parsedLT.시작시간
+              lec.끝시간 = parsedLT.끝시간
+            }
           }
           state.customModal.list = list
         }
