@@ -12,7 +12,7 @@
           </select>
         </RMenuTitleBox>
         <RMenuTitleBox size = "100" color = "blue" style= "border: none">          
-          <select class= "select-grade-custom" v-model="this.getUserInfo.grade" @change="changeMajorType">
+          <select class= "select-grade-custom" v-model="this.getUserInfo.grade" @change="[changeMajorType(), changeGyoyangType()]">
             <option v-for="item in this.gradeList" :value="item" :key="item">{{ item + "학년"}}</option>
           </select>
         </RMenuTitleBox>

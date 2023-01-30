@@ -91,7 +91,7 @@ export default {
 .custom-checkbox-cart
   position: absolute
   left : 93%
-  top: 45%
+  top: 60px
 
 .custom-container
   display: block 
