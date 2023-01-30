@@ -22,10 +22,14 @@ export default createStore({
     gradList: [],
     shadowList: [[],[],[],[],[]],
     wantedIndex: [1, 3, 5, 7, 2, 4, 6],
+
+    
     lecDetailsLeft: {state: false},
     lecDetailsRight: {state: false},
     searchModal: {state: false},
-    customModal: {state: false},
+    customModal: {state: false, list:[]},
+
+
     hackData : {최소학점: 0, 최대학점 : 0, 신청학점: 0, 시간표학점: 0, 수강과목수: 0},
     selectedTimes: { 
       월:[], 
@@ -134,9 +138,6 @@ export default createStore({
     getSearchModal(state){
       return state.searchModal
     },
-    getCustomModal(state){
-      return state.customModal
-    },
     getHackData(state){
       return state.hackData
     },
@@ -145,6 +146,9 @@ export default createStore({
     },
     getArrayIndex(state){
       return state.wantedIndex
+    },
+    getCustomModal(state){
+      return state.customModal
     },
     getCustomGE(state) {
       return state.customGE
@@ -599,15 +603,38 @@ export default createStore({
       }
     },
 
+    setCustomModal(state, list)
+    {
+      try{
+        console.log(list)
+        if(!state.customModal['state']){
+          state.customModal['state'] = true
+
+          let parsedLT
+          for(let lec of list) {
+            parsedLT = parseLectime(lec.수업시간);
+            lec.수업시간 = parsedLT.수업시간
+            lec.요일 = parsedLT.요일
+            lec.시작시간 = parsedLT.시작시간
+            lec.끝시간 = parsedLT.끝시간
+          }
+          state.customModal.list = list
+        }
+        else{
+          state.customModal['state'] = false
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+    },
+
     setUpCustomGE(state, custom) {
       state.customGE = custom
     },
     setUpCustomMajor(state, custom) {
       state.customMajor = custom
     },
-    setUpCourseModal(state, courseData){
-      state.wantedList = courseData
-    }
 
   },
 

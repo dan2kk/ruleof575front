@@ -28,8 +28,6 @@
         <RMenuTitleBox size = "200" color ="blue" fontsize = "22"  style= "border: none">교양 영역 중 Top 5</RMenuTitleBox>
       </div>
       <CustomCart :customList = "this.getCustomGE" v-if="this.getCustomGE.hot != undefined"/>
-
-      <CustomModal v-if ="onCustomModal" v-on:modal-close="customModalClose"></CustomModal>
     </div>
   </div>
 </template>
@@ -39,11 +37,10 @@ import RMenuTitleBox from "../Box/RMenuTitleBox";
 import RMenuModifiableTitleBox from "../Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "../Box/RMenuTextBox";
 import CustomCart from "./CustomCart"
-import CustomModal from "./CustomModal"
 export default {
   name: "Custom",
   components: {
-    RMenuTitleBox, RMenuTextBox, CustomCart, CustomModal, RMenuModifiableTitleBox
+    RMenuTitleBox, RMenuTextBox, CustomCart, RMenuModifiableTitleBox
   },
   data(){
     return{
@@ -82,9 +79,6 @@ export default {
       }
       filtered = filtered.sort((a, b) => fieldOrder.indexOf(a.영역코드명) - fieldOrder.indexOf(b.영역코드명));
     },
-    onCustomModal(){
-      return this.$store.getters.getCustomModal.state
-    },
     getMajorData(){
       return this.$store.getters.getMajorData
     },
@@ -94,14 +88,6 @@ export default {
     getCustomMajor(){
       return this.$store.getters.getCustomMajor
     },
-    grade() {
-      if(this.$store.getters.getIsLogined == false) {
-        return 1
-      }
-      else {
-        return this.$store.getters.getGrade
-      }
-    },
     getUserInfo(){
       return this.$store.getters.getUserInfo
     }
@@ -109,9 +95,6 @@ export default {
   methods: {
     setIsShow(fieldName) {
       this.$store.commit("setIsCustomShow", fieldName)
-    },
-    customModalClose(){
-      this.$store.getters.getCustomModal.state = false
     },
     changeMajorType(){
       this.$store.dispatch('fetchCustomMajor')

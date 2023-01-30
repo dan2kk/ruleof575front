@@ -6,29 +6,31 @@
         </div>
         <div class= "custom-modal-card">
           <RMenuTitleBox color= "blue" size="535">과목 직접 담기</RMenuTitleBox>
+          <CustomModalRecord :lecData=lec v-for="lec in this.lecList" :key="lec"></CustomModalRecord>
         </div>
     </div>
 </template>
   
 
 <script>
-import RMenuTitleBox from "../Box/RMenuTitleBox"
-import axios from "axios"
+import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox"
+import RMenuTextBox from "./RMenu/Box/RMenuTextBox"
+import SearchImageBox from "./RMenu/Box/SearchImageBox"
+import CustomModalRecord from "./CustomModalRecord"
 
 export default {
-  name: "Modal",
+  name: "CustomModal",
   props: [],
   components: {
-    RMenuTitleBox
+    RMenuTitleBox,
+    RMenuTextBox,
+    SearchImageBox,
+    CustomModalRecord
   },
-  data(){
-    return{
-      input: "",
-      lecList : []
+  computed: {
+    lecList() {
+      return this.$store.getters.getCustomModal.list
     }
-  },
-  methods:{
-
   }
 };
 
@@ -37,7 +39,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../../../variables'
+@import '../../variables'
 
 .custom-modal
   width: 600px
