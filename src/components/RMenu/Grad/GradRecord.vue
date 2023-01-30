@@ -36,7 +36,7 @@ export default {
         }
         else
         {
-          if (this.gradData.이수여부 == "N")
+          if (this.gradData.이수여부 == "Y")
             color = "#E0E0E0"
           else
             color = "#purple"

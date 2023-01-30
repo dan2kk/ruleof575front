@@ -6,8 +6,7 @@ import axios from "axios"
 export default createStore({
   state: {
     isLogined: false,
-   userInfo: {stuId: "2018007947", userName: "김병주", major: null, grade: "3"},
-    //userInfo: {stuId: null, userName: null, major: null, grade: null},
+    userInfo: {stuId: null, userName: null, major: null, grade: null},
 
     gradInfo : null,
     isChanged: false,
