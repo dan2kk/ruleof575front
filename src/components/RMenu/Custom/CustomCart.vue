@@ -11,11 +11,11 @@
                     <RMenuTextBox color="red" :text= idx+1 size = "25" height = "50"/>
                     <RMenuTextBox color="red" :text = custom.과목명 size = "275" height = "50" @click="showCurSemLec(custom.개설예정수업목록)"/>
                     <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <RMenuTextBox color="red" :text= custom.설강기준평점 size = "75" height = "50"/>
                 </div>
             </div>
             <RMenuTitleBox class = "long-button" color="green" size = "600" v-show = "!isContextShown[1]" @click = "isContextShown[1] = !isContextShown[1]">
-                최고 보험용 과목
+                최고 보험 과목
             </RMenuTitleBox>
             <div v-for = "(custom, idx) in this.customList.cold.slice(0, 5)" v-show = "isContextShown[1]" :key = custom>
                 <div class = "row-custom" >
