@@ -5,7 +5,7 @@
           창을 닫으려면 바깥을 클릭
         </div>
         <div class= "search-modal-card">
-          <RMenuTitleBox color= "red" size="535">과목 직접 담기</RMenuTitleBox>
+          <RMenuTitleBox color= "red" size="534">과목 직접 담기</RMenuTitleBox>
           <div class="search">
             <input type="text" class="search-box" id="searchbox"  placeholder="원하는 과목 직접 검색"/>
             <input type="submit" class="search-button" value="검색" @click="getSearchText()">
@@ -90,7 +90,7 @@ export default {
   border-top-right-radius: 15px
 
 .search-modal-card::-webkit-scrollbar 
-  width : 1px
+ display: none
   
 .search-modal-card::-webkit-scrollbar-thumb
   background-color: rgba(0,0,0)

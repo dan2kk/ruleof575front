@@ -68,6 +68,7 @@ export default {
   display: flex
   width: 1200px
   height: 960px
+  overflow: hidden
 .right-modal
   left: 600px
 .search-modal

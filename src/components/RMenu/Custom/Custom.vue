@@ -116,16 +116,17 @@ export default {
   height: 100%
   position: relative
   width: 100%
-
+  border-bottom-right-radius: 15px
+  border-bottom-left-radius: 15px
 .row
   align-items: center
   display: flex
 
-.custom-lower-menu
+.custom
   overflow-y: overlay
   overflow-x: hidden
 
-.custom-lower-menu::-webkit-scrollbar 
+.custom::-webkit-scrollbar 
   display: none
 
 .select-major-custom
