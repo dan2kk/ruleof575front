@@ -5,7 +5,7 @@
           창을 닫으려면 바깥을 클릭
         </div>
         <div class= "custom-modal-card">
-          <RMenuTitleBox color= "blue" size="535">과목 직접 담기</RMenuTitleBox>
+          <RMenuTitleBox color= "blue" size="534">과목 직접 담기</RMenuTitleBox>
           <CustomModalRecord :lecData=lec v-for="lec in this.lecList" :key="lec"></CustomModalRecord>
         </div>
     </div>
@@ -56,12 +56,10 @@ export default {
   border-radius: 15px
   
 .custom-modal-card
-  background-color: $error-color
   position: absolute
   left: 5%
   width: 90%
-  height : 80%
-  margin-top: 5%
+  margin-top: 30%
   background-color: $solitude
   z-index: 10
   border: 3px solid #b2c3e1
@@ -70,11 +68,7 @@ export default {
   border-top-right-radius: 15px
 
 .custom-modal-card::-webkit-scrollbar 
-  width : 1px
-  
-.custom-modal-card::-webkit-scrollbar-thumb
-  background-color: rgba(0,0,0)
-  height: 95%
+  display: none
 
 .empty-cart
   width: 100%
