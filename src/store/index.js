@@ -613,6 +613,7 @@ export default createStore({
 
           let parsedLT
           for(let lec of list) {
+            console.log(lec.수업시간)
             parsedLT = parseLectime(lec.수업시간);
             lec.수업시간 = parsedLT.수업시간
             lec.요일 = parsedLT.요일
@@ -623,6 +624,7 @@ export default createStore({
         }
         else{
           state.customModal['state'] = false
+          state.customModal.list.length = 0
         }
       }
       catch(err){
