@@ -1,5 +1,5 @@
 <template>
-    <div class= "custom-record-cart" v-show="!isOverlapped">
+    <div class= "custom-record-cart" v-show="isShowOverlapped || !isOverlapped">
       <RMenuTextBox :text= this.lecData.과목명 color= "blue" size= "250"></RMenuTextBox>
       <RMenuTextBox :text= this.lecData.대표교강사명 color= "blue" size= "75"></RMenuTextBox>
       <RMenuTextBox :text= this.lecData.수업시간 color = "blue" size= "100" fontsize="13"></RMenuTextBox>
@@ -73,6 +73,9 @@
           }
         }
         return isOverlapped
+      },
+      isShowOverlapped() {
+        return this.$store.getters.getCustomModal['isShowOverlapped']
       }
 
     },

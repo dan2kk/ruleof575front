@@ -9,7 +9,7 @@
           <RMenuTitleBox color= "blue" size="534"> 시간표와 겹치는 과목 보이기</RMenuTitleBox>
           <div class = "custom-checkbox-cart">    
               <label class="custom-container">
-                <input checked="custom-checked" type="checkbox" @click ="setIsNonTimeHidden">
+                <input checked="custom-checked" type="checkbox" @click ="setIsShowOverlapped">
                 <span class="custom-checkmark"></span>
               </label>
           </div>
@@ -39,8 +39,8 @@ export default {
     }
   },
   methods:{
-    setIsNonTimeHidden(){
-      this.$store.commit("setIsNonTimeHidden")
+    setIsShowOverlapped(){
+      this.$store.commit("setIsShowOverlapped")
     }
   }
 };

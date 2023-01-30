@@ -610,6 +610,7 @@ export default createStore({
         console.log(list)
         if(!state.customModal['state']){
           state.customModal['state'] = true
+          state.customModal['isShowOverlapped'] = true
 
           let parsedLT
           for(let lec of list) {
@@ -631,7 +632,14 @@ export default createStore({
         console.log(err)
       }
     },
-
+    setIsShowOverlapped(state) {
+      if(state.customModal['isShowOverlapped']) {
+        state.customModal['isShowOverlapped'] = false
+      }
+      else {
+        state.customModal['isShowOverlapped'] = true
+      }
+    },
     setUpCustomGE(state, custom) {
       state.customGE = custom
     },
