@@ -11,8 +11,8 @@ export default createStore({
 
     gradInfo : null,
     isChanged: false,
-    isOnlyInGradShow: true,
-    isNonTimeHidden : true,
+    isOnlyInGradShow: false,
+    isNonTimeHidden : false,
     curScreen: 0,
     
     lecList:[],

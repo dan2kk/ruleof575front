@@ -6,6 +6,13 @@
         </div>
         <div class= "custom-modal-card">
           <RMenuTitleBox color= "blue" size="534">과목 직접 담기</RMenuTitleBox>
+          <RMenuTitleBox color= "blue" size="534"> 시간표와 겹치는 과목 보이기</RMenuTitleBox>
+          <div class = "custom-checkbox-cart">    
+              <label class="custom-container">
+                <input checked="custom-checked" type="checkbox" @click ="setIsNonTimeHidden">
+                <span class="custom-checkmark"></span>
+              </label>
+          </div>
           <CustomModalRecord :lecData=lec v-for="lec in this.lecList" :key="lec"></CustomModalRecord>
         </div>
     </div>
@@ -17,7 +24,6 @@ import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox"
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox"
 import SearchImageBox from "./RMenu/Box/SearchImageBox"
 import CustomModalRecord from "./CustomModalRecord"
-
 export default {
   name: "CustomModal",
   props: [],
@@ -30,6 +36,11 @@ export default {
   computed: {
     lecList() {
       return this.$store.getters.getCustomModal.list
+    }
+  },
+  methods:{
+    setIsNonTimeHidden(){
+      this.$store.commit("setIsNonTimeHidden")
     }
   }
 };
@@ -75,5 +86,55 @@ export default {
   height: 80%
   opacity: 0
   background-color: black
+
+
+.custom-checkbox-cart
+  position: absolute
+  left : 93%
+  top: 45%
+
+.custom-container
+  display: block 
+  position: relative
+  padding-left: 25px
+  cursor: pointer 
+  font-size: 22px 
+  user-select: none 
+  input 
+    position: absolute 
+    opacity: 0 
+    cursor: pointer 
+    height: 0 
+    width: 0 
+    &:checked 
+      & ~.custom-checkmark 
+        background-color: #2196F3 
+        border-radius: 5px
+        &:after 
+          display: block 
+
+.custom-checkmark 
+  &:after 
+    left: 9px 
+    top: 5px 
+    width: 5px 
+    height: 10px 
+    border: solid white 
+    border-width: 0 3px 3px 0 
+    transform: rotate(45deg) 
+
+.custom-checkmark
+  position: absolute 
+  top: 0 
+  left: 0 
+  height: 25px 
+  width: 25px 
+  background-color: #ccc 
+  border-radius: 5px
+  &:after 
+    content: "" 
+    position: absolute 
+    display: none
+  
 
 </style>
