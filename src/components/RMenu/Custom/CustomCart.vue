@@ -11,7 +11,8 @@
                     <RMenuTextBox color="red" :text= idx+1 size = "25" height = "50"/>
                     <RMenuTextBox color="red" :text = custom.과목명 size = "275" height = "50" @click="showCurSemLec(custom.개설예정수업목록)"/>
                     <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="red" :text= custom.대표교강사명 size = "75" height = "50"/>
+                    <img class="medal" :src="idx+'.png'"/>
+                    <RMenuTextBox color="red"  size = "75" height = "50"/>
                 </div>
             </div>
             <RMenuTitleBox class = "long-button" color="green" size = "600" v-show = "!isContextShown[1]" @click = "isContextShown[1] = !isContextShown[1]">
@@ -24,7 +25,7 @@
                     <RMenuTextBox color="green" :text= idx+1 size = "25" height = "50"/>
                     <RMenuTextBox color="green" :text = custom.과목명 size = "275" height = "50" @click="showCurSemLec(custom.개설예정수업목록)"/>
                     <RMenuTextBox color="green" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="green" :text= custom.설강기준평점 size = "75" height = "50"/>
+                    <RMenuTextBox color="green" :text= "custom.설강기준평점+'/4.5'" size = "75" height = "50"/>
                 </div>
             </div>
             <RMenuTitleBox class = "long-button" color="yellow" size = "600" v-show = "!isContextShown[2]" @click = "isContextShown[2] = !isContextShown[2]">
@@ -37,7 +38,7 @@
                     <RMenuTextBox color="yellow" :text= idx+1 size = "25" height = "50"/>
                     <RMenuTextBox color="yellow" :text = custom.과목명 size = "275" height = "50" @click="showCurSemLec(custom.개설예정수업목록)"/>
                     <RMenuTextBox color="yellow" :text= custom.대표교강사명 size = "75" height = "50"/>
-                    <RMenuTextBox color="yellow" :text= custom.설강기준평점 size = "75" height = "50"/>
+                    <RMenuTextBox color="yellow" :text= "custom.설강기준평점+'/4.5'" size = "75" height = "50"/>
                 </div>
             </div>
 
@@ -49,11 +50,15 @@
 import RMenuModifiableTitleBox from "../Box/RMenuModifiableTitleBox";
 import RMenuTitleBox from "../Box/RMenuTitleBox";
 import RMenuTextBox from "../Box/RMenuTextBox";
+import SearchImageBox from "../Box/SearchImageBox.vue";
 export default {
     name: "CustomCart",
     components: {
-        RMenuTitleBox, RMenuTextBox, RMenuModifiableTitleBox,
-    },
+    RMenuTitleBox,
+    RMenuTextBox,
+    RMenuModifiableTitleBox,
+    SearchImageBox
+},
     props:["customList"],
     data(){
         return{
@@ -94,5 +99,10 @@ export default {
 .short-button:active
     transform: scale(0.95)
 
+.medal
+    height: 50px
+    width: 50px
+    position: absolute
+    left: 90%
 </style>
 
