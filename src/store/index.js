@@ -610,26 +610,37 @@ export default createStore({
         console.log(list)
         if(!state.customModal['state']){
           state.customModal['state'] = true
+          state.customModal['isShowOverlapped'] = true
 
           let parsedLT
           for(let lec of list) {
-            parsedLT = parseLectime(lec.수업시간);
-            lec.수업시간 = parsedLT.수업시간
-            lec.요일 = parsedLT.요일
-            lec.시작시간 = parsedLT.시작시간
-            lec.끝시간 = parsedLT.끝시간
+            if(lec.요일== undefined) {
+              parsedLT = parseLectime(lec.수업시간);
+              lec.수업시간 = parsedLT.수업시간
+              lec.요일 = parsedLT.요일
+              lec.시작시간 = parsedLT.시작시간
+              lec.끝시간 = parsedLT.끝시간
+            }
           }
           state.customModal.list = list
         }
         else{
           state.customModal['state'] = false
+          state.customModal.list.length = 0
         }
       }
       catch(err){
         console.log(err)
       }
     },
-
+    setIsShowOverlapped(state) {
+      if(state.customModal['isShowOverlapped']) {
+        state.customModal['isShowOverlapped'] = false
+      }
+      else {
+        state.customModal['isShowOverlapped'] = true
+      }
+    },
     setUpCustomGE(state, custom) {
       state.customGE = custom
     },
