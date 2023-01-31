@@ -110,7 +110,6 @@ import RMenuTitleBox from "./RMenu/Box/RMenuTitleBox";
 import RMenuModifiableTitleBox from "./RMenu/Box/RMenuModifiableTitleBox";
 import RMenuTextBox from "./RMenu/Box/RMenuTextBox";
 import {Chart, registerables} from 'chart.js'
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(...registerables)
 
 export default {
@@ -216,7 +215,7 @@ export default {
     },
     setChart(){
       new Chart(this.$refs.pieChart, {
-        plugins:[ChartDataLabels],
+        plugins:[],
         type:'pie',
         data:this.setData(),
         options:this.setOptions(),
