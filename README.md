@@ -1,19 +1,126 @@
-# ruletest
+# 삼심분만에 다 끝내는 수강신청(삼다수)
 
-## Project setup
-```
-npm install
-```
+프로젝트 개요
+---
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- 기존 한양대학교 수강신청 사이트에 있는 불편함을 해결하고 학생들의 편의를 높이기 위한 시작한 프로젝트
+- [HY-Data Lv.2 데이터톤 출품작](https://hylu-s.hanyang.ac.kr/ko/program/all/view/799), 대상 수상
+- [발표 자료 자세히 보기](https://github.com/dan2kk/ruleof575front/blob/master/%5B2022%20HY-Data%20%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%86%A4%5D%EB%8D%B0%EC%84%B8%20%ED%8C%80%20%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)
+- [BE Repository](https://github.com/heegh000/ruleof575-back)
 
-### Compiles and minifies for production
+프로젝트 빌드
+---
 ```
+npm run ci
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+기능
+---
+
+### 실행
+![실행](https://github.com/dan2kk/ruleof575front/assets/108382134/1f8bf841-6882-4b43-80f9-7cc2315ac9a0)
+- 프로그램 설치 시 한양대학교 수강신청 사이트 메뉴에 ‘도우미’라는 버튼이 추가됩니다.
+- 도우미 버튼 클릭 시 프로그램이 표시되며, 로그인 버튼을 클릭하면 서버에서 사용자의 정보를 불러옵니다.
+
+### 수업목록
+![수업목록1](https://github.com/dan2kk/ruleof575front/assets/108382134/a90a508d-a206-4227-9b4e-efd559b79169)
+![수업목록2](https://github.com/dan2kk/ruleof575front/assets/108382134/ec744768-0e29-4ca7-8349-998c137eda91)
+
+- **수업목록**에서 이전까지 사용자가 담아둔 수업들을 확인할 수 있습니다.
+- 수업은 아래 방법들로 담을 수 있습니다.
+  1. **수업목록**에서 과목 직접 검색
+  2. **교양찾기**에서 +버튼 클릭
+  3. **강의랭킹**에서 원하는 과목 클릭 후 +버튼 클릭
+  4. 한양대학교 수강신청 사이트 희망수업에서 불러오기
+- 담은 수업으로 할 수 있는 작업은 다음과 같습니다.
+  1. 화살표 버튼으로 수업 순서를 바꿀 수 있습니다.
+  2. +버튼을 눌러 **시간표**에 추가할 수 있습니다.
+  3. 과목명을 클릭해 **수업상세**를 볼 수 있습니다.
+
+### 시간표
+![시간표](https://github.com/dan2kk/ruleof575front/assets/108382134/a94f944f-83af-4546-8ad7-25de019de622)
+
+- 사용자가 **시간표**에 추가한 과목들을 시각적으로 확인할 수 있습니다.
+- **수업목록**에서 +버튼을 클릭하여 **시간표**에 과목을 추가할 수 있습니다.
+- **수업목록, 교양찾기, 강의랭킹**에서 +버튼에 mouse over시 시간표에 진한 음영으로 표시됩니다.
+- **시간표**에서 발생하는 클릭 이벤트는 다음과 같습니다.
+  1. 과목을 클릭할 시, **수업목록**과 마찬가지로 **수업상세**를 볼 수 있습니다.
+  2. 빈 블럭을 클릭시 선택할 수 있습니다.
+  3. 요일 버튼 클릭 시, 세로 줄의 모든 빈 블럭이 선택됩니다.
+  4. 시간 버튼 클릭 시, 가로 줄의 모든 빈 블럭이 선택됩니다.
+- **시간표**에서 찾기 버튼 클릭 시, 빈 블럭에 해당하는 모든 교양 수업을 서버에 요청하고, 오른쪽 화면을 **교양찾기** 화면으로 변경합니다.
+
+### 수업 상세
+![수업상세](https://github.com/dan2kk/ruleof575front/assets/108382134/cf94551c-cf5a-44d2-8a35-bfaba662ebe7)
+
+- **수업상세**를 확인할 수 있는 방법은 다음과 같습니다
+  1. **수업목록**에서 과목명 클릭
+  2. **교양찾기**에서 과목명 클릭
+  3. **시간표**에서 과목 클릭
+- 서버에 과목에 대한 정보를 요청하여 받은 정보를 chart.js를 이용하여 렌더링하여 편의성을 제공합니다.
+
+### 교양찾기
+
+![교양찾기](https://github.com/dan2kk/ruleof575front/assets/108382134/60cc2934-056f-48ab-8749-66d75077e7d9)
+
+- **시간표**에서 찾기 버튼을 클릭하면, 선택된 블럭에 해당하는 수업시간을 가진 교양 과목을 확인할 수 있습니다.
+- 교양 영역 별로 교양 목록을 숨기거나 볼 수 있습니다.
+- 체크 박스를 통해, 자신에게 필요한 영역의 교양만 받거나, 시간미지정 강좌를 보지 않을 수 있습니다.
+- **수업목록**과 동일하게 과목명 클릭시 **수업상세**를 볼 수 있습니다.
+- +버튼 클릭 시, **수업목록**에 그 과목을 추가할 수 있습니다.
+
+### 강의랭킹
+
+![강의랭킹1](https://github.com/dan2kk/ruleof575front/assets/108382134/85881927-6337-4a2e-9e20-7658dcbb4bff)
+![강의랭킹2](https://github.com/dan2kk/ruleof575front/assets/108382134/1b350aa6-af07-4b87-b0f1-d8476ac3cbd5)
+
+- 전공과 학년을 선택하여 해당 전공, 학년이 작년에 수강신청한 결과를 분석하여 다양한 기준으로 과목을 추천받습니다.
+- 위와 비슷하게 교양 영역을 선택하여 과목을 추천받을 수 있습니다.
+- 초기 전공과 학년은, 사용자의 정보를 바탕으로 세팅됩니다.
+- 과목 클릭 시, 올해 개설될 과목을 확인하고, **수업목록**에 추가할 수 있습니다.
+
+### 졸업사정
+
+![졸업사정1](https://github.com/dan2kk/ruleof575front/assets/108382134/1300b364-4509-401d-97f3-898a451cd68b)
+![졸업사정2](https://github.com/dan2kk/ruleof575front/assets/108382134/e466a56a-11a3-44b6-8be9-1f1adc3cc291)
+
+- 초기 로그인 시, 한양대학교 수강신청 사이트의 졸업사정 페이지로 이동하여 사용자의 수강 상황을 크롤링해서 저장합니다.
+- 이후 로그인 시에는 자체 server에 저장된 졸업사정을 불러옵니다.
+- 사용자의 수강 상황을 기반으로, 현재 졸업 요건이 충족되는지에 대한 정보를 출력합니다.
+
+멤버
+---
+
+- [김병주 (FE)](https://github.com/cocoju1704)
+- [정재호 (FE)](https://github.com/dan2kk)
+- [정지훈 (BE, 데이터 분석)](https://github.com/ztophoon)
+- [한관희 (BE, FE)](https://github.com/heegh000)
+
+개발환경
+---
+
+### FE
+
+![FE](https://github.com/dan2kk/ruleof575front/assets/108382134/a1f06ddd-a2a9-498d-9a63-6a8f0dc12c77)
+
+- Figma
+- Vue.js
+- Vuex
+- Sass
+
+### BE
+
+![BE](https://github.com/dan2kk/ruleof575front/assets/108382134/f6fa0a9f-75ff-4e9f-bdce-f845b35de181)
+
+- Server
+    - TypeScripts
+    - Node.js
+    - Express.js
+- DBMS
+    - PostgreSQL 13.7
+- AWS
+    - EC2:  Ubuntu 22.04 LTS
+    - RDS
+    - ACM
+    - Route53
